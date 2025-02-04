@@ -1,0 +1,40 @@
+---
+description: Planning Template - How we document and track project planning and execution
+globs:
+---
+
+# 🎯 1. Goal(s)
+*Clear specific outcome(s) we aim to achieve.*
+---
+
+- 1.1.
+
+# 📚 2. Context
+> *Important information relevant to the plan.*
+
+- 2.1.
+
+# 🎓 3. Assumptions
+> *List of critical assumptions that need validation before proceeding.*
+
+ - 3.1.
+
+# ❓ 4. Questions
+> *Specific questions about implementation details that need answers.*
+
+- [ ] 4.1.
+
+# 🪜 5. Plan
+> *Detailed step-by-step actions required to achieve the goal.*
+
+# 🎯 Main Objective: OBJECTIVE
+
+- [ ] 1. Example goal or CRUD step
+  - [ ] 1.1. We keep breaking down the steps until we reach the most atomic form
+  - [ ] 1.2. Where the most atomic form means: a CRUD action where you either Create, Read, Update or Delete a resource.
+  - [ ] 1.3. Start each CRUD action with a verb 
+- [ ] 2. Include (code) examples where appropriate
+  - [ ] 2.1. Use the following format:
+    ```LANGUAGE
+    // Example code
+    ```

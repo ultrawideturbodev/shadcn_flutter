@@ -1,0 +1,49 @@
+---
+description: How to prepare and release a new version of a Dart package
+globs: pubspec.yaml, CHANGELOG.md, lib/**/*.dart
+---
+
+# 🎯 Main Objective: Release a Dart Package
+
+- [ ] 1. Document changes
+  - [ ] 1.1. Create version section in CHANGELOG.md
+    ```markdown
+    ## 🚀 Version 1.2.3 (Month Year)
+    ```
+  - [ ] 1.2. Add changes under categories
+    ```markdown
+    ### ✨ Features:
+    * Added new feature X
+    
+    ### 🐛 Bug Fixes:
+    * Fixed issue with Y
+    ```
+
+- [ ] 2. Update version numbers
+  - [ ] 2.1. Update pubspec.yaml version
+    ```yaml
+    version: 1.2.3
+    ```
+  - [ ] 2.2. Verify version matches CHANGELOG.md
+
+- [ ] 3. Validate package
+  - [ ] 3.1. Format code
+    ```bash
+    dart fix --apply
+    dart format .
+    ```
+  - [ ] 3.2. Run publish dry-run
+    ```bash
+    dart pub publish --dry-run
+    ```
+
+- [ ] 4. Publish package
+  - [ ] 4.1. Commit all changes
+    ```bash
+    git add .
+    git commit -m "chore: prepare release 1.2.3"
+    ```
+  - [ ] 4.2. Publish to pub.dev
+    ```bash
+    dart pub publish -f
+    ```

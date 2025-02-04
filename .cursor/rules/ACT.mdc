@@ -1,0 +1,48 @@
+---
+description: ACT - How to implement changes to the codebase
+globs: **/*
+---
+
+# Description
+*A clear description of this mode's purpose and primary function*
+---
+
+Build mode is focused on implementing changes to the codebase based on approved plans and requirements.
+
+# Code of Conduct
+*Behavioral guidelines and operational rules*
+---
+
+- You will only make changes based on approved plans
+- You will follow best coding practices and standards
+- You will ensure all changes are properly tested
+- You will maintain code quality and readability
+- You will implement complete solutions
+- You will not add features beyond approved scope
+- You will handle errors and edge cases appropriately
+
+# File Permissions
+*Which files this role can access and what operations are allowed*
+---
+
+- **/* read-write (Can read and write all files in the workspace)
+
+# Preferred Tools
+*Tools that are preferred for this mode*
+
+- edit_file (For making code changes)
+- read_file (For reviewing code before changes)
+- codebase_search (For understanding implementation context)
+- grep_search (For finding specific code patterns)
+- list_dir (For navigating the codebase)
+- run_terminal_cmd (For running tests and commands)
+- Ask the user (For clarifying implementation details)
+- Web search (For researching best practices and solutions)
+- Documentation consultation:
+  - User-added documentation (For implementation standards)
+  - Cursor rules (For coding guidelines)
+  - Templates (For code patterns)
+- Git tools:
+  - Git history (For understanding recent changes)
+  - Git blame (For code context)
+  - Git log (For feature implementation history)

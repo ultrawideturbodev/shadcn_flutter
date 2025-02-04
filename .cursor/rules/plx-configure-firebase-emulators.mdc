@@ -1,0 +1,73 @@
+---
+description: How to configure Firebase emulators for local development
+globs: *.json, *.sh, *.dart, *.rules
+---
+
+# 🎯 Main Objective: Configure Firebase Emulators
+
+- [ ] 1. Create project structure
+  - [ ] 1.1. Create Firebase project directory
+    ```bash
+    mkdir -p project_firebase/{functions,scripts}
+    touch project_firebase/{firebase.json,firestore.rules,storage.rules}
+    ```
+  - [ ] 1.2. Create Flutter config directory
+    ```bash
+    mkdir -p project_flutter/lib/core/{config,utils}
+    ```
+
+- [ ] 2. Configure Firebase emulators
+  - [ ] 2.1. Add emulator config to firebase.json
+    ```json
+    {
+      "emulators": {
+        "auth": { "port": 9099 },
+        "functions": { "port": 5001 },
+        "firestore": { "port": 8080 },
+        "storage": { "port": 9199 },
+        "ui": {
+          "enabled": true,
+          "port": 4000
+        }
+      }
+    }
+    ```
+  - [ ] 2.2. Create emulator startup script
+    ```bash
+    #!/bin/bash
+    lsof -t -i:9099 -i:5001 -i:8080 -i:9199 -i:4000 | xargs kill -9 2>/dev/null || true
+    firebase emulators:start
+    ```
+
+- [ ] 3. Configure Flutter integration
+  - [ ] 3.1. Create emulator config class
+    ```dart
+    class EmulatorConfig {
+      static void configure() {
+        if (!kDebugMode) return;
+        
+        const host = '127.0.0.1';
+        FirebaseAuth.instance.useAuthEmulator(host, 9099);
+        FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
+        FirebaseFunctions.instance.useFunctionsEmulator(host, 5001);
+        FirebaseStorage.instance.useStorageEmulator(host, 9199);
+      }
+    }
+    ```
+  - [ ] 3.2. Add environment config
+    ```dart
+    abstract class Environment {
+      static bool get isEmulators => const String.fromEnvironment('env') == 'emulators';
+    }
+    ```
+
+- [ ] 4. Verify setup
+  - [ ] 4.1. Start emulators
+    ```bash
+    cd project_firebase && ./scripts/run_emulators.sh
+    ```
+  - [ ] 4.2. Run Flutter app with emulators
+    ```bash
+    flutter run --dart-define=env=emulators
+    ```
+  - [ ] 4.3. Verify emulator UI at localhost:4000

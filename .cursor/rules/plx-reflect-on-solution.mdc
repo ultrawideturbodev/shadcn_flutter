@@ -1,0 +1,54 @@
+---
+description: How we validate and gain complete confidence in our proposed solution
+globs:
+---
+
+# 🎯 Main Objective: Validate Solution Confidence
+
+- [ ] 1. Review current solution
+  - [ ] 1.1. Document proposed approach
+    ```markdown
+    # Current Solution
+    - Core approach:
+    - Implementation details:
+    - Expected outcomes:
+    ```
+  - [ ] 1.2. List all assumptions made
+  - [ ] 1.3. Identify potential gaps
+  - [ ] 1.4. Note areas of uncertainty
+
+- [ ] 2. Deep research phase
+  - [ ] 2.1. Scan related files
+    ```bash
+    # Find all potentially related files
+    find . -type f -name "*pattern*"
+    ```
+  - [ ] 2.2. Review documentation
+  - [ ] 2.3. Search for similar patterns
+  - [ ] 2.4. Document findings and insights
+
+- [ ] 3. Challenge solution
+  - [ ] 3.1. Question each component
+    ```markdown
+    # Component Analysis
+    - Why this approach?
+    - What could break?
+    - What's missing?
+    ```
+  - [ ] 3.2. List potential issues
+  - [ ] 3.3. Identify edge cases
+  - [ ] 3.4. Document concerns
+
+- [ ] 4. Iterate until certain
+  - [ ] 4.1. Address each concern
+  - [ ] 4.2. Research unclear areas
+  - [ ] 4.3. Ask clarifying questions
+  - [ ] 4.4. Repeat steps 1-3 until:
+    ```markdown
+    # Confidence Checklist
+    - All components understood
+    - Edge cases covered
+    - No remaining questions
+    - Implementation clear
+    - Potential issues addressed
+    ```

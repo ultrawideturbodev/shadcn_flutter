@@ -1,0 +1,79 @@
+---
+description: How to create clear and structured feature documentation
+globs: **/*.md, *.md
+---
+
+# 🎯 Main Objective: Create a Feature Breakdown Document
+
+- [ ] 1. Create document structure
+  - [ ] 1.1. Create markdown file with feature name
+    ```markdown
+    # Feature Name
+    ```
+  - [ ] 1.2. Add table of contents section
+    ```markdown
+    ## 📝 Table of Contents
+    - [Introduction](#introduction)
+    - [The Plan](#the-plan)
+    - [Implementation](#implementation)
+    - [Testing](#testing)
+    - [Reflection](#reflection)
+    ```
+
+- [ ] 2. Document introduction
+  - [ ] 2.1. Add feature overview
+    ```markdown
+    ## Introduction
+    [Brief description of what the feature does and why it's needed]
+    ```
+  - [ ] 2.2. List prerequisites
+    ```markdown
+    ### Prerequisites
+    - Required knowledge/setup 1
+    - Required knowledge/setup 2
+    ```
+
+- [ ] 3. Create implementation plan
+  - [ ] 3.1. Break down steps
+    ```markdown
+    ## The Plan
+    1. First major step
+       - Sub-step A
+       - Sub-step B
+    2. Second major step
+    ```
+  - [ ] 3.2. Add code examples for complex steps
+    ```markdown
+    ### Example Implementation
+    ```dart
+    void exampleCode() {
+      // Code with comments
+    }
+    ```
+    ```
+
+- [ ] 4. Document testing approach
+  - [ ] 4.1. List test scenarios
+    ```markdown
+    ## Testing
+    - [ ] Test scenario 1
+    - [ ] Test scenario 2
+    ```
+  - [ ] 4.2. Add example test code
+    ```markdown
+    ### Test Example
+    ```dart
+    void testFeature() {
+      // Test code
+    }
+    ```
+    ```
+
+- [ ] 5. Add reflection section
+  - [ ] 5.1. Document key decisions
+    ```markdown
+    ## Reflection
+    - Why we chose X approach
+    - Performance considerations
+    - Future improvements
+    ```

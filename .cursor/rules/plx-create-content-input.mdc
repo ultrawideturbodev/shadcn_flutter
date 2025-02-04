@@ -1,0 +1,54 @@
+---
+description: How we prepare content input for various platforms
+globs: *.md
+---
+
+# 🎯 Main Objective: Create Content Input Document
+
+- [ ] 1. Research content source
+  - [ ] 1.1. Review work logs for technical achievements
+  - [ ] 1.2. Identify key learning points
+  - [ ] 1.3. List required visual materials
+  - [ ] 1.4. Document target audience
+
+- [ ] 2. Create content structure
+  - [ ] 2.1. Add content metadata
+    ```markdown
+    TOPIC: [Brief topic description]
+    TYPE: [Tutorial/Case Study/Tips]
+    AUDIENCE: [Target developers]
+    ```
+  - [ ] 2.2. Define learning objectives
+    ```markdown
+    OBJECTIVES:
+    - Main technical concept to learn
+    - Practical implementation details
+    - Key takeaways
+    ```
+
+- [ ] 3. Document technical details
+  - [ ] 3.1. Write problem statement
+  - [ ] 3.2. Add solution approach
+  - [ ] 3.3. Include code examples
+    ```markdown
+    ```language
+    // Relevant code snippet
+    ```
+    ```
+  - [ ] 3.4. List key technical learnings
+
+- [ ] 4. Prepare visual requirements
+  - [ ] 4.1. List required screenshots
+    ```markdown
+    VISUALS:
+    - UI component screenshot
+    - Code implementation image
+    - Result demonstration
+    ```
+  - [ ] 4.2. Add visual annotations
+  - [ ] 4.3. Include demo requirements
+
+- [ ] 5. Verify content package
+  - [ ] 5.1. Check technical accuracy
+  - [ ] 5.2. Validate learning value
+  - [ ] 5.3. Confirm visual completeness

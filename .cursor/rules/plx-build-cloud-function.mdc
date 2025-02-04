@@ -1,0 +1,86 @@
+---
+description: How to create and structure Firebase Cloud Functions in TypeScript
+globs: *.ts
+---
+
+# 🎯 Main Objective: Create a Cloud Function
+
+- [ ] 1. Create feature structure
+  - [ ] 1.1. Create feature directory
+    ```bash
+    mkdir -p functions/src/[feature-name]/{dtos,functions,requests}
+    ```
+  - [ ] 1.2. Add collection to enum
+    ```typescript
+    enum FirestoreCollectionType {
+      yourCollection = 'yourCollection'
+    }
+    ```
+
+- [ ] 2. Create data types
+  - [ ] 2.1. Create DTO class
+    ```typescript
+    export class YourDto {
+      constructor(
+        public id: string,
+        public createdAt: Date,
+        public field1: string
+      ) {}
+
+      static fromJson(json: any): YourDto {
+        return new YourDto(
+          json.id,
+          json.createdAt.toDate(),
+          json.field1
+        );
+      }
+    }
+    ```
+  - [ ] 2.2. Create request interface
+    ```typescript
+    export interface YourRequest {
+      field1: string;
+    }
+    ```
+
+- [ ] 3. Implement function
+  - [ ] 3.1. Create function file
+    ```typescript
+    import {onCall} from "firebase-functions/v2/https";
+    import {CloudResponse} from "../../core/responses/cloudResponse";
+    import {callableAuthMiddleware} from "../../core/middleware/callableAuthMiddleware";
+    import {YourRequest} from "../requests/your_request";
+
+    export const yourFunction = onCall(async (request) => {
+      const auth = await callableAuthMiddleware(request);
+      const data = request.data as YourRequest;
+      
+      // Implementation
+      
+      return new CloudResponse({
+        statusCode: 200,
+        result: result
+      });
+    });
+    ```
+  - [ ] 3.2. Export function
+    ```typescript
+    // functions/src/index.ts
+    export {yourFunction} from './feature-name/functions/your_function';
+    ```
+
+- [ ] 4. Test implementation
+  - [ ] 4.1. Test with auth
+    ```typescript
+    const result = await firebase.functions().httpsCallable('yourFunction')({
+      field1: 'test'
+    });
+    ```
+  - [ ] 4.2. Verify error handling
+    ```typescript
+    try {
+      await firebase.functions().httpsCallable('yourFunction')({});
+    } catch (e) {
+      // Should throw validation error
+    }
+    ```

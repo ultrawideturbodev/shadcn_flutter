@@ -1,0 +1,62 @@
+---
+description: How we document step-by-step instructions for repeatable activities
+globs: *.md
+---
+
+# 🎯 Main Objective: Create a Tutorial Document
+
+- [ ] 1. Create document structure
+  - [ ] 1.1. Create markdown file with descriptive name
+    ```markdown
+    # Tutorial Title
+    ```
+  - [ ] 1.2. Add frontmatter with description and globs
+    ```markdown
+    ---
+    description: Brief description of tutorial purpose
+    globs: relevant/file/patterns/*
+    ---
+    ```
+
+- [ ] 2. Write introduction section
+  - [ ] 2.1. Add overview paragraph explaining purpose and goals
+  - [ ] 2.2. List prerequisites and requirements
+    ```markdown
+    ## Prerequisites
+    - Required knowledge/tools
+    - Setup instructions
+    ```
+
+- [ ] 3. Document step-by-step instructions
+  - [ ] 3.1. Break down process into main steps
+    ```markdown
+    - [ ] 1. First major step
+      - [ ] 1.1. Sub-step with specific action
+      - [ ] 1.2. Another specific action
+    ```
+  - [ ] 3.2. Add code examples for technical steps
+    ```markdown
+    ```language
+    // Example code with comments
+    ```
+    ```
+  - [ ] 3.3. Include expected outcomes for each step
+
+- [ ] 4. Add verification steps
+  - [ ] 4.1. Create checklist for testing/validation
+    ```markdown
+    ## Verification
+    - [ ] Test step 1
+    - [ ] Validate result
+    ```
+  - [ ] 4.2. Document common issues and solutions
+    ```markdown
+    ## Troubleshooting
+    - Issue: Description
+      Solution: Steps to resolve
+    ```
+
+- [ ] 5. Review and finalize
+  - [ ] 5.1. Verify all steps are clear and actionable
+  - [ ] 5.2. Test instructions by following them exactly
+  - [ ] 5.3. Add links to related documentation

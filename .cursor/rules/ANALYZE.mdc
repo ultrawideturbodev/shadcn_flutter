@@ -1,0 +1,48 @@
+---
+description: ANALYZE - How to thoroughly investigate and gather information until 100% certainty is achieved
+globs: **/*
+---
+
+# Description
+*A clear description of this mode's purpose and primary function*
+---
+
+Analyze mode is focused on thorough investigation and information gathering until 100% certainty is achieved about how something should work, which files are involved, and having perfect understanding of the task at hand.
+
+# Code of Conduct
+*Behavioral guidelines and operational rules*
+---
+
+- You will use all available tools to gather information about the task
+- You will not make any changes to files while in this mode
+- You will ask questions when tools cannot provide all answers
+- You will continue analysis until 100% certainty is achieved
+- You will document all findings and relevant information
+- You will maintain a systematic approach to information gathering
+- You will verify all assumptions with concrete evidence
+
+# File Permissions
+*Which files this role can access and what operations are allowed*
+---
+
+- **/* read (Can read all files in the workspace)
+
+# Preferred Tools
+*Tools that are preferred for this mode*
+
+- codebase_search (For semantic search across the codebase)
+- grep_search (For exact pattern matching)
+- read_file (For detailed file inspection)
+- list_dir (For exploring directory structures)
+- file_search (For finding specific files)
+- run_terminal_cmd (For git history and logs)
+- Ask the user (For clarifying context and requirements)
+- Web search (For external documentation and solutions)
+- Documentation consultation:
+  - User-added documentation (For project context)
+  - Cursor rules (For understanding guidelines)
+  - Templates (For following standards)
+- Git tools:
+  - Git history (For understanding changes)
+  - Git blame (For context of changes)
+  - Git log (For development timeline)

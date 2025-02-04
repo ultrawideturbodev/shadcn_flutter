@@ -1,0 +1,79 @@
+# 🎯 Main Objective: Create a Requirements Document
+
+- [ ] 1. Create requirements document
+  - [ ] 1.1. Create @your-requirements.md in root folder
+
+- [ ] 2. Define actors and components
+  - [ ] 2.1. Create actors list
+    ```markdown
+    ## Actors
+    - User: Person who interacts with system
+    - Admin: Person who manages system
+    ```
+  - [ ] 2.2. Create components list
+    ```markdown 
+    ## Components
+    - Button: UI element for actions
+    - Screen: Container for UI elements
+    ```
+
+- [ ] 3. Document activities
+  - [ ] 3.1. List actor activities
+    ```markdown
+    ## User Activities
+    - Create profile
+    - Update settings
+    ```
+  - [ ] 3.2. List component activities
+    ```markdown
+    ## Button Activities
+    - Trigger form submit
+    - Show loading state
+    ```
+
+- [ ] 4. Map activity flows
+  - [ ] 4.1. Write happy path flows
+    ```markdown
+    ## Create Profile Flow
+    GIVEN user is on signup screen
+    WHEN user submits form
+    THEN system creates profile
+    ```
+  - [ ] 4.2. Add error flows
+    ```markdown
+    ## Error Flow
+    WHEN form validation fails
+    THEN show error message
+    ```
+
+- [ ] 5. Define properties and behaviors
+  - [ ] 5.1. List required properties
+    ```markdown
+    ## Properties
+    - username: string
+    - email: string
+    - created_at: timestamp
+    ```
+  - [ ] 5.2. Document behaviors
+    ```markdown
+    ## Behaviors
+    - Should validate email format
+    - Should prevent duplicate usernames
+    ```
+
+- [ ] 6. Assign implementation tasks
+  - [ ] 6.1. Create role-based tasks
+    ```markdown
+    ## Tasks
+    Frontend:
+    - Implement form validation
+    
+    Backend:
+    - Create user API endpoint
+    ```
+  - [ ] 6.2. Add acceptance criteria
+    ```markdown
+    ## Acceptance
+    - Form shows validation errors
+    - API returns 201 on success
+    ```

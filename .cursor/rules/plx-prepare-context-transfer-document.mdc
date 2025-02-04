@@ -1,0 +1,57 @@
+---
+description: How to document and transfer work context between AI agents effectively
+globs: **/*.md, *.md
+---
+
+# 🎯 Main Objective: Create a Context Transfer Document
+
+- [ ] 1. Initialize transfer document
+  - [ ] 1.1. Create new markdown file
+    ```markdown
+    # Context Transfer Document - [Date]
+    ```
+  - [ ] 1.2. Add document metadata
+    ```markdown
+    - From: [Current Agent]
+    - To: [Target Agent]
+    - Task: [Task Name]
+    ```
+
+- [ ] 2. Document key context
+  - [ ] 2.1. Summarize important decisions
+    ```markdown
+    ## 📝 Key Decisions
+    - Selected X technology because...
+    - Agreed on Y approach due to...
+    ```
+  - [ ] 2.2. List modified files
+    ```markdown
+    ## 📁 Modified Files
+    1. path/to/file1.ext - [Brief change description]
+    2. path/to/file2.ext - [Brief change description]
+    ```
+  - [ ] 2.3. Document current progress
+    ```markdown
+    ## 📊 Progress
+    - Feature X: 80% complete
+    - Tests: 60% complete
+    ```
+
+- [ ] 3. Define next actions
+  - [ ] 3.1. List pending tasks
+    ```markdown
+    ## ⏭️ Next Steps
+    1. Implement [specific feature]
+    2. Complete [specific task]
+    ```
+  - [ ] 3.2. Document blockers
+    ```markdown
+    ## 🚧 Blockers
+    - Waiting for [specific resource]
+    - Need decision on [specific item]
+    ```
+
+- [ ] 4. Verify and transfer
+  - [ ] 4.1. Review document completeness
+  - [ ] 4.2. Get user confirmation
+  - [ ] 4.3. Share document with target agent

@@ -1,0 +1,59 @@
+---
+description: How we document step-by-step instructions for repeatable activities
+globs: *.md
+---
+
+# 🎯 Main Objective: Create an Insight Document
+
+- [ ] 1. Initialize document structure
+  - [ ] 1.1. Create markdown file in insights directory
+  - [ ] 1.2. Add frontmatter with description
+    ```markdown
+    ---
+    description: Brief explanation of the insight's purpose
+    ---
+    ```
+  - [ ] 1.3. Create title using "How We [Action] [Topic]" format
+    ```markdown
+    # How We [Action] [Topic]
+    ```
+
+- [ ] 2. Write core sections
+  - [ ] 2.1. Add one-line summary under title
+    ```markdown
+    > Concise explanation of what reader will learn
+    ```
+  - [ ] 2.2. Create "Why This Matters" section with 2-3 bullet points
+    ```markdown
+    ## Why This Matters
+    - Benefit 1
+    - Benefit 2
+    ```
+  - [ ] 2.3. List 3-5 key points with examples
+    ```markdown
+    ## Key Points
+    1. First Point
+       - Supporting detail
+       - Example: practical application
+    ```
+
+- [ ] 3. Add practical example
+  - [ ] 3.1. Create example section with code
+    ```markdown
+    ## Example in Practice
+    ```language
+    // Real-world code example
+    ```
+    ```
+  - [ ] 3.2. Add 2-3 key takeaways
+    ```markdown
+    ## Key Takeaways
+    - Main lesson 1
+    - Main lesson 2
+    ```
+
+- [ ] 4. Review and validate
+  - [ ] 4.1. Verify professional tone
+  - [ ] 4.2. Check code examples work
+  - [ ] 4.3. Confirm practical value is clear
+  - [ ] 4.4. Ensure format is consistent

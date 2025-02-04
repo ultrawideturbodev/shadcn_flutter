@@ -1,0 +1,45 @@
+---
+description: How we document step-by-step instructions for creating inbox items
+globs: *.md
+---
+
+# 🎯 Main Objective: Create and Organize Inbox Item
+
+- [ ] 1. Analyze input content
+  - [ ] 1.1. Read user input thoroughly
+  - [ ] 1.2. Identify key topic and role
+  - [ ] 1.3. Extract important details
+    ```markdown
+    Topic: [Main subject]
+    Role: [Target role]
+    Details: [Key information]
+    ```
+
+- [ ] 2. Create inbox item file
+  - [ ] 2.1. Generate kebab-case filename
+    ```markdown
+    [topic-name]-inbox-item.md
+    ```
+  - [ ] 2.2. Add metadata header
+    ```markdown
+    # [Topic Title]
+    
+    *Date Added: [YYYY-MM-DD]*
+    ```
+  - [ ] 2.3. Format content sections
+    ```markdown
+    ## What is it?
+    [Description]
+    
+    ## Key Points
+    - [Point 1]
+    - [Point 2]
+    ```
+
+- [ ] 3. Place in correct inbox
+  - [ ] 3.1. Select target role inbox:
+    ```markdown
+    roles/[role]/inbox/
+    ```
+  - [ ] 3.2. Save file in inbox location
+  - [ ] 3.3. Verify file placement and name

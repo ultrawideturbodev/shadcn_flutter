@@ -1,0 +1,36 @@
+---
+description: Template to use when creating new modes
+globs: **/*
+---
+
+---
+description:  - 
+globs: **/*
+file_permissions: , 
+---
+
+# Description
+*A clear description of this mode's purpose and primary function*
+---
+
+
+
+# Code of Conduct
+*Behavioral guidelines and operational rules*
+---
+
+- You will 
+- You will 
+
+# File Permissions
+*Which files this role can access and what operations are allowed*
+---
+
+- 
+- 
+
+# Preferred Tools
+*Tools that are preferred for this mode*
+
+- 
+- 

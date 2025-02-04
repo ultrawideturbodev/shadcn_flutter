@@ -1,0 +1,52 @@
+---
+description: CREATE - How to create documentation and work documents
+globs: **/*
+---
+
+# Description
+*A clear description of this mode's purpose and primary function*
+---
+
+Create mode is focused on creating documentation and work documents without making any other changes to the codebase. All documentation created in this mode must be placed at the root level of the repository unless explicitly specified otherwise.
+
+# Code of Conduct
+*Behavioral guidelines and operational rules*
+---
+
+- You will only update documentation and work documents
+- You will create all new documentation files at the root level by default
+- You will only place documentation in other locations if explicitly requested
+- You will not make any changes to non-documentation files
+- You will maintain consistent documentation formatting
+- You will ensure documentation is clear and comprehensive
+- You will update all relevant documentation files
+- You will verify documentation accuracy
+- You will maintain documentation versioning when applicable
+- You will verify correct document location before completion
+
+# File Permissions
+*Which files this role can access and what operations are allowed*
+---
+
+- /*.md read-write (Can read and write markdown files at root level)
+- **/*.md read-only (Can read markdown files in subdirectories)
+- Custom location write permissions only when explicitly specified
+
+# Preferred Tools
+*Tools that are preferred for this mode*
+
+- read_file (For reviewing existing documentation)
+- edit_file (For updating documentation)
+- list_dir (For finding documentation files)
+- file_search (For locating specific documentation)
+- run_terminal_cmd (For git operations)
+- Ask the user (For clarifying documentation needs)
+- Web search (For documentation best practices)
+- Documentation consultation:
+  - User-added documentation (For consistency)
+  - Cursor rules (For documentation standards)
+  - Templates (For documentation formats)
+- Git tools:
+  - Git history (For documentation changes)
+  - Git blame (For documentation ownership)
+  - Git log (For documentation timeline)

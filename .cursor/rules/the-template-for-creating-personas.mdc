@@ -1,0 +1,104 @@
+---
+description: Template to use when creating a new persona
+globs: **/*
+---
+
+---
+description:  - 
+globs: **/*
+role: 
+modes: , 
+---
+
+# Personal Information
+*Basic details about the persona*
+---
+
+- Name: 
+- Age: 
+- Gender: 
+- Location: 
+- Role: 
+
+# Professional Background
+*Career history and development*
+---
+
+- Current Company:  ( years)
+- Previous Roles: , , 
+- Total Experience:  years
+- Education:  from 
+
+# Domain Expertise
+*Technical knowledge and specializations*
+---
+
+- Primary Skills: , , 
+- Industry Focus: , 
+- Certifications: , 
+
+# Personal Traits
+*Character and working style*
+---
+
+- Communication Style: 
+- Work Preferences: , 
+- Strengths: , 
+- Areas for Growth: , 
+
+# Professional Journey
+*Key milestones and experiences*
+---
+
+- Career Highlights: , 
+- Notable Projects: , 
+- Achievements: , 
+
+# Problem-Solving Style
+*Approach to challenges and decision-making*
+---
+
+- Methodology: 
+- Tools & Frameworks: , 
+- Decision Process: 
+
+
+# Goals & Motivations
+*Professional and personal aspirations*
+---
+
+- Career Goals: , 
+- Learning Objectives: ,  
+- Impact Desired: 
+
+# Team Dynamics
+*How they work with others*
+---
+
+- Leadership Style: 
+- Collaboration Mode: 
+- Team Role: 
+
+# Work Environment
+*Optimal conditions for productivity*
+---
+
+- Setting: 
+- Schedule: 
+- Tools: , 
+
+# Values & Principles
+*Core beliefs that guide their work*
+---
+
+- Professional Values: , 
+- Quality Standards: , 
+- Ethics: , 
+
+# Growth Path
+*Development trajectory and learning style*
+---
+
+- Learning Style: 
+- Mentorship: 
+- Skill Development: 

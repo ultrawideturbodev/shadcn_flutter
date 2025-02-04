@@ -1,0 +1,73 @@
+---
+description: How to structure Dart classes with clear sections and organization
+globs: *.dart
+---
+
+# 🎯 Main Objective: Structure a Dart Class
+
+- [ ] 1. Add section headers
+  - [ ] 1.1. Create locator section
+    ```dart
+    // 📍 LOCATOR ------------------------------------------------------------------------------- \\
+    static Service get locate => GetIt.I.get();
+    static void registerFactory() => GetIt.I.registerFactory(Service.new);
+    ```
+  - [ ] 1.2. Create dependencies section  
+    ```dart
+    // 🧩 DEPENDENCIES -------------------------------------------------------------------------- \\
+    final _api = Api.locate;
+    final _service = Service.locate;
+    ```
+  - [ ] 1.3. Create lifecycle section
+    ```dart
+    // 🎬 INIT & DISPOSE ------------------------------------------------------------------------ \\
+    @override
+    void dispose() {
+      _controller.dispose();
+      super.dispose();
+    }
+    ```
+  - [ ] 1.4. Create state section
+    ```dart
+    // 🎩 STATE --------------------------------------------------------------------------------- \\
+    final _items = ValueNotifier<List<Item>>([]);
+    final _isLoading = ValueNotifier<bool>(false);
+    ```
+  - [ ] 1.5. Create fetchers section
+    ```dart
+    // 🧲 FETCHERS ------------------------------------------------------------------------------ \\
+    ValueListenable<List<Item>> get items => _items;
+    ValueListenable<bool> get isLoading => _isLoading;
+    ```
+  - [ ] 1.6. Create mutators section
+    ```dart
+    // 🪄 MUTATORS ------------------------------------------------------------------------------ \\
+    Future<void> createItem(Item item) async {
+      _isLoading.value = true;
+      try {
+        await _api.create(item);
+      } finally {
+        _isLoading.value = false;
+      }
+    }
+    ```
+
+- [ ] 2. Implement class type
+  - [ ] 2.1. Create service class
+    ```dart
+    class ItemService extends BaseService {
+      // Add sections from step 1
+    }
+    ```
+  - [ ] 2.2. Create view model class
+    ```dart
+    class ItemViewModel extends BaseViewModel {
+      // Add sections from step 1  
+    }
+    ```
+
+- [ ] 3. Verify implementation
+  - [ ] 3.1. Check section order matches template
+  - [ ] 3.2. Verify all code is in appropriate sections
+  - [ ] 3.3. Test dependency injection works
+  - [ ] 3.4. Validate state management flow

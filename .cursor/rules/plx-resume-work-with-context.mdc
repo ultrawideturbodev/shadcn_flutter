@@ -1,0 +1,33 @@
+---
+description: How to analyze and resume work from a previous state effectively
+globs: **/*
+---
+- [ ] 1. Load previous work state
+  - [ ] 1.1. Read documentation
+    - [ ] 1.1.1. Open todo.md file
+    - [ ] 1.1.2. Open milestone.md file
+    - [ ] 1.1.3. Open transfer.md file
+  - [ ] 1.2. Review code state
+    - [ ] 1.2.1. Read git history
+    - [ ] 1.2.2. Check open branches
+    - [ ] 1.2.3. Review uncommitted changes
+
+- [ ] 2. Verify current context
+  - [ ] 2.1. Check active work
+    - [ ] 2.1.1. List incomplete tasks
+    - [ ] 2.1.2. Note current milestone
+    - [ ] 2.1.3. Document blocking issues
+  - [ ] 2.2. Validate decisions
+    - [ ] 2.2.1. Review architecture choices
+    - [ ] 2.2.2. Check implementation approach
+    - [ ] 2.2.3. Confirm tech stack decisions
+
+- [ ] 3. Plan next steps
+  - [ ] 3.1. Create action items
+    - [ ] 3.1.1. Write immediate next tasks
+    - [ ] 3.1.2. List required decisions
+    - [ ] 3.1.3. Note dependencies
+  - [ ] 3.2. Get confirmation
+    - [ ] 3.2.1. Present current state
+    - [ ] 3.2.2. Show planned actions
+    - [ ] 3.2.3. Request user approval

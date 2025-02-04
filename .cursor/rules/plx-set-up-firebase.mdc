@@ -1,0 +1,69 @@
+---
+description: How to set up Firebase in a monorepo Flutter project
+globs: *.dart, *.json, *.yaml, *.sh
+---
+
+# 🎯 Main Objective: Configure Firebase in Monorepo
+
+- [ ] 1. Install required tools
+  - [ ] 1.1. Install Firebase CLI
+    ```bash
+    npm install -g firebase-tools
+    firebase login
+    ```
+  - [ ] 1.2. Install FlutterFire CLI
+    ```bash
+    dart pub global activate flutterfire_cli
+    ```
+
+- [ ] 2. Create Firebase project structure
+  - [ ] 2.1. Create project directories
+    ```bash
+    mkdir -p project_mono/{project_firebase,project_flutter}
+    ```
+  - [ ] 2.2. Initialize Firebase project
+    ```bash
+    cd project_firebase
+    firebase init
+    # Select: Firestore, Auth, Storage, Emulators
+    ```
+
+- [ ] 3. Configure Flutter integration
+  - [ ] 3.1. Configure FlutterFire
+    ```bash
+    cd ../project_flutter
+    flutterfire configure --project=your-firebase-project
+    ```
+  - [ ] 3.2. Add environment configuration
+    ```dart
+    enum Environment {
+      production,
+      emulators;
+
+      static Environment get current => 
+        const String.fromEnvironment('env') == 'emulators' 
+          ? Environment.emulators 
+          : Environment.production;
+    }
+    ```
+  - [ ] 3.3. Initialize Firebase in app
+    ```dart
+    Future<void> main() async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+      if (Environment.current == Environment.emulators) {
+        await connectToEmulators();
+      }
+      runApp(const MyApp());
+    }
+    ```
+
+- [ ] 4. Verify setup
+  - [ ] 4.1. Run app with emulators
+    ```bash
+    flutter run --dart-define=env=emulators
+    ```
+  - [ ] 4.2. Check Firebase connection in logs
+  - [ ] 4.3. Verify services are accessible

@@ -1,0 +1,60 @@
+---
+description: How we document step-by-step instructions for handling CODE RED critical issues requiring immediate STOP
+globs: *.md
+---
+
+# 🎯 Main Objective: STOP ALL WORK - CODE RED CRITICAL ISSUE
+
+- [ ] 1. IMMEDIATE STOP (Follow @STOP.md protocol)
+  - [ ] 1.1. Cease all operations immediately
+  - [ ] 1.2. Document exact state
+    ```markdown
+    - Current task: [task name]
+    - Status: [% complete]
+    - Last action: [action]
+    - Next planned: [action]
+    ```
+  - [ ] 1.3. Close all files and tools
+  - [ ] 1.4. Acknowledge STOP mode activation
+
+- [ ] 2. Critical Impact Assessment
+  - [ ] 2.1. List all potentially affected files
+  - [ ] 2.2. Trace all dependencies
+    ```bash
+    grep -r "pattern" ./src
+    find . -type f -name "*pattern*"
+    ```
+  - [ ] 2.3. Map contamination spread
+    ```markdown
+    - Source: [origin file]
+    -> Affects: [dependent files]
+    -> Impacts: [downstream systems]
+    ```
+
+- [ ] 3. Emergency Analysis Protocol
+  - [ ] 3.1. Review critical code paths
+  - [ ] 3.2. Document failure points
+    ```markdown
+    1. Failure: [description]
+    2. Cascade: [chain reaction]
+    3. Impact: [damage assessment]
+    ```
+  - [ ] 3.3. Identify all error vectors
+  - [ ] 3.4. Test failure scenarios
+
+- [ ] 4. CODE RED Report
+  - [ ] 4.1. Critical issue summary
+    ```markdown
+    ## CODE RED Analysis
+    - Critical failure: [description]
+    - Blast radius: [affected systems]
+    - Severity: [CRITICAL/SEVERE/HIGH]
+    - Time sensitivity: [immediate/hours/days]
+    ```
+  - [ ] 4.2. Emergency mitigation options
+  - [ ] 4.3. Required emergency approvals
+
+- [ ] 5. Emergency Response
+  - [ ] 5.1. Alert all stakeholders
+  - [ ] 5.2. Document crisis response plan
+  - [ ] 5.3. Await emergency authorization

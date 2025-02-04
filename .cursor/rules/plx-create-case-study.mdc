@@ -1,0 +1,79 @@
+---
+description: How we document step-by-step instructions for creating case studies
+globs: *.md
+---
+
+# 🎯 Main Objective: Create a Case Study Document
+
+- [ ] 1. Initialize case study file
+  - [ ] 1.1. Create markdown file in case-studies directory
+    ```markdown
+    # [Project Name] Case Study
+    ```
+  - [ ] 1.2. Add required metadata
+    ```markdown
+    ---
+    title: Project Name
+    type: client|technical|process|innovation
+    industry: Industry Name
+    duration: X months
+    audience: Developers|Clients|Internal
+    platforms: Website|LinkedIn|Blog
+    ---
+    ```
+
+- [ ] 2. Document core sections
+  - [ ] 2.1. Write executive summary
+    ```markdown
+    ## 🎯 Executive Summary
+    - Achievement: [Key metric]
+    - Timeline: [Duration]
+    - Impact: [Business value]
+    ```
+  - [ ] 2.2. Describe challenge and solution
+    ```markdown
+    ## 🔍 Challenge
+    - Initial problem
+    - Business impact
+    - Technical constraints
+
+    ## 💡 Solution
+    - Approach taken
+    - Key technologies
+    - Architecture overview
+    ```
+  - [ ] 2.3. Add implementation details
+    ```markdown
+    ## ⚙️ Implementation
+    - Step 1: [Action]
+    - Step 2: [Action]
+    
+    ### Code Example
+    ```code
+    // Key implementation detail
+    ```
+    ```
+
+- [ ] 3. Add supporting content
+  - [ ] 3.1. Insert media assets
+    ```markdown
+    ![Description](./images/screenshot.png)
+    ```
+  - [ ] 3.2. Include metrics and results
+    ```markdown
+    ## 📊 Results
+    - Metric 1: [Value]
+    - Metric 2: [Value]
+    - ROI: [Calculation]
+    ```
+  - [ ] 3.3. Add testimonials
+    ```markdown
+    ## 👥 Testimonials
+    > "Quote from stakeholder" - Name, Role
+    ```
+
+- [ ] 4. Review and publish
+  - [ ] 4.1. Verify content accuracy
+  - [ ] 4.2. Get stakeholder approval
+  - [ ] 4.3. Create platform-specific versions
+  - [ ] 4.4. Publish to designated platforms

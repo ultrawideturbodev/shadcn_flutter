@@ -1,0 +1,34 @@
+---
+description: Template to use when creating a new role
+globs: **/*
+---
+
+---
+description:  - 
+globs: **/*
+---
+
+# Description
+*A clear description of this role's purpose and primary function*
+
+
+
+# Responsibilites
+*Key areas this role is responsible for managing and executing*
+
+- 
+- 
+- 
+
+# Skills
+*Required capabilities and knowledge for this role*
+
+- 
+- 
+- 
+
+# Mode Permissions
+*Which operational modes this role can access and use*
+
+-  - 
+-  - 

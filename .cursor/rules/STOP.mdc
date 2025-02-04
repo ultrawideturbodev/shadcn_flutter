@@ -1,0 +1,38 @@
+---
+description: STOP - How to handle immediate work stoppage and maintain clear communication until further notice
+globs: **/*
+---
+
+# Description
+*A clear description of this mode's purpose and primary function*
+---
+
+STOP mode is focused on immediate work stoppage and clear communication with the user. When activated, all ongoing operations cease, and no file modifications are allowed until further instruction.
+
+# Code of Conduct
+*Behavioral guidelines and operational rules*
+---
+
+- You will immediately stop all ongoing operations
+- You will not make ANY changes to ANY files while in this mode
+- You will only communicate with the user
+- You will wait for explicit new instructions before proceeding
+- You will maintain clear and concise communication
+- You will acknowledge and confirm understanding of user instructions
+- You will not resume work without explicit permission
+- You will not suggest or initiate any actions
+- You will reset all assumptions about current work
+- You will maintain this state until given new orders
+
+# File Permissions
+*Which files this role can access and what operations are allowed*
+---
+
+- **/* read (Can read files but NO modifications allowed)
+
+# Preferred Tools
+*Tools that are preferred for this mode*
+
+- Ask the user (Primary tool for communication)
+- read_file (For reference only if needed)
+- No other tools should be used unless explicitly requested by user

@@ -1,0 +1,49 @@
+---
+description: How to document changes in a consistent and clear format
+globs: CHANGELOG.md, changelog.md
+---
+
+# 🎯 Main Objective: Update the Changelog
+
+- [ ] 1. Create version header
+  - [ ] 1.1. Add semantic version with date
+    ```markdown
+    ## 🚀 Version 1.2.3 (January 2024)
+    ---
+    ```
+  - [ ] 1.2. Verify version follows semantic versioning (MAJOR.MINOR.PATCH)
+
+- [ ] 2. Add change sections
+  - [ ] 2.1. Create breaking changes section if needed
+    ```markdown
+    ### 💔 Breaking:
+    * Removed deprecated `oldMethod` - use `newMethod` instead
+    ```
+  - [ ] 2.2. Create features section
+    ```markdown
+    ### ✨ Features:
+    * Added `newFeature` to handle X functionality
+    ```
+  - [ ] 2.3. Create improvements section
+    ```markdown
+    ### 🛠️ Improvements:
+    * Updated `existingFeature` to improve performance
+    ```
+  - [ ] 2.4. Create bug fixes section
+    ```markdown
+    ### 🐛 Bug fixes:
+    * Fixed crash in `brokenFeature` when input was null
+    ```
+
+- [ ] 3. Document changes
+  - [ ] 3.1. Start each bullet with action verb
+  - [ ] 3.2. Wrap code references in backticks
+  - [ ] 3.3. Reference issue numbers if applicable
+    ```markdown
+    * Added `newFeature` to handle X functionality (#123)
+    ```
+
+- [ ] 4. Validate changelog
+  - [ ] 4.1. Verify sections are in correct order (Breaking → Features → Improvements → Fixes)
+  - [ ] 4.2. Check all code references use backticks
+  - [ ] 4.3. Confirm bullet points are clear and concise

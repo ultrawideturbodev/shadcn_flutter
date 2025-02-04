@@ -1,0 +1,75 @@
+---
+description: How to set up a new Firestore collection with proper architecture and data modeling
+globs: *.dart, *.rules, *.json
+---
+
+# 🎯 Main Objective: Set Up a New Firestore Collection
+
+- [ ] 1. Create collection structure
+  - [ ] 1.1. Add collection to enum
+    ```dart
+    enum FirestoreCollection {
+      users,
+      newCollection,
+    }
+    ```
+  - [ ] 1.2. Create DTO class
+    ```dart
+    @JsonSerializable(includeIfNull: true, explicitToJson: true)
+    class NewCollectionDto extends TurboWriteableId<String> {
+      NewCollectionDto({
+        required this.id,
+        required this.createdAt,
+        required this.updatedAt,
+        required this.createdBy,
+      });
+
+      @override
+      final String id;
+      @TimestampConverter()
+      final DateTime createdAt;
+      @TimestampConverter()
+      final DateTime updatedAt;
+      final String createdBy;
+    }
+    ```
+
+- [ ] 2. Configure security rules
+  - [ ] 2.1. Add collection rules
+    ```rules
+    match /newCollection/{documentId} {
+      allow create: if hasAuth() && request.auth.uid == request.resource.data.createdBy;
+      allow read: if hasAuth();
+      allow update: if hasAuth() && resource.data.createdBy == request.auth.uid;
+      allow delete: if hasAuth() && resource.data.createdBy == request.auth.uid;
+    }
+    ```
+
+- [ ] 3. Create service layer
+  - [ ] 3.1. Create collection service
+    ```dart
+    class NewCollectionService extends CollectionService<NewCollectionDto, NewCollectionApi> {
+      NewCollectionService() : super(api: NewCollectionApi.locate);
+
+      @override
+      Stream<List<NewCollectionDto>> Function(User user) get stream =>
+          (user) => api.findStreamWithConverter();
+    }
+    ```
+  - [ ] 3.2. Register dependencies
+    ```dart
+    void registerDependencies() {
+      NewCollectionApi.registerFactory();
+      NewCollectionService.registerLazySingleton();
+    }
+    ```
+
+- [ ] 4. Implement usage
+  - [ ] 4.1. Create view model
+    ```dart
+    class NewCollectionViewModel extends BaseViewModel {
+      final _service = NewCollectionService.locate;
+      
+      Stream<List<NewCollectionDto>> get items => _service.stream(currentUser);
+    }
+    ```

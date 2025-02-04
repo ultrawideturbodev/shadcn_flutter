@@ -1,0 +1,81 @@
+---
+description: How to build a form structure in a Flutter application
+globs: *.dart, *.json
+---
+
+# 🎯 Main Objective: Create a Form Structure
+
+- [ ] 1. Create form configuration
+  - [ ] 1.1. Create enum for form fields
+    ```dart
+    enum _FormFields {
+      name,
+      description,
+      email
+    }
+    ```
+  - [ ] 1.2. Create form class extending FormConfig
+    ```dart
+    class ExampleForm extends FormConfig {
+      ExampleForm._();
+      static ExampleForm get locate => GetIt.I.get();
+      static void registerFactory() => GetIt.I.registerFactory(ExampleForm._);
+    }
+    ```
+
+- [ ] 2. Configure form fields
+  - [ ] 2.1. Add field configurations map
+    ```dart
+    @override
+    late final Map<Enum, FormFieldConfig> formFieldConfigs = {
+      _FormFields.name: FormFieldConfig<String>(
+        id: _FormFields.name,
+        formFieldType: FormFieldType.text,
+        initialValue: _initialDto?.name,
+        valueValidator: kValueValidatorsRequired(),
+      ),
+    };
+    ```
+  - [ ] 2.2. Add field getters
+    ```dart
+    FormFieldConfig<String> get name => formFieldConfig(_FormFields.name);
+    ```
+  - [ ] 2.3. Add field update methods
+    ```dart
+    void updateName(String? value) => name.value = value;
+    ```
+
+- [ ] 3. Initialize form
+  - [ ] 3.1. Add initialization field
+    ```dart
+    late final ExampleDto? _initialDto;
+    ```
+  - [ ] 3.2. Create initialize method
+    ```dart
+    void initialise({required ExampleDto? dto}) {
+      _initialDto = dto;
+    }
+    ```
+
+- [ ] 4. Integrate with ViewModel
+  - [ ] 4.1. Add form dependency
+    ```dart
+    late final _form = ExampleForm.locate;
+    ```
+  - [ ] 4.2. Initialize in viewmodel
+    ```dart
+    @override
+    Future<void> initialise() async {
+      final dto = await _service.tryFindById(args.id);
+      _form.initialise(dto: dto);
+      super.initialise();
+    }
+    ```
+  - [ ] 4.3. Add dispose method
+    ```dart
+    @override
+    void dispose() {
+      _form.dispose();
+      super.dispose();
+    }
+    ```
