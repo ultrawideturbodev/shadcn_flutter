@@ -23,6 +23,7 @@ dependencies:
   web: ^1.0.0
   data_widget: ^0.0.2
   gap: ^3.0.1
+  haptic_feedback: ^0.5.1+1
 
 dev_dependencies:
   flutter_test:

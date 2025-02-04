@@ -1,5 +1,8 @@
 import 'dart:math';
 
+import 'package:flutter/gestures.dart';
+import 'package:shadcn_flutter/src/vibrate/globals/g_vibrate.dart';
+
 import '../../../shadcn_flutter.dart';
 
 class Toggle extends StatefulWidget {
@@ -237,8 +240,25 @@ class Button extends StatefulWidget {
   final WidgetStatesController? statesController;
   final AlignmentGeometry? marginAlignment;
   final bool disableFocusOutline;
+
+  static const _defaultAnimationDuration = Duration(milliseconds: 50);
+  final Duration animationDuration;
+  static const _defaultAnimationCurve = Curves.fastOutSlowIn;
+  final Curve animationCurve;
+  static const _defaultReverseAnimationCurve = Curves.decelerate;
+  final Curve reverseAnimationCurve;
+  static const _defaultScaleAnimationEnd = 0.95;
+  final double scaleAnimationEnd;
+  static const _defaultOpacityAnimationEnd = 0.8;
+  final double opacityAnimationEnd;
+
   const Button({
     super.key,
+    this.animationDuration = _defaultAnimationDuration,
+    this.animationCurve = _defaultAnimationCurve,
+    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
+    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -274,6 +294,11 @@ class Button extends StatefulWidget {
 
   const Button.primary({
     super.key,
+    this.animationDuration = _defaultAnimationDuration,
+    this.animationCurve = _defaultAnimationCurve,
+    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
+    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -309,6 +334,11 @@ class Button extends StatefulWidget {
 
   const Button.secondary({
     super.key,
+    this.animationDuration = _defaultAnimationDuration,
+    this.animationCurve = _defaultAnimationCurve,
+    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
+    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -344,6 +374,11 @@ class Button extends StatefulWidget {
 
   const Button.outline({
     super.key,
+    this.animationDuration = _defaultAnimationDuration,
+    this.animationCurve = _defaultAnimationCurve,
+    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
+    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -379,6 +414,11 @@ class Button extends StatefulWidget {
 
   const Button.ghost({
     super.key,
+    this.animationDuration = _defaultAnimationDuration,
+    this.animationCurve = _defaultAnimationCurve,
+    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
+    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -414,6 +454,11 @@ class Button extends StatefulWidget {
 
   const Button.link({
     super.key,
+    this.animationDuration = _defaultAnimationDuration,
+    this.animationCurve = _defaultAnimationCurve,
+    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
+    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -449,6 +494,11 @@ class Button extends StatefulWidget {
 
   const Button.text({
     super.key,
+    this.animationDuration = _defaultAnimationDuration,
+    this.animationCurve = _defaultAnimationCurve,
+    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
+    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -484,6 +534,11 @@ class Button extends StatefulWidget {
 
   const Button.destructive({
     super.key,
+    this.animationDuration = _defaultAnimationDuration,
+    this.animationCurve = _defaultAnimationCurve,
+    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
+    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -519,6 +574,11 @@ class Button extends StatefulWidget {
 
   const Button.fixed({
     super.key,
+    this.animationDuration = _defaultAnimationDuration,
+    this.animationCurve = _defaultAnimationCurve,
+    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
+    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -554,6 +614,11 @@ class Button extends StatefulWidget {
 
   const Button.card({
     super.key,
+    this.animationDuration = _defaultAnimationDuration,
+    this.animationCurve = _defaultAnimationCurve,
+    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
+    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -591,10 +656,46 @@ class Button extends StatefulWidget {
   ButtonState createState() => ButtonState();
 }
 
-class ButtonState<T extends Button> extends State<T> {
+class ButtonState<T extends Button> extends State<T> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _scaleAnimation;
+  late final Animation<double> _opacityAnimation;
+
   bool get _shouldEnableFeedback {
     final platform = Theme.of(context).platform;
     return isMobile(platform);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: widget.animationDuration,
+      vsync: this,
+    );
+
+    _scaleAnimation = Tween<double>(
+      begin: 1,
+      end: widget.scaleAnimationEnd,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: widget.animationCurve,
+        reverseCurve: widget.reverseAnimationCurve,
+      ),
+    );
+
+    _opacityAnimation = Tween<double>(
+      begin: 1,
+      end: widget.opacityAnimationEnd,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: widget.animationCurve,
+        reverseCurve: widget.reverseAnimationCurve,
+      ),
+    );
   }
 
   AbstractButtonStyle? _style;
@@ -665,12 +766,25 @@ class ButtonState<T extends Button> extends State<T> {
     return _style!.iconTheme(context, states);
   }
 
+  void _handleTapDown(TapDownDetails details) {
+    _controller.forward();
+    gVibrateSelection();
+  }
+
+  void _handleTapUp(TapUpDetails details) {
+    _controller.reverse();
+  }
+
+  void _handlePointerCancel(PointerCancelEvent event) {
+    _controller.reverse();
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scaling = theme.scaling;
     bool enableFeedback = widget.enableFeedback ?? _shouldEnableFeedback;
-    return Clickable(
+    final clickable = Clickable(
       disableFocusOutline: widget.disableFocusOutline,
       statesController: widget.statesController,
       focusNode: widget.focusNode,
@@ -716,8 +830,7 @@ class ButtonState<T extends Button> extends State<T> {
                       child: Align(
                         widthFactor: 1,
                         heightFactor: 1,
-                        alignment: widget.alignment ??
-                            AlignmentDirectional.centerStart,
+                        alignment: widget.alignment ?? AlignmentDirectional.centerStart,
                         child: widget.child,
                       ),
                     ),
@@ -727,6 +840,25 @@ class ButtonState<T extends Button> extends State<T> {
                 ),
               ),
             ),
+    );
+    return  Listener(
+      onPointerDown: (_) => _handleTapDown(
+        TapDownDetails(kind: PointerDeviceKind.touch),
+      ),
+      onPointerUp: (_) => _handleTapUp(
+        TapUpDetails(kind: PointerDeviceKind.touch),
+      ),
+      onPointerCancel: _handlePointerCancel,
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) => Transform.scale(
+          scale: _scaleAnimation.value,
+          child: Opacity(
+            opacity: _opacityAnimation.value,
+            child: clickable,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -749,8 +881,7 @@ class ButtonDensity {
   static const ButtonDensity normal = ButtonDensity(_densityNormal);
   static const ButtonDensity comfortable = ButtonDensity(_densityComfortable);
   static const ButtonDensity icon = ButtonDensity(_densityIcon);
-  static const ButtonDensity iconComfortable =
-      ButtonDensity(_densityIconComfortable);
+  static const ButtonDensity iconComfortable = ButtonDensity(_densityIconComfortable);
   static const ButtonDensity iconDense = ButtonDensity(_densityIconDense);
   static const ButtonDensity dense = ButtonDensity(_densityDense);
   static const ButtonDensity compact = ButtonDensity(_densityCompact);
@@ -769,19 +900,16 @@ EdgeInsets _densityCompact(EdgeInsets padding) {
 }
 
 EdgeInsets _densityIcon(EdgeInsets padding) {
-  return EdgeInsets.all(
-      min(padding.top, min(padding.bottom, min(padding.left, padding.right))));
+  return EdgeInsets.all(min(padding.top, min(padding.bottom, min(padding.left, padding.right))));
 }
 
 EdgeInsets _densityIconComfortable(EdgeInsets padding) {
-  return EdgeInsets.all(
-      max(padding.top, max(padding.bottom, max(padding.left, padding.right))));
+  return EdgeInsets.all(max(padding.top, max(padding.bottom, max(padding.left, padding.right))));
 }
 
 EdgeInsets _densityIconDense(EdgeInsets padding) {
   return EdgeInsets.all(
-      min(padding.top, min(padding.bottom, min(padding.left, padding.right))) *
-          0.5);
+      min(padding.top, min(padding.bottom, min(padding.left, padding.right))) * 0.5);
 }
 
 EdgeInsets _densityComfortable(EdgeInsets padding) {
@@ -793,8 +921,7 @@ enum ButtonShape {
   circle,
 }
 
-typedef ButtonStateProperty<T> = T Function(
-    BuildContext context, Set<WidgetState> states);
+typedef ButtonStateProperty<T> = T Function(BuildContext context, Set<WidgetState> states);
 
 abstract class AbstractButtonStyle {
   ButtonStateProperty<Decoration> get decoration;
@@ -946,8 +1073,7 @@ class ButtonStyle implements AbstractButtonStyle {
     return variance.decoration;
   }
 
-  Decoration _resolveCircleDecoration(
-      BuildContext context, Set<WidgetState> states) {
+  Decoration _resolveCircleDecoration(BuildContext context, Set<WidgetState> states) {
     var decoration = variance.decoration(context, states);
     if (decoration is BoxDecoration) {
       return BoxDecoration(
@@ -982,11 +1108,9 @@ class ButtonStyle implements AbstractButtonStyle {
     return _resolvePadding;
   }
 
-  EdgeInsetsGeometry _resolvePadding(
-      BuildContext context, Set<WidgetState> states) {
-    return density.modifier(
-        variance.padding(context, states).optionallyResolve(context) *
-            size.scale);
+  EdgeInsetsGeometry _resolvePadding(BuildContext context, Set<WidgetState> states) {
+    return density
+        .modifier(variance.padding(context, states).optionallyResolve(context) * size.scale);
   }
 
   @override
@@ -1016,8 +1140,7 @@ class ButtonStyle implements AbstractButtonStyle {
     return _resolveIconTheme;
   }
 
-  IconThemeData _resolveIconTheme(
-      BuildContext context, Set<WidgetState> states) {
+  IconThemeData _resolveIconTheme(BuildContext context, Set<WidgetState> states) {
     var iconSize = variance.iconTheme(context, states).size;
     iconSize ??= IconTheme.of(context).size ?? 24;
     return variance.iconTheme(context, states).copyWith(
@@ -1189,8 +1312,7 @@ class ButtonVariance implements AbstractButtonStyle {
 
   @override
   int get hashCode {
-    return Object.hash(
-        decoration, mouseCursor, padding, textStyle, iconTheme, margin);
+    return Object.hash(decoration, mouseCursor, padding, textStyle, iconTheme, margin);
   }
 
   @override
@@ -1319,8 +1441,7 @@ class _CopyWithButtonStyle implements AbstractButtonStyle {
     return _buildPadding;
   }
 
-  EdgeInsetsGeometry _buildPadding(
-      BuildContext context, Set<WidgetState> states) {
+  EdgeInsetsGeometry _buildPadding(BuildContext context, Set<WidgetState> states) {
     return _padding!(context, states, _delegate.padding(context, states));
   }
 
@@ -1333,8 +1454,7 @@ class _CopyWithButtonStyle implements AbstractButtonStyle {
   }
 
   MouseCursor _buildMouseCursor(BuildContext context, Set<WidgetState> states) {
-    return _mouseCursor!(
-        context, states, _delegate.mouseCursor(context, states));
+    return _mouseCursor!(context, states, _delegate.mouseCursor(context, states));
   }
 
   @override
@@ -1357,8 +1477,7 @@ class _CopyWithButtonStyle implements AbstractButtonStyle {
     return _buildMargin;
   }
 
-  EdgeInsetsGeometry _buildMargin(
-      BuildContext context, Set<WidgetState> states) {
+  EdgeInsetsGeometry _buildMargin(BuildContext context, Set<WidgetState> states) {
     return _margin!(context, states, _delegate.margin(context, states));
   }
 
@@ -1378,8 +1497,8 @@ class _CopyWithButtonStyle implements AbstractButtonStyle {
 
   @override
   int get hashCode {
-    return Object.hash(_delegate, _decoration, _mouseCursor, _padding,
-        _textStyle, _iconTheme, _margin);
+    return Object.hash(
+        _delegate, _decoration, _mouseCursor, _padding, _textStyle, _iconTheme, _margin);
   }
 
   @override
@@ -1414,16 +1533,14 @@ TextStyle _buttonCardTextStyle(BuildContext context, Set<WidgetState> states) {
   );
 }
 
-IconThemeData _buttonCardIconTheme(
-    BuildContext context, Set<WidgetState> states) {
+IconThemeData _buttonCardIconTheme(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return IconThemeData(
     color: themeData.colorScheme.cardForeground,
   );
 }
 
-Decoration _buttonCardDecoration(
-    BuildContext context, Set<WidgetState> states) {
+Decoration _buttonCardDecoration(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   if (states.contains(WidgetState.disabled)) {
     return BoxDecoration(
@@ -1435,8 +1552,7 @@ Decoration _buttonCardDecoration(
       ),
     );
   }
-  if (states.contains(WidgetState.hovered) ||
-      states.contains(WidgetState.selected)) {
+  if (states.contains(WidgetState.hovered) || states.contains(WidgetState.selected)) {
     return BoxDecoration(
       color: themeData.colorScheme.border,
       borderRadius: BorderRadius.circular(themeData.radiusXl),
@@ -1462,8 +1578,7 @@ EdgeInsets _buttonCardPadding(BuildContext context, Set<WidgetState> states) {
 }
 
 // MENUBUTTON
-Decoration _buttonMenuDecoration(
-    BuildContext context, Set<WidgetState> states) {
+Decoration _buttonMenuDecoration(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   if (states.contains(WidgetState.disabled)) {
     return const BoxDecoration();
@@ -1501,15 +1616,13 @@ EdgeInsets _buttonMenuPadding(BuildContext context, Set<WidgetState> states) {
   return const EdgeInsets.only(left: 8, top: 6, right: 6, bottom: 6) * scaling;
 }
 
-EdgeInsets _buttonMenubarPadding(
-    BuildContext context, Set<WidgetState> states) {
+EdgeInsets _buttonMenubarPadding(BuildContext context, Set<WidgetState> states) {
   final theme = Theme.of(context);
   final scaling = theme.scaling;
   return const EdgeInsets.symmetric(horizontal: 12, vertical: 4) * scaling;
 }
 
-IconThemeData _buttonMenuIconTheme(
-    BuildContext context, Set<WidgetState> states) {
+IconThemeData _buttonMenuIconTheme(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return IconThemeData(
     color: themeData.colorScheme.accentForeground,
@@ -1517,8 +1630,7 @@ IconThemeData _buttonMenuIconTheme(
 }
 
 // PRIMARY
-Decoration _buttonPrimaryDecoration(
-    BuildContext context, Set<WidgetState> states) {
+Decoration _buttonPrimaryDecoration(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   if (states.contains(WidgetState.disabled)) {
     return BoxDecoration(
@@ -1538,16 +1650,14 @@ Decoration _buttonPrimaryDecoration(
   );
 }
 
-TextStyle _buttonPrimaryTextStyle(
-    BuildContext context, Set<WidgetState> states) {
+TextStyle _buttonPrimaryTextStyle(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return themeData.typography.small.merge(themeData.typography.medium).copyWith(
         color: themeData.colorScheme.primaryForeground,
       );
 }
 
-IconThemeData _buttonPrimaryIconTheme(
-    BuildContext context, Set<WidgetState> states) {
+IconThemeData _buttonPrimaryIconTheme(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return IconThemeData(
     color: themeData.colorScheme.primaryForeground,
@@ -1555,8 +1665,7 @@ IconThemeData _buttonPrimaryIconTheme(
 }
 
 // SECONDARY
-Decoration _buttonSecondaryDecoration(
-    BuildContext context, Set<WidgetState> states) {
+Decoration _buttonSecondaryDecoration(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   if (states.contains(WidgetState.disabled)) {
     return BoxDecoration(
@@ -1576,8 +1685,7 @@ Decoration _buttonSecondaryDecoration(
   );
 }
 
-TextStyle _buttonSecondaryTextStyle(
-    BuildContext context, Set<WidgetState> states) {
+TextStyle _buttonSecondaryTextStyle(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return themeData.typography.small.merge(themeData.typography.medium).copyWith(
         color: states.contains(WidgetState.disabled)
@@ -1586,8 +1694,7 @@ TextStyle _buttonSecondaryTextStyle(
       );
 }
 
-IconThemeData _buttonSecondaryIconTheme(
-    BuildContext context, Set<WidgetState> states) {
+IconThemeData _buttonSecondaryIconTheme(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return IconThemeData(
     color: states.contains(WidgetState.disabled)
@@ -1596,8 +1703,7 @@ IconThemeData _buttonSecondaryIconTheme(
   );
 }
 
-Decoration _buttonOutlineDecoration(
-    BuildContext context, Set<WidgetState> states) {
+Decoration _buttonOutlineDecoration(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   if (states.contains(WidgetState.disabled)) {
     return BoxDecoration(
@@ -1629,8 +1735,7 @@ Decoration _buttonOutlineDecoration(
   );
 }
 
-TextStyle _buttonOutlineTextStyle(
-    BuildContext context, Set<WidgetState> states) {
+TextStyle _buttonOutlineTextStyle(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return themeData.typography.small.merge(themeData.typography.medium).copyWith(
         color: states.contains(WidgetState.disabled)
@@ -1639,8 +1744,7 @@ TextStyle _buttonOutlineTextStyle(
       );
 }
 
-IconThemeData _buttonOutlineIconTheme(
-    BuildContext context, Set<WidgetState> states) {
+IconThemeData _buttonOutlineIconTheme(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return IconThemeData(
     color: states.contains(WidgetState.disabled)
@@ -1649,8 +1753,7 @@ IconThemeData _buttonOutlineIconTheme(
   );
 }
 
-Decoration _buttonGhostDecoration(
-    BuildContext context, Set<WidgetState> states) {
+Decoration _buttonGhostDecoration(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   if (states.contains(WidgetState.disabled)) {
     return BoxDecoration(
@@ -1679,8 +1782,7 @@ TextStyle _buttonGhostTextStyle(BuildContext context, Set<WidgetState> states) {
       );
 }
 
-IconThemeData _buttonGhostIconTheme(
-    BuildContext context, Set<WidgetState> states) {
+IconThemeData _buttonGhostIconTheme(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return IconThemeData(
     color: states.contains(WidgetState.disabled)
@@ -1696,16 +1798,14 @@ TextStyle _buttonMutedTextStyle(BuildContext context, Set<WidgetState> states) {
       );
 }
 
-IconThemeData _buttonMutedIconTheme(
-    BuildContext context, Set<WidgetState> states) {
+IconThemeData _buttonMutedIconTheme(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return IconThemeData(
     color: themeData.colorScheme.mutedForeground,
   );
 }
 
-Decoration _buttonLinkDecoration(
-    BuildContext context, Set<WidgetState> states) {
+Decoration _buttonLinkDecoration(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return BoxDecoration(
     borderRadius: BorderRadius.circular(themeData.radiusMd),
@@ -1718,14 +1818,12 @@ TextStyle _buttonLinkTextStyle(BuildContext context, Set<WidgetState> states) {
         color: states.contains(WidgetState.disabled)
             ? themeData.colorScheme.mutedForeground
             : themeData.colorScheme.foreground,
-        decoration: states.contains(WidgetState.hovered)
-            ? TextDecoration.underline
-            : TextDecoration.none,
+        decoration:
+            states.contains(WidgetState.hovered) ? TextDecoration.underline : TextDecoration.none,
       );
 }
 
-IconThemeData _buttonLinkIconTheme(
-    BuildContext context, Set<WidgetState> states) {
+IconThemeData _buttonLinkIconTheme(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return IconThemeData(
     color: states.contains(WidgetState.disabled)
@@ -1734,8 +1832,7 @@ IconThemeData _buttonLinkIconTheme(
   );
 }
 
-Decoration _buttonTextDecoration(
-    BuildContext context, Set<WidgetState> states) {
+Decoration _buttonTextDecoration(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return BoxDecoration(
     borderRadius: BorderRadius.circular(themeData.radiusMd),
@@ -1751,8 +1848,7 @@ TextStyle _buttonTextTextStyle(BuildContext context, Set<WidgetState> states) {
       );
 }
 
-IconThemeData _buttonTextIconTheme(
-    BuildContext context, Set<WidgetState> states) {
+IconThemeData _buttonTextIconTheme(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return IconThemeData(
     color: states.contains(WidgetState.hovered)
@@ -1761,8 +1857,7 @@ IconThemeData _buttonTextIconTheme(
   );
 }
 
-Decoration _buttonDestructiveDecoration(
-    BuildContext context, Set<WidgetState> states) {
+Decoration _buttonDestructiveDecoration(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   if (states.contains(WidgetState.disabled)) {
     return BoxDecoration(
@@ -1782,8 +1877,7 @@ Decoration _buttonDestructiveDecoration(
   );
 }
 
-TextStyle _buttonDestructiveTextStyle(
-    BuildContext context, Set<WidgetState> states) {
+TextStyle _buttonDestructiveTextStyle(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return themeData.typography.small.merge(themeData.typography.medium).copyWith(
         color: states.contains(WidgetState.disabled)
@@ -1792,8 +1886,7 @@ TextStyle _buttonDestructiveTextStyle(
       );
 }
 
-IconThemeData _buttonDestructiveIconTheme(
-    BuildContext context, Set<WidgetState> states) {
+IconThemeData _buttonDestructiveIconTheme(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
   return IconThemeData(
     color: states.contains(WidgetState.disabled)
@@ -1803,16 +1896,14 @@ IconThemeData _buttonDestructiveIconTheme(
 }
 
 // STATIC BUTTON
-TextStyle _buttonStaticTextStyle(
-    BuildContext context, Set<WidgetState> states) {
+TextStyle _buttonStaticTextStyle(BuildContext context, Set<WidgetState> states) {
   final theme = Theme.of(context);
   return theme.typography.small.merge(theme.typography.medium).copyWith(
         color: theme.colorScheme.foreground,
       );
 }
 
-IconThemeData _buttonStaticIconTheme(
-    BuildContext context, Set<WidgetState> states) {
+IconThemeData _buttonStaticIconTheme(BuildContext context, Set<WidgetState> states) {
   return const IconThemeData();
 }
 
@@ -2464,8 +2555,7 @@ class DestructiveButton extends StatelessWidget {
       leading: leading,
       trailing: trailing,
       alignment: alignment,
-      style:
-          ButtonStyle.destructive(size: size, density: density, shape: shape),
+      style: ButtonStyle.destructive(size: size, density: density, shape: shape),
       focusNode: focusNode,
       disableTransition: disableTransition,
       onHover: onHover,
@@ -3076,38 +3166,37 @@ class ButtonStyleOverride extends StatelessWidget {
       var data = Data.maybeOf<ButtonStyleOverrideData>(context);
       if (data != null) {
         decoration = (context, state, value) {
-          return data.decoration?.call(context, state,
-                  decoration?.call(context, state, value) ?? value) ??
+          return data.decoration
+                  ?.call(context, state, decoration?.call(context, state, value) ?? value) ??
               decoration?.call(context, state, value) ??
               value;
         };
         mouseCursor = (context, state, value) {
-          return data.mouseCursor?.call(context, state,
-                  mouseCursor?.call(context, state, value) ?? value) ??
+          return data.mouseCursor
+                  ?.call(context, state, mouseCursor?.call(context, state, value) ?? value) ??
               mouseCursor?.call(context, state, value) ??
               value;
         };
         padding = (context, state, value) {
-          return data.padding?.call(context, state,
-                  padding?.call(context, state, value) ?? value) ??
+          return data.padding
+                  ?.call(context, state, padding?.call(context, state, value) ?? value) ??
               padding?.call(context, state, value) ??
               value;
         };
         textStyle = (context, state, value) {
-          return data.textStyle?.call(context, state,
-                  textStyle?.call(context, state, value) ?? value) ??
+          return data.textStyle
+                  ?.call(context, state, textStyle?.call(context, state, value) ?? value) ??
               textStyle?.call(context, state, value) ??
               value;
         };
         iconTheme = (context, state, value) {
-          return data.iconTheme?.call(context, state,
-                  iconTheme?.call(context, state, value) ?? value) ??
+          return data.iconTheme
+                  ?.call(context, state, iconTheme?.call(context, state, value) ?? value) ??
               iconTheme?.call(context, state, value) ??
               value;
         };
         margin = (context, state, value) {
-          return data.margin?.call(context, state,
-                  margin?.call(context, state, value) ?? value) ??
+          return data.margin?.call(context, state, margin?.call(context, state, value) ?? value) ??
               margin?.call(context, state, value) ??
               value;
         };
@@ -3170,8 +3259,7 @@ class ButtonGroup extends StatelessWidget {
               } else if (borderRadius == null) {
                 resolvedBorderRadius = BorderRadius.zero;
               } else {
-                resolvedBorderRadius =
-                    borderRadius.resolve(Directionality.of(context));
+                resolvedBorderRadius = borderRadius.resolve(Directionality.of(context));
               }
               if (direction == Axis.horizontal) {
                 if (i == 0) {

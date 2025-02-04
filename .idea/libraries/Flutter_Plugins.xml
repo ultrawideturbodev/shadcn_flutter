@@ -1,6 +1,8 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
-    <CLASSES />
+    <CLASSES>
+      <root url="file://$USER_HOME$/.puro/shared/pub_cache/hosted/pub.dev/haptic_feedback-0.5.1+1" />
+    </CLASSES>
     <JAVADOC />
     <SOURCES />
   </library>
