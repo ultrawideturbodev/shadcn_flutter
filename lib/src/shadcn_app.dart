@@ -42,7 +42,6 @@ class ShadcnApp extends StatefulWidget {
     this.scrollBehavior,
     this.materialTheme,
     this.cupertinoTheme,
-    this.scaling,
     this.disableBrowserContextMenu = true,
     this.initialRecentColors = const [],
     this.maxRecentColors = 10,
@@ -89,7 +88,6 @@ class ShadcnApp extends StatefulWidget {
     this.scrollBehavior,
     this.materialTheme,
     this.cupertinoTheme,
-    this.scaling,
     this.disableBrowserContextMenu = true,
     this.initialRecentColors = const [],
     this.maxRecentColors = 50,
@@ -113,8 +111,6 @@ class ShadcnApp extends StatefulWidget {
         initialRoute = null;
 
   final GlobalKey<NavigatorState>? navigatorKey;
-
-  final AdaptiveScaling? scaling;
 
   final Widget? home;
 
@@ -317,7 +313,6 @@ class _ShadcnAppState extends State<ShadcnApp> {
   Widget _builder(BuildContext context, Widget? child) {
     return ShadcnLayer(
       theme: widget.theme,
-      scaling: widget.scaling,
       initialRecentColors: widget.initialRecentColors,
       maxRecentColors: widget.maxRecentColors,
       onRecentColorsChanged: widget.onRecentColorsChanged,
@@ -460,7 +455,6 @@ class ShadcnLayer extends StatelessWidget {
   final ThemeData theme;
   final ThemeData? darkTheme;
   final ThemeMode themeMode;
-  final AdaptiveScaling? scaling;
   final List<Color> initialRecentColors;
   final int maxRecentColors;
   final ValueChanged<List<Color>>? onRecentColorsChanged;
@@ -474,7 +468,6 @@ class ShadcnLayer extends StatelessWidget {
   const ShadcnLayer({
     super.key,
     required this.theme,
-    this.scaling,
     this.child,
     this.initialRecentColors = const [],
     this.maxRecentColors = 50,
@@ -491,14 +484,13 @@ class ShadcnLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appScaling = scaling ?? AdaptiveScaler.defaultScaling(theme);
     var platformBrightness = MediaQuery.platformBrightnessOf(context);
     var mobileMode = isMobile(theme.platform);
     final scaledTheme = themeMode == ThemeMode.dark ||
             (themeMode == ThemeMode.system &&
                 platformBrightness == Brightness.dark)
-        ? appScaling.scale(darkTheme ?? theme)
-        : appScaling.scale(theme);
+        ? darkTheme ?? theme
+        : theme;
     return OverlayManagerLayer(
       menuHandler: menuHandler ??
           (mobileMode

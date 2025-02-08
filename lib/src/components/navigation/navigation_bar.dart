@@ -619,10 +619,13 @@ class NavigationDivider extends StatelessWidget implements NavigationBarItem {
   final double? thickness;
   final Color? color;
 
+  final double horizontalPadding;
+
   const NavigationDivider({
     super.key,
     this.thickness,
     this.color,
+    this.horizontalPadding = 0,
   });
 
   @override
@@ -658,16 +661,16 @@ class NavigationDivider extends StatelessWidget implements NavigationBarItem {
       return SliverToBoxAdapter(
         child: Padding(
           padding: direction == Axis.vertical
-              ? EdgeInsets.symmetric(vertical: 8 * scaling)
-              : EdgeInsets.symmetric(horizontal: 8 * scaling),
+              ? EdgeInsets.symmetric(vertical: 8 * scaling, horizontal: horizontalPadding)
+              : EdgeInsets.symmetric(horizontal: 8 * scaling + horizontalPadding),
           child: child,
         ),
       );
     }
     return Padding(
       padding: direction == Axis.vertical
-          ? EdgeInsets.symmetric(vertical: 4 * scaling)
-          : EdgeInsets.symmetric(horizontal: 4 * scaling),
+          ? EdgeInsets.symmetric(vertical: 4 * scaling, horizontal: horizontalPadding)
+          : EdgeInsets.symmetric(horizontal: 4 * scaling + horizontalPadding),
       child: child,
     );
   }

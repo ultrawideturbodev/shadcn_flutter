@@ -86,8 +86,8 @@ class SelectedButton extends StatefulWidget {
   final AlignmentGeometry? marginAlignment;
   final bool disableTransition;
   final ValueChanged<bool>? onHover;
-  final ValueChanged<bool>? onFocus;
   final bool? enableFeedback;
+  final ValueChanged<bool>? onFocus;
   final GestureTapDownCallback? onTapDown;
   final GestureTapUpCallback? onTapUp;
   final GestureTapCancelCallback? onTapCancel;
@@ -195,6 +195,7 @@ class SelectedButtonState extends State<SelectedButton> {
         onSecondaryLongPress: widget.onSecondaryLongPress,
         onTertiaryLongPress: widget.onTertiaryLongPress,
         disableHoverEffect: widget.disableHoverEffect,
+        scaleAnimationEnd: 1,
         onPressed: () {
           if (widget.onChanged != null) {
             widget.onChanged!(!widget.value);
@@ -247,9 +248,9 @@ class Button extends StatefulWidget {
   final Curve animationCurve;
   static const _defaultReverseAnimationCurve = Curves.decelerate;
   final Curve reverseAnimationCurve;
-  static const _defaultScaleAnimationEnd = 0.95;
+  static const defaultScaleAnimationEnd = 0.95;
   final double scaleAnimationEnd;
-  static const _defaultOpacityAnimationEnd = 0.8;
+  static const defaultOpacityAnimationEnd = 0.8;
   final double opacityAnimationEnd;
 
   const Button({
@@ -257,8 +258,8 @@ class Button extends StatefulWidget {
     this.animationDuration = _defaultAnimationDuration,
     this.animationCurve = _defaultAnimationCurve,
     this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
+    this.scaleAnimationEnd = defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -297,8 +298,8 @@ class Button extends StatefulWidget {
     this.animationDuration = _defaultAnimationDuration,
     this.animationCurve = _defaultAnimationCurve,
     this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
+    this.scaleAnimationEnd = defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -337,8 +338,8 @@ class Button extends StatefulWidget {
     this.animationDuration = _defaultAnimationDuration,
     this.animationCurve = _defaultAnimationCurve,
     this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
+    this.scaleAnimationEnd = defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -377,8 +378,8 @@ class Button extends StatefulWidget {
     this.animationDuration = _defaultAnimationDuration,
     this.animationCurve = _defaultAnimationCurve,
     this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
+    this.scaleAnimationEnd = defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -417,8 +418,8 @@ class Button extends StatefulWidget {
     this.animationDuration = _defaultAnimationDuration,
     this.animationCurve = _defaultAnimationCurve,
     this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
+    this.scaleAnimationEnd = defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -457,8 +458,8 @@ class Button extends StatefulWidget {
     this.animationDuration = _defaultAnimationDuration,
     this.animationCurve = _defaultAnimationCurve,
     this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
+    this.scaleAnimationEnd = defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -497,8 +498,8 @@ class Button extends StatefulWidget {
     this.animationDuration = _defaultAnimationDuration,
     this.animationCurve = _defaultAnimationCurve,
     this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
+    this.scaleAnimationEnd = defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -537,8 +538,8 @@ class Button extends StatefulWidget {
     this.animationDuration = _defaultAnimationDuration,
     this.animationCurve = _defaultAnimationCurve,
     this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
+    this.scaleAnimationEnd = defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -577,8 +578,8 @@ class Button extends StatefulWidget {
     this.animationDuration = _defaultAnimationDuration,
     this.animationCurve = _defaultAnimationCurve,
     this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
+    this.scaleAnimationEnd = defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -617,8 +618,8 @@ class Button extends StatefulWidget {
     this.animationDuration = _defaultAnimationDuration,
     this.animationCurve = _defaultAnimationCurve,
     this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = _defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = _defaultOpacityAnimationEnd,
+    this.scaleAnimationEnd = defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -698,6 +699,12 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
     );
   }
 
+  @override
+  Future<void> dispose() async {
+    _controller.dispose();
+    super.dispose();
+  }
+
   AbstractButtonStyle? _style;
   ButtonStyleOverrideData? _overrideData;
 
@@ -767,9 +774,30 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
   }
 
   void _handleTapDown(TapDownDetails details) {
-    _controller.forward();
-    gVibrateSelection();
+    if (_enableCustomFeedback) {
+      _controller.forward();
+      gVibrateSelection();
+    }
   }
+
+  bool get _enableCustomFeedback =>
+      widget.enabled != false &&
+      (widget.onPressed != null ||
+          widget.onTapDown != null ||
+          widget.onSecondaryTapDown != null ||
+          widget.onTertiaryTapDown != null ||
+          widget.onLongPressStart != null ||
+          widget.onSecondaryLongPress != null ||
+          widget.onTertiaryLongPress != null ||
+          widget.onTapCancel != null ||
+          widget.onTapUp != null ||
+          widget.onSecondaryTapUp != null ||
+          widget.onTertiaryTapUp != null ||
+          widget.onLongPressEnd != null ||
+          widget.onLongPressMoveUpdate != null ||
+          widget.onLongPressUp != null ||
+          widget.onSecondaryTapCancel != null ||
+          widget.onTertiaryTapCancel != null);
 
   void _handleTapUp(TapUpDetails details) {
     _controller.reverse();
@@ -801,15 +829,6 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
       padding: WidgetStateProperty.resolveWith(_resolvePadding),
       textStyle: WidgetStateProperty.resolveWith(_resolveTextStyle),
       iconTheme: WidgetStateProperty.resolveWith(_resolveIconTheme),
-      transform: enableFeedback
-          ? WidgetStateProperty.resolveWith((states) {
-              if (states.contains(WidgetState.pressed)) {
-                // scale down to 95% with alignment at center
-                return Matrix4.identity()..scale(0.95);
-              }
-              return null;
-            })
-          : null,
       onPressed: widget.onPressed,
       child: widget.leading == null && widget.trailing == null
           ? Align(
@@ -841,7 +860,7 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
               ),
             ),
     );
-    return  Listener(
+    return Listener(
       onPointerDown: (_) => _handleTapDown(
         TapDownDetails(kind: PointerDeviceKind.touch),
       ),
@@ -1726,7 +1745,7 @@ Decoration _buttonOutlineDecoration(BuildContext context, Set<WidgetState> state
     );
   }
   return BoxDecoration(
-    color: themeData.colorScheme.muted.withOpacity(0),
+    color: themeData.colorScheme.card,
     border: Border.all(
       color: themeData.colorScheme.muted,
       width: 1,
@@ -2432,6 +2451,8 @@ class TextButton extends StatelessWidget {
   final GestureLongPressEndCallback? onLongPressEnd;
   final GestureLongPressUpCallback? onSecondaryLongPress;
   final GestureLongPressUpCallback? onTertiaryLongPress;
+  final double scaleAnimationEnd;
+  final double opacityAnimationEnd;
 
   const TextButton({
     super.key,
@@ -2464,6 +2485,8 @@ class TextButton extends StatelessWidget {
     this.onLongPressEnd,
     this.onSecondaryLongPress,
     this.onTertiaryLongPress,
+    this.scaleAnimationEnd = Button.defaultScaleAnimationEnd,
+    this.opacityAnimationEnd = Button.defaultOpacityAnimationEnd,
   });
 
   @override
@@ -2471,6 +2494,8 @@ class TextButton extends StatelessWidget {
     return Button(
       onPressed: onPressed,
       enabled: enabled,
+      scaleAnimationEnd: scaleAnimationEnd,
+      opacityAnimationEnd: opacityAnimationEnd,
       leading: leading,
       trailing: trailing,
       alignment: alignment,

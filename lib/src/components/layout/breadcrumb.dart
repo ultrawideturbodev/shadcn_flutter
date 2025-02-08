@@ -66,7 +66,7 @@ class Breadcrumb extends StatelessWidget {
                     ],
                   ),
           ],
-        ).small().muted(),
+        ),
       ),
     );
   }

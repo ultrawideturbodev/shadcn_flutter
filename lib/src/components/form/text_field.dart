@@ -9,6 +9,7 @@ class TextField extends StatefulWidget {
   final TextEditingController? controller;
   final bool filled;
   final Widget? placeholder;
+  final String? hintText;
   final AlignmentGeometry? placeholderAlignment;
   final AlignmentGeometry? leadingAlignment;
   final AlignmentGeometry? trailingAlignment;
@@ -57,6 +58,7 @@ class TextField extends StatefulWidget {
     this.minLines,
     this.filled = false,
     this.placeholder,
+    this.hintText,
     this.border = true,
     this.leading,
     this.trailing,
@@ -102,8 +104,7 @@ class TextField extends StatefulWidget {
   State<TextField> createState() => _TextFieldState();
 }
 
-class _TextFieldState extends State<TextField>
-    with FormValueSupplier<String, TextField> {
+class _TextFieldState extends State<TextField> with FormValueSupplier<String, TextField> {
   late FocusNode _focusNode;
   final GlobalKey _key = GlobalKey();
   late TextEditingController _controller;
@@ -195,23 +196,20 @@ class _TextFieldState extends State<TextField>
       listenable: _statesController,
       builder: (context, child) {
         return MouseRegion(
-          cursor: widget.enabled
-              ? SystemMouseCursors.text
-              : SystemMouseCursors.basic,
+          cursor: widget.enabled ? SystemMouseCursors.text : SystemMouseCursors.basic,
           child: GestureDetector(
             onTap: widget.enabled ? () => _focusNode.requestFocus() : null,
             child: TextFieldTapRegion(
               enabled: widget.enabled,
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: optionallyResolveBorderRadius(
-                          context, widget.borderRadius) ??
+                  borderRadius: optionallyResolveBorderRadius(context, widget.borderRadius) ??
                       BorderRadius.circular(theme.radiusMd),
                   color: widget.filled ? theme.colorScheme.muted : null,
                   border: widget.border
                       ? Border.all(
-                          color: _statesController.value
-                                      .contains(WidgetState.focused) &&
+                          width: 1.5,
+                          color: _statesController.value.contains(WidgetState.focused) &&
                                   widget.enabled
                               ? theme.colorScheme.ring
                               : theme.colorScheme.border,
@@ -234,9 +232,7 @@ class _TextFieldState extends State<TextField>
         child: Row(
           children: [
             if (widget.leading != null)
-              Align(
-                  alignment: widget.leadingAlignment ?? Alignment.center,
-                  child: widget.leading!),
+              Align(alignment: widget.leadingAlignment ?? Alignment.center, child: widget.leading!),
             if (widget.leading != null) SizedBox(width: 8 * scaling),
             Flexible(
               child: Stack(
@@ -248,8 +244,7 @@ class _TextFieldState extends State<TextField>
                         ? null
                         : widget.useNativeContextMenu && !kIsWeb
                             ? (context, editableTextState) {
-                                return material.AdaptiveTextSelectionToolbar
-                                    .editableText(
+                                return material.AdaptiveTextSelectionToolbar.editableText(
                                   editableTextState: editableTextState,
                                 );
                               }
@@ -278,9 +273,7 @@ class _TextFieldState extends State<TextField>
                     autofillHints: widget.autofillHints,
                     minLines: widget.minLines,
                     buildCounter: (context,
-                        {required currentLength,
-                        required isFocused,
-                        required maxLength}) {
+                        {required currentLength, required isFocused, required maxLength}) {
                       return null;
                     },
                     controller: _controller,
@@ -293,6 +286,10 @@ class _TextFieldState extends State<TextField>
                       // suffixIcon: widget.trailing,
                       isDense: true,
                       border: material.InputBorder.none,
+                      hintText: widget.hintText,
+                      hintStyle: defaultTextStyle.copyWith(
+                        color: theme.colorScheme.input,
+                      ),
                       hoverColor: Colors.transparent,
                       focusedBorder: material.InputBorder.none,
                       enabledBorder: material.InputBorder.none,
@@ -304,45 +301,17 @@ class _TextFieldState extends State<TextField>
                       ),
                     ),
                     cursorColor: theme.colorScheme.primary,
-                    cursorWidth: 1,
+                    cursorWidth: 1.5,
+                    cursorHeight: 16,
+                    cursorRadius: const Radius.circular(2),
                   ),
-                  if (widget.placeholder != null)
-                    Positioned.fill(
-                      child: ListenableBuilder(
-                        listenable: _controller,
-                        builder: (context, child) {
-                          return IgnorePointer(
-                            child: Visibility(
-                              visible: _controller.text.isEmpty,
-                              child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 1),
-                                alignment: widget.placeholderAlignment ??
-                                    Alignment.centerLeft,
-                                child: DefaultTextStyle(
-                                  style: defaultTextStyle
-                                      .merge(theme.typography.normal)
-                                      .merge(theme.typography.small)
-                                      .copyWith(
-                                        color:
-                                            theme.colorScheme.mutedForeground,
-                                      ),
-                                  child: widget.placeholder!,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    )
                 ],
               ),
             ),
             if (widget.trailing != null) SizedBox(width: 8 * scaling),
             if (widget.trailing != null)
               Align(
-                  alignment: widget.trailingAlignment ?? Alignment.center,
-                  child: widget.trailing!),
+                  alignment: widget.trailingAlignment ?? Alignment.center, child: widget.trailing!),
           ],
         ),
       ),

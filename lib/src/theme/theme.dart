@@ -3,83 +3,6 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
-class AdaptiveScaling {
-  static const AdaptiveScaling desktop = AdaptiveScaling();
-  static const AdaptiveScaling mobile = AdaptiveScaling(1.25);
-  final double radiusScaling;
-  final double sizeScaling;
-  final double textScaling;
-
-  const AdaptiveScaling([double scaling = 1])
-      : this.only(
-          radiusScaling: scaling,
-          sizeScaling: scaling,
-          textScaling: scaling,
-        );
-
-  const AdaptiveScaling.only({
-    this.radiusScaling = 1,
-    this.sizeScaling = 1,
-    this.textScaling = 1,
-  });
-
-  ThemeData scale(ThemeData theme) {
-    return theme.copyWith(
-      radius: radiusScaling == 1 ? null : theme.radius * radiusScaling,
-      scaling: sizeScaling == 1 ? null : theme.scaling * sizeScaling,
-      typography: textScaling == 1 ? null : theme.typography.scale(textScaling),
-      iconTheme: textScaling == 1 ? null : theme.iconTheme.scale(textScaling),
-    );
-  }
-
-  static AdaptiveScaling lerp(
-    AdaptiveScaling a,
-    AdaptiveScaling b,
-    double t,
-  ) {
-    return AdaptiveScaling.only(
-      radiusScaling: lerpDouble(a.radiusScaling, b.radiusScaling, t)!,
-      sizeScaling: lerpDouble(a.sizeScaling, b.sizeScaling, t)!,
-      textScaling: lerpDouble(a.textScaling, b.textScaling, t)!,
-    );
-  }
-}
-
-class AdaptiveScaler extends StatelessWidget {
-  static AdaptiveScaling defaultScalingOf(BuildContext context) {
-    final theme = Theme.of(context);
-    return defaultScaling(theme);
-  }
-
-  static AdaptiveScaling defaultScaling(ThemeData theme) {
-    switch (theme.platform) {
-      case TargetPlatform.iOS:
-      case TargetPlatform.android:
-        return AdaptiveScaling.mobile;
-      default:
-        return AdaptiveScaling.desktop;
-    }
-  }
-
-  final AdaptiveScaling scaling;
-  final Widget child;
-
-  const AdaptiveScaler({
-    super.key,
-    required this.scaling,
-    required this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Theme(
-      data: scaling.scale(theme),
-      child: child,
-    );
-  }
-}
-
 class ThemeData {
   final ColorScheme colorScheme;
   final Typography typography;
@@ -233,9 +156,7 @@ class Theme extends InheritedTheme {
   @override
   Widget wrap(BuildContext context, Widget child) {
     final Theme? ancestorTheme = context.findAncestorWidgetOfExactType<Theme>();
-    return identical(this, ancestorTheme)
-        ? child
-        : Theme(data: data, child: child);
+    return identical(this, ancestorTheme) ? child : Theme(data: data, child: child);
   }
 
   @override
@@ -349,39 +270,17 @@ class IconThemeProperties {
 
   IconThemeProperties scale(double factor) {
     return IconThemeProperties(
-      x4Small: x4Small.size == null
-          ? x4Small
-          : x4Small.copyWith(size: x4Small.size! * factor),
-      x3Small: x3Small.size == null
-          ? x3Small
-          : x3Small.copyWith(size: x3Small.size! * factor),
-      x2Small: x2Small.size == null
-          ? x2Small
-          : x2Small.copyWith(size: x2Small.size! * factor),
-      xSmall: xSmall.size == null
-          ? xSmall
-          : xSmall.copyWith(size: xSmall.size! * factor),
-      small: small.size == null
-          ? small
-          : small.copyWith(size: small.size! * factor),
-      medium: medium.size == null
-          ? medium
-          : medium.copyWith(size: medium.size! * factor),
-      large: large.size == null
-          ? large
-          : large.copyWith(size: large.size! * factor),
-      xLarge: xLarge.size == null
-          ? xLarge
-          : xLarge.copyWith(size: xLarge.size! * factor),
-      x2Large: x2Large.size == null
-          ? x2Large
-          : x2Large.copyWith(size: x2Large.size! * factor),
-      x3Large: x3Large.size == null
-          ? x3Large
-          : x3Large.copyWith(size: x3Large.size! * factor),
-      x4Large: x4Large.size == null
-          ? x4Large
-          : x4Large.copyWith(size: x4Large.size! * factor),
+      x4Small: x4Small.size == null ? x4Small : x4Small.copyWith(size: x4Small.size! * factor),
+      x3Small: x3Small.size == null ? x3Small : x3Small.copyWith(size: x3Small.size! * factor),
+      x2Small: x2Small.size == null ? x2Small : x2Small.copyWith(size: x2Small.size! * factor),
+      xSmall: xSmall.size == null ? xSmall : xSmall.copyWith(size: xSmall.size! * factor),
+      small: small.size == null ? small : small.copyWith(size: small.size! * factor),
+      medium: medium.size == null ? medium : medium.copyWith(size: medium.size! * factor),
+      large: large.size == null ? large : large.copyWith(size: large.size! * factor),
+      xLarge: xLarge.size == null ? xLarge : xLarge.copyWith(size: xLarge.size! * factor),
+      x2Large: x2Large.size == null ? x2Large : x2Large.copyWith(size: x2Large.size! * factor),
+      x3Large: x3Large.size == null ? x3Large : x3Large.copyWith(size: x3Large.size! * factor),
+      x4Large: x4Large.size == null ? x4Large : x4Large.copyWith(size: x4Large.size! * factor),
     );
   }
 
@@ -457,8 +356,7 @@ class ComponentTheme<T> extends InheritedTheme {
 
   @override
   Widget wrap(BuildContext context, Widget child) {
-    ComponentTheme<T>? ancestorTheme =
-        context.findAncestorWidgetOfExactType<ComponentTheme<T>>();
+    ComponentTheme<T>? ancestorTheme = context.findAncestorWidgetOfExactType<ComponentTheme<T>>();
     // if it's the same type, we don't need to wrap it
     if (identical(this, ancestorTheme)) {
       return child;
@@ -476,8 +374,7 @@ class ComponentTheme<T> extends InheritedTheme {
   }
 
   static T? maybeOf<T>(BuildContext context) {
-    final widget =
-        context.dependOnInheritedWidgetOfExactType<ComponentTheme<T>>();
+    final widget = context.dependOnInheritedWidgetOfExactType<ComponentTheme<T>>();
     if (widget == null) {
       return null;
     }

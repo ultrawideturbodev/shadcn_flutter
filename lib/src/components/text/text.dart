@@ -268,6 +268,20 @@ extension TextExtension on Widget {
         child: this);
   }
 
+  Widget input() {
+    return Builder(
+      builder: (context) {
+        final themeData = Theme.of(context);
+        return DefaultTextStyle.merge(
+          child: this,
+          style: TextStyle(
+            color: themeData.colorScheme.input,
+          ),
+        );
+      },
+    );
+  }
+
   Widget muted() {
     return Builder(
       builder: (context) {
