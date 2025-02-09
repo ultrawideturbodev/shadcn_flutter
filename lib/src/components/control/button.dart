@@ -838,27 +838,35 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
               child: widget.child,
             )
           : IntrinsicWidth(
-              child: IntrinsicHeight(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    if (widget.leading != null) widget.leading!,
-                    if (widget.leading != null) Gap(8 * scaling),
-                    Expanded(
-                      child: Align(
-                        widthFactor: 1,
-                        heightFactor: 1,
-                        alignment: widget.alignment ?? AlignmentDirectional.centerStart,
-                        child: widget.child,
-                      ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (widget.leading != null) widget.leading!,
+                  if (widget.leading != null) Gap(8 * scaling),
+                  Expanded(
+                    child: Align(
+                      widthFactor: 1,
+                      heightFactor: 1,
+                      alignment: widget.alignment ?? AlignmentDirectional.centerStart,
+                      child: widget.child,
                     ),
-                    if (widget.trailing != null) Gap(8 * scaling),
-                    if (widget.trailing != null) widget.trailing!,
-                  ],
-                ),
+                  ),
+                  if (widget.trailing != null) Gap(8 * scaling),
+                  if (widget.trailing != null) widget.trailing!,
+                ],
               ),
             ),
+    );
+    final animatedBuilder = AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) => Transform.scale(
+        scale: _scaleAnimation.value,
+        child: Opacity(
+          opacity: _opacityAnimation.value,
+          child: clickable,
+        ),
+      ),
     );
     return Listener(
       onPointerDown: (_) => _handleTapDown(
@@ -868,28 +876,27 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
         TapUpDetails(kind: PointerDeviceKind.touch),
       ),
       onPointerCancel: _handlePointerCancel,
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) => Transform.scale(
-          scale: _scaleAnimation.value,
-          child: Opacity(
-            opacity: _opacityAnimation.value,
-            child: clickable,
-          ),
+      child: switch (widget.style is ButtonVariance) {
+        // animatedBuilder
+        true => SizedBox(
+          height: (widget.style as ButtonVariance).size?.maxHeight,
+          child: animatedBuilder,
         ),
-      ),
+        false => animatedBuilder,
+      },
     );
   }
 }
 
 class ButtonSize {
   final double scale;
-  const ButtonSize(this.scale);
+  final double maxHeight;
+  const ButtonSize(this.scale) : maxHeight = 40 * scale;
+  static const ButtonSize xSmall = ButtonSize(0.6);
+  static const ButtonSize small = ButtonSize(0.8);
   static const ButtonSize normal = ButtonSize(1);
-  static const ButtonSize xSmall = ButtonSize(1 / 2);
-  static const ButtonSize small = ButtonSize(3 / 4);
-  static const ButtonSize large = ButtonSize(2);
-  static const ButtonSize xLarge = ButtonSize(3);
+  static const ButtonSize large = ButtonSize(1.2);
+  static const ButtonSize xLarge = ButtonSize(1.4);
 }
 
 typedef DensityModifier = EdgeInsets Function(EdgeInsets padding);
@@ -1199,6 +1206,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonPrimaryTextStyle,
     iconTheme: _buttonPrimaryIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
   static const ButtonVariance secondary = ButtonVariance(
     decoration: _buttonSecondaryDecoration,
@@ -1207,6 +1215,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonSecondaryTextStyle,
     iconTheme: _buttonSecondaryIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
   static const ButtonVariance outline = ButtonVariance(
     decoration: _buttonOutlineDecoration,
@@ -1215,6 +1224,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonOutlineTextStyle,
     iconTheme: _buttonOutlineIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
   static const ButtonVariance ghost = ButtonVariance(
     decoration: _buttonGhostDecoration,
@@ -1223,6 +1233,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonGhostTextStyle,
     iconTheme: _buttonGhostIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
   static const ButtonVariance link = ButtonVariance(
     decoration: _buttonLinkDecoration,
@@ -1231,6 +1242,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonLinkTextStyle,
     iconTheme: _buttonLinkIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
   static const ButtonVariance text = ButtonVariance(
     decoration: _buttonTextDecoration,
@@ -1239,6 +1251,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonTextTextStyle,
     iconTheme: _buttonTextIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
   static const ButtonVariance destructive = ButtonVariance(
     decoration: _buttonDestructiveDecoration,
@@ -1247,6 +1260,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonDestructiveTextStyle,
     iconTheme: _buttonDestructiveIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
 
   static const ButtonVariance fixed = ButtonVariance(
@@ -1256,6 +1270,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonStaticTextStyle,
     iconTheme: _buttonStaticIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
 
   static const ButtonVariance menu = ButtonVariance(
@@ -1265,6 +1280,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonMenuTextStyle,
     iconTheme: _buttonMenuIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
 
   static const ButtonVariance menubar = ButtonVariance(
@@ -1274,6 +1290,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonMenuTextStyle,
     iconTheme: _buttonMenuIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
 
   static const ButtonVariance muted = ButtonVariance(
@@ -1283,6 +1300,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonMutedTextStyle,
     iconTheme: _buttonMutedIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
 
   static const ButtonVariance card = ButtonVariance(
@@ -1292,6 +1310,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonCardTextStyle,
     iconTheme: _buttonCardIconTheme,
     margin: _buttonZeroMargin,
+    size: ButtonSize.normal,
   );
 
   @override
@@ -1307,6 +1326,8 @@ class ButtonVariance implements AbstractButtonStyle {
   @override
   final ButtonStateProperty<EdgeInsetsGeometry> margin;
 
+  final ButtonSize? size;
+
   const ButtonVariance({
     required this.decoration,
     required this.mouseCursor,
@@ -1314,6 +1335,7 @@ class ButtonVariance implements AbstractButtonStyle {
     required this.textStyle,
     required this.iconTheme,
     required this.margin,
+    required this.size,
   });
 
   @override
@@ -1326,17 +1348,18 @@ class ButtonVariance implements AbstractButtonStyle {
         other.padding == padding &&
         other.textStyle == textStyle &&
         other.iconTheme == iconTheme &&
-        other.margin == margin;
+        other.margin == margin &&
+        other.size == size;
   }
 
   @override
   int get hashCode {
-    return Object.hash(decoration, mouseCursor, padding, textStyle, iconTheme, margin);
+    return Object.hash(decoration, mouseCursor, padding, textStyle, iconTheme, margin, size);
   }
 
   @override
   String toString() {
-    return 'ButtonVariance(decoration: $decoration, mouseCursor: $mouseCursor, padding: $padding, textStyle: $textStyle, iconTheme: $iconTheme, margin: $margin)';
+    return 'ButtonVariance(decoration: $decoration, mouseCursor: $mouseCursor, padding: $padding, textStyle: $textStyle, iconTheme: $iconTheme, margin: $margin, size: $size)';
   }
 }
 

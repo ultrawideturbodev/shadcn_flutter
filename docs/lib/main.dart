@@ -763,7 +763,6 @@ class MyAppState extends State<MyApp> {
         routerConfig: router,
         debugShowCheckedModeBanner: false,
         title: 'shadcn/ui Flutter',
-        scaling: AdaptiveScaling(scaling),
         enableScrollInterception: true,
         // popoverHandler: DialogOverlayHandler(),
         theme: ThemeData(

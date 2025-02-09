@@ -36,6 +36,7 @@ class ChipButton extends StatelessWidget {
         margin: (context, states) {
           return EdgeInsets.zero;
         },
+        size: null,
       ),
       onPressed: onPressed,
       child: child,
