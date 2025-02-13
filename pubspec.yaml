@@ -45,3 +45,7 @@ topics:
   - components
   - shadcn-ui
 
+module:
+  androidX: true
+  androidPackage: com.example.shadcn_flutter
+  iosBundleIdentifier: com.example.shadcnFlutter

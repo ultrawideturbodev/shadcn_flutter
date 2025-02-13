@@ -12,6 +12,7 @@ class AutoComplete extends StatefulWidget {
   final bool readOnly;
   final List<TextInputFormatter> inputFormatters;
   final Widget? placeholder;
+  final String? hintText;
   final ValueChanged<int>? onAcceptSuggestion;
   final FocusNode? focusNode;
   final AlignmentGeometry? popoverAlignment;
@@ -58,6 +59,7 @@ class AutoComplete extends StatefulWidget {
     this.readOnly = false,
     this.inputFormatters = const [],
     this.placeholder,
+    this.hintText,
     this.onAcceptSuggestion,
     this.focusNode,
     this.popoverAlignment,
@@ -192,7 +194,9 @@ class _AutoCompleteState extends State<AutoComplete> {
                 BoxConstraints(
                   maxHeight: 300 * theme.scaling,
                 ),
-            child: SurfaceCard(
+            child: Card(
+              filled: true,
+              fillColor: theme.colorScheme.card,
               padding: const EdgeInsets.all(4) * theme.scaling,
               child: AnimatedBuilder(
                   animation: Listenable.merge([_suggestions, _selectedIndex]),
@@ -309,6 +313,7 @@ class _AutoCompleteState extends State<AutoComplete> {
           textAlign: widget.textAlign,
           textAlignVertical: widget.textAlignVertical,
           undoController: widget.undoController,
+          hintText: widget.hintText,
           autofillHints: widget.autofillHints,
           onTapOutside: widget.onTapOutside,
           style: widget.style,
