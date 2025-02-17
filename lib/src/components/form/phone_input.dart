@@ -199,20 +199,22 @@ class _PhoneInputState extends State<PhoneInput>
                 ),
             ],
           ),
-          LimitedBox(
-            maxWidth: 200 * theme.scaling,
-            child: TextField(
-              controller: _controller,
-              autofillHints: const [AutofillHints.telephoneNumber],
-              keyboardType: widget.onlyNumber ? TextInputType.phone : null,
-              inputFormatters: [
-                if (widget.onlyNumber) FilteringTextInputFormatter.digitsOnly,
-              ],
-              borderRadius: BorderRadius.only(
-                topRight: theme.radiusMdRadius,
-                bottomRight: theme.radiusMdRadius,
+          Flexible(
+            child: LimitedBox(
+              maxWidth: 200 * theme.scaling,
+              child: TextField(
+                controller: _controller,
+                autofillHints: const [AutofillHints.telephoneNumber],
+                keyboardType: widget.onlyNumber ? TextInputType.phone : null,
+                inputFormatters: [
+                  if (widget.onlyNumber) FilteringTextInputFormatter.digitsOnly,
+                ],
+                borderRadius: BorderRadius.only(
+                  topRight: theme.radiusMdRadius,
+                  bottomRight: theme.radiusMdRadius,
+                ),
+                initialValue: widget.initialValue?.number,
               ),
-              initialValue: widget.initialValue?.number,
             ),
           )
         ],

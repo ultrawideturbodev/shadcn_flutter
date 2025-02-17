@@ -248,7 +248,7 @@ class Button extends StatefulWidget {
   final Curve animationCurve;
   static const _defaultReverseAnimationCurve = Curves.decelerate;
   final Curve reverseAnimationCurve;
-  static const defaultScaleAnimationEnd = 0.95;
+  static const defaultScaleAnimationEnd = 0.97;
   final double scaleAnimationEnd;
   static const defaultOpacityAnimationEnd = 0.8;
   final double opacityAnimationEnd;
