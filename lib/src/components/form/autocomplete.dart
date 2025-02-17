@@ -178,11 +178,9 @@ class _AutoCompleteState extends State<AutoComplete> {
   }
 
   void _onSuggestionsChanged() {
-    if ((_suggestions.value.isEmpty && _popoverController.hasOpenPopover) ||
-        !_focusNode.hasFocus) {
+    if ((_suggestions.value.isEmpty && _popoverController.hasOpenPopover) || !_focusNode.hasFocus) {
       _popoverController.close();
-    } else if (!_popoverController.hasOpenPopover &&
-        _suggestions.value.isNotEmpty) {
+    } else if (!_popoverController.hasOpenPopover && _suggestions.value.isNotEmpty) {
       _selectedIndex.value = -1;
       _popoverController.show(
         context: context,
@@ -218,11 +216,10 @@ class _AutoCompleteState extends State<AutoComplete> {
             ),
           );
         },
-        widthConstraint:
-            widget.popoverWidthConstraint ?? PopoverConstraint.anchorFixedSize,
-        anchorAlignment:
-            widget.popoverAnchorAlignment ?? AlignmentDirectional.bottomStart,
+        widthConstraint: widget.popoverWidthConstraint ?? PopoverConstraint.anchorFixedSize,
+        anchorAlignment: widget.popoverAnchorAlignment ?? AlignmentDirectional.bottomStart,
         alignment: widget.popoverAlignment ?? AlignmentDirectional.topStart,
+        offset: Offset(0, Theme.of(context).scaling * 8),
       );
     }
   }
@@ -256,10 +253,8 @@ class _AutoCompleteState extends State<AutoComplete> {
   Widget build(BuildContext context) {
     return Shortcuts(
       shortcuts: {
-        LogicalKeySet(LogicalKeyboardKey.arrowDown):
-            const _MoveSelectionIntent(1),
-        LogicalKeySet(LogicalKeyboardKey.arrowUp):
-            const _MoveSelectionIntent(-1),
+        LogicalKeySet(LogicalKeyboardKey.arrowDown): const _MoveSelectionIntent(1),
+        LogicalKeySet(LogicalKeyboardKey.arrowUp): const _MoveSelectionIntent(-1),
         LogicalKeySet(LogicalKeyboardKey.enter): const _AcceptSelectionIntent(),
       },
       child: Actions(
@@ -272,11 +267,9 @@ class _AutoCompleteState extends State<AutoComplete> {
               if (suggestions.isEmpty) {
                 return;
               }
-              final newSelectedIndex =
-                  (selectedIndex + direction) % suggestions.length;
-              _selectedIndex.value = newSelectedIndex < 0
-                  ? suggestions.length - 1
-                  : newSelectedIndex;
+              final newSelectedIndex = (selectedIndex + direction) % suggestions.length;
+              _selectedIndex.value =
+                  newSelectedIndex < 0 ? suggestions.length - 1 : newSelectedIndex;
               return;
             },
           ),

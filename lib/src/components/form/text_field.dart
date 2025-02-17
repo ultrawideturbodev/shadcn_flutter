@@ -297,12 +297,10 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
                       disabledBorder: material.InputBorder.none,
                       errorBorder: material.InputBorder.none,
                       focusedErrorBorder: material.InputBorder.none,
-                      contentPadding: switch (kIsWeb) {
-                        true => const EdgeInsets.symmetric(
-                            vertical: 8,
-                          ),
-                        false => null,
-                      },
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 8,
+                      ),
                     ),
                     cursorColor: theme.colorScheme.primary,
                     cursorWidth: 1.5,
