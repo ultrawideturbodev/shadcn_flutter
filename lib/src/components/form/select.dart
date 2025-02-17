@@ -56,6 +56,8 @@ class SelectItemButton<T> extends StatelessWidget
         var isSelected = selected.contains(value);
         return Button(
           disableTransition: true,
+          disableHoverEffect: false,
+          scaleAnimationEnd: 1,
           alignment: AlignmentDirectional.centerStart,
           onPressed: () {
             selectItem(!isSelected);
@@ -65,9 +67,6 @@ class SelectItemButton<T> extends StatelessWidget
               vertical: 8 * scaling,
               horizontal: 8 * scaling,
             ),
-            mouseCursor: (context, states, value) {
-              return SystemMouseCursors.basic;
-            },
           ),
           trailing: isSelected
               ? const Icon(

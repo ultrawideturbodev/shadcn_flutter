@@ -192,6 +192,7 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
     }
     var maxLines = widget.maxLines;
     maxLines ??= widget.obscureText ? 1 : null;
+    final hasLeading = widget.leading != null;
     return ListenableBuilder(
       listenable: _statesController,
       builder: (context, child) {
@@ -218,7 +219,7 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
                 ),
                 padding: widget.padding ??
                     EdgeInsets.symmetric(
-                      horizontal: 12 * scaling,
+                      horizontal: 8 * scaling,
                       vertical: 8 * scaling,
                     ),
                 child: child,
@@ -231,9 +232,9 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
         data: _statesController,
         child: Row(
           children: [
-            if (widget.leading != null)
+            if (hasLeading)
               Align(alignment: widget.leadingAlignment ?? Alignment.center, child: widget.leading!),
-            if (widget.leading != null) SizedBox(width: 8 * scaling),
+            if (hasLeading) SizedBox(width: 8 * scaling),
             Flexible(
               child: Stack(
                 fit: StackFit.passthrough,

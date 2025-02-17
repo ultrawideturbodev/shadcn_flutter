@@ -840,7 +840,7 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
           : IntrinsicWidth(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   if (widget.leading != null) widget.leading!,
                   if (widget.leading != null) Gap(8 * scaling),
@@ -879,9 +879,9 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
       child: switch (widget.style is ButtonVariance) {
         // animatedBuilder
         true => SizedBox(
-          height: (widget.style as ButtonVariance).size?.maxHeight,
-          child: animatedBuilder,
-        ),
+            height: (widget.style as ButtonVariance).size?.maxHeight,
+            child: animatedBuilder,
+          ),
         false => animatedBuilder,
       },
     );
