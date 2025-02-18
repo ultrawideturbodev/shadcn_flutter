@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/gestures.dart';
-import 'package:shadcn_flutter/src/vibrate/globals/g_vibrate.dart';
 
 import '../../../shadcn_flutter.dart';
 
@@ -195,7 +194,6 @@ class SelectedButtonState extends State<SelectedButton> {
         onSecondaryLongPress: widget.onSecondaryLongPress,
         onTertiaryLongPress: widget.onTertiaryLongPress,
         disableHoverEffect: widget.disableHoverEffect,
-        scaleAnimationEnd: 1,
         onPressed: () {
           if (widget.onChanged != null) {
             widget.onChanged!(!widget.value);
@@ -242,24 +240,8 @@ class Button extends StatefulWidget {
   final AlignmentGeometry? marginAlignment;
   final bool disableFocusOutline;
 
-  static const _defaultAnimationDuration = Duration(milliseconds: 50);
-  final Duration animationDuration;
-  static const _defaultAnimationCurve = Curves.fastOutSlowIn;
-  final Curve animationCurve;
-  static const _defaultReverseAnimationCurve = Curves.decelerate;
-  final Curve reverseAnimationCurve;
-  static const defaultScaleAnimationEnd = 0.97;
-  final double scaleAnimationEnd;
-  static const defaultOpacityAnimationEnd = 0.8;
-  final double opacityAnimationEnd;
-
   const Button({
     super.key,
-    this.animationDuration = _defaultAnimationDuration,
-    this.animationCurve = _defaultAnimationCurve,
-    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -295,11 +277,6 @@ class Button extends StatefulWidget {
 
   const Button.primary({
     super.key,
-    this.animationDuration = _defaultAnimationDuration,
-    this.animationCurve = _defaultAnimationCurve,
-    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -335,11 +312,6 @@ class Button extends StatefulWidget {
 
   const Button.secondary({
     super.key,
-    this.animationDuration = _defaultAnimationDuration,
-    this.animationCurve = _defaultAnimationCurve,
-    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -375,11 +347,6 @@ class Button extends StatefulWidget {
 
   const Button.outline({
     super.key,
-    this.animationDuration = _defaultAnimationDuration,
-    this.animationCurve = _defaultAnimationCurve,
-    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -415,11 +382,6 @@ class Button extends StatefulWidget {
 
   const Button.ghost({
     super.key,
-    this.animationDuration = _defaultAnimationDuration,
-    this.animationCurve = _defaultAnimationCurve,
-    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -455,11 +417,6 @@ class Button extends StatefulWidget {
 
   const Button.link({
     super.key,
-    this.animationDuration = _defaultAnimationDuration,
-    this.animationCurve = _defaultAnimationCurve,
-    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -495,11 +452,6 @@ class Button extends StatefulWidget {
 
   const Button.text({
     super.key,
-    this.animationDuration = _defaultAnimationDuration,
-    this.animationCurve = _defaultAnimationCurve,
-    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -535,11 +487,6 @@ class Button extends StatefulWidget {
 
   const Button.destructive({
     super.key,
-    this.animationDuration = _defaultAnimationDuration,
-    this.animationCurve = _defaultAnimationCurve,
-    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -575,11 +522,6 @@ class Button extends StatefulWidget {
 
   const Button.fixed({
     super.key,
-    this.animationDuration = _defaultAnimationDuration,
-    this.animationCurve = _defaultAnimationCurve,
-    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -615,11 +557,6 @@ class Button extends StatefulWidget {
 
   const Button.card({
     super.key,
-    this.animationDuration = _defaultAnimationDuration,
-    this.animationCurve = _defaultAnimationCurve,
-    this.reverseAnimationCurve = _defaultReverseAnimationCurve,
-    this.scaleAnimationEnd = defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = defaultOpacityAnimationEnd,
     this.statesController,
     this.leading,
     this.trailing,
@@ -658,51 +595,10 @@ class Button extends StatefulWidget {
 }
 
 class ButtonState<T extends Button> extends State<T> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _scaleAnimation;
-  late final Animation<double> _opacityAnimation;
 
   bool get _shouldEnableFeedback {
     final platform = Theme.of(context).platform;
     return isMobile(platform);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _controller = AnimationController(
-      duration: widget.animationDuration,
-      vsync: this,
-    );
-
-    _scaleAnimation = Tween<double>(
-      begin: 1,
-      end: widget.scaleAnimationEnd,
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: widget.animationCurve,
-        reverseCurve: widget.reverseAnimationCurve,
-      ),
-    );
-
-    _opacityAnimation = Tween<double>(
-      begin: 1,
-      end: widget.opacityAnimationEnd,
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: widget.animationCurve,
-        reverseCurve: widget.reverseAnimationCurve,
-      ),
-    );
-  }
-
-  @override
-  Future<void> dispose() async {
-    _controller.dispose();
-    super.dispose();
   }
 
   AbstractButtonStyle? _style;
@@ -773,13 +669,6 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
     return _style!.iconTheme(context, states);
   }
 
-  void _handleTapDown(TapDownDetails details) {
-    if (_enableCustomFeedback) {
-      _controller.forward();
-      gVibrateSelection();
-    }
-  }
-
   bool get _enableCustomFeedback =>
       widget.enabled != false &&
       (widget.onPressed != null ||
@@ -798,14 +687,6 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
           widget.onLongPressUp != null ||
           widget.onSecondaryTapCancel != null ||
           widget.onTertiaryTapCancel != null);
-
-  void _handleTapUp(TapUpDetails details) {
-    _controller.reverse();
-  }
-
-  void _handlePointerCancel(PointerCancelEvent event) {
-    _controller.reverse();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -858,33 +739,7 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
               ),
             ),
     );
-    final animatedBuilder = AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) => Transform.scale(
-        scale: _scaleAnimation.value,
-        child: Opacity(
-          opacity: _opacityAnimation.value,
-          child: clickable,
-        ),
-      ),
-    );
-    return Listener(
-      onPointerDown: (_) => _handleTapDown(
-        TapDownDetails(kind: PointerDeviceKind.touch),
-      ),
-      onPointerUp: (_) => _handleTapUp(
-        TapUpDetails(kind: PointerDeviceKind.touch),
-      ),
-      onPointerCancel: _handlePointerCancel,
-      child: switch (widget.style is ButtonVariance) {
-        // animatedBuilder
-        true => SizedBox(
-            height: (widget.style as ButtonVariance).size?.maxHeight,
-            child: animatedBuilder,
-          ),
-        false => animatedBuilder,
-      },
-    );
+    return clickable;
   }
 }
 
@@ -2474,8 +2329,6 @@ class TextButton extends StatelessWidget {
   final GestureLongPressEndCallback? onLongPressEnd;
   final GestureLongPressUpCallback? onSecondaryLongPress;
   final GestureLongPressUpCallback? onTertiaryLongPress;
-  final double scaleAnimationEnd;
-  final double opacityAnimationEnd;
 
   const TextButton({
     super.key,
@@ -2508,8 +2361,6 @@ class TextButton extends StatelessWidget {
     this.onLongPressEnd,
     this.onSecondaryLongPress,
     this.onTertiaryLongPress,
-    this.scaleAnimationEnd = Button.defaultScaleAnimationEnd,
-    this.opacityAnimationEnd = Button.defaultOpacityAnimationEnd,
   });
 
   @override
@@ -2517,8 +2368,6 @@ class TextButton extends StatelessWidget {
     return Button(
       onPressed: onPressed,
       enabled: enabled,
-      scaleAnimationEnd: scaleAnimationEnd,
-      opacityAnimationEnd: opacityAnimationEnd,
       leading: leading,
       trailing: trailing,
       alignment: alignment,

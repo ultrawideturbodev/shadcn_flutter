@@ -20,8 +20,7 @@ class SearchQuery<T> {
   const SearchQuery(this.query, this.searchFilter, this.selectedValue);
 }
 
-class SelectItemButton<T> extends StatelessWidget
-    implements AbstractSelectItem<T> {
+class SelectItemButton<T> extends StatelessWidget implements AbstractSelectItem<T> {
   final T value;
   final Widget child;
   final SearchIndexer? computeIndexingScore;
@@ -39,9 +38,7 @@ class SelectItemButton<T> extends StatelessWidget
       return SearchResult(0, query.selectedValue.contains(value));
     }
     return SearchResult(
-      computeIndexingScore?.call(query.query) ??
-          query.searchFilter?.call(value, query.query) ??
-          0,
+      computeIndexingScore?.call(query.query) ?? query.searchFilter?.call(value, query.query) ?? 0,
       query.selectedValue.contains(value),
     );
   }
@@ -57,7 +54,6 @@ class SelectItemButton<T> extends StatelessWidget
         return Button(
           disableTransition: true,
           disableHoverEffect: false,
-          scaleAnimationEnd: 1,
           alignment: AlignmentDirectional.centerStart,
           onPressed: () {
             selectItem(!isSelected);
@@ -70,13 +66,13 @@ class SelectItemButton<T> extends StatelessWidget
           ),
           trailing: isSelected
               ? const Icon(
-            Icons.check,
-          ).iconSmall()
+                  Icons.check,
+                ).iconSmall()
               : selected.isNotEmpty
-              ? SizedBox(
-            width: 16 * scaling,
-          )
-              : null,
+                  ? SizedBox(
+                      width: 16 * scaling,
+                    )
+                  : null,
           child: child.normal(),
         );
       },
@@ -153,12 +149,12 @@ class SelectGroup<T> extends StatelessWidget implements AbstractSelectItem<T> {
         for (int i = 0; i < this.children.length; i++) {
           var item = this.children[i];
           if (text == null || text.isEmpty) {
-            var result = item.search(SearchQuery<T>(text ?? '',
-                searchData.searchFilter, searchData.value.value as List<T>));
+            var result = item.search(SearchQuery<T>(
+                text ?? '', searchData.searchFilter, searchData.value.value as List<T>));
             resultMap[item] = SelectSearchResult(0, i, result.hasSelectedValue);
           } else {
-            var result = item.search(SearchQuery<T>(text,
-                searchData.searchFilter, searchData.value.value as List<T>));
+            var result = item.search(
+                SearchQuery<T>(text, searchData.searchFilter, searchData.value.value as List<T>));
             int score = result.score;
             bool hasSelectedValue = result.hasSelectedValue;
             if (score > 0 || searchData.showUnrelatedValues) {
@@ -241,7 +237,7 @@ class SelectItem<T> extends StatelessWidget implements AbstractSelectItem<T> {
           builder: (context, child) {
             return builder(
               context,
-                  (selected) {
+              (selected) {
                 searchData.onChanged(value, selected);
               },
               searchData.value.value as List<T>,
@@ -274,8 +270,7 @@ typedef SelectSearch = void Function(String query);
 
 class Select<T> extends StatefulWidget {
   final ValueChanged<T?>? onChanged; // if null, then it's a disabled combobox
-  final SearchFilter<T>?
-  searchFilter; // if its not null, then it's a searchable combobox
+  final SearchFilter<T>? searchFilter; // if its not null, then it's a searchable combobox
   final SelectSearch? onSearch;
   final Widget? placeholder; // placeholder when value is null
   final bool filled;
@@ -333,8 +328,7 @@ class Select<T> extends StatefulWidget {
   SelectState<T> createState() => SelectState<T>();
 }
 
-class SelectState<T> extends State<Select<T>>
-    with FormValueSupplier<T, Select<T>> {
+class SelectState<T> extends State<Select<T>> with FormValueSupplier<T, Select<T>> {
   late FocusNode _focusNode;
   final PopoverController _popoverController = PopoverController();
   late ValueNotifier<List<T>> _valueNotifier;
@@ -344,8 +338,7 @@ class SelectState<T> extends State<Select<T>>
   void initState() {
     super.initState();
     _focusNode = widget.focusNode ?? FocusNode();
-    _valueNotifier =
-        ValueNotifier(widget.value == null ? const [] : [widget.value as T]);
+    _valueNotifier = ValueNotifier(widget.value == null ? const [] : [widget.value as T]);
     _childrenNotifier = ValueNotifier(widget.children);
   }
 
@@ -357,8 +350,7 @@ class SelectState<T> extends State<Select<T>>
     }
     if (widget.value != oldWidget.value) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        _valueNotifier.value =
-        widget.value == null ? const [] : [widget.value as T];
+        _valueNotifier.value = widget.value == null ? const [] : [widget.value as T];
         formValue = widget.value;
       });
     }
@@ -412,17 +404,11 @@ class SelectState<T> extends State<Select<T>>
         child: Button(
           disableHoverEffect: widget.disableHoverEffect,
           focusNode: _focusNode,
-          style: (widget.filled
-              ? ButtonVariance.secondary
-              : ButtonVariance.outline)
-              .copyWith(
-            decoration:
-            widget.borderRadius != null ? _overrideBorderRadius : null,
+          style: (widget.filled ? ButtonVariance.secondary : ButtonVariance.outline).copyWith(
+            decoration: widget.borderRadius != null ? _overrideBorderRadius : null,
             padding: widget.padding != null ? _overridePadding : null,
           ),
-          onPressed: widget.onChanged == null
-              ? null
-              : () {
+          onPressed: () {
             _popoverController
                 .show(
               context: context,
@@ -430,15 +416,13 @@ class SelectState<T> extends State<Select<T>>
               anchorAlignment: widget.popoverAnchorAlignment,
               widthConstraint: widget.popupWidthConstraint,
               overlayBarrier: OverlayBarrier(
-                padding:
-                const EdgeInsets.symmetric(vertical: 8) * scaling,
+                padding: const EdgeInsets.symmetric(vertical: 8) * scaling,
                 borderRadius: BorderRadius.circular(theme.radiusLg),
               ),
               builder: (context) {
                 return SelectPopup<T>(
                   borderRadius: BorderRadius.circular(theme.radiusLg),
-                  margin:
-                  const EdgeInsets.symmetric(vertical: 8) * scaling,
+                  margin: const EdgeInsets.symmetric(vertical: 8) * scaling,
                   onSearch: widget.onSearch,
                   autoClose: widget.autoClosePopover,
                   orderSelectedFirst: widget.orderSelectedFirst,
@@ -450,13 +434,12 @@ class SelectState<T> extends State<Select<T>>
                   onChanged: widget.onChanged == null
                       ? null
                       : (value, selected) {
-                    if (selected && widget.value != value) {
-                      widget.onChanged!(value);
-                    } else if (widget.canUnselect &&
-                        widget.value == value) {
-                      widget.onChanged!(null);
-                    }
-                  },
+                          if (selected && widget.value != value) {
+                            widget.onChanged!(value);
+                          } else if (widget.canUnselect && widget.value == value) {
+                            widget.onChanged!(null);
+                          }
+                        },
                   emptyBuilder: widget.emptyBuilder,
                   surfaceBlur: widget.surfaceBlur,
                   surfaceOpacity: widget.surfaceOpacity,
@@ -465,7 +448,7 @@ class SelectState<T> extends State<Select<T>>
               },
             )
                 .then(
-                  (value) {
+              (value) {
                 _focusNode.requestFocus();
               },
             );
@@ -477,9 +460,9 @@ class SelectState<T> extends State<Select<T>>
                 Expanded(
                   child: widget.value != null
                       ? widget.itemBuilder(
-                    context,
-                    widget.value as T,
-                  )
+                          context,
+                          widget.value as T,
+                        )
                       : placeholder,
                 ),
                 SizedBox(width: 8 * scaling),
@@ -576,8 +559,8 @@ class SelectPopupState<T> extends State<SelectPopup<T>> {
         margin: isSheetOverlay ? null : widget.margin,
         constraints: widget.constraints ??
             (const BoxConstraints(
-              minWidth: 200,
-            ) *
+                  minWidth: 200,
+                ) *
                 scaling),
         child: SurfaceCard(
           clipBehavior: Clip.hardEdge,
@@ -612,8 +595,7 @@ class SelectPopupState<T> extends State<SelectPopup<T>> {
                           onChanged: (value) {
                             widget.onSearch?.call(value);
                           },
-                          padding: const EdgeInsets.symmetric(vertical: 12) *
-                              scaling,
+                          padding: const EdgeInsets.symmetric(vertical: 12) * scaling,
                         ),
                       ),
                     ],
@@ -638,23 +620,20 @@ class SelectPopupState<T> extends State<SelectPopup<T>> {
                       ]),
                       builder: (context, child) {
                         String text = _searchController.text;
-                        Map<AbstractSelectItem<T>, SelectSearchResult>
-                        resultMap = {};
+                        Map<AbstractSelectItem<T>, SelectSearchResult> resultMap = {};
                         for (int i = 0; i < widget.children.value.length; i++) {
                           var item = widget.children.value[i];
                           if (text.isEmpty) {
-                            var result = item.search(SearchQuery<T>(
-                                text, widget.searchFilter, widget.value.value));
-                            resultMap[item] = SelectSearchResult(
-                                0, i, result.hasSelectedValue);
+                            var result = item.search(
+                                SearchQuery<T>(text, widget.searchFilter, widget.value.value));
+                            resultMap[item] = SelectSearchResult(0, i, result.hasSelectedValue);
                           } else {
-                            var result = item.search(SearchQuery<T>(
-                                text, widget.searchFilter, widget.value.value));
+                            var result = item.search(
+                                SearchQuery<T>(text, widget.searchFilter, widget.value.value));
                             int score = result.score;
                             bool hasSelectedValue = result.hasSelectedValue;
                             if (score > 0 || widget.showUnrelatedValues) {
-                              resultMap[item] = SelectSearchResult(
-                                  score, i, hasSelectedValue);
+                              resultMap[item] = SelectSearchResult(score, i, hasSelectedValue);
                             }
                           }
                         }
@@ -663,12 +642,10 @@ class SelectPopupState<T> extends State<SelectPopup<T>> {
                         resultMap.entries.toList()
                           ..sort((a, b) {
                             if (widget.orderSelectedFirst) {
-                              if (a.value.hasSelectedValue &&
-                                  !b.value.hasSelectedValue) {
+                              if (a.value.hasSelectedValue && !b.value.hasSelectedValue) {
                                 return -1;
                               }
-                              if (!a.value.hasSelectedValue &&
-                                  b.value.hasSelectedValue) {
+                              if (!a.value.hasSelectedValue && b.value.hasSelectedValue) {
                                 return 1;
                               }
                             }
@@ -682,17 +659,14 @@ class SelectPopupState<T> extends State<SelectPopup<T>> {
                           });
                         Widget child;
                         if (children.isEmpty) {
-                          child = widget.emptyBuilder?.call(context) ??
-                              const SizedBox();
+                          child = widget.emptyBuilder?.call(context) ?? const SizedBox();
                         } else {
                           child = Stack(
                             fit: StackFit.passthrough,
                             children: [
                               Padding(
                                 // to fix visual glitch, add padding
-                                padding:
-                                const EdgeInsets.only(top: 1, bottom: 1) *
-                                    scaling,
+                                padding: const EdgeInsets.only(top: 1, bottom: 1) * scaling,
                                 child: ListView(
                                   controller: _scrollController,
                                   padding: const EdgeInsets.all(4) * scaling,
@@ -710,18 +684,14 @@ class SelectPopupState<T> extends State<SelectPopup<T>> {
                                       left: 0,
                                       right: 0,
                                       child: HoverActivity(
-                                        hitTestBehavior:
-                                        HitTestBehavior.translucent,
-                                        debounceDuration:
-                                        const Duration(milliseconds: 16),
+                                        hitTestBehavior: HitTestBehavior.translucent,
+                                        debounceDuration: const Duration(milliseconds: 16),
                                         onHover: () {
                                           // decrease scroll offset
-                                          var value =
-                                              _scrollController.offset - 8;
+                                          var value = _scrollController.offset - 8;
                                           value = value.clamp(
                                             0.0,
-                                            _scrollController
-                                                .position.maxScrollExtent,
+                                            _scrollController.position.maxScrollExtent,
                                           );
                                           _scrollController.jumpTo(
                                             value,
@@ -729,9 +699,8 @@ class SelectPopupState<T> extends State<SelectPopup<T>> {
                                         },
                                         child: Container(
                                           color: theme.colorScheme.background,
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 4) *
-                                              scaling,
+                                          padding:
+                                              const EdgeInsets.symmetric(vertical: 4) * scaling,
                                           child: const Icon(
                                             RadixIcons.chevronUp,
                                           ).iconX3Small(),
@@ -746,28 +715,22 @@ class SelectPopupState<T> extends State<SelectPopup<T>> {
                                 builder: (context, child) {
                                   return Visibility(
                                     visible: _scrollController.hasClients &&
-                                        _scrollController
-                                            .position.hasContentDimensions &&
+                                        _scrollController.position.hasContentDimensions &&
                                         _scrollController.offset <
-                                            _scrollController
-                                                .position.maxScrollExtent,
+                                            _scrollController.position.maxScrollExtent,
                                     child: Positioned(
                                       bottom: 0,
                                       left: 0,
                                       right: 0,
                                       child: HoverActivity(
-                                        hitTestBehavior:
-                                        HitTestBehavior.translucent,
-                                        debounceDuration:
-                                        const Duration(milliseconds: 16),
+                                        hitTestBehavior: HitTestBehavior.translucent,
+                                        debounceDuration: const Duration(milliseconds: 16),
                                         onHover: () {
                                           // increase scroll offset
-                                          var value =
-                                              _scrollController.offset + 8;
+                                          var value = _scrollController.offset + 8;
                                           value = value.clamp(
                                             0.0,
-                                            _scrollController
-                                                .position.maxScrollExtent,
+                                            _scrollController.position.maxScrollExtent,
                                           );
                                           _scrollController.jumpTo(
                                             value,
@@ -775,9 +738,8 @@ class SelectPopupState<T> extends State<SelectPopup<T>> {
                                         },
                                         child: Container(
                                           color: theme.colorScheme.background,
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 4) *
-                                              scaling,
+                                          padding:
+                                              const EdgeInsets.symmetric(vertical: 4) * scaling,
                                           child: const Icon(
                                             RadixIcons.chevronDown,
                                           ).iconX3Small(),
@@ -792,12 +754,11 @@ class SelectPopupState<T> extends State<SelectPopup<T>> {
                         }
                         return Data.inherit(
                           data: SelectData(
-                                (item, query) {
-                              return widget.searchFilter?.call(item, query) ??
-                                  0;
+                            (item, query) {
+                              return widget.searchFilter?.call(item, query) ?? 0;
                             },
                             text,
-                                (value, selected) {
+                            (value, selected) {
                               widget.onChanged?.call(value, selected);
                               if (widget.autoClose) {
                                 closeOverlay(context, value);
@@ -838,8 +799,8 @@ class SelectData {
   final bool showUnrelatedValues;
   final bool orderSelectedFirst;
 
-  SelectData(this.searchFilter, this.query, this.onChanged, this.value,
-      this.showUnrelatedValues, this.orderSelectedFirst);
+  SelectData(this.searchFilter, this.query, this.onChanged, this.value, this.showUnrelatedValues,
+      this.orderSelectedFirst);
 
   @override
   bool operator ==(Object other) {
@@ -867,10 +828,8 @@ class SelectData {
 }
 
 class MultiSelect<T> extends StatefulWidget {
-  final ValueChanged<List<T>>?
-  onChanged; // if null, then it's a disabled combobox
-  final SearchFilter<T>?
-  searchFilter; // if its not null, then it's a searchable combobox
+  final ValueChanged<List<T>>? onChanged; // if null, then it's a disabled combobox
+  final SearchFilter<T>? searchFilter; // if its not null, then it's a searchable combobox
   final Widget? placeholder; // placeholder when value is null
   final bool filled;
   final FocusNode? focusNode;
@@ -992,74 +951,67 @@ class MultiSelectState<T> extends State<MultiSelect<T>>
         child: Button(
           disableHoverEffect: widget.disableHoverEffect,
           focusNode: _focusNode,
-          style: (widget.filled
-              ? ButtonVariance.secondary
-              : ButtonVariance.outline)
-              .copyWith(
+          style: (widget.filled ? ButtonVariance.secondary : ButtonVariance.outline).copyWith(
             decoration: widget.borderRadius != null
                 ? (context, states, decoration) {
-              return (decoration as BoxDecoration).copyWith(
-                borderRadius: widget.borderRadius,
-              );
-            }
+                    return (decoration as BoxDecoration).copyWith(
+                      borderRadius: widget.borderRadius,
+                    );
+                  }
                 : null,
-            padding: widget.padding != null
-                ? (context, states, value) => widget.padding!
-                : null,
+            padding: widget.padding != null ? (context, states, value) => widget.padding! : null,
           ),
           onPressed: widget.onChanged == null
               ? null
               : () {
-            _popoverController
-                .show(
-              context: context,
-              alignment: widget.popoverAlignment,
-              anchorAlignment: widget.popoverAnchorAlignment,
-              widthConstraint: widget.popupWidthConstraint,
-              overlayBarrier: OverlayBarrier(
-                padding:
-                const EdgeInsets.symmetric(vertical: 8) * scaling,
-                borderRadius: BorderRadius.circular(theme.radiusLg),
-              ),
-              builder: (context) {
-                return SelectPopup<T>(
-                  borderRadius: BorderRadius.circular(theme.radiusLg),
-                  margin:
-                  const EdgeInsets.symmetric(vertical: 8) * scaling,
-                  orderSelectedFirst: widget.orderSelectedFirst,
-                  searchPlaceholder: widget.searchPlaceholder,
-                  onSearch: widget.onSearch,
-                  searchFilter: widget.searchFilter,
-                  constraints: widget.popupConstraints,
-                  value: _valueNotifier,
-                  showUnrelatedValues: widget.showUnrelatedValues,
-                  autoClose: widget.autoClosePopover,
-                  onChanged: widget.onChanged == null
-                      ? null
-                      : (value, selected) {
-                    if (value != null) {
-                      List<T> newValue = List.from(widget.value);
-                      if (selected) {
-                        newValue.add(value);
-                      } else {
-                        newValue.remove(value);
-                      }
-                      widget.onChanged!(newValue);
-                    }
-                  },
-                  emptyBuilder: widget.emptyBuilder,
-                  surfaceBlur: widget.surfaceBlur,
-                  surfaceOpacity: widget.surfaceOpacity,
-                  children: _childrenNotifier,
-                );
-              },
-            )
-                .then(
-                  (value) {
-                _focusNode.requestFocus();
-              },
-            );
-          },
+                  _popoverController
+                      .show(
+                    context: context,
+                    alignment: widget.popoverAlignment,
+                    anchorAlignment: widget.popoverAnchorAlignment,
+                    widthConstraint: widget.popupWidthConstraint,
+                    overlayBarrier: OverlayBarrier(
+                      padding: const EdgeInsets.symmetric(vertical: 8) * scaling,
+                      borderRadius: BorderRadius.circular(theme.radiusLg),
+                    ),
+                    builder: (context) {
+                      return SelectPopup<T>(
+                        borderRadius: BorderRadius.circular(theme.radiusLg),
+                        margin: const EdgeInsets.symmetric(vertical: 8) * scaling,
+                        orderSelectedFirst: widget.orderSelectedFirst,
+                        searchPlaceholder: widget.searchPlaceholder,
+                        onSearch: widget.onSearch,
+                        searchFilter: widget.searchFilter,
+                        constraints: widget.popupConstraints,
+                        value: _valueNotifier,
+                        showUnrelatedValues: widget.showUnrelatedValues,
+                        autoClose: widget.autoClosePopover,
+                        onChanged: widget.onChanged == null
+                            ? null
+                            : (value, selected) {
+                                if (value != null) {
+                                  List<T> newValue = List.from(widget.value);
+                                  if (selected) {
+                                    newValue.add(value);
+                                  } else {
+                                    newValue.remove(value);
+                                  }
+                                  widget.onChanged!(newValue);
+                                }
+                              },
+                        emptyBuilder: widget.emptyBuilder,
+                        surfaceBlur: widget.surfaceBlur,
+                        surfaceOpacity: widget.surfaceOpacity,
+                        children: _childrenNotifier,
+                      );
+                    },
+                  )
+                      .then(
+                    (value) {
+                      _focusNode.requestFocus();
+                    },
+                  );
+                },
           child: IntrinsicWidth(
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -1067,35 +1019,34 @@ class MultiSelectState<T> extends State<MultiSelect<T>>
                 Expanded(
                   child: widget.value.isNotEmpty
                       ? Wrap(
-                    spacing: 4 * scaling,
-                    runSpacing: 4 * scaling,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      for (var value in widget.value)
-                        Chip(
-                          style: const ButtonStyle.primary(),
-                          trailing: ChipButton(
-                            onPressed: widget.onChanged == null
-                                ? null
-                                : () {
-                              if (widget.onChanged != null) {
-                                List<T> newValue =
-                                List.from(widget.value);
-                                newValue.remove(value);
-                                widget.onChanged!(newValue);
-                              }
-                            },
-                            child: const Icon(
-                              Icons.close,
-                            ).iconSmall(),
-                          ),
-                          child: widget.itemBuilder(
-                            context,
-                            value,
-                          ),
-                        ),
-                    ],
-                  )
+                          spacing: 4 * scaling,
+                          runSpacing: 4 * scaling,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            for (var value in widget.value)
+                              Chip(
+                                style: const ButtonStyle.primary(),
+                                trailing: ChipButton(
+                                  onPressed: widget.onChanged == null
+                                      ? null
+                                      : () {
+                                          if (widget.onChanged != null) {
+                                            List<T> newValue = List.from(widget.value);
+                                            newValue.remove(value);
+                                            widget.onChanged!(newValue);
+                                          }
+                                        },
+                                  child: const Icon(
+                                    Icons.close,
+                                  ).iconSmall(),
+                                ),
+                                child: widget.itemBuilder(
+                                  context,
+                                  value,
+                                ),
+                              ),
+                          ],
+                        )
                       : placeholder,
                 ),
                 SizedBox(width: 8 * scaling),
