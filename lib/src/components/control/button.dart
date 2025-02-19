@@ -595,7 +595,6 @@ class Button extends StatefulWidget {
 }
 
 class ButtonState<T extends Button> extends State<T> with SingleTickerProviderStateMixin {
-
   bool get _shouldEnableFeedback {
     final platform = Theme.of(context).platform;
     return isMobile(platform);
@@ -1623,7 +1622,7 @@ Decoration _buttonOutlineDecoration(BuildContext context, Set<WidgetState> state
     );
   }
   return BoxDecoration(
-    color: themeData.colorScheme.card,
+    color: themeData.colorScheme.muted.withOpacity(0),
     border: Border.all(
       color: themeData.colorScheme.muted,
       width: 1,

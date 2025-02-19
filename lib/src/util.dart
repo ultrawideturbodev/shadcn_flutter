@@ -5,7 +5,7 @@ import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 typedef Predicate<T> = bool Function(T value);
 
-const kDefaultDuration = Duration(milliseconds: 150);
+const kDefaultDuration = Duration(milliseconds: 113);
 
 typedef ContextedCallback = void Function(BuildContext context);
 typedef ContextedValueChanged<T> = void Function(BuildContext context, T value);
@@ -183,7 +183,7 @@ BorderRadius subtractByBorder(BorderRadius radius, double borderWidth) {
     topRight: _subtractSafe(radius.topRight, Radius.circular(borderWidth)),
     bottomLeft: _subtractSafe(radius.bottomLeft, Radius.circular(borderWidth)),
     bottomRight:
-        _subtractSafe(radius.bottomRight, Radius.circular(borderWidth)),
+    _subtractSafe(radius.bottomRight, Radius.circular(borderWidth)),
   );
 }
 
@@ -327,18 +327,18 @@ extension WidgetExtension on Widget {
 
   Widget constrained(
       {double? minWidth,
-      double? maxWidth,
-      double? minHeight,
-      double? maxHeight}) {
+        double? maxWidth,
+        double? minHeight,
+        double? maxHeight}) {
     if (this is ConstrainedBox) {
       return ConstrainedBox(
         constraints: BoxConstraints(
           minWidth: minWidth ?? (this as ConstrainedBox).constraints.minWidth,
           maxWidth: maxWidth ?? (this as ConstrainedBox).constraints.maxWidth,
           minHeight:
-              minHeight ?? (this as ConstrainedBox).constraints.minHeight,
+          minHeight ?? (this as ConstrainedBox).constraints.minHeight,
           maxHeight:
-              maxHeight ?? (this as ConstrainedBox).constraints.maxHeight,
+          maxHeight ?? (this as ConstrainedBox).constraints.maxHeight,
         ),
         child: (this as ConstrainedBox).child,
       );
@@ -363,13 +363,13 @@ extension WidgetExtension on Widget {
 
   Widget withPadding(
       {double? top,
-      double? bottom,
-      double? left,
-      double? right,
-      double? horizontal,
-      double? vertical,
-      double? all,
-      EdgeInsetsGeometry? padding}) {
+        double? bottom,
+        double? left,
+        double? right,
+        double? horizontal,
+        double? vertical,
+        double? all,
+        EdgeInsetsGeometry? padding}) {
     assert(() {
       if (all != null) {
         if (top != null ||
@@ -408,12 +408,12 @@ extension WidgetExtension on Widget {
 
   Widget withMargin(
       {double? top,
-      double? bottom,
-      double? left,
-      double? right,
-      double? horizontal,
-      double? vertical,
-      double? all}) {
+        double? bottom,
+        double? left,
+        double? right,
+        double? horizontal,
+        double? vertical,
+        double? all}) {
     assert(() {
       if (all != null) {
         if (top != null ||
@@ -498,7 +498,7 @@ extension WidgetExtension on Widget {
 
   Widget clipRRect(
       {BorderRadiusGeometry borderRadius = BorderRadius.zero,
-      Clip clipBehavior = Clip.antiAlias}) {
+        Clip clipBehavior = Clip.antiAlias}) {
     return ClipRRect(
       borderRadius: borderRadius,
       clipBehavior: clipBehavior,
@@ -515,7 +515,7 @@ extension WidgetExtension on Widget {
 
   Widget clipPath(
       {Clip clipBehavior = Clip.antiAlias,
-      required CustomClipper<Path> clipper}) {
+        required CustomClipper<Path> clipper}) {
     return ClipPath(
       clipBehavior: clipBehavior,
       clipper: clipper,
@@ -737,7 +737,7 @@ extension ColorExtension on Color {
   Color getContrastColor([double luminanceContrast = 1]) {
     // luminance contrast is between 0..1
     assert(luminanceContrast >= 0 && luminanceContrast <= 1,
-        'luminanceContrast should be between 0 and 1');
+    'luminanceContrast should be between 0 and 1');
     final hsl = HSLColor.fromColor(this);
     double currentLuminance = hsl.lightness;
     double targetLuminance;

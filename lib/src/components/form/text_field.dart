@@ -152,13 +152,20 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
   }
 
   void _onFocusChanged() {
-    if (!_focusNode.hasFocus) {
+    if (_focusNode.hasFocus) {
+      _statesController.update(WidgetState.focused, true);
+    } else {
+      _statesController.update(WidgetState.focused, false);
       widget.onEditingComplete?.call();
     }
   }
 
   void _onValueChanged() {
     formValue = _controller.text;
+    // Remove hover state when typing
+    if (_statesController.value.contains(WidgetState.hovered)) {
+      _statesController.update(WidgetState.hovered, false);
+    }
   }
 
   @override
@@ -202,11 +209,18 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
             onTap: widget.enabled ? () => _focusNode.requestFocus() : null,
             child: TextFieldTapRegion(
               enabled: widget.enabled,
-              child: Container(
+              child: AnimatedContainer(
+                duration: kDefaultDuration,
                 decoration: BoxDecoration(
                   borderRadius: optionallyResolveBorderRadius(context, widget.borderRadius) ??
                       BorderRadius.circular(theme.radiusMd),
-                  color: widget.filled ? theme.colorScheme.muted : null,
+                  color: widget.filled
+                      ? (_statesController.value.contains(WidgetState.hovered) && widget.enabled
+                          ? theme.colorScheme.accent
+                          : theme.colorScheme.muted)
+                      : (_statesController.value.contains(WidgetState.hovered) && widget.enabled
+                          ? theme.colorScheme.accent
+                          : null),
                   border: widget.border
                       ? Border.all(
                           width: 1.5,
