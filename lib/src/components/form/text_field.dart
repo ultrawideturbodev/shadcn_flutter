@@ -152,20 +152,13 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
   }
 
   void _onFocusChanged() {
-    if (_focusNode.hasFocus) {
-      _statesController.update(WidgetState.focused, true);
-    } else {
-      _statesController.update(WidgetState.focused, false);
+    if (!_focusNode.hasFocus) {
       widget.onEditingComplete?.call();
     }
   }
 
   void _onValueChanged() {
     formValue = _controller.text;
-    // Remove hover state when typing
-    if (_statesController.value.contains(WidgetState.hovered)) {
-      _statesController.update(WidgetState.hovered, false);
-    }
   }
 
   @override
@@ -185,8 +178,8 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
           .merge(theme.typography.small)
           .merge(theme.typography.normal)
           .copyWith(
-            color: theme.colorScheme.foreground,
-          )
+        color: theme.colorScheme.foreground,
+      )
           .merge(widget.style);
     } else {
       defaultTextStyle = DefaultTextStyle.of(context)
@@ -194,8 +187,8 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
           .merge(theme.typography.small)
           .merge(theme.typography.normal)
           .copyWith(
-            color: theme.colorScheme.foreground,
-          );
+        color: theme.colorScheme.foreground,
+      );
     }
     var maxLines = widget.maxLines;
     maxLines ??= widget.obscureText ? 1 : null;
@@ -209,26 +202,19 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
             onTap: widget.enabled ? () => _focusNode.requestFocus() : null,
             child: TextFieldTapRegion(
               enabled: widget.enabled,
-              child: AnimatedContainer(
-                duration: kDefaultDuration,
+              child: Container(
                 decoration: BoxDecoration(
                   borderRadius: optionallyResolveBorderRadius(context, widget.borderRadius) ??
                       BorderRadius.circular(theme.radiusMd),
-                  color: widget.filled
-                      ? (_statesController.value.contains(WidgetState.hovered) && widget.enabled
-                          ? theme.colorScheme.accent
-                          : theme.colorScheme.muted)
-                      : (_statesController.value.contains(WidgetState.hovered) && widget.enabled
-                          ? theme.colorScheme.accent
-                          : null),
+                  color: widget.filled ? theme.colorScheme.muted : null,
                   border: widget.border
                       ? Border.all(
-                          width: 1.5,
-                          color: _statesController.value.contains(WidgetState.focused) &&
-                                  widget.enabled
-                              ? theme.colorScheme.ring
-                              : theme.colorScheme.border,
-                        )
+                    width: 1.5,
+                    color: _statesController.value.contains(WidgetState.focused) &&
+                        widget.enabled
+                        ? theme.colorScheme.ring
+                        : theme.colorScheme.border,
+                  )
                       : null,
                 ),
                 padding: widget.padding ??
@@ -258,12 +244,12 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
                     contextMenuBuilder: widget.contextMenuBuilder == null
                         ? null
                         : widget.useNativeContextMenu && !kIsWeb
-                            ? (context, editableTextState) {
-                                return material.AdaptiveTextSelectionToolbar.editableText(
-                                  editableTextState: editableTextState,
-                                );
-                              }
-                            : widget.contextMenuBuilder,
+                        ? (context, editableTextState) {
+                      return material.AdaptiveTextSelectionToolbar.editableText(
+                        editableTextState: editableTextState,
+                      );
+                    }
+                        : widget.contextMenuBuilder,
                     clipBehavior: widget.clipBehavior,
                     statesController: _statesController,
                     inputFormatters: widget.inputFormatters,
