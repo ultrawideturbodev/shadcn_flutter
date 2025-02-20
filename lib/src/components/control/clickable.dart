@@ -370,7 +370,7 @@ class _ClickableState extends State<Clickable> {
       borderRadius: borderRadius,
       child: GestureDetector(
         behavior: widget.behavior,
-        onTap: widget.onPressed != null ? _onPressed : null,
+        onTap: _onPressed,
         onLongPress: widget.onLongPress,
         // onDoubleTap: widget.onDoubleTap, HANDLED CUSTOMLY
         onSecondaryTapDown: widget.onSecondaryTapDown,
@@ -385,33 +385,31 @@ class _ClickableState extends State<Clickable> {
         onLongPressEnd: widget.onLongPressEnd,
         onSecondaryLongPress: widget.onSecondaryLongPress,
         onTertiaryLongPress: widget.onTertiaryLongPress,
-        onTapDown: widget.onPressed != null
-            ? (details) {
-                if (widget.enableFeedback) {
-                  // also dispatch hover
-                  _controller.update(WidgetState.hovered, true);
-                }
-                _controller.update(WidgetState.pressed, true);
-              }
-            : null,
-        onTapUp: widget.onPressed != null
-            ? (details) {
-                if (widget.enableFeedback) {
-                  // also dispatch hover
-                  _controller.update(WidgetState.hovered, false);
-                }
-                _controller.update(WidgetState.pressed, false);
-              }
-            : null,
-        onTapCancel: widget.onPressed != null
-            ? () {
-                if (widget.enableFeedback) {
-                  // also dispatch hover
-                  _controller.update(WidgetState.hovered, false);
-                }
-                _controller.update(WidgetState.pressed, false);
-              }
-            : null,
+        onTapDown: (details) {
+          if (widget.enableFeedback) {
+            // also dispatch hover
+            _controller.update(WidgetState.hovered, true);
+          }
+          _controller.update(WidgetState.pressed, true);
+          widget.onTapDown?.call(details);
+        },
+        onTapUp: (details) {
+          print('''[🐛] [PRINT] [🌟] [_ClickableState._builder] [📞] Pew pew 1''');
+          if (widget.enableFeedback) {
+            // also dispatch hover
+            _controller.update(WidgetState.hovered, false);
+          }
+          _controller.update(WidgetState.pressed, false);
+          widget.onTapUp?.call(details);
+        },
+        onTapCancel: () {
+          if (widget.enableFeedback) {
+            // also dispatch hover
+            _controller.update(WidgetState.hovered, false);
+          }
+          _controller.update(WidgetState.pressed, false);
+          widget.onTapCancel?.call();
+        },
         child: FocusableActionDetector(
           enabled: enabled,
           focusNode: _focusNode,
