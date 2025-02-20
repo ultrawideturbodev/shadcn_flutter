@@ -48,7 +48,7 @@ class ToggleState extends State<Toggle> {
             ? ButtonStyle.secondary(
                 density: widget.style.density,
                 shape: widget.style.shape,
-                size: widget.style.size,
+                buttonSize: widget.style.size,
               )
             : widget.style.copyWith(textStyle: (context, states, value) {
                 final theme = Theme.of(context);
@@ -668,30 +668,13 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
     return _style!.iconTheme(context, states);
   }
 
-  bool get _enableCustomFeedback =>
-      widget.enabled != false &&
-      (widget.onPressed != null ||
-          widget.onTapDown != null ||
-          widget.onSecondaryTapDown != null ||
-          widget.onTertiaryTapDown != null ||
-          widget.onLongPressStart != null ||
-          widget.onSecondaryLongPress != null ||
-          widget.onTertiaryLongPress != null ||
-          widget.onTapCancel != null ||
-          widget.onTapUp != null ||
-          widget.onSecondaryTapUp != null ||
-          widget.onTertiaryTapUp != null ||
-          widget.onLongPressEnd != null ||
-          widget.onLongPressMoveUpdate != null ||
-          widget.onLongPressUp != null ||
-          widget.onSecondaryTapCancel != null ||
-          widget.onTertiaryTapCancel != null);
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final scaling = theme.scaling;
     bool enableFeedback = widget.enableFeedback ?? _shouldEnableFeedback;
+    final buttonSize =
+        widget.style is ButtonStyle ? (widget.style as ButtonStyle).buttonSize : ButtonSize.normal;
     final clickable = Clickable(
       disableFocusOutline: widget.disableFocusOutline,
       statesController: widget.statesController,
@@ -710,33 +693,38 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
       textStyle: WidgetStateProperty.resolveWith(_resolveTextStyle),
       iconTheme: WidgetStateProperty.resolveWith(_resolveIconTheme),
       onPressed: widget.onPressed,
-      child: widget.leading == null && widget.trailing == null
-          ? Align(
-              heightFactor: 1,
-              widthFactor: 1,
-              alignment: widget.alignment ?? Alignment.center,
-              child: widget.child,
-            )
-          : IntrinsicWidth(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (widget.leading != null) widget.leading!,
-                  if (widget.leading != null) Gap(8 * scaling),
-                  Expanded(
-                    child: Align(
-                      widthFactor: 1,
-                      heightFactor: 1,
-                      alignment: widget.alignment ?? AlignmentDirectional.centerStart,
-                      child: widget.child,
+      child: ConstrainedBox(
+        constraints: BoxConstraints.tightFor(
+          height: buttonSize.maxHeight,
+        ),
+        child: widget.leading == null && widget.trailing == null
+            ? Align(
+                heightFactor: 1,
+                widthFactor: 1,
+                alignment: widget.alignment ?? Alignment.center,
+                child: widget.child,
+              )
+            : IntrinsicWidth(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if (widget.leading != null) widget.leading!,
+                    if (widget.leading != null) Gap(8 * scaling),
+                    Expanded(
+                      child: Align(
+                        widthFactor: 1,
+                        heightFactor: 1,
+                        alignment: widget.alignment ?? AlignmentDirectional.centerStart,
+                        child: widget.child,
+                      ),
                     ),
-                  ),
-                  if (widget.trailing != null) Gap(8 * scaling),
-                  if (widget.trailing != null) widget.trailing!,
-                ],
+                    if (widget.trailing != null) Gap(8 * scaling),
+                    if (widget.trailing != null) widget.trailing!,
+                  ],
+                ),
               ),
-            ),
+      ),
     );
     return clickable;
   }
@@ -814,133 +802,133 @@ abstract class AbstractButtonStyle {
 
 class ButtonStyle implements AbstractButtonStyle {
   final ButtonVariance variance;
-  final ButtonSize size;
+  final ButtonSize buttonSize;
   final ButtonDensity density;
   final ButtonShape shape;
 
   const ButtonStyle({
     required this.variance,
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   });
 
   const ButtonStyle.primary({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.primary;
 
   const ButtonStyle.secondary({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.secondary;
 
   const ButtonStyle.outline({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.outline;
 
   const ButtonStyle.ghost({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.ghost;
 
   const ButtonStyle.link({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.link;
 
   const ButtonStyle.text({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.text;
 
   const ButtonStyle.destructive({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.destructive;
 
   const ButtonStyle.fixed({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.fixed;
 
   const ButtonStyle.menu({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.menu;
 
   const ButtonStyle.menubar({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.menubar;
 
   const ButtonStyle.muted({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.muted;
 
   const ButtonStyle.primaryIcon({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.primary;
 
   const ButtonStyle.secondaryIcon({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.secondary;
 
   const ButtonStyle.outlineIcon({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.outline;
 
   const ButtonStyle.ghostIcon({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.ghost;
 
   const ButtonStyle.linkIcon({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.link;
 
   const ButtonStyle.textIcon({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.text;
 
   const ButtonStyle.destructiveIcon({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.destructive;
 
   const ButtonStyle.fixedIcon({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.fixed;
 
   const ButtonStyle.card({
-    this.size = ButtonSize.normal,
+    this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
   }) : variance = ButtonVariance.card;
@@ -982,7 +970,7 @@ class ButtonStyle implements AbstractButtonStyle {
 
   @override
   ButtonStateProperty<EdgeInsetsGeometry> get padding {
-    if (size == ButtonSize.normal && density == ButtonDensity.normal) {
+    if (buttonSize == ButtonSize.normal && density == ButtonDensity.normal) {
       return variance.padding;
     }
     return _resolvePadding;
@@ -990,12 +978,12 @@ class ButtonStyle implements AbstractButtonStyle {
 
   EdgeInsetsGeometry _resolvePadding(BuildContext context, Set<WidgetState> states) {
     return density
-        .modifier(variance.padding(context, states).optionallyResolve(context) * size.scale);
+        .modifier(variance.padding(context, states).optionallyResolve(context) * buttonSize.scale);
   }
 
   @override
   ButtonStateProperty<TextStyle> get textStyle {
-    if (size == ButtonSize.normal) {
+    if (buttonSize == ButtonSize.normal) {
       return variance.textStyle;
     }
     return _resolveTextStyle;
@@ -1008,13 +996,13 @@ class ButtonStyle implements AbstractButtonStyle {
       fontSize = textStyle.fontSize ?? 14;
     }
     return variance.textStyle(context, states).copyWith(
-          fontSize: fontSize * size.scale,
+          fontSize: fontSize * buttonSize.scale,
         );
   }
 
   @override
   ButtonStateProperty<IconThemeData> get iconTheme {
-    if (size == ButtonSize.normal) {
+    if (buttonSize == ButtonSize.normal) {
       return variance.iconTheme;
     }
     return _resolveIconTheme;
@@ -1024,7 +1012,7 @@ class ButtonStyle implements AbstractButtonStyle {
     var iconSize = variance.iconTheme(context, states).size;
     iconSize ??= IconTheme.of(context).size ?? 24;
     return variance.iconTheme(context, states).copyWith(
-          size: iconSize * size.scale,
+          size: iconSize * buttonSize.scale,
         );
   }
 
@@ -1032,6 +1020,8 @@ class ButtonStyle implements AbstractButtonStyle {
   ButtonStateProperty<EdgeInsetsGeometry> get margin {
     return variance.margin;
   }
+
+  ButtonSize get size => buttonSize;
 }
 
 extension ShapeDecorationExtension on ShapeDecoration {
@@ -1414,11 +1404,28 @@ MouseCursor _buttonMouseCursor(BuildContext context, Set<WidgetState> states) {
 }
 
 EdgeInsets _buttonPadding(BuildContext context, Set<WidgetState> states) {
+  return EdgeInsets.zero;
+}
+
+EdgeInsets _buttonMenuPadding(BuildContext context, Set<WidgetState> states) {
   final theme = Theme.of(context);
-  return EdgeInsets.symmetric(
-    horizontal: theme.scaling * 16,
-    vertical: theme.scaling * 8,
-  );
+  final scaling = theme.scaling;
+  final menuGroupData = Data.maybeOf<MenuGroupData>(context);
+  if (menuGroupData != null && menuGroupData.direction == Axis.horizontal) {
+    return EdgeInsets.symmetric(horizontal: 18, vertical: 6) * scaling;
+  }
+  return EdgeInsets.only(left: 8, top: 6, right: 6, bottom: 6) * scaling;
+}
+
+EdgeInsets _buttonMenubarPadding(BuildContext context, Set<WidgetState> states) {
+  final theme = Theme.of(context);
+  final scaling = theme.scaling;
+  return EdgeInsets.symmetric(horizontal: 12, vertical: 4) * scaling;
+}
+
+EdgeInsets _buttonCardPadding(BuildContext context, Set<WidgetState> states) {
+  final theme = Theme.of(context);
+  return EdgeInsets.all(16) * theme.scaling;
 }
 
 // CARD
@@ -1468,11 +1475,6 @@ Decoration _buttonCardDecoration(BuildContext context, Set<WidgetState> states) 
   );
 }
 
-EdgeInsets _buttonCardPadding(BuildContext context, Set<WidgetState> states) {
-  final theme = Theme.of(context);
-  return const EdgeInsets.all(16) * theme.scaling;
-}
-
 // MENUBUTTON
 Decoration _buttonMenuDecoration(BuildContext context, Set<WidgetState> states) {
   var themeData = Theme.of(context);
@@ -1498,29 +1500,6 @@ TextStyle _buttonMenuTextStyle(BuildContext context, Set<WidgetState> states) {
     );
   }
   return themeData.typography.small.copyWith(
-    color: themeData.colorScheme.accentForeground,
-  );
-}
-
-EdgeInsets _buttonMenuPadding(BuildContext context, Set<WidgetState> states) {
-  final theme = Theme.of(context);
-  final scaling = theme.scaling;
-  final menuGroupData = Data.maybeOf<MenuGroupData>(context);
-  if (menuGroupData != null && menuGroupData.direction == Axis.horizontal) {
-    return const EdgeInsets.symmetric(horizontal: 18, vertical: 6) * scaling;
-  }
-  return const EdgeInsets.only(left: 8, top: 6, right: 6, bottom: 6) * scaling;
-}
-
-EdgeInsets _buttonMenubarPadding(BuildContext context, Set<WidgetState> states) {
-  final theme = Theme.of(context);
-  final scaling = theme.scaling;
-  return const EdgeInsets.symmetric(horizontal: 12, vertical: 4) * scaling;
-}
-
-IconThemeData _buttonMenuIconTheme(BuildContext context, Set<WidgetState> states) {
-  var themeData = Theme.of(context);
-  return IconThemeData(
     color: themeData.colorScheme.accentForeground,
   );
 }
@@ -1876,7 +1855,7 @@ class PrimaryButton extends StatelessWidget {
       leading: leading,
       trailing: trailing,
       alignment: alignment,
-      style: ButtonStyle.primary(size: size, density: density, shape: shape),
+      style: ButtonStyle.primary(buttonSize: size, density: density, shape: shape),
       focusNode: focusNode,
       disableTransition: disableTransition,
       onHover: onHover,
@@ -1975,7 +1954,7 @@ class SecondaryButton extends StatelessWidget {
       leading: leading,
       trailing: trailing,
       alignment: alignment,
-      style: ButtonStyle.secondary(size: size, density: density, shape: shape),
+      style: ButtonStyle.secondary(buttonSize: size, density: density, shape: shape),
       focusNode: focusNode,
       disableTransition: disableTransition,
       onHover: onHover,
@@ -2074,7 +2053,7 @@ class OutlineButton extends StatelessWidget {
       leading: leading,
       trailing: trailing,
       alignment: alignment,
-      style: ButtonStyle.outline(size: size, density: density, shape: shape),
+      style: ButtonStyle.outline(buttonSize: size, density: density, shape: shape),
       focusNode: focusNode,
       disableTransition: disableTransition,
       onHover: onHover,
@@ -2173,7 +2152,7 @@ class GhostButton extends StatelessWidget {
       leading: leading,
       trailing: trailing,
       alignment: alignment,
-      style: ButtonStyle.ghost(size: size, density: density, shape: shape),
+      style: ButtonStyle.ghost(buttonSize: size, density: density, shape: shape),
       focusNode: focusNode,
       disableTransition: disableTransition,
       onHover: onHover,
@@ -2272,7 +2251,7 @@ class LinkButton extends StatelessWidget {
       leading: leading,
       trailing: trailing,
       alignment: alignment,
-      style: ButtonStyle.link(size: size, density: density, shape: shape),
+      style: ButtonStyle.link(buttonSize: size, density: density, shape: shape),
       focusNode: focusNode,
       disableTransition: disableTransition,
       onHover: onHover,
@@ -2370,7 +2349,7 @@ class TextButton extends StatelessWidget {
       leading: leading,
       trailing: trailing,
       alignment: alignment,
-      style: ButtonStyle.text(size: size, density: density, shape: shape),
+      style: ButtonStyle.text(buttonSize: size, density: density, shape: shape),
       focusNode: focusNode,
       disableTransition: disableTransition,
       child: child,
@@ -2451,7 +2430,7 @@ class DestructiveButton extends StatelessWidget {
       leading: leading,
       trailing: trailing,
       alignment: alignment,
-      style: ButtonStyle.destructive(size: size, density: density, shape: shape),
+      style: ButtonStyle.destructive(buttonSize: size, density: density, shape: shape),
       focusNode: focusNode,
       disableTransition: disableTransition,
       onHover: onHover,
@@ -2550,7 +2529,7 @@ class TabButton extends StatelessWidget {
       leading: leading,
       trailing: trailing,
       alignment: alignment,
-      style: ButtonStyle.fixed(size: size, density: density, shape: shape),
+      style: ButtonStyle.fixed(buttonSize: size, density: density, shape: shape),
       focusNode: focusNode,
       disableTransition: disableTransition,
       onHover: onHover,
@@ -2649,7 +2628,7 @@ class CardButton extends StatelessWidget {
       leading: leading,
       trailing: trailing,
       alignment: alignment,
-      style: ButtonStyle.card(size: size, density: density, shape: shape),
+      style: ButtonStyle.card(buttonSize: size, density: density, shape: shape),
       focusNode: focusNode,
       disableTransition: disableTransition,
       onHover: onHover,
@@ -2989,7 +2968,7 @@ class IconButton extends StatelessWidget {
       alignment: alignment,
       style: ButtonStyle(
         variance: variance,
-        size: size,
+        buttonSize: size,
         density: density,
         shape: shape,
       ),
@@ -3228,4 +3207,11 @@ class ButtonGroup extends StatelessWidget {
     }
     return flex;
   }
+}
+
+IconThemeData _buttonMenuIconTheme(BuildContext context, Set<WidgetState> states) {
+  var themeData = Theme.of(context);
+  return IconThemeData(
+    color: themeData.colorScheme.accentForeground,
+  );
 }

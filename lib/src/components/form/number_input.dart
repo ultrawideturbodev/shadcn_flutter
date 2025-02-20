@@ -101,7 +101,7 @@ class _NumberInputState extends State<NumberInput>
     return widget.buttonStyle ??
         const ButtonStyle.text(
           density: ButtonDensity.compact,
-          size: ButtonSize.small,
+          buttonSize: ButtonSize.small,
         );
   }
 
