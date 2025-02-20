@@ -767,16 +767,19 @@ class _NavigationItemState extends _AbstractNavigationButtonState<NavigationItem
                     ? AlignmentDirectional.centerEnd
                     : AlignmentDirectional.centerStart)
                 : null),
-        child: _NavigationLabeled(
-          label: label,
-          showLabel: showLabel,
-          labelType: labelType,
-          direction: direction,
-          keepMainAxisSize: (data?.keepMainAxisSize ?? false) && canShowLabel,
-          keepCrossAxisSize: (data?.keepCrossAxisSize ?? false) && canShowLabel,
-          position: data?.parentLabelPosition ?? NavigationLabelPosition.bottom,
-          spacing: widget.spacing ?? (8 * scaling),
-          child: widget.child,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: _NavigationLabeled(
+            label: label,
+            showLabel: showLabel,
+            labelType: labelType,
+            direction: direction,
+            keepMainAxisSize: (data?.keepMainAxisSize ?? false) && canShowLabel,
+            keepCrossAxisSize: (data?.keepCrossAxisSize ?? false) && canShowLabel,
+            position: data?.parentLabelPosition ?? NavigationLabelPosition.bottom,
+            spacing: widget.spacing ?? (8 * scaling),
+            child: widget.child,
+          ),
         ),
       ),
     );
@@ -984,7 +987,7 @@ class _NavigationLabeled extends StatelessWidget {
           top: position == NavigationLabelPosition.bottom ? spacing : 0,
           bottom: position == NavigationLabelPosition.top ? spacing : 0,
           left: position == NavigationLabelPosition.end ? spacing : 0,
-          right: position == NavigationLabelPosition.start ? spacing : 0,
+          right: position == NavigationLabelPosition.start ? spacing : 8,
         ),
         child: label,
       ),

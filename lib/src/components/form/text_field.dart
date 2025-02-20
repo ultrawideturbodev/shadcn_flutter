@@ -178,8 +178,8 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
           .merge(theme.typography.small)
           .merge(theme.typography.normal)
           .copyWith(
-        color: theme.colorScheme.foreground,
-      )
+            color: theme.colorScheme.foreground,
+          )
           .merge(widget.style);
     } else {
       defaultTextStyle = DefaultTextStyle.of(context)
@@ -187,8 +187,8 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
           .merge(theme.typography.small)
           .merge(theme.typography.normal)
           .copyWith(
-        color: theme.colorScheme.foreground,
-      );
+            color: theme.colorScheme.foreground,
+          );
     }
     var maxLines = widget.maxLines;
     maxLines ??= widget.obscureText ? 1 : null;
@@ -209,12 +209,12 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
                   color: widget.filled ? theme.colorScheme.muted : null,
                   border: widget.border
                       ? Border.all(
-                    width: 1.5,
-                    color: _statesController.value.contains(WidgetState.focused) &&
-                        widget.enabled
-                        ? theme.colorScheme.ring
-                        : theme.colorScheme.border,
-                  )
+                          width: 1.5,
+                          color: _statesController.value.contains(WidgetState.focused) &&
+                                  widget.enabled
+                              ? theme.colorScheme.ring
+                              : theme.colorScheme.border,
+                        )
                       : null,
                 ),
                 padding: widget.padding ??
@@ -234,7 +234,6 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
           children: [
             if (hasLeading)
               Align(alignment: widget.leadingAlignment ?? Alignment.center, child: widget.leading!),
-            if (hasLeading) SizedBox(width: 8 * scaling),
             Flexible(
               child: Stack(
                 fit: StackFit.passthrough,
@@ -244,12 +243,12 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
                     contextMenuBuilder: widget.contextMenuBuilder == null
                         ? null
                         : widget.useNativeContextMenu && !kIsWeb
-                        ? (context, editableTextState) {
-                      return material.AdaptiveTextSelectionToolbar.editableText(
-                        editableTextState: editableTextState,
-                      );
-                    }
-                        : widget.contextMenuBuilder,
+                            ? (context, editableTextState) {
+                                return material.AdaptiveTextSelectionToolbar.editableText(
+                                  editableTextState: editableTextState,
+                                );
+                              }
+                            : widget.contextMenuBuilder,
                     clipBehavior: widget.clipBehavior,
                     statesController: _statesController,
                     inputFormatters: widget.inputFormatters,

@@ -679,7 +679,7 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
       disableFocusOutline: widget.disableFocusOutline,
       statesController: widget.statesController,
       focusNode: widget.focusNode,
-      enabled: widget.enabled ?? widget.onPressed != null,
+      enabled: widget.enabled ?? true,
       marginAlignment: widget.marginAlignment,
       disableTransition: widget.disableTransition,
       onHover: widget.onHover,
