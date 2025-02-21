@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
+import 'package:shadcn_flutter/src/components/display/icon_box.dart';
 
 enum CalendarViewType {
   date,
@@ -88,26 +89,28 @@ class _DatePickerDialogState extends State<DatePickerDialog> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      OutlineButton(
-                        density: ButtonDensity.icon,
-                        borderWidth: widget.borderWidth ?? theme.borderWidth,
-                        onPressed: () {
-                          setState(() {
-                            switch (_viewType) {
-                              case CalendarViewType.date:
-                                _view = _view.previous;
-                                _alternateView = _alternateView.previous;
-                                break;
-                              case CalendarViewType.month:
-                                _view = _view.previousYear;
-                                break;
-                              case CalendarViewType.year:
-                                _yearSelectStart -= 16;
-                                break;
-                            }
-                          });
-                        },
-                        child: const Icon(Icons.arrow_back).iconXSmall(),
+                      IconBox(
+                        child: OutlineButton(
+                          density: ButtonDensity.icon,
+                          borderWidth: widget.borderWidth ?? theme.borderWidth,
+                          onPressed: () {
+                            setState(() {
+                              switch (_viewType) {
+                                case CalendarViewType.date:
+                                  _view = _view.previous;
+                                  _alternateView = _alternateView.previous;
+                                  break;
+                                case CalendarViewType.month:
+                                  _view = _view.previousYear;
+                                  break;
+                                case CalendarViewType.year:
+                                  _yearSelectStart -= 16;
+                                  break;
+                              }
+                            });
+                          },
+                          child: const Icon(Icons.arrow_back).iconXSmall(),
+                        ),
                       ),
                       SizedBox(
                         width: theme.scaling * 16,
@@ -209,26 +212,28 @@ class _DatePickerDialogState extends State<DatePickerDialog> {
                         SizedBox(
                           width: theme.scaling * 16,
                         ),
-                        OutlineButton(
-                          density: ButtonDensity.icon,
-                          borderWidth: widget.borderWidth ?? theme.borderWidth,
-                          onPressed: () {
-                            setState(() {
-                              switch (_viewType) {
-                                case CalendarViewType.date:
-                                  _view = _view.next;
-                                  _alternateView = _alternateView.next;
-                                  break;
-                                case CalendarViewType.month:
-                                  _view = _view.nextYear;
-                                  break;
-                                case CalendarViewType.year:
-                                  _yearSelectStart += 16;
-                                  break;
-                              }
-                            });
-                          },
-                          child: const Icon(Icons.arrow_forward).iconXSmall(),
+                        IconBox(
+                          child: OutlineButton(
+                            density: ButtonDensity.icon,
+                            borderWidth: widget.borderWidth ?? theme.borderWidth,
+                            onPressed: () {
+                              setState(() {
+                                switch (_viewType) {
+                                  case CalendarViewType.date:
+                                    _view = _view.next;
+                                    _alternateView = _alternateView.next;
+                                    break;
+                                  case CalendarViewType.month:
+                                    _view = _view.nextYear;
+                                    break;
+                                  case CalendarViewType.year:
+                                    _yearSelectStart += 16;
+                                    break;
+                                }
+                              });
+                            },
+                            child: const Icon(Icons.arrow_forward).iconXSmall(),
+                          ),
                         ),
                       ],
                     ),
@@ -292,25 +297,27 @@ class _DatePickerDialogState extends State<DatePickerDialog> {
         children: [
           Row(
             children: [
-              OutlineButton(
-                density: ButtonDensity.icon,
-                borderWidth: widget.borderWidth ?? theme.borderWidth,
-                onPressed: () {
-                  setState(() {
-                    switch (_viewType) {
-                      case CalendarViewType.date:
-                        _view = _view.previous;
-                        break;
-                      case CalendarViewType.month:
-                        _view = _view.previousYear;
-                        break;
-                      case CalendarViewType.year:
-                        _yearSelectStart -= 16;
-                        break;
-                    }
-                  });
-                },
-                child: const Icon(Icons.arrow_back).iconXSmall(),
+              IconBox(
+                child: OutlineButton(
+                  density: ButtonDensity.icon,
+                  borderWidth: widget.borderWidth ?? theme.borderWidth,
+                  onPressed: () {
+                    setState(() {
+                      switch (_viewType) {
+                        case CalendarViewType.date:
+                          _view = _view.previous;
+                          break;
+                        case CalendarViewType.month:
+                          _view = _view.previousYear;
+                          break;
+                        case CalendarViewType.year:
+                          _yearSelectStart -= 16;
+                          break;
+                      }
+                    });
+                  },
+                  child: const Icon(Icons.arrow_back).iconXSmall(),
+                ),
               ),
               SizedBox(
                 width: theme.scaling * 16,
@@ -344,25 +351,27 @@ class _DatePickerDialogState extends State<DatePickerDialog> {
               SizedBox(
                 width: theme.scaling * 16,
               ),
-              OutlineButton(
-                density: ButtonDensity.icon,
-                borderWidth: widget.borderWidth ?? theme.borderWidth,
-                onPressed: () {
-                  setState(() {
-                    switch (_viewType) {
-                      case CalendarViewType.date:
-                        _view = _view.next;
-                        break;
-                      case CalendarViewType.month:
-                        _view = _view.nextYear;
-                        break;
-                      case CalendarViewType.year:
-                        _yearSelectStart += 16;
-                        break;
-                    }
-                  });
-                },
-                child: const Icon(Icons.arrow_forward).iconXSmall(),
+              IconBox(
+                child: OutlineButton(
+                  density: ButtonDensity.icon,
+                  borderWidth: widget.borderWidth ?? theme.borderWidth,
+                  onPressed: () {
+                    setState(() {
+                      switch (_viewType) {
+                        case CalendarViewType.date:
+                          _view = _view.next;
+                          break;
+                        case CalendarViewType.month:
+                          _view = _view.nextYear;
+                          break;
+                        case CalendarViewType.year:
+                          _yearSelectStart += 16;
+                          break;
+                      }
+                    });
+                  },
+                  child: const Icon(Icons.arrow_forward).iconXSmall(),
+                ),
               ),
             ],
           ),

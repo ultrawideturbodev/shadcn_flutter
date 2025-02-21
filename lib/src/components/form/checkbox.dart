@@ -31,8 +31,7 @@ class Checkbox extends StatefulWidget {
   _CheckboxState createState() => _CheckboxState();
 }
 
-class _CheckboxState extends State<Checkbox>
-    with FormValueSupplier<CheckboxState, Checkbox> {
+class _CheckboxState extends State<Checkbox> with FormValueSupplier<CheckboxState, Checkbox> {
   final bool _focusing = false;
   bool _shouldAnimate = false;
 
@@ -63,9 +62,7 @@ class _CheckboxState extends State<Checkbox>
       }
     } else {
       _changeTo(
-        widget.state == CheckboxState.checked
-            ? CheckboxState.unchecked
-            : CheckboxState.checked,
+        widget.state == CheckboxState.checked ? CheckboxState.unchecked : CheckboxState.checked,
       );
     }
   }
@@ -95,8 +92,10 @@ class _CheckboxState extends State<Checkbox>
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (widget.leading != null) widget.leading!.small().medium(),
-          SizedBox(width: theme.scaling * 8),
+          if (widget.leading != null) ...[
+            widget.leading!.small().medium(),
+            SizedBox(width: theme.scaling * 8),
+          ],
           AnimatedContainer(
             duration: kDefaultDuration,
             width: theme.scaling * 16,
@@ -146,12 +145,8 @@ class _CheckboxState extends State<Checkbox>
                 : Center(
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 100),
-                      width: widget.state == CheckboxState.indeterminate
-                          ? theme.scaling * 8
-                          : 0,
-                      height: widget.state == CheckboxState.indeterminate
-                          ? theme.scaling * 8
-                          : 0,
+                      width: widget.state == CheckboxState.indeterminate ? theme.scaling * 8 : 0,
+                      height: widget.state == CheckboxState.indeterminate ? theme.scaling * 8 : 0,
                       padding: EdgeInsets.zero,
                       decoration: BoxDecoration(
                         color: theme.colorScheme.primary,
@@ -160,8 +155,10 @@ class _CheckboxState extends State<Checkbox>
                     ),
                   ),
           ),
-          SizedBox(width: theme.scaling * 8),
-          if (widget.trailing != null) widget.trailing!.small().medium(),
+          if (widget.trailing != null) ...[
+            SizedBox(width: theme.scaling * 8),
+            widget.trailing!.small().medium(),
+          ],
         ],
       ),
     );
@@ -191,26 +188,22 @@ class AnimatedCheckPainter extends CustomPainter {
     Offset firstStrokeEnd = Offset(size.width * 0.35, size.height);
     Offset secondStrokeStart = firstStrokeEnd;
     Offset secondStrokeEnd = Offset(size.width, 0);
-    double firstStrokeLength =
-        (firstStrokeEnd - firstStrokeStart).distanceSquared;
-    double secondStrokeLength =
-        (secondStrokeEnd - secondStrokeStart).distanceSquared;
+    double firstStrokeLength = (firstStrokeEnd - firstStrokeStart).distanceSquared;
+    double secondStrokeLength = (secondStrokeEnd - secondStrokeStart).distanceSquared;
     double totalLength = firstStrokeLength + secondStrokeLength;
 
     double normalizedFirstStrokeLength = firstStrokeLength / totalLength;
     double normalizedSecondStrokeLength = secondStrokeLength / totalLength;
 
     double firstStrokeProgress =
-        progress.clamp(0.0, normalizedFirstStrokeLength) /
-            normalizedFirstStrokeLength;
-    double secondStrokeProgress = (progress - normalizedFirstStrokeLength)
-            .clamp(0.0, normalizedSecondStrokeLength) /
-        normalizedSecondStrokeLength;
+        progress.clamp(0.0, normalizedFirstStrokeLength) / normalizedFirstStrokeLength;
+    double secondStrokeProgress =
+        (progress - normalizedFirstStrokeLength).clamp(0.0, normalizedSecondStrokeLength) /
+            normalizedSecondStrokeLength;
     if (firstStrokeProgress <= 0) {
       return;
     }
-    Offset currentPoint =
-        Offset.lerp(firstStrokeStart, firstStrokeEnd, firstStrokeProgress)!;
+    Offset currentPoint = Offset.lerp(firstStrokeStart, firstStrokeEnd, firstStrokeProgress)!;
     path.moveTo(firstStrokeStart.dx, firstStrokeStart.dy);
     path.lineTo(currentPoint.dx, currentPoint.dy);
     if (secondStrokeProgress <= 0) {

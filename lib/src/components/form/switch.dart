@@ -53,7 +53,7 @@ class _SwitchState extends State<Switch> with FormValueSupplier<bool, Switch> {
       focused: _focusing,
       borderRadius: BorderRadius.circular(theme.radiusXl),
       align: 3 * scaling,
-      width: 2 * scaling,
+      borderWidth: 2 * scaling,
       child: GestureDetector(
         onTap: () {
           widget.onChanged?.call(!widget.value);

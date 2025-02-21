@@ -120,9 +120,7 @@ class _PhoneInputState extends State<PhoneInput>
         children: [
           Select<Country>(
             padding: EdgeInsets.only(
-                top: theme.scaling * 8,
                 left: theme.scaling * 8,
-                bottom: theme.scaling * 8,
                 right: theme.scaling * 4),
             searchPlaceholder: widget.searchPlaceholder ??
                 Text(localization.searchPlaceholderCountry),

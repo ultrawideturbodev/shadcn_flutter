@@ -38,8 +38,14 @@ class DatePicker extends StatelessWidget {
       popoverPadding: popoverPadding,
       value: value,
       onChanged: onChanged,
-      placeholder: placeholder ?? Text(localizations.placeholderDatePicker),
-      trailing: const Icon(Icons.calendar_today),
+      placeholder: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: placeholder ?? Text(localizations.placeholderDatePicker),
+      ),
+      trailing: const Padding(
+        padding: EdgeInsets.only(right: 16),
+        child: Icon(Icons.calendar_today),
+      ),
       builder: (context, value) {
         return Text(localizations.formatDateTime(value, showTime: false));
       },
@@ -49,12 +55,9 @@ class DatePicker extends StatelessWidget {
           initialView: initialView ?? CalendarView.now(),
           initialViewType: initialViewType ?? CalendarViewType.date,
           selectionMode: CalendarSelectionMode.single,
-          initialValue: handler.value == null
-              ? null
-              : CalendarValue.single(handler.value!),
+          initialValue: handler.value == null ? null : CalendarValue.single(handler.value!),
           onChanged: (value) {
-            handler.value =
-                value == null ? null : (value as SingleCalendarValue).date;
+            handler.value = value == null ? null : (value as SingleCalendarValue).date;
           },
           stateBuilder: stateBuilder,
         );
@@ -133,8 +136,14 @@ class DateRangePicker extends StatelessWidget {
       mode: mode,
       onChanged: onChanged,
       dialogTitle: dialogTitle,
-      placeholder: placeholder ?? Text(localizations.placeholderDatePicker),
-      trailing: const Icon(Icons.calendar_month),
+      placeholder: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: placeholder ?? Text(localizations.placeholderDatePicker),
+      ),
+      trailing: const Padding(
+        padding: EdgeInsets.only(right: 16),
+        child: Icon(Icons.calendar_month),
+      ),
       builder: (context, value) {
         return Text(
             '${localizations.formatDateTime(value.start, showTime: false)} - ${localizations.formatDateTime(value.end, showTime: false)}');
@@ -149,9 +158,7 @@ class DateRangePicker extends StatelessWidget {
             viewMode: constraints.biggest.width < 500
                 ? CalendarSelectionMode.single
                 : CalendarSelectionMode.range,
-            initialValue: value == null
-                ? null
-                : CalendarValue.range(value.start, value.end),
+            initialValue: value == null ? null : CalendarValue.range(value.start, value.end),
             onChanged: (value) {
               if (value == null) {
                 handler.value = null;

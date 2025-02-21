@@ -47,8 +47,7 @@ class NumberInput extends StatefulWidget {
   State<NumberInput> createState() => _NumberInputState();
 }
 
-class _NumberInputState extends State<NumberInput>
-    with FormValueSupplier<num, NumberInput> {
+class _NumberInputState extends State<NumberInput> with FormValueSupplier<num, NumberInput> {
   late TextEditingController _controller;
   late double _lastValidValue;
 
@@ -93,6 +92,8 @@ class _NumberInputState extends State<NumberInput>
     final theme = Theme.of(context);
     return OutlinedContainer(
       borderRadius: theme.borderRadiusMd,
+      borderColor: theme.colorScheme.border,
+      borderWidth: theme.borderWidth,
       child: buildTextField(context, theme),
     );
   }
@@ -165,11 +166,10 @@ class _NumberInputState extends State<NumberInput>
                   Flexible(
                     child: Button(
                       style: _buttonStyle,
-                      enabled: widget.enabled ??
-                          (widget.max == null || _lastValidValue < widget.max!),
+                      enabled:
+                          widget.enabled ?? (widget.max == null || _lastValidValue < widget.max!),
                       onPressed: () {
-                        if (widget.max == null ||
-                            _lastValidValue < widget.max!) {
+                        if (widget.max == null || _lastValidValue < widget.max!) {
                           double oldValue = _value.toDouble();
                           _lastValidValue = oldValue + widget.step;
                           _controller.text = widget.allowDecimals
@@ -187,11 +187,10 @@ class _NumberInputState extends State<NumberInput>
                   Flexible(
                     child: Button(
                       style: _buttonStyle,
-                      enabled: widget.enabled ??
-                          (widget.min == null || _lastValidValue > widget.min!),
+                      enabled:
+                          widget.enabled ?? (widget.min == null || _lastValidValue > widget.min!),
                       onPressed: () {
-                        if (widget.min == null ||
-                            _lastValidValue > widget.min!) {
+                        if (widget.min == null || _lastValidValue > widget.min!) {
                           double oldValue = _value.toDouble();
                           _lastValidValue = oldValue - widget.step;
                           _controller.text = widget.allowDecimals
@@ -309,8 +308,7 @@ class _NumberInputState extends State<NumberInput>
             : BorderRadius.circular(4 * scaling),
         enabled: widget.enabled ?? true,
         initialValue: _valueAsString,
-        keyboardType:
-            TextInputType.numberWithOptions(decimal: widget.allowDecimals),
+        keyboardType: TextInputType.numberWithOptions(decimal: widget.allowDecimals),
         textAlignVertical: TextAlignVertical.center,
       ),
     );
