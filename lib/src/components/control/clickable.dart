@@ -359,6 +359,21 @@ class _ClickableState extends State<Clickable> {
     BorderRadiusGeometry borderRadius;
     if (decoration is BoxDecoration) {
       borderRadius = decoration.borderRadius ?? theme.borderRadiusMd;
+      if (decoration.border != null && decoration.border is Border) {
+        final componentTheme = ComponentTheme.maybeOf<dynamic>(context);
+        final borderWidth = componentTheme?.borderWidth ?? theme.borderWidth;
+        if (borderWidth != null) {
+          final border = decoration.border as Border;
+          decoration = decoration.copyWith(
+            border: Border(
+              top: border.top.copyWith(width: borderWidth),
+              right: border.right.copyWith(width: borderWidth),
+              bottom: border.bottom.copyWith(width: borderWidth),
+              left: border.left.copyWith(width: borderWidth),
+            ),
+          );
+        }
+      }
     } else {
       borderRadius = theme.borderRadiusMd;
     }
@@ -372,7 +387,6 @@ class _ClickableState extends State<Clickable> {
         behavior: widget.behavior,
         onTap: _onPressed,
         onLongPress: widget.onLongPress,
-        // onDoubleTap: widget.onDoubleTap, HANDLED CUSTOMLY
         onSecondaryTapDown: widget.onSecondaryTapDown,
         onSecondaryTapUp: widget.onSecondaryTapUp,
         onSecondaryTapCancel: widget.onSecondaryTapCancel,
@@ -387,7 +401,6 @@ class _ClickableState extends State<Clickable> {
         onTertiaryLongPress: widget.onTertiaryLongPress,
         onTapDown: (details) {
           if (widget.enableFeedback) {
-            // also dispatch hover
             _controller.update(WidgetState.hovered, true);
           }
           _controller.update(WidgetState.pressed, true);
@@ -395,7 +408,6 @@ class _ClickableState extends State<Clickable> {
         },
         onTapUp: (details) {
           if (widget.enableFeedback) {
-            // also dispatch hover
             _controller.update(WidgetState.hovered, false);
           }
           _controller.update(WidgetState.pressed, false);
@@ -403,7 +415,6 @@ class _ClickableState extends State<Clickable> {
         },
         onTapCancel: () {
           if (widget.enableFeedback) {
-            // also dispatch hover
             _controller.update(WidgetState.hovered, false);
           }
           _controller.update(WidgetState.pressed, false);

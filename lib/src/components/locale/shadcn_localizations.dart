@@ -4,10 +4,8 @@ import 'package:flutter/foundation.dart';
 
 import '../../../shadcn_flutter.dart';
 
-class ShadcnLocalizationsDelegate
-    extends LocalizationsDelegate<ShadcnLocalizations> {
-  static const ShadcnLocalizationsDelegate delegate =
-      ShadcnLocalizationsDelegate();
+class ShadcnLocalizationsDelegate extends LocalizationsDelegate<ShadcnLocalizations> {
+  static const ShadcnLocalizationsDelegate delegate = ShadcnLocalizationsDelegate();
   const ShadcnLocalizationsDelegate();
 
   @override
@@ -15,18 +13,16 @@ class ShadcnLocalizationsDelegate
 
   @override
   Future<ShadcnLocalizations> load(Locale locale) {
-    return SynchronousFuture<ShadcnLocalizations>(
-        DefaultShadcnLocalizations.instance);
+    return SynchronousFuture<ShadcnLocalizations>(DefaultShadcnLocalizations.instance);
   }
 
   @override
   bool shouldReload(ShadcnLocalizationsDelegate old) => false;
 }
 
-const _fileByteUnits =
-    SizeUnitLocale(1024, ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']);
-const _fileBitUnits = SizeUnitLocale(
-    1024, ['Bi', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']);
+const _fileByteUnits = SizeUnitLocale(1024, ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']);
+const _fileBitUnits =
+    SizeUnitLocale(1024, ['Bi', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']);
 
 class SizeUnitLocale {
   final int base;
@@ -56,15 +52,13 @@ String formatFileSize(int bytes, SizeUnitLocale unit) {
   // return '${NumberFormat('#,##0.#').format(bytes / pow(base, digitGroups))} ${units[digitGroups]}';
   // do it without NumberFormat, but format to #,##0.# format
   final value = bytes / pow(base, digitGroups);
-  final formattedValue =
-      value.toStringAsFixed(value.truncateToDouble() == value ? 0 : 1);
+  final formattedValue = value.toStringAsFixed(value.truncateToDouble() == value ? 0 : 1);
   return '$formattedValue ${units[digitGroups]}';
 }
 
 abstract class ShadcnLocalizations {
   static ShadcnLocalizations of(BuildContext context) {
-    return Localizations.of<ShadcnLocalizations>(
-            context, ShadcnLocalizations) ??
+    return Localizations.of<ShadcnLocalizations>(context, ShadcnLocalizations) ??
         DefaultShadcnLocalizations.instance;
   }
 
@@ -180,6 +174,7 @@ abstract class ShadcnLocalizations {
   String get colorPickerTabRGB;
   String get colorPickerTabHSV;
   String get colorPickerTabHSL;
+  String get colorPickerPickFromScreen;
 
   String dataTableSelectedRows(int count, int total);
   String get dataTableNext;
@@ -326,10 +321,8 @@ class DefaultShadcnLocalizations extends ShadcnLocalizations {
     'video/mp4': 'MP4 Video',
     'video/mpeg': 'MPEG Video',
     'application/vnd.apple.installer+xml': 'Apple Installer Package',
-    'application/vnd.oasis.opendocument.presentation':
-        'OpenDocument Presentation Document',
-    'application/vnd.oasis.opendocument.spreadsheet':
-        'OpenDocument Spreadsheet Document',
+    'application/vnd.oasis.opendocument.presentation': 'OpenDocument Presentation Document',
+    'application/vnd.oasis.opendocument.spreadsheet': 'OpenDocument Spreadsheet Document',
     'application/vnd.oasis.opendocument.text': 'OpenDocument Text Document',
     'audio/ogg': 'Ogg Audio',
     'video/ogg': 'Ogg Video',
@@ -399,12 +392,10 @@ class DefaultShadcnLocalizations extends ShadcnLocalizations {
   }
 
   @override
-  String formLessThan(double value) =>
-      'Must be less than ${formatNumber(value)}';
+  String formLessThan(double value) => 'Must be less than ${formatNumber(value)}';
 
   @override
-  String formGreaterThan(double value) =>
-      'Must be greater than ${formatNumber(value)}';
+  String formGreaterThan(double value) => 'Must be greater than ${formatNumber(value)}';
 
   @override
   String formLessThanOrEqualTo(double value) =>
@@ -426,23 +417,19 @@ class DefaultShadcnLocalizations extends ShadcnLocalizations {
   String formLengthLessThan(int value) => 'Must be at least $value characters';
 
   @override
-  String formLengthGreaterThan(int value) =>
-      'Must be at most $value characters';
+  String formLengthGreaterThan(int value) => 'Must be at most $value characters';
 
   @override
   String get formPasswordDigits => 'Must contain at least one digit';
 
   @override
-  String get formPasswordLowercase =>
-      'Must contain at least one lowercase letter';
+  String get formPasswordLowercase => 'Must contain at least one lowercase letter';
 
   @override
-  String get formPasswordUppercase =>
-      'Must contain at least one uppercase letter';
+  String get formPasswordUppercase => 'Must contain at least one uppercase letter';
 
   @override
-  String get formPasswordSpecial =>
-      'Must contain at least one special character';
+  String get formPasswordSpecial => 'Must contain at least one special character';
 
   @override
   String get abbreviatedMonday => 'Mo';
@@ -573,12 +560,10 @@ class DefaultShadcnLocalizations extends ShadcnLocalizations {
   String get placeholderTimePicker => 'Select a time';
 
   @override
-  String formatTimeOfDay(TimeOfDay time,
-      {bool use24HourFormat = true, bool showSeconds = false}) {
+  String formatTimeOfDay(TimeOfDay time, {bool use24HourFormat = true, bool showSeconds = false}) {
     String result = '';
     if (use24HourFormat) {
-      result +=
-          '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+      result += '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
       if (showSeconds) {
         result += ':${time.second.toString().padLeft(2, '0')}';
       }
@@ -728,6 +713,9 @@ class DefaultShadcnLocalizations extends ShadcnLocalizations {
 
   @override
   String get colorPickerTabHSL => 'HSL';
+
+  @override
+  String get colorPickerPickFromScreen => 'Pick from screen';
 
   @override
   String get colorHue => 'Hue';

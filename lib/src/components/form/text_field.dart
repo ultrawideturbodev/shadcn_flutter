@@ -48,6 +48,7 @@ class TextField extends StatefulWidget {
   final Clip clipBehavior;
   final bool autofocus;
   final WidgetStatesController? statesController;
+  final double? borderWidth;
 
   const TextField({
     super.key,
@@ -93,6 +94,7 @@ class TextField extends StatefulWidget {
     this.leadingAlignment,
     this.trailingAlignment,
     this.statesController,
+    this.borderWidth,
   });
 
   static Widget defaultContextMenuBuilder(
@@ -209,7 +211,7 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
                   color: widget.filled ? theme.colorScheme.muted : null,
                   border: widget.border
                       ? Border.all(
-                          width: 1.5,
+                          width: widget.borderWidth ?? theme.borderWidth ?? 1.5,
                           color: _statesController.value.contains(WidgetState.focused) &&
                                   widget.enabled
                               ? theme.colorScheme.ring

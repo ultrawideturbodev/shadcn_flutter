@@ -5,7 +5,7 @@ class FocusOutline extends StatelessWidget {
   final bool focused;
   final BorderRadiusGeometry? borderRadius;
   final double align;
-  final double width;
+  final double? borderWidth;
   final double? radius;
   const FocusOutline({
     super.key,
@@ -13,7 +13,7 @@ class FocusOutline extends StatelessWidget {
     required this.focused,
     this.borderRadius,
     this.align = 0,
-    this.width = 1,
+    this.borderWidth,
     this.radius,
   });
 
@@ -54,7 +54,7 @@ class FocusOutline extends StatelessWidget {
                   borderRadius: getAdjustedBorderRadius(textDirection),
                   border: Border.all(
                     color: Theme.of(context).colorScheme.ring,
-                    width: width,
+                    width: borderWidth ?? Theme.of(context).borderWidth ?? 1,
                   ),
                 ),
               ),

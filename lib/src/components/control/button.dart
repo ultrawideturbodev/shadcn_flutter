@@ -813,6 +813,7 @@ abstract class AbstractButtonStyle {
   ButtonStateProperty<TextStyle> get textStyle;
   ButtonStateProperty<IconThemeData> get iconTheme;
   ButtonStateProperty<EdgeInsetsGeometry> get margin;
+  ButtonStateProperty<double?>? get borderWidth;
 }
 
 class ButtonStyle implements AbstractButtonStyle {
@@ -820,138 +821,186 @@ class ButtonStyle implements AbstractButtonStyle {
   final ButtonSize buttonSize;
   final ButtonDensity density;
   final ButtonShape shape;
+  final ButtonStateProperty<double?>? _borderWidth;
 
   const ButtonStyle({
     required this.variance,
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  });
+    ButtonStateProperty<double?>? borderWidth,
+  }) : _borderWidth = borderWidth;
 
   const ButtonStyle.primary({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.primary;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.primary,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.secondary({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.secondary;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.secondary,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.outline({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.outline;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.outline,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.ghost({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.ghost;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.ghost,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.link({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.link;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.link,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.text({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.text;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.text,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.destructive({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.destructive;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.destructive,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.fixed({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.fixed;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.fixed,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.menu({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.menu;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.menu,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.menubar({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.menubar;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.menubar,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.muted({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.muted;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.muted,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.primaryIcon({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.primary;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.primary,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.secondaryIcon({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.secondary;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.secondary,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.outlineIcon({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.outline;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.outline,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.ghostIcon({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.ghost;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.ghost,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.linkIcon({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.link;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.link,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.textIcon({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.text;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.text,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.destructiveIcon({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.destructive;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.destructive,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.fixedIcon({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.fixed;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.fixed,
+        _borderWidth = borderWidth;
 
   const ButtonStyle.card({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
-  }) : variance = ButtonVariance.card;
+    ButtonStateProperty<double?>? borderWidth,
+  })  : variance = ButtonVariance.card,
+        _borderWidth = borderWidth;
+
+  @override
+  ButtonStateProperty<double?>? get borderWidth => _borderWidth;
 
   @override
   ButtonStateProperty<Decoration> get decoration {
     if (shape == ButtonShape.circle) {
       return _resolveCircleDecoration;
+    }
+    if (_borderWidth != null) {
+      return _resolveDecorationWithBorderWidth;
     }
     return variance.decoration;
   }
@@ -976,6 +1025,25 @@ class ButtonStyle implements AbstractButtonStyle {
     } else {
       throw Exception('Unsupported decoration type ${decoration.runtimeType}');
     }
+  }
+
+  Decoration _resolveDecorationWithBorderWidth(BuildContext context, Set<WidgetState> states) {
+    var decoration = variance.decoration(context, states);
+    if (decoration is BoxDecoration) {
+      final width = _borderWidth?.call(context, states);
+      if (width != null && decoration.border != null && decoration.border is Border) {
+        final border = decoration.border as Border;
+        return decoration.copyWith(
+          border: Border(
+            top: border.top.copyWith(width: width),
+            right: border.right.copyWith(width: width),
+            bottom: border.bottom.copyWith(width: width),
+            left: border.left.copyWith(width: width),
+          ),
+        );
+      }
+    }
+    return decoration;
   }
 
   @override
@@ -1066,6 +1134,7 @@ class ButtonVariance implements AbstractButtonStyle {
     iconTheme: _buttonPrimaryIconTheme,
     margin: _buttonZeroMargin,
     size: ButtonSize.normal,
+    borderWidth: null,
   );
   static const ButtonVariance secondary = ButtonVariance(
     decoration: _buttonSecondaryDecoration,
@@ -1075,6 +1144,7 @@ class ButtonVariance implements AbstractButtonStyle {
     iconTheme: _buttonSecondaryIconTheme,
     margin: _buttonZeroMargin,
     size: ButtonSize.normal,
+    borderWidth: null,
   );
   static const ButtonVariance outline = ButtonVariance(
     decoration: _buttonOutlineDecoration,
@@ -1084,6 +1154,7 @@ class ButtonVariance implements AbstractButtonStyle {
     iconTheme: _buttonOutlineIconTheme,
     margin: _buttonZeroMargin,
     size: ButtonSize.normal,
+    borderWidth: null,
   );
   static const ButtonVariance ghost = ButtonVariance(
     decoration: _buttonGhostDecoration,
@@ -1093,6 +1164,7 @@ class ButtonVariance implements AbstractButtonStyle {
     iconTheme: _buttonGhostIconTheme,
     margin: _buttonZeroMargin,
     size: ButtonSize.normal,
+    borderWidth: null,
   );
   static const ButtonVariance link = ButtonVariance(
     decoration: _buttonLinkDecoration,
@@ -1102,6 +1174,7 @@ class ButtonVariance implements AbstractButtonStyle {
     iconTheme: _buttonLinkIconTheme,
     margin: _buttonZeroMargin,
     size: ButtonSize.normal,
+    borderWidth: null,
   );
   static const ButtonVariance text = ButtonVariance(
     decoration: _buttonTextDecoration,
@@ -1111,6 +1184,7 @@ class ButtonVariance implements AbstractButtonStyle {
     iconTheme: _buttonTextIconTheme,
     margin: _buttonZeroMargin,
     size: ButtonSize.normal,
+    borderWidth: null,
   );
   static const ButtonVariance destructive = ButtonVariance(
     decoration: _buttonDestructiveDecoration,
@@ -1120,6 +1194,7 @@ class ButtonVariance implements AbstractButtonStyle {
     iconTheme: _buttonDestructiveIconTheme,
     margin: _buttonZeroMargin,
     size: ButtonSize.normal,
+    borderWidth: null,
   );
 
   static const ButtonVariance fixed = ButtonVariance(
@@ -1130,6 +1205,7 @@ class ButtonVariance implements AbstractButtonStyle {
     iconTheme: _buttonStaticIconTheme,
     margin: _buttonZeroMargin,
     size: ButtonSize.normal,
+    borderWidth: null,
   );
 
   static const ButtonVariance menu = ButtonVariance(
@@ -1140,6 +1216,7 @@ class ButtonVariance implements AbstractButtonStyle {
     iconTheme: _buttonMenuIconTheme,
     margin: _buttonZeroMargin,
     size: ButtonSize.normal,
+    borderWidth: null,
   );
 
   static const ButtonVariance menubar = ButtonVariance(
@@ -1150,6 +1227,7 @@ class ButtonVariance implements AbstractButtonStyle {
     iconTheme: _buttonMenuIconTheme,
     margin: _buttonZeroMargin,
     size: ButtonSize.normal,
+    borderWidth: null,
   );
 
   static const ButtonVariance muted = ButtonVariance(
@@ -1184,6 +1262,8 @@ class ButtonVariance implements AbstractButtonStyle {
   final ButtonStateProperty<IconThemeData> iconTheme;
   @override
   final ButtonStateProperty<EdgeInsetsGeometry> margin;
+  @override
+  final ButtonStateProperty<double?>? borderWidth;
 
   final ButtonSize? size;
 
@@ -1195,6 +1275,7 @@ class ButtonVariance implements AbstractButtonStyle {
     required this.iconTheme,
     required this.margin,
     required this.size,
+    this.borderWidth,
   });
 
   @override
@@ -1208,17 +1289,27 @@ class ButtonVariance implements AbstractButtonStyle {
         other.textStyle == textStyle &&
         other.iconTheme == iconTheme &&
         other.margin == margin &&
+        other.borderWidth == borderWidth &&
         other.size == size;
   }
 
   @override
   int get hashCode {
-    return Object.hash(decoration, mouseCursor, padding, textStyle, iconTheme, margin, size);
+    return Object.hash(
+      decoration,
+      mouseCursor,
+      padding,
+      textStyle,
+      iconTheme,
+      margin,
+      borderWidth,
+      size,
+    );
   }
 
   @override
   String toString() {
-    return 'ButtonVariance(decoration: $decoration, mouseCursor: $mouseCursor, padding: $padding, textStyle: $textStyle, iconTheme: $iconTheme, margin: $margin, size: $size)';
+    return 'ButtonVariance(decoration: $decoration, mouseCursor: $mouseCursor, padding: $padding, textStyle: $textStyle, iconTheme: $iconTheme, margin: $margin, borderWidth: $borderWidth, size: $size)';
   }
 }
 
@@ -1309,6 +1400,9 @@ class _CopyWithButtonStyle implements AbstractButtonStyle {
     this._iconTheme,
     this._margin,
   );
+
+  @override
+  ButtonStateProperty<double?>? get borderWidth => _delegate.borderWidth;
 
   @override
   ButtonStateProperty<IconThemeData> get iconTheme {
@@ -2009,6 +2103,7 @@ class OutlineButton extends StatelessWidget {
   final bool disableTransition;
   final ValueChanged<bool>? onHover;
   final ValueChanged<bool>? onFocus;
+  final double? borderWidth;
 
   final bool? enableFeedback;
   final GestureTapDownCallback? onTapDown;
@@ -2058,6 +2153,7 @@ class OutlineButton extends StatelessWidget {
     this.onLongPressEnd,
     this.onSecondaryLongPress,
     this.onTertiaryLongPress,
+    this.borderWidth,
   });
 
   @override
@@ -2068,7 +2164,12 @@ class OutlineButton extends StatelessWidget {
       leading: leading,
       trailing: trailing,
       alignment: alignment,
-      style: ButtonStyle.outline(buttonSize: size, density: density, shape: shape),
+      style: ButtonStyle.outline(
+        buttonSize: size,
+        density: density,
+        shape: shape,
+        borderWidth: borderWidth != null ? (context, states) => borderWidth : null,
+      ),
       focusNode: focusNode,
       disableTransition: disableTransition,
       onHover: onHover,

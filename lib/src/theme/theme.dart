@@ -12,6 +12,7 @@ class ThemeData {
   final IconThemeProperties iconTheme;
   final double? surfaceOpacity;
   final double? surfaceBlur;
+  final double? borderWidth;
 
   ThemeData({
     required this.colorScheme,
@@ -22,6 +23,7 @@ class ThemeData {
     TargetPlatform? platform,
     this.surfaceOpacity,
     this.surfaceBlur,
+    this.borderWidth,
   }) : _platform = platform;
 
   /// The current platform.
@@ -70,6 +72,7 @@ class ThemeData {
     IconThemeProperties? iconTheme,
     double? surfaceOpacity,
     double? surfaceBlur,
+    double? borderWidth,
   }) {
     return ThemeData(
       colorScheme: colorScheme ?? this.colorScheme,
@@ -80,6 +83,7 @@ class ThemeData {
       iconTheme: iconTheme ?? this.iconTheme,
       surfaceOpacity: surfaceOpacity ?? this.surfaceOpacity,
       surfaceBlur: surfaceBlur ?? this.surfaceBlur,
+      borderWidth: borderWidth ?? this.borderWidth,
     );
   }
 
@@ -97,6 +101,7 @@ class ThemeData {
       iconTheme: IconThemeProperties.lerp(a.iconTheme, b.iconTheme, t),
       surfaceOpacity: lerpDouble(a.surfaceOpacity, b.surfaceOpacity, t),
       surfaceBlur: lerpDouble(a.surfaceBlur, b.surfaceBlur, t),
+      borderWidth: lerpDouble(a.borderWidth, b.borderWidth, t),
     );
   }
 
@@ -111,7 +116,8 @@ class ThemeData {
         other.scaling == scaling &&
         other.iconTheme == iconTheme &&
         other.surfaceOpacity == surfaceOpacity &&
-        other.surfaceBlur == surfaceBlur;
+        other.surfaceBlur == surfaceBlur &&
+        other.borderWidth == borderWidth;
   }
 
   @override
@@ -124,12 +130,13 @@ class ThemeData {
       iconTheme,
       surfaceOpacity,
       surfaceBlur,
+      borderWidth,
     );
   }
 
   @override
   String toString() {
-    return 'ThemeData(colorScheme: $colorScheme, typography: $typography, radius: $radius, scaling: $scaling, iconTheme: $iconTheme, surfaceOpacity: $surfaceOpacity, surfaceBlur: $surfaceBlur)';
+    return 'ThemeData(colorScheme: $colorScheme, typography: $typography, radius: $radius, scaling: $scaling, iconTheme: $iconTheme, surfaceOpacity: $surfaceOpacity, surfaceBlur: $surfaceBlur, borderWidth: $borderWidth)';
   }
 }
 
@@ -347,10 +354,12 @@ class IconThemeProperties {
 
 class ComponentTheme<T> extends InheritedTheme {
   final T data;
+  final double? borderWidth;
 
   const ComponentTheme({
     super.key,
     required this.data,
+    this.borderWidth,
     required super.child,
   });
 
@@ -363,6 +372,7 @@ class ComponentTheme<T> extends InheritedTheme {
     }
     return ComponentTheme<T>(
       data: data,
+      borderWidth: borderWidth,
       child: child,
     );
   }
@@ -383,7 +393,7 @@ class ComponentTheme<T> extends InheritedTheme {
 
   @override
   bool updateShouldNotify(covariant ComponentTheme<T> oldWidget) {
-    return oldWidget.data != data;
+    return oldWidget.data != data || oldWidget.borderWidth != borderWidth;
   }
 }
 

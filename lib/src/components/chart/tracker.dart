@@ -18,22 +18,19 @@ abstract class TrackerLevel {
   ///
   /// [color] is set to `Colors.orange`
   /// [name] is set to `"Warning"`
-  static const TrackerLevel warning =
-      _SimpleTrackerLevel(Colors.orange, 'Warning');
+  static const TrackerLevel warning = _SimpleTrackerLevel(Colors.orange, 'Warning');
 
   /// Default values for the critical level.
   ///
   /// [color] is set to `Colors.red`
   /// [name] is set to `"Critical"`
-  static const TrackerLevel critical =
-      _SimpleTrackerLevel(Colors.red, 'Critical');
+  static const TrackerLevel critical = _SimpleTrackerLevel(Colors.red, 'Critical');
 
   /// Default values for the unknown level.
   ///
   /// [color] is set to `Colors.gray`
   /// [name] is set to `"Unknown"`
-  static const TrackerLevel unknown =
-      _SimpleTrackerLevel(Colors.gray, 'Unknown');
+  static const TrackerLevel unknown = _SimpleTrackerLevel(Colors.gray, 'Unknown');
   // enum? no, this will allow custom implementations
   /// Gets the color for the specified [TrackerLevel].
   Color get color;
@@ -85,22 +82,26 @@ class TrackerTheme {
   final double? radius;
   final double? gap;
   final double? itemHeight;
+  final double? borderWidth;
 
   const TrackerTheme({
     this.radius,
     this.gap,
     this.itemHeight,
+    this.borderWidth,
   });
 
   TrackerTheme copyWith({
     double? radius,
     double? gap,
     double? itemHeight,
+    double? borderWidth,
   }) {
     return TrackerTheme(
       radius: radius ?? this.radius,
       gap: gap ?? this.gap,
       itemHeight: itemHeight ?? this.itemHeight,
+      borderWidth: borderWidth ?? this.borderWidth,
     );
   }
 
@@ -111,7 +112,8 @@ class TrackerTheme {
     return other is TrackerTheme &&
         other.radius == radius &&
         other.gap == gap &&
-        other.itemHeight == itemHeight;
+        other.itemHeight == itemHeight &&
+        other.borderWidth == borderWidth;
   }
 
   @override
@@ -119,11 +121,12 @@ class TrackerTheme {
         radius,
         gap,
         itemHeight,
+        borderWidth,
       );
 
   @override
   String toString() =>
-      'TrackerTheme(radius: $radius, gap: $gap, itemHeight: $itemHeight)';
+      'TrackerTheme(radius: $radius, gap: $gap, itemHeight: $itemHeight, borderWidth: $borderWidth)';
 }
 
 /// A widget that displays a tracker.
@@ -153,8 +156,7 @@ class Tracker extends StatelessWidget {
     final theme = Theme.of(context);
     final trackerTheme = ComponentTheme.maybeOf<TrackerTheme>(context);
     return ClipRRect(
-      borderRadius:
-          BorderRadius.circular(trackerTheme?.radius ?? theme.radiusMd),
+      borderRadius: BorderRadius.circular(trackerTheme?.radius ?? theme.radiusMd),
       child: Row(
         children: [
           for (final data in this.data)
@@ -167,7 +169,13 @@ class Tracker extends StatelessWidget {
                 },
                 child: Container(
                   height: trackerTheme?.itemHeight ?? 32,
-                  color: data.level.color,
+                  decoration: BoxDecoration(
+                    color: data.level.color,
+                    border: Border.all(
+                      width: trackerTheme?.borderWidth ?? theme.borderWidth ?? 1.5,
+                      color: theme.colorScheme.border,
+                    ),
+                  ),
                 ),
               ),
             )
