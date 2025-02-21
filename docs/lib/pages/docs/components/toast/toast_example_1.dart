@@ -32,7 +32,7 @@ class _ToastExample1State extends State<ToastExample1> {
       children: [
         PrimaryButton(
           onPressed: () {
-            showToast(
+            showShadToast(
               context: context,
               builder: buildToast,
               location: ToastLocation.bottomLeft,
@@ -42,7 +42,7 @@ class _ToastExample1State extends State<ToastExample1> {
         ),
         PrimaryButton(
           onPressed: () {
-            showToast(
+            showShadToast(
               context: context,
               builder: buildToast,
               location: ToastLocation.bottomRight,
@@ -52,7 +52,7 @@ class _ToastExample1State extends State<ToastExample1> {
         ),
         PrimaryButton(
           onPressed: () {
-            showToast(
+            showShadToast(
               context: context,
               builder: buildToast,
               location: ToastLocation.topLeft,
@@ -62,7 +62,7 @@ class _ToastExample1State extends State<ToastExample1> {
         ),
         PrimaryButton(
           onPressed: () {
-            showToast(
+            showShadToast(
               context: context,
               builder: buildToast,
               location: ToastLocation.topRight,
@@ -73,7 +73,7 @@ class _ToastExample1State extends State<ToastExample1> {
         // bottom center
         PrimaryButton(
           onPressed: () {
-            showToast(
+            showShadToast(
               context: context,
               builder: buildToast,
               location: ToastLocation.bottomCenter,
@@ -84,7 +84,7 @@ class _ToastExample1State extends State<ToastExample1> {
         // top center
         PrimaryButton(
           onPressed: () {
-            showToast(
+            showShadToast(
               context: context,
               builder: buildToast,
               location: ToastLocation.topCenter,

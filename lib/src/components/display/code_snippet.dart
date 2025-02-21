@@ -154,7 +154,7 @@ class _CodeSnippetState extends State<CodeSnippet> {
                     Clipboard.setData(ClipboardData(text: widget.code))
                         .then((value) {
                       if (context.mounted) {
-                        showToast(
+                        showShadToast(
                           context: context,
                           showDuration: const Duration(seconds: 2),
                           builder: (context, overlay) {

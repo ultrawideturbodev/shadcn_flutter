@@ -10,7 +10,7 @@ class ColorPickerExample2 extends StatelessWidget {
         final history = ColorHistoryStorage.of(context);
         final result = await pickColorFromScreen(context, history);
         if (result != null && context.mounted) {
-          showToast(
+          showShadToast(
             context: context,
             builder: (context, overlay) {
               return SurfaceCard(

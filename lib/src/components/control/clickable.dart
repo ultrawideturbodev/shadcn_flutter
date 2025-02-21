@@ -394,7 +394,6 @@ class _ClickableState extends State<Clickable> {
           widget.onTapDown?.call(details);
         },
         onTapUp: (details) {
-          print('''[🐛] [PRINT] [🌟] [_ClickableState._builder] [📞] Pew pew 1''');
           if (widget.enableFeedback) {
             // also dispatch hover
             _controller.update(WidgetState.hovered, false);

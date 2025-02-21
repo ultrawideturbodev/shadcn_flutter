@@ -7,7 +7,7 @@ import 'package:shadcn_flutter/shadcn_flutter.dart';
 typedef ToastBuilder = Widget Function(
     BuildContext context, ToastOverlay overlay);
 
-ToastOverlay showToast({
+ToastOverlay showShadToast({
   required BuildContext context,
   required ToastBuilder builder,
   ToastLocation location = ToastLocation.bottomRight,
