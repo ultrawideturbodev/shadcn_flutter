@@ -152,25 +152,27 @@ class _DatePickerDialogState extends State<DatePickerDialog> {
                       ),
                       if (_viewType != CalendarViewType.date ||
                           viewMode != CalendarSelectionMode.range)
-                        OutlineButton(
-                          density: ButtonDensity.icon,
-                          borderWidth: widget.borderWidth ?? theme.borderWidth,
-                          onPressed: () {
-                            setState(() {
-                              switch (_viewType) {
-                                case CalendarViewType.date:
-                                  _view = _view.next;
-                                  break;
-                                case CalendarViewType.month:
-                                  _view = _view.nextYear;
-                                  break;
-                                case CalendarViewType.year:
-                                  _yearSelectStart += 16;
-                                  break;
-                              }
-                            });
-                          },
-                          child: const Icon(Icons.arrow_forward).iconXSmall(),
+                        IconBox(
+                          child: OutlineButton(
+                            density: ButtonDensity.icon,
+                            borderWidth: widget.borderWidth ?? theme.borderWidth,
+                            onPressed: () {
+                              setState(() {
+                                switch (_viewType) {
+                                  case CalendarViewType.date:
+                                    _view = _view.next;
+                                    break;
+                                  case CalendarViewType.month:
+                                    _view = _view.nextYear;
+                                    break;
+                                  case CalendarViewType.year:
+                                    _yearSelectStart += 16;
+                                    break;
+                                }
+                              });
+                            },
+                            child: const Icon(Icons.arrow_forward).iconXSmall(),
+                          ),
                         ),
                     ],
                   ),

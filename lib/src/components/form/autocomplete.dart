@@ -118,6 +118,7 @@ class _AutoCompleteItem extends StatefulWidget {
 class _AutoCompleteItemState extends State<_AutoCompleteItem> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SelectedButton(
       value: widget.selected,
       alignment: AlignmentDirectional.centerStart,
@@ -126,7 +127,10 @@ class _AutoCompleteItemState extends State<_AutoCompleteItem> {
           widget.onSelected();
         }
       },
-      child: Text(widget.suggestion),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: theme.scaling * 12),
+        child: Text(widget.suggestion),
+      ),
     );
   }
 

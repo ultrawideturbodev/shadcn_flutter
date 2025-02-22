@@ -60,8 +60,7 @@ class SelectItemButton<T> extends StatelessWidget implements AbstractSelectItem<
           },
           style: const ButtonStyle.ghost().copyWith(
             padding: (context, states, value) => EdgeInsets.symmetric(
-              vertical: 8 * scaling,
-              horizontal: 8 * scaling,
+              horizontal: 12 * scaling,
             ),
           ),
           trailing: isSelected
