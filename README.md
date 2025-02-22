@@ -1,4 +1,4 @@
-# shadcn_flutter
+# turbo_shadcn_flutter
 ![Pub Likes](https://img.shields.io/pub/likes/shadcn_flutter)
 ![Pub Points](https://img.shields.io/pub/points/shadcn_flutter)
 ![Pub Version](https://img.shields.io/pub/v/shadcn_flutter)
