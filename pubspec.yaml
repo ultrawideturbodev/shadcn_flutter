@@ -49,18 +49,3 @@ module:
   androidX: true
   androidPackage: com.example.shadcn_flutter
   iosBundleIdentifier: com.example.shadcnFlutter
-
-# The following section is automatically managed by toggle_dependencies.dart
-dependency_overrides:
-  informers:
-    path: ../../packages/informers
-  loglytics:
-    path: ../../packages/loglytics
-  turbo_firestore_api:
-    path: ../../packages/turbo_firestore_api
-  turbo_response:
-    path: ../../packages/turbo_response
-  veto:
-    path: ../../packages/veto
-  shadcn_flutter:
-    path: .
