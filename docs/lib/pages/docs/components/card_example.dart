@@ -11,8 +11,7 @@ class CardExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'card',
-      description:
-          'Cards are surfaces that display content and actions on a single topic.',
+      description: 'Cards are surfaces that display content and actions on a single topic.',
       displayName: 'Card',
       children: [
         WidgetUsageExample(

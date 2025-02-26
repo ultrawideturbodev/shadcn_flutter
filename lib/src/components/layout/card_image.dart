@@ -64,16 +64,14 @@ class _CardImageState extends State<CardImage> {
           children: [
             Flexible(
               child: OutlinedContainer(
-                backgroundColor:
-                    widget.backgroundColor ?? theme.colorScheme.card,
+                backgroundColor: widget.backgroundColor ?? theme.colorScheme.card,
                 borderColor: widget.borderColor ?? theme.colorScheme.border,
                 child: AnimatedBuilder(
                     animation: _statesController,
                     builder: (context, child) {
                       return AnimatedScale(
                         duration: kDefaultDuration,
-                        scale: _statesController.value
-                                .contains(WidgetState.hovered)
+                        scale: _statesController.value.contains(WidgetState.hovered)
                             ? widget.hoverScale
                             : widget.normalScale,
                         child: widget.image,

@@ -96,11 +96,9 @@ class _OutlinedContainerState extends State<OutlinedContainer> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final scaling = theme.scaling;
-    var borderRadius =
-        widget.borderRadius?.resolve(Directionality.of(context)) ??
-            BorderRadius.circular(theme.radiusXl);
-    var backgroundColor =
-        widget.backgroundColor ?? theme.colorScheme.background;
+    var borderRadius = widget.borderRadius?.resolve(Directionality.of(context)) ??
+        BorderRadius.circular(theme.radiusXl);
+    var backgroundColor = widget.backgroundColor ?? theme.colorScheme.background;
     if (widget.surfaceOpacity != null) {
       backgroundColor = backgroundColor.scaleAlpha(widget.surfaceOpacity!);
     }
@@ -239,8 +237,8 @@ class DashedContainerProperties {
       gap: lerpDouble(a.gap, b.gap, t)!,
       thickness: lerpDouble(a.thickness, b.thickness, t)!,
       color: Color.lerp(a.color, b.color, t)!,
-      borderRadius: BorderRadius.lerp(a.borderRadius.optionallyResolve(context),
-          b.borderRadius.optionallyResolve(context), t)!,
+      borderRadius: BorderRadius.lerp(
+          a.borderRadius.optionallyResolve(context), b.borderRadius.optionallyResolve(context), t)!,
     );
   }
 }

@@ -11,9 +11,7 @@ class MyComplexData {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is MyComplexData &&
-        other.myInt == myInt &&
-        other.myBool == myBool;
+    return other is MyComplexData && other.myInt == myInt && other.myBool == myBool;
   }
 
   @override

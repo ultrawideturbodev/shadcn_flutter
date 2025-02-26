@@ -110,8 +110,7 @@ class _ColorsPageState extends State<ColorsPage> {
                 aspectRatio: 16 / 19,
                 child: Clickable(
                   enabled: clickable,
-                  mouseCursor:
-                      const WidgetStatePropertyAll(SystemMouseCursors.click),
+                  mouseCursor: const WidgetStatePropertyAll(SystemMouseCursors.click),
                   onPressed: () {
                     _onTap(name, swatch, shade);
                   },
@@ -145,8 +144,7 @@ class _ColorsPageState extends State<ColorsPage> {
     ).gap(8);
   }
 
-  Widget buildEditableColorRow(
-      BuildContext context, String name, ColorShades swatch) {
+  Widget buildEditableColorRow(BuildContext context, String name, ColorShades swatch) {
     final theme = Theme.of(context);
     List<Widget> children = [];
     var shadeValues = ColorShades.shadeValues;
@@ -161,8 +159,7 @@ class _ColorsPageState extends State<ColorsPage> {
                 aspectRatio: 16 / 19,
                 child: Builder(builder: (context) {
                   return Clickable(
-                    mouseCursor:
-                        const WidgetStatePropertyAll(SystemMouseCursors.click),
+                    mouseCursor: const WidgetStatePropertyAll(SystemMouseCursors.click),
                     onPressed: () {
                       showColorPicker(
                         context: context,
@@ -299,11 +296,9 @@ class _ColorsPageState extends State<ColorsPage> {
                         onPressed: () {
                           setState(() {
                             _customColor = color.value[500].toHSL();
-                            Scrollable.ensureVisible(
-                                _customColorKey.currentContext!,
+                            Scrollable.ensureVisible(_customColorKey.currentContext!,
                                 duration: kDefaultDuration,
-                                alignmentPolicy:
-                                    ScrollPositionAlignmentPolicy.explicit);
+                                alignmentPolicy: ScrollPositionAlignmentPolicy.explicit);
                           });
                         },
                         size: ButtonSize.xSmall,
@@ -479,19 +474,16 @@ class _ColorsPageState extends State<ColorsPage> {
                       builder: (context) {
                         return AlertDialog(
                           title: const Text('Reset Options'),
-                          content: const Text(
-                              'Are you sure you want to reset the options?'),
+                          content: const Text('Are you sure you want to reset the options?'),
                           actions: [
                             PrimaryButton(
                               onPressed: () {
                                 setState(() {
                                   _hueShift = _defaultHueShift;
                                   _saturationStepUp = _defaultSaturationStepUp;
-                                  _saturationStepDown =
-                                      _defaultSaturationStepDown;
+                                  _saturationStepDown = _defaultSaturationStepDown;
                                   _lightnessStepUp = _defaultLightnessStepUp;
-                                  _lightnessStepDown =
-                                      _defaultLightnessStepDown;
+                                  _lightnessStepDown = _defaultLightnessStepDown;
                                 });
                                 Navigator.of(context).pop();
                               },

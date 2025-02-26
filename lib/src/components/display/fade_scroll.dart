@@ -10,7 +10,7 @@ class FadeScroll extends StatelessWidget {
   final List<Color> gradient;
 
   const FadeScroll({
-    Key? key,
+    super.key,
     required this.startOffset,
     required this.endOffset,
     required this.child,
@@ -18,7 +18,7 @@ class FadeScroll extends StatelessWidget {
     required this.gradient,
     this.startCrossOffset = 0,
     this.endCrossOffset = 0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,18 +41,15 @@ class FadeScroll extends StatelessWidget {
         }
         return ShaderMask(
           shaderCallback: (bounds) {
-            Alignment start = direction == Axis.horizontal
-                ? Alignment.centerLeft
-                : Alignment.topCenter;
-            Alignment end = direction == Axis.horizontal
-                ? Alignment.centerRight
-                : Alignment.bottomCenter;
+            Alignment start =
+                direction == Axis.horizontal ? Alignment.centerLeft : Alignment.topCenter;
+            Alignment end =
+                direction == Axis.horizontal ? Alignment.centerRight : Alignment.bottomCenter;
             double relativeStart = startOffset / size;
             double relativeEnd = 1 - endOffset / size;
             List<double> stops = shouldFadeStart && shouldFadeEnd
                 ? [
-                    for (int i = 0; i < gradient.length; i++)
-                      (i / gradient.length) * relativeStart,
+                    for (int i = 0; i < gradient.length; i++) (i / gradient.length) * relativeStart,
                     relativeStart,
                     relativeEnd,
                     for (int i = 1; i < gradient.length + 1; i++)
@@ -69,8 +66,7 @@ class FadeScroll extends StatelessWidget {
                         0,
                         relativeEnd,
                         for (int i = 1; i < gradient.length + 1; i++)
-                          relativeEnd +
-                              (i / gradient.length) * (1 - relativeEnd),
+                          relativeEnd + (i / gradient.length) * (1 - relativeEnd),
                       ];
             return LinearGradient(
                     colors: [
@@ -108,4 +104,3 @@ class _ScaleGradient extends GradientTransform {
       ..translate(-dx, -dy);
   }
 }
-

@@ -11,8 +11,7 @@ class TooltipExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'tooltip',
-      description:
-          'A floating message that appears when a user interacts with a target.',
+      description: 'A floating message that appears when a user interacts with a target.',
       displayName: 'Tooltip',
       children: [
         WidgetUsageExample(

@@ -13,8 +13,7 @@ class AlertDialogExample1 extends StatelessWidget {
           builder: (context) {
             return AlertDialog(
               title: const Text('Alert title'),
-              content: const Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+              content: const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
               actions: [
                 OutlineButton(
                   child: const Text('Cancel'),

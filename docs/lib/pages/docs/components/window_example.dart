@@ -10,8 +10,7 @@ class WindowExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'window',
-      description:
-          'A window manager that allows you to create and manage windows.',
+      description: 'A window manager that allows you to create and manage windows.',
       displayName: 'Window',
       children: [
         WidgetUsageExample(

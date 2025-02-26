@@ -36,8 +36,7 @@ class MenuPopup extends StatelessWidget {
       surfaceBlur: surfaceBlur ?? theme.surfaceBlur,
       surfaceOpacity: surfaceOpacity ?? theme.surfaceOpacity,
       padding: isSheetOverlay
-          ? const EdgeInsets.symmetric(vertical: 12, horizontal: 4) *
-              theme.scaling
+          ? const EdgeInsets.symmetric(vertical: 12, horizontal: 4) * theme.scaling
           : const EdgeInsets.all(4) * theme.scaling,
       child: SingleChildScrollView(
         scrollDirection: data?.direction ?? Axis.vertical,

@@ -4,8 +4,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
-typedef ToastBuilder = Widget Function(
-    BuildContext context, ToastOverlay overlay);
+typedef ToastBuilder = Widget Function(BuildContext context, ToastOverlay overlay);
 
 ToastOverlay showShadToast({
   required BuildContext context,
@@ -153,10 +152,8 @@ class _ToastLayerState extends State<ToastLayer> {
   }
 
   void removeEntry(ToastEntry entry) {
-    _AttachedToastEntry? last = entries[entry.location]!
-        .entries
-        .where((e) => e.entry == entry)
-        .lastOrNull;
+    _AttachedToastEntry? last =
+        entries[entry.location]!.entries.where((e) => e.entry == entry).lastOrNull;
     if (last != null) {
       setState(() {
         entries[entry.location]!.entries.remove(last);
@@ -176,19 +173,16 @@ class _ToastLayerState extends State<ToastLayer> {
       var location = locationEntry.key;
       var entries = locationEntry.value.entries;
       var expanding = locationEntry.value._expanding;
-      int startVisible =
-          (entries.length - (widget.maxStackedEntries + reservedEntries)).max(
-              0); // reserve some invisible toast as for the ghost entry depending animation speed
-      Alignment entryAlignment =
-          location.childrenAlignment.optionallyResolve(context) * -1;
+      int startVisible = (entries.length - (widget.maxStackedEntries + reservedEntries))
+          .max(0); // reserve some invisible toast as for the ghost entry depending animation speed
+      Alignment entryAlignment = location.childrenAlignment.optionallyResolve(context) * -1;
       List<Widget> positionedChildren = [];
       int toastIndex = 0;
-      var collapsedOffset =
-          widget.collapsedOffset ?? (const Offset(0, 12) * scaling);
-      var padding = widget.padding?.optionallyResolve(context) ??
-          (const EdgeInsets.all(24) * scaling);
-      var toastConstraints = widget.toastConstraints ??
-          BoxConstraints.tightFor(width: 320 * scaling);
+      var collapsedOffset = widget.collapsedOffset ?? (const Offset(0, 12) * scaling);
+      var padding =
+          widget.padding?.optionallyResolve(context) ?? (const EdgeInsets.all(24) * scaling);
+      var toastConstraints =
+          widget.toastConstraints ?? BoxConstraints.tightFor(width: 320 * scaling);
       for (var i = entries.length - 1; i >= startVisible; i--) {
         var entry = entries[i];
         positionedChildren.insert(
@@ -196,8 +190,7 @@ class _ToastLayerState extends State<ToastLayer> {
           ToastEntryLayout(
             key: entry.key,
             entry: entry.entry,
-            expanded:
-                expanding || widget.expandMode == ExpandMode.alwaysExpanded,
+            expanded: expanding || widget.expandMode == ExpandMode.alwaysExpanded,
             visible: toastIndex < widget.maxStackedEntries,
             dismissible: entry.entry.dismissible,
             previousAlignment: location.childrenAlignment,
@@ -483,14 +476,10 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
             builder: (context, child) {
               return AnimatedValueBuilder(
                   value: widget.closing.value ? 0.0 : _dismissOffset,
-                  duration: _dismissing && !widget.closing.value
-                      ? Duration.zero
-                      : kDefaultDuration,
+                  duration: _dismissing && !widget.closing.value ? Duration.zero : kDefaultDuration,
                   builder: (context, dismissProgress, child) {
                     return AnimatedValueBuilder(
-                        value: widget.closing.value
-                            ? 0.0
-                            : _closeDismissing ?? 0.0,
+                        value: widget.closing.value ? 0.0 : _closeDismissing ?? 0.0,
                         duration: kDefaultDuration,
                         onEnd: (value) {
                           if (value == -1.0 || value == 1.0) {
@@ -505,9 +494,7 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
                               builder: (context, indexProgress, child) {
                                 return AnimatedValueBuilder(
                                   initialValue: widget.index > 0 ? 1.0 : 0.0,
-                                  value: widget.closing.value && !_dismissing
-                                      ? 0.0
-                                      : 1.0,
+                                  value: widget.closing.value && !_dismissing ? 0.0 : 1.0,
                                   curve: widget.curve,
                                   duration: widget.duration,
                                   onEnd: (value) {
@@ -520,16 +507,12 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
                                         value: widget.visible ? 1.0 : 0.0,
                                         curve: widget.curve,
                                         duration: widget.duration,
-                                        builder:
-                                            (context, visibleProgress, child) {
+                                        builder: (context, visibleProgress, child) {
                                           return AnimatedValueBuilder(
-                                              value:
-                                                  widget.expanded ? 1.0 : 0.0,
+                                              value: widget.expanded ? 1.0 : 0.0,
                                               curve: widget.expandingCurve,
-                                              duration:
-                                                  widget.expandingDuration,
-                                              builder: (context, expandProgress,
-                                                  child) {
+                                              duration: widget.expandingDuration,
+                                              builder: (context, expandProgress, child) {
                                                 return buildToast(
                                                     expandProgress,
                                                     showingProgress,
@@ -556,23 +539,16 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
     return childWidget;
   }
 
-  Widget buildToast(
-      double expandProgress,
-      double showingProgress,
-      double visibleProgress,
-      double indexProgress,
-      double dismissProgress,
-      double closeDismissingProgress) {
+  Widget buildToast(double expandProgress, double showingProgress, double visibleProgress,
+      double indexProgress, double dismissProgress, double closeDismissingProgress) {
     double nonCollapsingProgress = (1.0 - expandProgress) * showingProgress;
     var offset = widget.entryOffset * (1.0 - showingProgress);
 
     // when its behind another toast, shift it up based on index
     var previousAlignment = widget.previousAlignment.optionallyResolve(context);
     offset += Offset(
-          (widget.collapsedOffset.dx * previousAlignment.x) *
-              nonCollapsingProgress,
-          (widget.collapsedOffset.dy * previousAlignment.y) *
-              nonCollapsingProgress,
+          (widget.collapsedOffset.dx * previousAlignment.x) * nonCollapsingProgress,
+          (widget.collapsedOffset.dy * previousAlignment.y) * nonCollapsingProgress,
         ) *
         indexProgress;
 
@@ -608,13 +584,11 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
     );
 
     // fade out the toast behind
-    opacity *=
-        pow(widget.collapsedOpacity, indexProgress * nonCollapsingProgress);
+    opacity *= pow(widget.collapsedOpacity, indexProgress * nonCollapsingProgress);
 
     opacity *= 1 - (closeDismissingProgress + dismissProgress).abs();
 
-    double scale =
-        1.0 * pow(widget.collapsedScale, indexProgress * (1 - expandProgress));
+    double scale = 1.0 * pow(widget.collapsedScale, indexProgress * (1 - expandProgress));
 
     return Align(
       alignment: entryAlignment,

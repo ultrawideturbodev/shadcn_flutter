@@ -21,9 +21,7 @@ class PhoneNumber {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is PhoneNumber &&
-        other.country == country &&
-        other.number == number;
+    return other is PhoneNumber && other.country == country && other.number == number;
   }
 
   @override
@@ -62,17 +60,14 @@ class PhoneInput extends StatefulWidget {
   State<PhoneInput> createState() => _PhoneInputState();
 }
 
-class _PhoneInputState extends State<PhoneInput>
-    with FormValueSupplier<PhoneNumber, PhoneInput> {
+class _PhoneInputState extends State<PhoneInput> with FormValueSupplier<PhoneNumber, PhoneInput> {
   late Country _country;
   late TextEditingController _controller;
 
   @override
   void initState() {
     super.initState();
-    _country = widget.initialCountry ??
-        widget.initialValue?.country ??
-        Country.unitedStates;
+    _country = widget.initialCountry ?? widget.initialValue?.country ?? Country.unitedStates;
     _controller = widget.controller ?? TextEditingController();
     formValue = value;
     _controller.addListener(_dispatchChanged);
@@ -101,8 +96,7 @@ class _PhoneInputState extends State<PhoneInput>
       text = text.substring(1);
     } else if (widget.filterZeroCode && text.startsWith('0')) {
       text = text.substring(1);
-    } else if (widget.filterCountryCode &&
-        text.startsWith(_country.dialCode.substring(1))) {
+    } else if (widget.filterCountryCode && text.startsWith(_country.dialCode.substring(1))) {
       // e.g. 628123456788 (indonesia) would be 8123456788
       text = text.substring(_country.dialCode.length - 1);
     }
@@ -119,11 +113,9 @@ class _PhoneInputState extends State<PhoneInput>
         mainAxisSize: MainAxisSize.min,
         children: [
           Select<Country>(
-            padding: EdgeInsets.only(
-                left: theme.scaling * 8,
-                right: theme.scaling * 4),
-            searchPlaceholder: widget.searchPlaceholder ??
-                Text(localization.searchPlaceholderCountry),
+            padding: EdgeInsets.only(left: theme.scaling * 8, right: theme.scaling * 4),
+            searchPlaceholder:
+                widget.searchPlaceholder ?? Text(localization.searchPlaceholderCountry),
             searchFilter: (item, query) {
               query = query.toLowerCase();
               var searchScore = item.name.toLowerCase().contains(query) ||

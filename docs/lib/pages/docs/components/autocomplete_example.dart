@@ -16,8 +16,7 @@ class AutoCompleteExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/autocomplete/autocomplete_example_1.dart',
+          path: 'lib/pages/docs/components/autocomplete/autocomplete_example_1.dart',
           child: AutoCompleteExample1(),
         ),
       ],

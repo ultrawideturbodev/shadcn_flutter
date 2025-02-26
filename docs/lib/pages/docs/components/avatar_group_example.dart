@@ -16,8 +16,7 @@ class AvatarGroupExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Avatar Group Example 1',
-          path:
-              'lib/pages/docs/components/avatar_group/avatar_group_example_1.dart',
+          path: 'lib/pages/docs/components/avatar_group/avatar_group_example_1.dart',
           child: AvatarGroupExample1(),
         ),
       ],

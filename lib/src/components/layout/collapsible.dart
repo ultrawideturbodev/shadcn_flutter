@@ -128,14 +128,11 @@ class CollapsibleState extends State<Collapsible> {
     final compTheme = ComponentTheme.maybeOf<CollapsibleTheme>(context);
 
     return Data.inherit(
-      data:
-          CollapsibleStateData(isExpanded: _isExpanded, handleTap: _handleTap),
+      data: CollapsibleStateData(isExpanded: _isExpanded, handleTap: _handleTap),
       child: IntrinsicWidth(
         child: Column(
-          crossAxisAlignment:
-              compTheme?.crossAxisAlignment ?? CrossAxisAlignment.stretch,
-          mainAxisAlignment:
-              compTheme?.mainAxisAlignment ?? MainAxisAlignment.start,
+          crossAxisAlignment: compTheme?.crossAxisAlignment ?? CrossAxisAlignment.stretch,
+          mainAxisAlignment: compTheme?.mainAxisAlignment ?? MainAxisAlignment.start,
           children: widget.children,
         ),
       ),

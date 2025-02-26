@@ -80,8 +80,7 @@ mixin ResizablePaneController implements ValueListenable<double> {
   void expand();
   double computeSize(double paneSize, {double? minSize, double? maxSize});
   bool get collapsed;
-  bool tryExpandSize(double size,
-      [PanelSibling direction = PanelSibling.both]) {
+  bool tryExpandSize(double size, [PanelSibling direction = PanelSibling.both]) {
     assert(_paneState != null, 'ResizablePaneController is not attached');
     return _paneState!.tryExpandSize(size, direction);
   }
@@ -108,15 +107,14 @@ mixin ResizablePaneController implements ValueListenable<double> {
   }
 }
 
-class AbsoluteResizablePaneController extends ChangeNotifier
-    with ResizablePaneController {
+class AbsoluteResizablePaneController extends ChangeNotifier with ResizablePaneController {
   double _size;
   bool _collapsed = false;
 
+  @override
   _ResizablePaneState? _paneState;
 
-  AbsoluteResizablePaneController(this._size, {bool collapsed = false})
-      : _collapsed = collapsed;
+  AbsoluteResizablePaneController(this._size, {bool collapsed = false}) : _collapsed = collapsed;
 
   @override
   double get value => _size;
@@ -144,8 +142,7 @@ class AbsoluteResizablePaneController extends ChangeNotifier
   }
 
   @override
-  void resize(double newSize, double paneSize,
-      {double? minSize, double? maxSize}) {
+  void resize(double newSize, double paneSize, {double? minSize, double? maxSize}) {
     _size = newSize.clamp(minSize ?? 0, maxSize ?? double.infinity);
     notifyListeners();
   }
@@ -156,12 +153,10 @@ class AbsoluteResizablePaneController extends ChangeNotifier
   }
 }
 
-class FlexibleResizablePaneController extends ChangeNotifier
-    with ResizablePaneController {
+class FlexibleResizablePaneController extends ChangeNotifier with ResizablePaneController {
   double _flex;
   bool _collapsed = false;
-  FlexibleResizablePaneController(this._flex, {bool collapsed = false})
-      : _collapsed = collapsed;
+  FlexibleResizablePaneController(this._flex, {bool collapsed = false}) : _collapsed = collapsed;
 
   @override
   double get value => _flex;
@@ -187,8 +182,7 @@ class FlexibleResizablePaneController extends ChangeNotifier
   }
 
   @override
-  void resize(double newSize, double paneSize,
-      {double? minSize, double? maxSize}) {
+  void resize(double newSize, double paneSize, {double? minSize, double? maxSize}) {
     _flex = newSize.clamp(minSize ?? 0, maxSize ?? double.infinity) / paneSize;
     notifyListeners();
   }
@@ -244,7 +238,7 @@ class ResizablePane extends StatefulWidget {
         initialSize = null;
 
   const ResizablePane.controlled({
-    Key? key,
+    super.key,
     required ResizablePaneController this.controller,
     this.minSize,
     this.maxSize,
@@ -273,12 +267,12 @@ class _ResizablePaneState extends State<ResizablePane> {
     if (widget.controller != null) {
       _controller = widget.controller!;
     } else if (widget.initialSize != null) {
-      _controller = AbsoluteResizablePaneController(widget.initialSize!,
-          collapsed: widget.initialCollapsed!);
+      _controller =
+          AbsoluteResizablePaneController(widget.initialSize!, collapsed: widget.initialCollapsed!);
     } else {
       assert(widget.initialFlex != null, 'initalFlex must not be null');
-      _controller = FlexibleResizablePaneController(widget.initialFlex!,
-          collapsed: widget.initialCollapsed!);
+      _controller =
+          FlexibleResizablePaneController(widget.initialFlex!, collapsed: widget.initialCollapsed!);
     }
     _controller._attachPaneState(this);
   }
@@ -315,8 +309,7 @@ class _ResizablePaneState extends State<ResizablePane> {
         }
       }
       _panelState?.attach(_controller);
-      assert(_panelState != null,
-          'ResizablePane must be a child of ResizablePanel');
+      assert(_panelState != null, 'ResizablePane must be a child of ResizablePanel');
       _controller._attachPaneState(this);
     }
   }
@@ -327,8 +320,7 @@ class _ResizablePaneState extends State<ResizablePane> {
     }
     List<ResizableItem> draggers = _panelState!.state.computeDraggers();
     Resizer resizer = Resizer(draggers);
-    bool result =
-        resizer.attemptExpandCollapsed(_panelState!.index, direction.direction);
+    bool result = resizer.attemptExpandCollapsed(_panelState!.index, direction.direction);
     if (result) {
       _panelState!.state.updateDraggers(resizer.items);
     }
@@ -341,20 +333,17 @@ class _ResizablePaneState extends State<ResizablePane> {
     }
     List<ResizableItem> draggers = _panelState!.state.computeDraggers();
     Resizer resizer = Resizer(draggers);
-    bool result =
-        resizer.attemptCollapse(_panelState!.index, direction.direction);
+    bool result = resizer.attemptCollapse(_panelState!.index, direction.direction);
     if (result) {
       _panelState!.state.updateDraggers(resizer.items);
     }
     return result;
   }
 
-  bool tryExpandSize(double size,
-      [PanelSibling direction = PanelSibling.both]) {
+  bool tryExpandSize(double size, [PanelSibling direction = PanelSibling.both]) {
     List<ResizableItem> draggers = _panelState!.state.computeDraggers();
     Resizer resizer = Resizer(draggers);
-    bool result =
-        resizer.attemptExpand(_panelState!.index, direction.direction, size);
+    bool result = resizer.attemptExpand(_panelState!.index, direction.direction, size);
     if (result) {
       _panelState!.state.updateDraggers(resizer.items);
     }
@@ -421,9 +410,7 @@ class _ResizablePanelData {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is _ResizablePanelData &&
-        other.state == state &&
-        other.index == index;
+    return other is _ResizablePanelData && other.state == state && other.index == index;
   }
 
   @override
@@ -519,10 +506,8 @@ class _ResizablePanelState extends State<ResizablePanel> {
       assert(controller != null, 'ResizablePaneController is not attached');
       double computedSize = controller!.computeSize(
         _panelSize,
-        minSize:
-            controller.collapsed ? null : controller._paneState!.widget.minSize,
-        maxSize:
-            controller.collapsed ? null : controller._paneState!.widget.maxSize,
+        minSize: controller.collapsed ? null : controller._paneState!.widget.minSize,
+        maxSize: controller.collapsed ? null : controller._paneState!.widget.maxSize,
       );
       draggers.add(_ResizableItem(
         value: computedSize,
@@ -590,14 +575,12 @@ class _ResizablePanelState extends State<ResizablePanel> {
     List<Widget> dividers = [];
     if (widget.direction == Axis.horizontal) {
       for (var i = 0; i < widget.children.length - 1; i++) {
-        Widget divider =
-            widget.dividerBuilder?.call(context) ?? const SizedBox();
+        Widget divider = widget.dividerBuilder?.call(context) ?? const SizedBox();
         dividers.add(divider);
       }
     } else {
       for (var i = 0; i < widget.children.length - 1; i++) {
-        Widget divider =
-            widget.dividerBuilder?.call(context) ?? const SizedBox();
+        Widget divider = widget.dividerBuilder?.call(context) ?? const SizedBox();
         dividers.add(divider);
       }
     }
@@ -658,7 +641,6 @@ class _Resizer extends StatefulWidget {
   final _ResizablePanelState panelState;
 
   const _Resizer({
-    super.key,
     required this.direction,
     required this.index,
     required this.thickness,
@@ -704,22 +686,14 @@ class _ResizerState extends State<_Resizer> {
         hitTestBehavior: HitTestBehavior.translucent,
         child: GestureDetector(
           behavior: HitTestBehavior.translucent,
-          onVerticalDragStart:
-              widget.direction == Axis.vertical ? _onDragStart : null,
-          onHorizontalDragStart:
-              widget.direction == Axis.horizontal ? _onDragStart : null,
-          onVerticalDragUpdate:
-              widget.direction == Axis.vertical ? _onDragUpdate : null,
-          onHorizontalDragUpdate:
-              widget.direction == Axis.horizontal ? _onDragUpdate : null,
-          onVerticalDragEnd:
-              widget.direction == Axis.vertical ? _onDragEnd : null,
-          onHorizontalDragEnd:
-              widget.direction == Axis.horizontal ? _onDragEnd : null,
-          onVerticalDragCancel:
-              widget.direction == Axis.vertical ? _onDragCancel : null,
-          onHorizontalDragCancel:
-              widget.direction == Axis.horizontal ? _onDragCancel : null,
+          onVerticalDragStart: widget.direction == Axis.vertical ? _onDragStart : null,
+          onHorizontalDragStart: widget.direction == Axis.horizontal ? _onDragStart : null,
+          onVerticalDragUpdate: widget.direction == Axis.vertical ? _onDragUpdate : null,
+          onHorizontalDragUpdate: widget.direction == Axis.horizontal ? _onDragUpdate : null,
+          onVerticalDragEnd: widget.direction == Axis.vertical ? _onDragEnd : null,
+          onHorizontalDragEnd: widget.direction == Axis.horizontal ? _onDragEnd : null,
+          onVerticalDragCancel: widget.direction == Axis.vertical ? _onDragCancel : null,
+          onHorizontalDragCancel: widget.direction == Axis.horizontal ? _onDragCancel : null,
         ),
       ),
     );
@@ -738,8 +712,7 @@ class _ResizableLayoutParentData extends ContainerBoxParentData<RenderBox> {
   double? flex;
 }
 
-class _ResizableLayoutChild
-    extends ParentDataWidget<_ResizableLayoutParentData> {
+class _ResizableLayoutChild extends ParentDataWidget<_ResizableLayoutParentData> {
   final int? index;
   final bool? isDragger;
   final bool? isDivider;
@@ -747,7 +720,6 @@ class _ResizableLayoutChild
   final double? flex;
 
   const _ResizableLayoutChild({
-    super.key,
     this.index,
     this.isDragger,
     this.isDivider,
@@ -796,15 +768,13 @@ class _ResizableLayoutChild
   Type get debugTypicalAncestorWidgetClass => _ResizableLayout;
 }
 
-typedef _ResizableLayoutCallback = void Function(
-    double panelSize, double flexCount);
+typedef _ResizableLayoutCallback = void Function(double panelSize, double flexCount);
 
 class _ResizableLayout extends MultiChildRenderObjectWidget {
   final Axis direction;
   final _ResizableLayoutCallback onLayout;
 
   const _ResizableLayout({
-    super.key,
     required this.direction,
     required super.children,
     required this.onLayout,
@@ -816,8 +786,7 @@ class _ResizableLayout extends MultiChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, _RenderResizableLayout renderObject) {
+  void updateRenderObject(BuildContext context, _RenderResizableLayout renderObject) {
     bool needsLayout = false;
     if (renderObject.direction != direction) {
       renderObject.direction = direction;
@@ -854,9 +823,7 @@ class _RenderResizableLayout extends RenderBox
   }
 
   Offset _createOffset(double main, double cross) {
-    return direction == Axis.horizontal
-        ? Offset(main, cross)
-        : Offset(cross, main);
+    return direction == Axis.horizontal ? Offset(main, cross) : Offset(cross, main);
   }
 
   @override
@@ -876,27 +843,21 @@ class _RenderResizableLayout extends RenderBox
     double mainOffset = 0;
 
     double intrinsicCross = 0;
-    bool hasInfiniteCross = direction == Axis.horizontal
-        ? !constraints.hasBoundedHeight
-        : !constraints.hasBoundedWidth;
+    bool hasInfiniteCross =
+        direction == Axis.horizontal ? !constraints.hasBoundedHeight : !constraints.hasBoundedWidth;
     if (hasInfiniteCross) {
       for (final child in getChildrenAsList()) {
         final childParentData = child.parentData as _ResizableLayoutParentData;
-        if (childParentData.isDragger != true &&
-            childParentData.index == null) {
+        if (childParentData.isDragger != true && childParentData.index == null) {
           if (direction == Axis.horizontal) {
-            intrinsicCross = max(
-                intrinsicCross, child.getMaxIntrinsicHeight(double.infinity));
+            intrinsicCross = max(intrinsicCross, child.getMaxIntrinsicHeight(double.infinity));
           } else {
-            intrinsicCross = max(
-                intrinsicCross, child.getMaxIntrinsicWidth(double.infinity));
+            intrinsicCross = max(intrinsicCross, child.getMaxIntrinsicWidth(double.infinity));
           }
         }
       }
     } else {
-      intrinsicCross = direction == Axis.horizontal
-          ? constraints.maxHeight
-          : constraints.maxWidth;
+      intrinsicCross = direction == Axis.horizontal ? constraints.maxHeight : constraints.maxWidth;
     }
 
     // lay out the dividers
@@ -943,9 +904,7 @@ class _RenderResizableLayout extends RenderBox
     // lay out the panes
     child = firstChild;
     List<double> sizes = [];
-    double parentSize = direction == Axis.horizontal
-        ? constraints.maxWidth
-        : constraints.maxHeight;
+    double parentSize = direction == Axis.horizontal ? constraints.maxWidth : constraints.maxHeight;
     double remainingSpace = parentSize - (panelSize + totalDividerSize);
     double flexSpace = remainingSpace / flexCount;
     onLayout(flexSpace, flexCount);
@@ -1027,8 +986,8 @@ class _RenderResizableLayout extends RenderBox
         Size draggerSize = child.size;
         // align at center
         var sizeExtent = _getSizeExtent(draggerSize);
-        childParentData.offset = _createOffset(
-            dividerOffsets[childParentData.index!] - sizeExtent / 2, 0);
+        childParentData.offset =
+            _createOffset(dividerOffsets[childParentData.index!] - sizeExtent / 2, 0);
         // childParentData.offset =
         //     _createOffset(draggerOffset - sizeExtent / 2 + dividerOffset, 0);
         // dividerOffset += sizeExtent;

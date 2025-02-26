@@ -8,12 +8,7 @@ class Alert extends StatelessWidget {
   final bool destructive;
 
   const Alert(
-      {super.key,
-      this.leading,
-      this.title,
-      this.content,
-      this.trailing,
-      this.destructive = false});
+      {super.key, this.leading, this.title, this.content, this.trailing, this.destructive = false});
 
   const Alert.destructive({
     super.key,
@@ -51,8 +46,7 @@ class Alert extends StatelessWidget {
       backgroundColor: scheme.background,
       borderColor: destructive ? scheme.destructive : null,
       child: Container(
-        padding: EdgeInsets.symmetric(
-            horizontal: 16 * scaling, vertical: 12 * scaling),
+        padding: EdgeInsets.symmetric(horizontal: 16 * scaling, vertical: 12 * scaling),
         child: Basic(
           leading: leading,
           title: title,

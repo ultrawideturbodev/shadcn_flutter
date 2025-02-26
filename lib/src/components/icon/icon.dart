@@ -2,105 +2,85 @@ import '../../../shadcn_flutter.dart';
 
 extension IconExtension on Widget {
   Widget iconX4Small() {
-    return WrappedIcon(
-        data: (context, theme) => theme.iconTheme.x4Small, child: this);
+    return WrappedIcon(data: (context, theme) => theme.iconTheme.x4Small, child: this);
   }
 
   Widget iconX3Small() {
-    return WrappedIcon(
-        data: (context, theme) => theme.iconTheme.x3Small, child: this);
+    return WrappedIcon(data: (context, theme) => theme.iconTheme.x3Small, child: this);
   }
 
   Widget iconX2Small() {
-    return WrappedIcon(
-        data: (context, theme) => theme.iconTheme.x2Small, child: this);
+    return WrappedIcon(data: (context, theme) => theme.iconTheme.x2Small, child: this);
   }
 
   Widget iconXSmall() {
-    return WrappedIcon(
-        data: (context, theme) => theme.iconTheme.xSmall, child: this);
+    return WrappedIcon(data: (context, theme) => theme.iconTheme.xSmall, child: this);
   }
 
   Widget iconSmall() {
-    return WrappedIcon(
-        data: (context, theme) => theme.iconTheme.small, child: this);
+    return WrappedIcon(data: (context, theme) => theme.iconTheme.small, child: this);
   }
 
   Widget iconMedium() {
-    return WrappedIcon(
-        data: (context, theme) => theme.iconTheme.medium, child: this);
+    return WrappedIcon(data: (context, theme) => theme.iconTheme.medium, child: this);
   }
 
   Widget iconLarge() {
-    return WrappedIcon(
-        data: (context, theme) => theme.iconTheme.large, child: this);
+    return WrappedIcon(data: (context, theme) => theme.iconTheme.large, child: this);
   }
 
   Widget iconXLarge() {
-    return WrappedIcon(
-        data: (context, theme) => theme.iconTheme.xLarge, child: this);
+    return WrappedIcon(data: (context, theme) => theme.iconTheme.xLarge, child: this);
   }
 
   Widget iconX2Large() {
-    return WrappedIcon(
-        data: (context, theme) => theme.iconTheme.x2Large, child: this);
+    return WrappedIcon(data: (context, theme) => theme.iconTheme.x2Large, child: this);
   }
 
   Widget iconX3Large() {
-    return WrappedIcon(
-        data: (context, theme) => theme.iconTheme.x3Large, child: this);
+    return WrappedIcon(data: (context, theme) => theme.iconTheme.x3Large, child: this);
   }
 
   Widget iconX4Large() {
-    return WrappedIcon(
-        data: (context, theme) => theme.iconTheme.x4Large, child: this);
+    return WrappedIcon(data: (context, theme) => theme.iconTheme.x4Large, child: this);
   }
 
   Widget iconMutedForeground() {
     return WrappedIcon(
-        data: (context, theme) =>
-            IconThemeData(color: theme.colorScheme.mutedForeground),
+        data: (context, theme) => IconThemeData(color: theme.colorScheme.mutedForeground),
         child: this);
   }
 
   Widget iconDestructiveForeground() {
     return WrappedIcon(
-        data: (context, theme) =>
-            IconThemeData(color: theme.colorScheme.destructiveForeground),
+        data: (context, theme) => IconThemeData(color: theme.colorScheme.destructiveForeground),
         child: this);
   }
 
   Widget iconPrimaryForeground() {
     return WrappedIcon(
-        data: (context, theme) =>
-            IconThemeData(color: theme.colorScheme.primaryForeground),
+        data: (context, theme) => IconThemeData(color: theme.colorScheme.primaryForeground),
         child: this);
   }
 
   Widget iconPrimary() {
     return WrappedIcon(
-        data: (context, theme) =>
-            IconThemeData(color: theme.colorScheme.primary),
-        child: this);
+        data: (context, theme) => IconThemeData(color: theme.colorScheme.primary), child: this);
   }
 
   Widget iconSecondary() {
     return WrappedIcon(
-        data: (context, theme) =>
-            IconThemeData(color: theme.colorScheme.secondary),
-        child: this);
+        data: (context, theme) => IconThemeData(color: theme.colorScheme.secondary), child: this);
   }
 
   Widget iconSecondaryForeground() {
     return WrappedIcon(
-        data: (context, theme) =>
-            IconThemeData(color: theme.colorScheme.secondaryForeground),
+        data: (context, theme) => IconThemeData(color: theme.colorScheme.secondaryForeground),
         child: this);
   }
 }
 
-typedef WrappedIconDataBuilder<T> = T Function(
-    BuildContext context, ThemeData theme);
+typedef WrappedIconDataBuilder<T> = T Function(BuildContext context, ThemeData theme);
 
 class WrappedIcon extends StatelessWidget {
   final WrappedIconDataBuilder<IconThemeData> data;

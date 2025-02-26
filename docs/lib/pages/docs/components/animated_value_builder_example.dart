@@ -12,8 +12,7 @@ class AnimatedValueBuilderExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'animated_value_builder',
-      description:
-          'AnimatedValueBuilder is a component that allows you to animate a value.',
+      description: 'AnimatedValueBuilder is a component that allows you to animate a value.',
       displayName: 'AnimatedValueBuilder',
       children: [
         WidgetUsageExample(

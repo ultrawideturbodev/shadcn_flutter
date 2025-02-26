@@ -1,10 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:shadcn_flutter/src/util.dart';
 
-typedef AnimatedChildBuilder<T> = Widget Function(
-    BuildContext context, T value, Widget? child);
-typedef AnimationBuilder<T> = Widget Function(
-    BuildContext context, Animation<T> animation);
+typedef AnimatedChildBuilder<T> = Widget Function(BuildContext context, T value, Widget? child);
+typedef AnimationBuilder<T> = Widget Function(BuildContext context, Animation<T> animation);
 typedef AnimatedChildValueBuilder<T> = Widget Function(
     BuildContext context, T oldValue, T newValue, double t, Widget? child);
 
@@ -229,8 +227,7 @@ class RepeatedAnimationBuilder<T> extends StatefulWidget {
   final Curve? reverseCurve;
   final RepeatMode mode;
   final Widget Function(BuildContext context, T value, Widget? child)? builder;
-  final Widget Function(BuildContext context, Animation<T> animation)?
-      animationBuilder;
+  final Widget Function(BuildContext context, Animation<T> animation)? animationBuilder;
   final Widget? child;
   final T Function(T a, T b, double t)? lerp;
   final bool play;
@@ -266,12 +263,10 @@ class RepeatedAnimationBuilder<T> extends StatefulWidget {
   }) : builder = null;
 
   @override
-  State<RepeatedAnimationBuilder<T>> createState() =>
-      _RepeatedAnimationBuilderState<T>();
+  State<RepeatedAnimationBuilder<T>> createState() => _RepeatedAnimationBuilderState<T>();
 }
 
-class _RepeatedAnimationBuilderState<T>
-    extends State<RepeatedAnimationBuilder<T>>
+class _RepeatedAnimationBuilderState<T> extends State<RepeatedAnimationBuilder<T>>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late CurvedAnimation _curvedAnimation;
@@ -285,8 +280,7 @@ class _RepeatedAnimationBuilderState<T>
     _controller = AnimationController(
       vsync: this,
     );
-    if (widget.mode == RepeatMode.reverse ||
-        widget.mode == RepeatMode.pingPongReverse) {
+    if (widget.mode == RepeatMode.reverse || widget.mode == RepeatMode.pingPongReverse) {
       _reverse = true;
       _controller.duration = widget.reverseDuration ?? widget.duration;
       _controller.reverseDuration = widget.duration;
@@ -320,8 +314,7 @@ class _RepeatedAnimationBuilderState<T>
     }
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        if (widget.mode == RepeatMode.pingPong ||
-            widget.mode == RepeatMode.pingPongReverse) {
+        if (widget.mode == RepeatMode.pingPong || widget.mode == RepeatMode.pingPongReverse) {
           _controller.reverse();
           _reverse = true;
         } else {
@@ -329,8 +322,7 @@ class _RepeatedAnimationBuilderState<T>
           _controller.forward();
         }
       } else if (status == AnimationStatus.dismissed) {
-        if (widget.mode == RepeatMode.pingPong ||
-            widget.mode == RepeatMode.pingPongReverse) {
+        if (widget.mode == RepeatMode.pingPong || widget.mode == RepeatMode.pingPongReverse) {
           _controller.forward();
           _reverse = false;
         } else {
@@ -356,8 +348,7 @@ class _RepeatedAnimationBuilderState<T>
         oldWidget.reverseCurve != widget.reverseCurve ||
         oldWidget.mode != widget.mode ||
         oldWidget.play != widget.play) {
-      if (widget.mode == RepeatMode.reverse ||
-          widget.mode == RepeatMode.pingPongReverse) {
+      if (widget.mode == RepeatMode.reverse || widget.mode == RepeatMode.pingPongReverse) {
         _controller.duration = widget.reverseDuration ?? widget.duration;
         _controller.reverseDuration = widget.duration;
         _curvedAnimation.dispose();
@@ -486,9 +477,8 @@ class IntervalDuration extends Curve {
     } else {
       progressEndInterval = 1;
     }
-    double clampedProgress = ((t - progressStartInterval) /
-            (progressEndInterval - progressStartInterval))
-        .clamp(0, 1);
+    double clampedProgress =
+        ((t - progressStartInterval) / (progressEndInterval - progressStartInterval)).clamp(0, 1);
     if (curve != null) {
       return curve!.transform(clampedProgress);
     }
@@ -544,8 +534,7 @@ class CrossFadedTransition extends StatefulWidget {
   final Widget child;
   final Duration duration;
   final AlignmentGeometry alignment;
-  final Widget Function(Widget a, Widget b, double t,
-      {AlignmentGeometry alignment}) lerp;
+  final Widget Function(Widget a, Widget b, double t, {AlignmentGeometry alignment}) lerp;
 
   const CrossFadedTransition({
     super.key,
@@ -571,8 +560,7 @@ class _CrossFadedTransitionState extends State<CrossFadedTransition> {
   @override
   void didUpdateWidget(covariant CrossFadedTransition oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.child != widget.child &&
-        oldWidget.child.key != widget.child.key) {
+    if (oldWidget.child != widget.child && oldWidget.child.key != widget.child.key) {
       newChild = widget.child;
     }
   }

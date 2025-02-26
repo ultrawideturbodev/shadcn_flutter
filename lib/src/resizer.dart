@@ -168,8 +168,7 @@ class Resizer {
     if (newSize < minSize) {
       double overflow = newSize - minSize;
       double given = delta - overflow;
-      var borrowSize =
-          _borrowSize(index + direction, overflow, until, direction);
+      var borrowSize = _borrowSize(index + direction, overflow, until, direction);
       item._newValue = minSize;
       return _BorrowInfo(borrowSize.givenSize + given, borrowSize.from);
     }
@@ -178,8 +177,7 @@ class Resizer {
       double maxOverflow = newSize - maxSize;
       double given = delta - maxOverflow;
 
-      var borrowSize =
-          _borrowSize(index + direction, maxOverflow, until, direction);
+      var borrowSize = _borrowSize(index + direction, maxOverflow, until, direction);
       item._newValue = maxSize;
       return _BorrowInfo(borrowSize.givenSize + given, borrowSize.from);
     }
@@ -235,10 +233,8 @@ class Resizer {
     } else if (direction == 0) {
       double halfDelta = delta / 2;
       var borrowedLeft = _borrowSize(index - 1, -halfDelta, 0, -1);
-      var borrowedRight =
-          _borrowSize(index + 1, -halfDelta, items.length - 1, 1);
-      if (borrowedLeft.givenSize != -halfDelta ||
-          borrowedRight.givenSize != -halfDelta) {
+      var borrowedRight = _borrowSize(index + 1, -halfDelta, items.length - 1, 1);
+      if (borrowedLeft.givenSize != -halfDelta || borrowedRight.givenSize != -halfDelta) {
         reset();
         return false;
       }
@@ -284,10 +280,8 @@ class Resizer {
       final delta = item.newValue - collapsedSize;
       final halfDelta = delta / 2;
       var borrowedLeft = _borrowSize(index - 1, halfDelta, 0, -1);
-      var borrowedRight =
-          _borrowSize(index + 1, halfDelta, items.length - 1, 1);
-      if (borrowedLeft.givenSize != halfDelta ||
-          borrowedRight.givenSize != halfDelta) {
+      var borrowedRight = _borrowSize(index + 1, halfDelta, items.length - 1, 1);
+      if (borrowedLeft.givenSize != halfDelta || borrowedRight.givenSize != halfDelta) {
         reset();
         return false;
       }
@@ -326,10 +320,8 @@ class Resizer {
     } else if (direction == 0) {
       final halfDelta = delta / 2;
       var borrowedLeft = _borrowSize(index - 1, halfDelta, 0, -1);
-      var borrowedRight =
-          _borrowSize(index + 1, halfDelta, items.length - 1, 1);
-      if (borrowedLeft.givenSize != halfDelta ||
-          borrowedRight.givenSize != halfDelta) {
+      var borrowedRight = _borrowSize(index + 1, halfDelta, items.length - 1, 1);
+      if (borrowedLeft.givenSize != halfDelta || borrowedRight.givenSize != halfDelta) {
         reset();
         return false;
       }
@@ -363,16 +355,11 @@ class Resizer {
     double givenBackRight = 0;
 
     if (couldNotBorrowLeft != -couldNotBorrowRight) {
-      givenBackLeft =
-          _borrowSize(borrowedRight.from, -couldNotBorrowLeft, index, -1)
-              .givenSize;
-      givenBackRight =
-          _borrowSize(borrowedLeft.from, -couldNotBorrowRight, index - 1, 1)
-              .givenSize;
+      givenBackLeft = _borrowSize(borrowedRight.from, -couldNotBorrowLeft, index, -1).givenSize;
+      givenBackRight = _borrowSize(borrowedLeft.from, -couldNotBorrowRight, index - 1, 1).givenSize;
     }
 
-    if (givenBackLeft != -couldNotBorrowLeft ||
-        givenBackRight != -couldNotBorrowRight) {
+    if (givenBackLeft != -couldNotBorrowLeft || givenBackRight != -couldNotBorrowRight) {
       reset();
       return;
     }
@@ -380,10 +367,8 @@ class Resizer {
     double payOffLeft = _payOffLoanSize(index - 1, delta, -1);
     double payOffRight = _payOffLoanSize(index, -delta, 1);
 
-    double payingBackLeft =
-        _borrowSize(index - 1, -payOffLeft, 0, -1).givenSize;
-    double payingBackRight =
-        _borrowSize(index, -payOffRight, items.length - 1, 1).givenSize;
+    double payingBackLeft = _borrowSize(index - 1, -payOffLeft, 0, -1).givenSize;
+    double payingBackRight = _borrowSize(index, -payOffRight, items.length - 1, 1).givenSize;
 
     if (payingBackLeft != -payOffLeft || payingBackRight != -payOffRight) {
       reset();
@@ -426,9 +411,7 @@ class Resizer {
       for (int i = index - 1; i >= 0; i--) {
         final previousItem = _getItem(i);
         double? collapsibleSize = previousItem?.collapsedSize;
-        if (previousItem != null &&
-            collapsibleSize != null &&
-            !previousItem.newCollapsed) {
+        if (previousItem != null && collapsibleSize != null && !previousItem.newCollapsed) {
           var minSize = previousItem.min;
           var threshold = (collapsibleSize - minSize) * collapseRatio;
           if (_couldNotBorrow < threshold) {
@@ -450,9 +433,7 @@ class Resizer {
       for (int i = index; i < items.length; i++) {
         final nextItem = _getItem(i);
         double? collapsibleSize = nextItem?.collapsedSize;
-        if (nextItem != null &&
-            collapsibleSize != null &&
-            !nextItem.newCollapsed) {
+        if (nextItem != null && collapsibleSize != null && !nextItem.newCollapsed) {
           var minSize = nextItem.min;
           var threshold = (collapsibleSize - minSize) * collapseRatio;
           if (_couldNotBorrow > threshold) {

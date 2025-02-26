@@ -12,8 +12,7 @@ class CheckboxExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'checkbox',
-      description:
-          'Checkboxes allow the user to select one or more items from a set.',
+      description: 'Checkboxes allow the user to select one or more items from a set.',
       displayName: 'Checkbox',
       children: [
         WidgetUsageExample(

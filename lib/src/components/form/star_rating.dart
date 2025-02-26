@@ -40,8 +40,7 @@ class StarRating extends StatefulWidget {
   State<StarRating> createState() => _StarRatingState();
 }
 
-class _StarRatingState extends State<StarRating>
-    with FormValueSupplier<double, StarRating> {
+class _StarRatingState extends State<StarRating> with FormValueSupplier<double, StarRating> {
   double? _changingValue;
 
   @override
@@ -90,18 +89,15 @@ class _StarRatingState extends State<StarRating>
 
   @override
   Widget build(BuildContext context) {
-    double roundedValue =
-        ((_changingValue ?? widget.value) / widget.step).round() * widget.step;
+    double roundedValue = ((_changingValue ?? widget.value) / widget.step).round() * widget.step;
     return AnimatedValueBuilder(
       value: roundedValue,
       duration: kDefaultDuration,
       builder: (context, roundedValue, child) {
         final theme = Theme.of(context);
         final scaling = theme.scaling;
-        var starSize =
-            widget.starSize != null ? widget.starSize! : 24.0 * scaling;
-        var starSpacing =
-            widget.starSpacing != null ? widget.starSpacing! : 5.0 * scaling;
+        var starSize = widget.starSize != null ? widget.starSize! : 24.0 * scaling;
+        var starSpacing = widget.starSpacing != null ? widget.starSpacing! : 5.0 * scaling;
         return GestureDetector(
           behavior: HitTestBehavior.translucent,
           onTap: () {
@@ -126,8 +122,7 @@ class _StarRatingState extends State<StarRating>
                       hitTestBehavior: HitTestBehavior.translucent,
                       onHover: (event) {
                         if (widget.onChanged == null) return;
-                        double progress =
-                            (event.localPosition.dx / starSize).clamp(0.0, 1.0);
+                        double progress = (event.localPosition.dx / starSize).clamp(0.0, 1.0);
                         setState(() {
                           _changingValue = (i + progress);
                         });
@@ -136,10 +131,8 @@ class _StarRatingState extends State<StarRating>
                         shaderCallback: (bounds) {
                           return LinearGradient(
                             colors: [
-                              widget.activeColor ??
-                                  Theme.of(context).colorScheme.primary,
-                              widget.backgroundColor ??
-                                  Theme.of(context).colorScheme.muted,
+                              widget.activeColor ?? Theme.of(context).colorScheme.primary,
+                              widget.backgroundColor ?? Theme.of(context).colorScheme.muted,
                             ],
                             stops: [
                               (roundedValue - i).clamp(0.0, 1.0),

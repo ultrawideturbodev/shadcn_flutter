@@ -13,8 +13,7 @@ class SliderExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'slider',
-      description:
-          'A slider is a control for selecting a single value from a range of values.',
+      description: 'A slider is a control for selecting a single value from a range of values.',
       displayName: 'Slider',
       children: [
         WidgetUsageExample(

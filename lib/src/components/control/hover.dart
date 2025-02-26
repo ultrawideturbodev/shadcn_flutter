@@ -24,8 +24,7 @@ class HoverActivity extends StatefulWidget {
   State<HoverActivity> createState() => _HoverActivityState();
 }
 
-class _HoverActivityState extends State<HoverActivity>
-    with SingleTickerProviderStateMixin {
+class _HoverActivityState extends State<HoverActivity> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override

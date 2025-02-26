@@ -53,10 +53,8 @@ class _ComponentsPageState extends State<ComponentsPage> {
       child: Basic(
         title: const Text('Event has been created'),
         subtitle: const Text('Sunday, July 07, 2024 at 12:00 PM'),
-        trailing: PrimaryButton(
-            size: ButtonSize.small,
-            onPressed: () {},
-            child: const Text('Undo')),
+        trailing:
+            PrimaryButton(size: ButtonSize.small, onPressed: () {}, child: const Text('Undo')),
         trailingAlignment: Alignment.center,
       ),
     );
@@ -132,9 +130,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                           builder: (context, value, child) {
                             // 0.0 - 0.5 = 0
                             // 0.5 - 1.0 = 1
-                            return Text(value.round().toString())
-                                .x3Large()
-                                .bold();
+                            return Text(value.round().toString()).x3Large().bold();
                           },
                         ),
                       ),
@@ -222,18 +218,15 @@ class _ComponentsPageState extends State<ComponentsPage> {
                       child: Accordion(
                         items: [
                           AccordionItem(
-                            trigger:
-                                AccordionTrigger(child: Text('Accordion 1')),
+                            trigger: AccordionTrigger(child: Text('Accordion 1')),
                             content: Text('Content 1'),
                           ),
                           AccordionItem(
-                            trigger:
-                                AccordionTrigger(child: Text('Accordion 2')),
+                            trigger: AccordionTrigger(child: Text('Accordion 2')),
                             content: Text('Content 2'),
                           ),
                           AccordionItem(
-                            trigger:
-                                AccordionTrigger(child: Text('Accordion 3')),
+                            trigger: AccordionTrigger(child: Text('Accordion 3')),
                             content: Text('Content 3'),
                           ),
                         ],
@@ -362,8 +355,8 @@ class _ComponentsPageState extends State<ComponentsPage> {
                     children: [
                       Basic(
                         title: const Text('Skeleton Example 1'),
-                        content: const Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+                        content:
+                            const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
                         leading: const Avatar(
                           initials: '',
                         ).asSkeleton(),
@@ -373,8 +366,8 @@ class _ComponentsPageState extends State<ComponentsPage> {
                       const Gap(16),
                       Basic(
                         title: const Text('Skeleton Example 1'),
-                        content: const Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+                        content:
+                            const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
                         leading: const Avatar(
                           initials: '',
                         ).asSkeleton(),
@@ -384,8 +377,8 @@ class _ComponentsPageState extends State<ComponentsPage> {
                       const Gap(16),
                       Basic(
                         title: const Text('Skeleton Example 1'),
-                        content: const Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+                        content:
+                            const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
                         leading: const Avatar(
                           initials: '',
                         ).asSkeleton(),
@@ -512,13 +505,11 @@ class _ComponentsPageState extends State<ComponentsPage> {
                               const Row(
                                 children: [
                                   Chip(
-                                    trailing:
-                                        ChipButton(child: Icon(Icons.close)),
+                                    trailing: ChipButton(child: Icon(Icons.close)),
                                     child: Text('Chip 1'),
                                   ),
                                   Chip(
-                                    trailing:
-                                        ChipButton(child: Icon(Icons.close)),
+                                    trailing: ChipButton(child: Icon(Icons.close)),
                                     child: Text('Chip 2'),
                                   ),
                                 ],
@@ -527,8 +518,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                               Row(
                                 children: [
                                   const Chip(
-                                    trailing:
-                                        ChipButton(child: Icon(Icons.close)),
+                                    trailing: ChipButton(child: Icon(Icons.close)),
                                     child: Text('Cool Chip'),
                                   ),
                                   const Gap(4),
@@ -552,8 +542,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                 reverse: true,
                 reverseVertical: true,
                 example: Card(
-                  child: ColorPickerSet(
-                      color: ColorDerivative.fromColor(Colors.blue)),
+                  child: ColorPickerSet(color: ColorDerivative.fromColor(Colors.blue)),
                 ),
               ),
               const ComponentCard(
@@ -594,19 +583,13 @@ class _ComponentsPageState extends State<ComponentsPage> {
                         child: InputOTP(
                           initialValue: '123456'.codeUnits,
                           children: [
-                            InputOTPChild.character(
-                                allowDigit: true, obscured: true),
-                            InputOTPChild.character(
-                                allowDigit: true, obscured: true),
-                            InputOTPChild.character(
-                                allowDigit: true, obscured: true),
+                            InputOTPChild.character(allowDigit: true, obscured: true),
+                            InputOTPChild.character(allowDigit: true, obscured: true),
+                            InputOTPChild.character(allowDigit: true, obscured: true),
                             InputOTPChild.separator,
-                            InputOTPChild.character(
-                                allowDigit: true, obscured: true),
-                            InputOTPChild.character(
-                                allowDigit: true, obscured: true),
-                            InputOTPChild.character(
-                                allowDigit: true, obscured: true),
+                            InputOTPChild.character(allowDigit: true, obscured: true),
+                            InputOTPChild.character(allowDigit: true, obscured: true),
+                            InputOTPChild.character(allowDigit: true, obscured: true),
                           ],
                         ),
                       ),
@@ -670,13 +653,11 @@ class _ComponentsPageState extends State<ComponentsPage> {
                           value: 'Apple',
                           onChanged: (value) {},
                           children: const [
-                            SelectItemButton(
-                                value: 'Apple', child: Text('Apple')),
+                            SelectItemButton(value: 'Apple', child: Text('Apple')),
                           ],
                         ),
                         SelectPopup(
-                          margin: const EdgeInsets.symmetric(vertical: 8) *
-                              theme.scaling,
+                          margin: const EdgeInsets.symmetric(vertical: 8) * theme.scaling,
                           borderRadius: theme.borderRadiusXl,
                           value: ValueNotifier(['Apple']),
                           children: ValueNotifier(const [
@@ -789,8 +770,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                 name: 'carousel',
                 title: 'Carousel',
                 fit: true,
-                example: SizedBox(
-                    width: 550, height: 200, child: CarouselExample1()),
+                example: SizedBox(width: 550, height: 200, child: CarouselExample1()),
               ),
               const ComponentCard(
                 name: 'divider',
@@ -841,8 +821,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                 name: 'timeline',
                 title: 'Timeline',
                 scale: 1,
-                example:
-                    const TimelineExample1().sized(width: 700, height: 800),
+                example: const TimelineExample1().sized(width: 700, height: 800),
               ),
             ]),
             const Text('Navigation').h2().anchored(navigationKey),
@@ -892,8 +871,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                                     decoration: (context, states, value) {
                                       return (value as BoxDecoration).copyWith(
                                         color: theme.colorScheme.accent,
-                                        borderRadius: BorderRadius.circular(
-                                            theme.radiusSm),
+                                        borderRadius: BorderRadius.circular(theme.radiusSm),
                                       );
                                     },
                                   ),
@@ -923,9 +901,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                             style: const ButtonStyle.menu(),
                             onPressed: () {},
                             trailing: const MenuShortcut(
-                              activator: SingleActivator(
-                                  LogicalKeyboardKey.keyZ,
-                                  control: true),
+                              activator: SingleActivator(LogicalKeyboardKey.keyZ, control: true),
                             ),
                             child: const Text('Undo'),
                           ),
@@ -934,15 +910,12 @@ class _ComponentsPageState extends State<ComponentsPage> {
                                 decoration: (context, states, value) {
                               return (value as BoxDecoration).copyWith(
                                 color: theme.colorScheme.accent,
-                                borderRadius:
-                                    BorderRadius.circular(theme.radiusSm),
+                                borderRadius: BorderRadius.circular(theme.radiusSm),
                               );
                             }),
                             onPressed: () {},
                             trailing: const MenuShortcut(
-                              activator: SingleActivator(
-                                  LogicalKeyboardKey.keyY,
-                                  control: true),
+                              activator: SingleActivator(LogicalKeyboardKey.keyY, control: true),
                             ),
                             child: const Text('Redo'),
                           ),
@@ -951,9 +924,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                             style: const ButtonStyle.menu(),
                             onPressed: () {},
                             trailing: const MenuShortcut(
-                              activator: SingleActivator(
-                                  LogicalKeyboardKey.keyX,
-                                  control: true),
+                              activator: SingleActivator(LogicalKeyboardKey.keyX, control: true),
                             ),
                             child: const Text('Cut'),
                           ),
@@ -961,9 +932,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                             style: const ButtonStyle.menu(),
                             onPressed: () {},
                             trailing: const MenuShortcut(
-                              activator: SingleActivator(
-                                  LogicalKeyboardKey.keyC,
-                                  control: true),
+                              activator: SingleActivator(LogicalKeyboardKey.keyC, control: true),
                             ),
                             child: const Text('Copy'),
                           ),
@@ -971,9 +940,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                             style: const ButtonStyle.menu(),
                             onPressed: () {},
                             trailing: const MenuShortcut(
-                              activator: SingleActivator(
-                                  LogicalKeyboardKey.keyV,
-                                  control: true),
+                              activator: SingleActivator(LogicalKeyboardKey.keyV, control: true),
                             ),
                             child: const Text('Paste'),
                           ),
@@ -999,10 +966,8 @@ class _ComponentsPageState extends State<ComponentsPage> {
                             style: const ButtonStyle.ghost().copyWith(
                               decoration: (context, states, value) {
                                 return (value as BoxDecoration).copyWith(
-                                  borderRadius:
-                                      BorderRadius.circular(theme.radiusMd),
-                                  color:
-                                      theme.colorScheme.muted.scaleAlpha(0.8),
+                                  borderRadius: BorderRadius.circular(theme.radiusMd),
+                                  color: theme.colorScheme.muted.scaleAlpha(0.8),
                                 );
                               },
                             ),
@@ -1032,10 +997,8 @@ class _ComponentsPageState extends State<ComponentsPage> {
                                   },
                                   decoration: (context, states, value) {
                                     return (value as BoxDecoration).copyWith(
-                                      borderRadius:
-                                          BorderRadius.circular(theme.radiusMd),
-                                      color: theme.colorScheme.muted
-                                          .scaleAlpha(0.8),
+                                      borderRadius: BorderRadius.circular(theme.radiusMd),
+                                      color: theme.colorScheme.muted.scaleAlpha(0.8),
                                     );
                                   },
                                 ),
@@ -1043,9 +1006,8 @@ class _ComponentsPageState extends State<ComponentsPage> {
                                 alignment: Alignment.topLeft,
                                 child: Basic(
                                   title: const Text('Installation').medium(),
-                                  content: const Text(
-                                          'How to install Shadcn/UI for Flutter')
-                                      .muted(),
+                                  content:
+                                      const Text('How to install Shadcn/UI for Flutter').muted(),
                                   mainAxisAlignment: MainAxisAlignment.start,
                                 ),
                               ).constrained(maxWidth: 16 * 16),
@@ -1178,9 +1140,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                     children: [
                       const Text('Drawer!').large().medium(),
                       const Gap(4),
-                      const Text(
-                              'This is a drawer that you can use to display content')
-                          .muted(),
+                      const Text('This is a drawer that you can use to display content').muted(),
                     ],
                   ).withPadding(horizontal: 32),
                 ).sized(width: 300, height: 300),
@@ -1230,9 +1190,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                     children: [
                       const Text('Sheet!').large().medium(),
                       const Gap(4),
-                      const Text(
-                              'This is a sheet that you can use to display content')
-                          .muted(),
+                      const Text('This is a sheet that you can use to display content').muted(),
                     ],
                   ).withPadding(horizontal: 32, vertical: 48),
                 ).sized(width: 300, height: 300),
@@ -1378,9 +1336,8 @@ class _ComponentsPageState extends State<ComponentsPage> {
                 name: 'calendar',
                 title: 'Calendar',
                 scale: 1,
-                example: Calendar(
-                    view: CalendarView.now(),
-                    selectionMode: CalendarSelectionMode.none),
+                example:
+                    Calendar(view: CalendarView.now(), selectionMode: CalendarSelectionMode.none),
               ),
               const ComponentCard(
                 name: 'command',
@@ -1406,8 +1363,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                           style: const ButtonStyle.menu(),
                           onPressed: () {},
                           trailing: const MenuShortcut(
-                            activator: SingleActivator(LogicalKeyboardKey.keyX,
-                                control: true),
+                            activator: SingleActivator(LogicalKeyboardKey.keyX, control: true),
                           ),
                           child: const Text('Cut'),
                         ),
@@ -1415,8 +1371,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                           style: const ButtonStyle.menu(),
                           onPressed: () {},
                           trailing: const MenuShortcut(
-                            activator: SingleActivator(LogicalKeyboardKey.keyC,
-                                control: true),
+                            activator: SingleActivator(LogicalKeyboardKey.keyC, control: true),
                           ),
                           child: const Text('Copy'),
                         ),
@@ -1424,8 +1379,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                           style: const ButtonStyle.menu(),
                           onPressed: () {},
                           trailing: const MenuShortcut(
-                            activator: SingleActivator(LogicalKeyboardKey.keyV,
-                                control: true),
+                            activator: SingleActivator(LogicalKeyboardKey.keyV, control: true),
                           ),
                           child: const Text('Paste'),
                         ),
@@ -1434,8 +1388,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                           style: const ButtonStyle.menu(),
                           onPressed: () {},
                           trailing: const MenuShortcut(
-                            activator:
-                                SingleActivator(LogicalKeyboardKey.delete),
+                            activator: SingleActivator(LogicalKeyboardKey.delete),
                           ),
                           child: const Text('Delete'),
                         ),
@@ -1443,8 +1396,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                           style: const ButtonStyle.menu(),
                           onPressed: () {},
                           trailing: const MenuShortcut(
-                            activator: SingleActivator(LogicalKeyboardKey.keyA,
-                                control: true),
+                            activator: SingleActivator(LogicalKeyboardKey.keyA, control: true),
                           ),
                           child: const Text('Select All'),
                         ),
@@ -1481,8 +1433,7 @@ class _ComponentsPageState extends State<ComponentsPage> {
                                     decoration: (context, states, value) {
                                   return (value as BoxDecoration).copyWith(
                                     color: theme.colorScheme.accent,
-                                    borderRadius:
-                                        BorderRadius.circular(theme.radiusSm),
+                                    borderRadius: BorderRadius.circular(theme.radiusSm),
                                   );
                                 }),
                                 onPressed: () {},
@@ -1498,9 +1449,8 @@ class _ComponentsPageState extends State<ComponentsPage> {
                                 style: const ButtonStyle.menu(),
                                 onPressed: () {},
                                 trailing: const MenuShortcut(
-                                  activator: SingleActivator(
-                                      LogicalKeyboardKey.keyC,
-                                      control: true),
+                                  activator:
+                                      SingleActivator(LogicalKeyboardKey.keyC, control: true),
                                 ),
                                 child: const Text('Copy'),
                               ),
@@ -1508,9 +1458,8 @@ class _ComponentsPageState extends State<ComponentsPage> {
                                 style: const ButtonStyle.menu(),
                                 onPressed: () {},
                                 trailing: const MenuShortcut(
-                                  activator: SingleActivator(
-                                      LogicalKeyboardKey.keyV,
-                                      control: true),
+                                  activator:
+                                      SingleActivator(LogicalKeyboardKey.keyV, control: true),
                                 ),
                                 child: const Text('Paste'),
                               ),
@@ -1620,19 +1569,16 @@ class _ComponentCardState extends State<ComponentCard> {
       onTap: componentsMode == ComponentsMode.normal
           ? null
           : () {
-              final render = repaintKey.currentContext!.findRenderObject()
-                  as RenderRepaintBoundary;
+              final render = repaintKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
               render.toImage().then(
                 (value) async {
-                  var byteData =
-                      (await value.toByteData(format: ImageByteFormat.png))!;
+                  var byteData = (await value.toByteData(format: ImageByteFormat.png))!;
                   value.dispose();
                   final list = byteData.buffer.asUint8List();
                   // convert to base64 image
                   final base64Image = base64.encode(list);
                   final String baseImage = 'data:image/png;base64,$base64Image';
-                  launchUrlString(baseImage,
-                      mode: LaunchMode.externalApplication);
+                  launchUrlString(baseImage, mode: LaunchMode.externalApplication);
                 },
               );
             },
@@ -1660,8 +1606,8 @@ class _ComponentCardState extends State<ComponentCard> {
                   duration: const Duration(milliseconds: 200),
                   curve: Curves.easeInOut,
                   builder: (context, value, child) {
-                    final borderColor = Color.lerp(theme.colorScheme.border,
-                        theme.colorScheme.ring, value);
+                    final borderColor =
+                        Color.lerp(theme.colorScheme.border, theme.colorScheme.ring, value);
                     return OutlinedContainer(
                       clipBehavior: Clip.antiAlias,
                       borderColor: borderColor,
@@ -1675,10 +1621,8 @@ class _ComponentCardState extends State<ComponentCard> {
                                   decoration: BoxDecoration(
                                     color: theme.colorScheme.accent,
                                     borderRadius: BorderRadius.only(
-                                      topLeft:
-                                          Radius.circular(theme.radiusMd + 3),
-                                      topRight:
-                                          Radius.circular(theme.radiusMd + 3),
+                                      topLeft: Radius.circular(theme.radiusMd + 3),
+                                      topRight: Radius.circular(theme.radiusMd + 3),
                                     ),
                                   ),
                                   child: Transform.scale(
@@ -1687,8 +1631,7 @@ class _ComponentCardState extends State<ComponentCard> {
                                       angle: pi / 180 * 10 * value,
                                       child: widget.fit
                                           ? Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
+                                              padding: const EdgeInsets.all(8.0),
                                               child: FittedBox(
                                                 fit: BoxFit.contain,
                                                 child: widget.example,
@@ -1698,8 +1641,7 @@ class _ComponentCardState extends State<ComponentCard> {
                                               ? Center(
                                                   child: Transform.scale(
                                                       scale: widget.scale,
-                                                      child:
-                                                          SingleChildScrollView(
+                                                      child: SingleChildScrollView(
                                                         clipBehavior: Clip.none,
                                                         child: widget.example,
                                                       )),
@@ -1707,40 +1649,27 @@ class _ComponentCardState extends State<ComponentCard> {
                                               : Stack(
                                                   children: [
                                                     Positioned(
-                                                      top: !widget
-                                                              .reverseVertical
-                                                          ? widget
-                                                              .verticalOffset
+                                                      top: !widget.reverseVertical
+                                                          ? widget.verticalOffset
                                                           : null,
                                                       right: widget.reverse
-                                                          ? widget
-                                                              .horizontalOffset
+                                                          ? widget.horizontalOffset
                                                           : null,
-                                                      bottom: widget
-                                                              .reverseVertical
-                                                          ? widget
-                                                              .verticalOffset
+                                                      bottom: widget.reverseVertical
+                                                          ? widget.verticalOffset
                                                           : null,
                                                       left: !widget.reverse
-                                                          ? widget
-                                                              .horizontalOffset
+                                                          ? widget.horizontalOffset
                                                           : null,
                                                       child: Transform.scale(
                                                         scale: widget.scale,
-                                                        alignment: widget
-                                                                .reverse
-                                                            ? widget
-                                                                    .reverseVertical
-                                                                ? Alignment
-                                                                    .bottomRight
-                                                                : Alignment
-                                                                    .topRight
-                                                            : widget
-                                                                    .reverseVertical
-                                                                ? Alignment
-                                                                    .bottomLeft
-                                                                : Alignment
-                                                                    .topLeft,
+                                                        alignment: widget.reverse
+                                                            ? widget.reverseVertical
+                                                                ? Alignment.bottomRight
+                                                                : Alignment.topRight
+                                                            : widget.reverseVertical
+                                                                ? Alignment.bottomLeft
+                                                                : Alignment.topLeft,
                                                         child: widget.example,
                                                       ),
                                                     ),
@@ -1751,9 +1680,7 @@ class _ComponentCardState extends State<ComponentCard> {
                             ),
                           ),
                           const Divider(),
-                          Text(widget.title)
-                              .medium()
-                              .withPadding(vertical: 12, horizontal: 16),
+                          Text(widget.title).medium().withPadding(vertical: 12, horizontal: 16),
                         ],
                       ),
                     );

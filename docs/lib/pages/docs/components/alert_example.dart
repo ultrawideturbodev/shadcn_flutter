@@ -12,8 +12,7 @@ class AlertExample extends StatelessWidget {
     return const ComponentPage(
       name: 'alert',
       displayName: 'Alert',
-      description:
-          'Alerts are used to communicate a state that affects the system.',
+      description: 'Alerts are used to communicate a state that affects the system.',
       children: [
         WidgetUsageExample(
           title: 'Alert Example',

@@ -2,10 +2,10 @@ import 'package:flutter/rendering.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 class GroupWidget extends MultiChildRenderObjectWidget {
-  GroupWidget({
-    Key? key,
-    List<Widget> children = const <Widget>[],
-  }) : super(key: key, children: children);
+  const GroupWidget({
+    super.key,
+    super.children,
+  });
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -92,8 +92,7 @@ class RenderGroup extends RenderBox
           childWidth = constraints.maxWidth;
         }
       }
-      child.layout(
-          BoxConstraints.tightFor(width: childWidth, height: childHeight),
+      child.layout(BoxConstraints.tightFor(width: childWidth, height: childHeight),
           parentUsesSize: true);
       if (top == null && bottom != null) {
         offsetY -= child.size.height;

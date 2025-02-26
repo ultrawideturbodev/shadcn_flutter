@@ -1,11 +1,9 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
-typedef DotBuilder = Widget Function(
-    BuildContext context, int index, bool active);
+typedef DotBuilder = Widget Function(BuildContext context, int index, bool active);
 
 class DotIndicator extends StatelessWidget {
-  static Widget _defaultDotBuilder(
-      BuildContext context, int index, bool active) {
+  static Widget _defaultDotBuilder(BuildContext context, int index, bool active) {
     return active ? const ActiveDotItem() : const InactiveDotItem();
   }
 
@@ -35,8 +33,7 @@ class DotIndicator extends StatelessWidget {
     final scaling = theme.scaling;
     final spacing = this.spacing ?? (8 * scaling);
     final padding =
-        (this.padding ?? const EdgeInsets.all(8)).resolve(directionality) *
-            theme.scaling;
+        (this.padding ?? const EdgeInsets.all(8)).resolve(directionality) * theme.scaling;
     final dotBuilder = this.dotBuilder ?? _defaultDotBuilder;
     List<Widget> children = [];
     for (int i = 0; i < length; i++) {
@@ -97,8 +94,7 @@ class DotItem extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         color: color,
-        borderRadius:
-            borderRadius != null ? BorderRadius.circular(borderRadius!) : null,
+        borderRadius: borderRadius != null ? BorderRadius.circular(borderRadius!) : null,
         border: borderColor != null && borderWidth != null
             ? Border.all(color: borderColor!, width: borderWidth!)
             : null,

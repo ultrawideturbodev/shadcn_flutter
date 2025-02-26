@@ -65,8 +65,7 @@ class _FormExample1State extends State<FormExample1> {
                 FormField(
                   key: _confirmPasswordKey,
                   label: const Text('Confirm Password'),
-                  validator: CompareWith.equal(_passwordKey,
-                      message: 'Passwords do not match'),
+                  validator: CompareWith.equal(_passwordKey, message: 'Passwords do not match'),
                   child: const TextField(
                     obscureText: true,
                   ),

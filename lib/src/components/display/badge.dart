@@ -68,7 +68,7 @@ class SecondaryBadge extends StatelessWidget {
         enabled: true,
         style: style ??
             const ButtonStyle.secondary(
-              buttonSize:ButtonSize.small,
+              buttonSize: ButtonSize.small,
               density: ButtonDensity.dense,
               shape: ButtonShape.rectangle,
             ).copyWith(
@@ -110,7 +110,7 @@ class OutlineBadge extends StatelessWidget {
         enabled: true,
         style: style ??
             const ButtonStyle.outline(
-              buttonSize:ButtonSize.small,
+              buttonSize: ButtonSize.small,
               density: ButtonDensity.dense,
               shape: ButtonShape.rectangle,
             ).copyWith(
@@ -152,7 +152,7 @@ class DestructiveBadge extends StatelessWidget {
         enabled: true,
         style: style ??
             const ButtonStyle.destructive(
-              buttonSize:ButtonSize.small,
+              buttonSize: ButtonSize.small,
               density: ButtonDensity.dense,
               shape: ButtonShape.rectangle,
             ).copyWith(

@@ -17,14 +17,12 @@ class LinearProgressExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Indeterminate Example',
-          path:
-              'lib/pages/docs/components/linear_progress/linear_progress_example_1.dart',
+          path: 'lib/pages/docs/components/linear_progress/linear_progress_example_1.dart',
           child: LinearProgressExample1(),
         ),
         WidgetUsageExample(
           title: 'Determinate Example',
-          path:
-              'lib/pages/docs/components/linear_progress/linear_progress_example_2.dart',
+          path: 'lib/pages/docs/components/linear_progress/linear_progress_example_2.dart',
           child: LinearProgressExample2(),
         ),
       ],

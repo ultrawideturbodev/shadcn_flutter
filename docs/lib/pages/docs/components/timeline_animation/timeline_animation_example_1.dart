@@ -6,8 +6,7 @@ class TimelineAnimationExample1 extends StatefulWidget {
   const TimelineAnimationExample1({super.key});
 
   @override
-  State<TimelineAnimationExample1> createState() =>
-      _TimelineAnimationExample1State();
+  State<TimelineAnimationExample1> createState() => _TimelineAnimationExample1State();
 }
 
 class _TimelineAnimationExample1State extends State<TimelineAnimationExample1>

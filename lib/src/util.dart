@@ -96,8 +96,7 @@ double unlerpDouble(double value, double min, double max) {
   return (value - min) / (max - min);
 }
 
-void swapItemInLists<T>(
-    List<List<T>> lists, T element, List<T> targetList, int targetIndex) {
+void swapItemInLists<T>(List<List<T>> lists, T element, List<T> targetList, int targetIndex) {
   for (var list in lists) {
     if (list != targetList) {
       list.remove(element);
@@ -106,8 +105,7 @@ void swapItemInLists<T>(
   targetList.swapItem(element, targetIndex);
 }
 
-BorderRadius? optionallyResolveBorderRadius(
-    BuildContext context, BorderRadiusGeometry? radius) {
+BorderRadius? optionallyResolveBorderRadius(BuildContext context, BorderRadiusGeometry? radius) {
   if (radius == null) {
     return null;
   }
@@ -182,8 +180,7 @@ BorderRadius subtractByBorder(BorderRadius radius, double borderWidth) {
     topLeft: _subtractSafe(radius.topLeft, Radius.circular(borderWidth)),
     topRight: _subtractSafe(radius.topRight, Radius.circular(borderWidth)),
     bottomLeft: _subtractSafe(radius.bottomLeft, Radius.circular(borderWidth)),
-    bottomRight:
-    _subtractSafe(radius.bottomRight, Radius.circular(borderWidth)),
+    bottomRight: _subtractSafe(radius.bottomRight, Radius.circular(borderWidth)),
   );
 }
 
@@ -266,8 +263,7 @@ class WidgetTreeChangeDetector extends StatefulWidget {
   });
 
   @override
-  _WidgetTreeChangeDetectorState createState() =>
-      _WidgetTreeChangeDetectorState();
+  _WidgetTreeChangeDetectorState createState() => _WidgetTreeChangeDetectorState();
 }
 
 class _WidgetTreeChangeDetectorState extends State<WidgetTreeChangeDetector> {
@@ -325,20 +321,14 @@ extension WidgetExtension on Widget {
     );
   }
 
-  Widget constrained(
-      {double? minWidth,
-        double? maxWidth,
-        double? minHeight,
-        double? maxHeight}) {
+  Widget constrained({double? minWidth, double? maxWidth, double? minHeight, double? maxHeight}) {
     if (this is ConstrainedBox) {
       return ConstrainedBox(
         constraints: BoxConstraints(
           minWidth: minWidth ?? (this as ConstrainedBox).constraints.minWidth,
           maxWidth: maxWidth ?? (this as ConstrainedBox).constraints.maxWidth,
-          minHeight:
-          minHeight ?? (this as ConstrainedBox).constraints.minHeight,
-          maxHeight:
-          maxHeight ?? (this as ConstrainedBox).constraints.maxHeight,
+          minHeight: minHeight ?? (this as ConstrainedBox).constraints.minHeight,
+          maxHeight: maxHeight ?? (this as ConstrainedBox).constraints.maxHeight,
         ),
         child: (this as ConstrainedBox).child,
       );
@@ -363,13 +353,13 @@ extension WidgetExtension on Widget {
 
   Widget withPadding(
       {double? top,
-        double? bottom,
-        double? left,
-        double? right,
-        double? horizontal,
-        double? vertical,
-        double? all,
-        EdgeInsetsGeometry? padding}) {
+      double? bottom,
+      double? left,
+      double? right,
+      double? horizontal,
+      double? vertical,
+      double? all,
+      EdgeInsetsGeometry? padding}) {
     assert(() {
       if (all != null) {
         if (top != null ||
@@ -383,13 +373,11 @@ extension WidgetExtension on Widget {
         }
       } else if (horizontal != null) {
         if (left != null || right != null) {
-          throw FlutterError(
-              'Horizontal padding cannot be used with left or right padding.');
+          throw FlutterError('Horizontal padding cannot be used with left or right padding.');
         }
       } else if (vertical != null) {
         if (top != null || bottom != null) {
-          throw FlutterError(
-              'Vertical padding cannot be used with top or bottom padding.');
+          throw FlutterError('Vertical padding cannot be used with top or bottom padding.');
         }
       }
       return true;
@@ -408,12 +396,12 @@ extension WidgetExtension on Widget {
 
   Widget withMargin(
       {double? top,
-        double? bottom,
-        double? left,
-        double? right,
-        double? horizontal,
-        double? vertical,
-        double? all}) {
+      double? bottom,
+      double? left,
+      double? right,
+      double? horizontal,
+      double? vertical,
+      double? all}) {
     assert(() {
       if (all != null) {
         if (top != null ||
@@ -422,18 +410,15 @@ extension WidgetExtension on Widget {
             right != null ||
             horizontal != null ||
             vertical != null) {
-          throw FlutterError(
-              'All margin properties cannot be used with other margin properties.');
+          throw FlutterError('All margin properties cannot be used with other margin properties.');
         }
       } else if (horizontal != null) {
         if (left != null || right != null) {
-          throw FlutterError(
-              'Horizontal margin cannot be used with left or right margin.');
+          throw FlutterError('Horizontal margin cannot be used with left or right margin.');
         }
       } else if (vertical != null) {
         if (top != null || bottom != null) {
-          throw FlutterError(
-              'Vertical margin cannot be used with top or bottom margin.');
+          throw FlutterError('Vertical margin cannot be used with top or bottom margin.');
         }
       }
       return true;
@@ -463,8 +448,7 @@ extension WidgetExtension on Widget {
     );
   }
 
-  Widget positioned(
-      {Key? key, double? left, double? top, double? right, double? bottom}) {
+  Widget positioned({Key? key, double? left, double? top, double? right, double? bottom}) {
     return Positioned(
       key: key,
       left: left,
@@ -497,8 +481,7 @@ extension WidgetExtension on Widget {
   }
 
   Widget clipRRect(
-      {BorderRadiusGeometry borderRadius = BorderRadius.zero,
-        Clip clipBehavior = Clip.antiAlias}) {
+      {BorderRadiusGeometry borderRadius = BorderRadius.zero, Clip clipBehavior = Clip.antiAlias}) {
     return ClipRRect(
       borderRadius: borderRadius,
       clipBehavior: clipBehavior,
@@ -513,9 +496,7 @@ extension WidgetExtension on Widget {
     );
   }
 
-  Widget clipPath(
-      {Clip clipBehavior = Clip.antiAlias,
-        required CustomClipper<Path> clipper}) {
+  Widget clipPath({Clip clipBehavior = Clip.antiAlias, required CustomClipper<Path> clipper}) {
     return ClipPath(
       clipBehavior: clipBehavior,
       clipper: clipper,
@@ -664,9 +645,7 @@ class _SeparatedFlexState extends State<SeparatedFlex> {
 
 extension FlexExtension on Flex {
   Widget gap(double gap) {
-    return separator(direction == Axis.vertical
-        ? SizedBox(height: gap)
-        : SizedBox(width: gap));
+    return separator(direction == Axis.vertical ? SizedBox(height: gap) : SizedBox(width: gap));
   }
 
   Widget separator(Widget separator) {
@@ -737,16 +716,14 @@ extension ColorExtension on Color {
   Color getContrastColor([double luminanceContrast = 1]) {
     // luminance contrast is between 0..1
     assert(luminanceContrast >= 0 && luminanceContrast <= 1,
-    'luminanceContrast should be between 0 and 1');
+        'luminanceContrast should be between 0 and 1');
     final hsl = HSLColor.fromColor(this);
     double currentLuminance = hsl.lightness;
     double targetLuminance;
     if (currentLuminance >= 0.5) {
-      targetLuminance =
-          currentLuminance - (currentLuminance * luminanceContrast);
+      targetLuminance = currentLuminance - (currentLuminance * luminanceContrast);
     } else {
-      targetLuminance =
-          currentLuminance + ((1 - currentLuminance) * luminanceContrast);
+      targetLuminance = currentLuminance + ((1 - currentLuminance) * luminanceContrast);
     }
     return hsl.withLightness(targetLuminance).toColor();
   }

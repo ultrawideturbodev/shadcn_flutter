@@ -17,14 +17,12 @@ class DatePickerExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Date Picker Example',
-          path:
-              'lib/pages/docs/components/date_picker/date_picker_example_1.dart',
+          path: 'lib/pages/docs/components/date_picker/date_picker_example_1.dart',
           child: DatePickerExample1(),
         ),
         WidgetUsageExample(
           title: 'Date Range Picker Example',
-          path:
-              'lib/pages/docs/components/date_picker/date_picker_example_2.dart',
+          path: 'lib/pages/docs/components/date_picker/date_picker_example_2.dart',
           child: DatePickerExample2(),
         ),
       ],

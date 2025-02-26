@@ -133,8 +133,7 @@ enum FocusChangeReason {
   userInteraction,
 }
 
-BorderRadius _borderRadiusFromPosition(
-    SelectionPosition? position, double value) {
+BorderRadius _borderRadiusFromPosition(SelectionPosition? position, double value) {
   if (position == SelectionPosition.start) {
     return BorderRadius.vertical(top: Radius.circular(value));
   } else if (position == SelectionPosition.end) {
@@ -153,8 +152,8 @@ class TreeNodeData<T> {
   final bool expandIcon;
   final void Function(FocusChangeReason reason)? onFocusChanged;
   SelectionPosition? selectionPosition;
-  TreeNodeData(this.depth, this.node, this.indentGuide, this.expanded,
-      this.expandIcon, this.onFocusChanged);
+  TreeNodeData(
+      this.depth, this.node, this.indentGuide, this.expanded, this.expandIcon, this.onFocusChanged);
 }
 
 class TreeNodeDepth {
@@ -281,8 +280,7 @@ extension TreeNodeListExtension<K> on List<TreeNode<K>> {
     return TreeView.setSelectedItems(this, items);
   }
 
-  List<TreeNode<K>> replaceNodesWithParent(
-      TreeNodeUnaryOperatorWithParent<K> operator) {
+  List<TreeNode<K>> replaceNodesWithParent(TreeNodeUnaryOperatorWithParent<K> operator) {
     return TreeView.replaceNodesWithParent(this, operator);
   }
 
@@ -335,8 +333,8 @@ class TreeView<T> extends StatefulWidget {
     return TreeSelectionDefaultHandler(nodes, onChanged).call;
   }
 
-  static ValueChanged<bool> defaultItemExpandHandler<K>(List<TreeNode<K>> nodes,
-      TreeNode<K> target, ValueChanged<List<TreeNode<K>>> onChanged) {
+  static ValueChanged<bool> defaultItemExpandHandler<K>(
+      List<TreeNode<K>> nodes, TreeNode<K> target, ValueChanged<List<TreeNode<K>>> onChanged) {
     return TreeItemExpandDefaultHandler(nodes, target, onChanged).call;
   }
 
@@ -347,8 +345,7 @@ class TreeView<T> extends StatefulWidget {
     for (int i = 0; i < newNodes.length; i++) {
       final node = newNodes[i];
       var newNode = operator(node);
-      List<TreeNode<K>>? newChildren =
-          _replaceNodes((newNode ?? node).children, operator);
+      List<TreeNode<K>>? newChildren = _replaceNodes((newNode ?? node).children, operator);
       if (newChildren != null) {
         newNode = (newNode ?? node).updateChildren(newChildren);
       }
@@ -360,15 +357,15 @@ class TreeView<T> extends StatefulWidget {
     return changed ? newNodes : null;
   }
 
-  static List<TreeNode<K>>? _replaceNodesWithParent<K>(TreeNode<K>? parent,
-      List<TreeNode<K>> nodes, TreeNodeUnaryOperatorWithParent<K> operator) {
+  static List<TreeNode<K>>? _replaceNodesWithParent<K>(
+      TreeNode<K>? parent, List<TreeNode<K>> nodes, TreeNodeUnaryOperatorWithParent<K> operator) {
     List<TreeNode<K>> newNodes = List.from(nodes);
     bool changed = false;
     for (int i = 0; i < newNodes.length; i++) {
       final node = newNodes[i];
       var newNode = operator(parent, node);
-      List<TreeNode<K>>? newChildren = _replaceNodesWithParent(
-          newNode ?? node, (newNode ?? node).children, operator);
+      List<TreeNode<K>>? newChildren =
+          _replaceNodesWithParent(newNode ?? node, (newNode ?? node).children, operator);
       if (newChildren != null) {
         newNode = (newNode ?? node).updateChildren(newChildren);
       }
@@ -397,8 +394,7 @@ class TreeView<T> extends StatefulWidget {
     });
   }
 
-  static List<TreeNode<K>> replaceItem<K>(
-      List<TreeNode<K>> nodes, K oldItem, TreeNode<K> newItem) {
+  static List<TreeNode<K>> replaceItem<K>(List<TreeNode<K>> nodes, K oldItem, TreeNode<K> newItem) {
     return replaceNodes(nodes, (node) {
       if (node is TreeItem<K> && node.data == oldItem) {
         return newItem;
@@ -407,13 +403,9 @@ class TreeView<T> extends StatefulWidget {
     });
   }
 
-  static List<TreeNode<K>> updateRecursiveSelection<K>(
-      List<TreeNode<K>> nodes) {
+  static List<TreeNode<K>> updateRecursiveSelection<K>(List<TreeNode<K>> nodes) {
     return replaceNodesWithParent(nodes, (parent, node) {
-      if (node is TreeItem<K> &&
-          !node.selected &&
-          parent != null &&
-          parent.selected) {
+      if (node is TreeItem<K> && !node.selected && parent != null && parent.selected) {
         return node.updateState(selected: true);
       }
       return null;
@@ -444,8 +436,7 @@ class TreeView<T> extends StatefulWidget {
     });
   }
 
-  static List<TreeNode<K>> expandNode<K>(
-      List<TreeNode<K>> nodes, TreeNode<K> target) {
+  static List<TreeNode<K>> expandNode<K>(List<TreeNode<K>> nodes, TreeNode<K> target) {
     return replaceNodes(nodes, (node) {
       return node == target ? node.updateState(expanded: true) : null;
     });
@@ -460,8 +451,7 @@ class TreeView<T> extends StatefulWidget {
     });
   }
 
-  static List<TreeNode<K>> collapseNode<K>(
-      List<TreeNode<K>> nodes, TreeNode<K> target) {
+  static List<TreeNode<K>> collapseNode<K>(List<TreeNode<K>> nodes, TreeNode<K> target) {
     return replaceNodes(nodes, (node) {
       return node == target ? node.updateState(expanded: false) : null;
     });
@@ -476,8 +466,7 @@ class TreeView<T> extends StatefulWidget {
     });
   }
 
-  static List<TreeNode<K>> selectNode<K>(
-      List<TreeNode<K>> nodes, TreeNode<K> target) {
+  static List<TreeNode<K>> selectNode<K>(List<TreeNode<K>> nodes, TreeNode<K> target) {
     return replaceNodes(nodes, (node) {
       return node == target ? node.updateState(selected: true) : null;
     });
@@ -492,8 +481,7 @@ class TreeView<T> extends StatefulWidget {
     });
   }
 
-  static List<TreeNode<K>> deselectNode<K>(
-      List<TreeNode<K>> nodes, TreeNode<K> target) {
+  static List<TreeNode<K>> deselectNode<K>(List<TreeNode<K>> nodes, TreeNode<K> target) {
     return replaceNodes(nodes, (node) {
       return node == target ? node.updateState(selected: false) : null;
     });
@@ -508,8 +496,7 @@ class TreeView<T> extends StatefulWidget {
     });
   }
 
-  static List<TreeNode<K>> toggleSelectNode<K>(
-      List<TreeNode<K>> nodes, TreeNode<K> target) {
+  static List<TreeNode<K>> toggleSelectNode<K>(List<TreeNode<K>> nodes, TreeNode<K> target) {
     return replaceNodes(nodes, (node) {
       return node == target ? node.updateState(selected: !node.selected) : null;
     });
@@ -518,14 +505,11 @@ class TreeView<T> extends StatefulWidget {
   static List<TreeNode<K>> toggleSelectNodes<K>(
       List<TreeNode<K>> nodes, Iterable<TreeNode<K>> targets) {
     return replaceNodes(nodes, (node) {
-      return targets.contains(node)
-          ? node.updateState(selected: !node.selected)
-          : null;
+      return targets.contains(node) ? node.updateState(selected: !node.selected) : null;
     });
   }
 
-  static List<TreeNode<K>> toggleSelectItem<K>(
-      List<TreeNode<K>> nodes, K target) {
+  static List<TreeNode<K>> toggleSelectItem<K>(List<TreeNode<K>> nodes, K target) {
     return replaceNodes(nodes, (node) {
       if (node is TreeItem<K> && node.data == target) {
         return node.updateState(selected: !node.selected);
@@ -534,8 +518,7 @@ class TreeView<T> extends StatefulWidget {
     });
   }
 
-  static List<TreeNode<K>> toggleSelectItems<K>(
-      List<TreeNode<K>> nodes, Iterable<K> targets) {
+  static List<TreeNode<K>> toggleSelectItems<K>(List<TreeNode<K>> nodes, Iterable<K> targets) {
     return replaceNodes(nodes, (node) {
       if (node is TreeItem<K> && targets.contains(node.data)) {
         return node.updateState(selected: !node.selected);
@@ -565,14 +548,11 @@ class TreeView<T> extends StatefulWidget {
   static List<TreeNode<K>> selectNodes<K>(
       List<TreeNode<K>> nodes, Iterable<TreeNode<K>> selectedNodes) {
     return replaceNodes(nodes, (node) {
-      return selectedNodes.contains(node)
-          ? node.updateState(selected: true)
-          : null;
+      return selectedNodes.contains(node) ? node.updateState(selected: true) : null;
     });
   }
 
-  static List<TreeNode<K>> selectItems<K>(
-      List<TreeNode<K>> nodes, Iterable<K> selectedItems) {
+  static List<TreeNode<K>> selectItems<K>(List<TreeNode<K>> nodes, Iterable<K> selectedItems) {
     return replaceNodes(nodes, (node) {
       if (node is TreeItem<K> && selectedItems.contains(node.data)) {
         return node.updateState(selected: true);
@@ -584,14 +564,11 @@ class TreeView<T> extends StatefulWidget {
   static List<TreeNode<K>> deselectNodes<K>(
       List<TreeNode<K>> nodes, Iterable<TreeNode<K>> deselectedNodes) {
     return replaceNodes(nodes, (node) {
-      return deselectedNodes.contains(node)
-          ? node.updateState(selected: false)
-          : null;
+      return deselectedNodes.contains(node) ? node.updateState(selected: false) : null;
     });
   }
 
-  static List<TreeNode<K>> deselectItems<K>(
-      List<TreeNode<K>> nodes, Iterable<K> deselectedItems) {
+  static List<TreeNode<K>> deselectItems<K>(List<TreeNode<K>> nodes, Iterable<K> deselectedItems) {
     return replaceNodes(nodes, (node) {
       if (node is TreeItem<K> && deselectedItems.contains(node.data)) {
         return node.updateState(selected: false);
@@ -607,8 +584,7 @@ class TreeView<T> extends StatefulWidget {
     });
   }
 
-  static List<TreeNode<K>> setSelectedItems<K>(
-      List<TreeNode<K>> nodes, Iterable<K> selectedItems) {
+  static List<TreeNode<K>> setSelectedItems<K>(List<TreeNode<K>> nodes, Iterable<K> selectedItems) {
     return replaceNodes(nodes, (node) {
       if (node is TreeItem<K>) {
         return node.updateState(selected: selectedItems.contains(node.data));
@@ -672,8 +648,7 @@ class _TreeViewState<T> extends State<TreeView<T>> {
         List<TreeNodeDepth> newDepth = List.from(depth);
         newDepth.add(TreeNodeDepth(i, nodes.length));
         walker(parentExpanded, node, newDepth);
-        _walkFlattened(
-            walker, node.children, parentExpanded && node.expanded, newDepth);
+        _walkFlattened(walker, node.children, parentExpanded && node.expanded, newDepth);
       } else if (node is TreeRoot<T>) {
         _walkFlattened(walker, node.children, parentExpanded, depth);
       }
@@ -692,8 +667,7 @@ class _TreeViewState<T> extends State<TreeView<T>> {
     }
   }
 
-  void _onChangeSelectionRange(
-      List<TreeNodeData<T>> children, int start, int end) {
+  void _onChangeSelectionRange(List<TreeNodeData<T>> children, int start, int end) {
     if (start > end) {
       final temp = start;
       start = end;
@@ -743,11 +717,9 @@ class _TreeViewState<T> extends State<TreeView<T>> {
               _walkNodes((node) {
                 selectedItems.add(node);
               }, [node]);
-              widget.onSelectionChanged
-                  ?.call(selectedItems, _multiSelect, !node.selected);
+              widget.onSelectionChanged?.call(selectedItems, _multiSelect, !node.selected);
             } else {
-              widget.onSelectionChanged
-                  ?.call([node], _multiSelect, !node.selected);
+              widget.onSelectionChanged?.call([node], _multiSelect, !node.selected);
             }
           }
         },
@@ -799,27 +771,21 @@ class _TreeViewState<T> extends State<TreeView<T>> {
               const DirectionalSelectTreeNodeIntent(false),
           LogicalKeySet(LogicalKeyboardKey.shift, LogicalKeyboardKey.arrowDown):
               const DirectionalSelectTreeNodeIntent(true),
-          LogicalKeySet(
-                  LogicalKeyboardKey.shiftLeft, LogicalKeyboardKey.arrowUp):
+          LogicalKeySet(LogicalKeyboardKey.shiftLeft, LogicalKeyboardKey.arrowUp):
               const DirectionalSelectTreeNodeIntent(false),
-          LogicalKeySet(
-                  LogicalKeyboardKey.shiftLeft, LogicalKeyboardKey.arrowDown):
+          LogicalKeySet(LogicalKeyboardKey.shiftLeft, LogicalKeyboardKey.arrowDown):
               const DirectionalSelectTreeNodeIntent(true),
-          LogicalKeySet(
-                  LogicalKeyboardKey.shiftRight, LogicalKeyboardKey.arrowUp):
+          LogicalKeySet(LogicalKeyboardKey.shiftRight, LogicalKeyboardKey.arrowUp):
               const DirectionalSelectTreeNodeIntent(false),
-          LogicalKeySet(
-                  LogicalKeyboardKey.shiftRight, LogicalKeyboardKey.arrowDown):
+          LogicalKeySet(LogicalKeyboardKey.shiftRight, LogicalKeyboardKey.arrowDown):
               const DirectionalSelectTreeNodeIntent(true),
 
           // multi select
           LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.space):
               const SelectTreeNodeIntent(),
-          LogicalKeySet(
-                  LogicalKeyboardKey.controlLeft, LogicalKeyboardKey.space):
+          LogicalKeySet(LogicalKeyboardKey.controlLeft, LogicalKeyboardKey.space):
               const SelectTreeNodeIntent(),
-          LogicalKeySet(
-                  LogicalKeyboardKey.controlRight, LogicalKeyboardKey.space):
+          LogicalKeySet(LogicalKeyboardKey.controlRight, LogicalKeyboardKey.space):
               const SelectTreeNodeIntent(),
         }
       },
@@ -834,11 +800,11 @@ class _TreeViewState<T> extends State<TreeView<T>> {
                   _walkNodes((node) {
                     selectedItems.add(node);
                   }, [selectedNode.node]);
-                  widget.onSelectionChanged?.call(
-                      selectedItems, _multiSelect, !selectedNode.node.selected);
+                  widget.onSelectionChanged
+                      ?.call(selectedItems, _multiSelect, !selectedNode.node.selected);
                 } else {
-                  widget.onSelectionChanged?.call([selectedNode.node],
-                      _multiSelect, !selectedNode.node.selected);
+                  widget.onSelectionChanged
+                      ?.call([selectedNode.node], _multiSelect, !selectedNode.node.selected);
                 }
               }
               return null;
@@ -878,8 +844,7 @@ class _TreeViewState<T> extends State<TreeView<T>> {
                   }
                 }
               }
-              _onChangeSelectionRange(
-                  children, _startFocusedIndex!, _currentFocusedIndex!);
+              _onChangeSelectionRange(children, _startFocusedIndex!, _currentFocusedIndex!);
               return null;
             },
           ),
@@ -919,8 +884,7 @@ class _TreeViewState<T> extends State<TreeView<T>> {
                 .map((data) => Data<TreeNodeData>.inherit(
                       data: data,
                       child: Builder(builder: (context) {
-                        return widget.builder(
-                            context, data.node as TreeItem<T>);
+                        return widget.builder(context, data.node as TreeItem<T>);
                       }),
                     ))
                 .toList(),
@@ -1203,8 +1167,7 @@ class _TreeItemViewState extends State<TreeItemView> {
     rowChildren.add(
       Expanded(
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: 8, vertical: 4) * scaling,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4) * scaling,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: subRowChildren,
@@ -1221,9 +1184,7 @@ class _TreeItemViewState extends State<TreeItemView> {
           duration: kDefaultDuration,
           firstCurve: Curves.easeInOut,
           secondCurve: Curves.easeInOut,
-          crossFadeState: data.expanded
-              ? CrossFadeState.showFirst
-              : CrossFadeState.showSecond,
+          crossFadeState: data.expanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
           secondChild: const SizedBox(),
           firstChild: IntrinsicHeight(
             child: Clickable(
@@ -1232,14 +1193,10 @@ class _TreeItemViewState extends State<TreeItemView> {
               disableTransition: true,
               statesController: _statesController,
               shortcuts: {
-                if (widget.onExpand != null &&
-                    (widget.expandable ?? data.node.children.isNotEmpty))
-                  LogicalKeySet(LogicalKeyboardKey.arrowRight):
-                      const ExpandTreeNodeIntent(),
-                if (widget.onExpand != null &&
-                    (widget.expandable ?? data.node.children.isNotEmpty))
-                  LogicalKeySet(LogicalKeyboardKey.arrowLeft):
-                      const CollapseTreeNodeIntent(),
+                if (widget.onExpand != null && (widget.expandable ?? data.node.children.isNotEmpty))
+                  LogicalKeySet(LogicalKeyboardKey.arrowRight): const ExpandTreeNodeIntent(),
+                if (widget.onExpand != null && (widget.expandable ?? data.node.children.isNotEmpty))
+                  LogicalKeySet(LogicalKeyboardKey.arrowLeft): const CollapseTreeNodeIntent(),
               },
               actions: {
                 ActivateIntent: CallbackAction(
@@ -1320,8 +1277,7 @@ class _TreeItemViewState extends State<TreeItemView> {
               },
               enabled: widget.onPressed != null ||
                   widget.onDoublePressed != null ||
-                  (widget.onExpand != null &&
-                      (widget.expandable ?? data.node.children.isNotEmpty)),
+                  (widget.onExpand != null && (widget.expandable ?? data.node.children.isNotEmpty)),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: rowChildren,

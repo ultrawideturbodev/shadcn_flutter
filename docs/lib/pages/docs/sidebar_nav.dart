@@ -54,8 +54,7 @@ class SidebarButton extends StatelessWidget {
         alignment: AlignmentDirectional.centerStart,
         style: ButtonVariance.text.copyWith(
           padding: (context, states, value) {
-            return const EdgeInsets.symmetric(vertical: 4, horizontal: 8) *
-                data.scaling;
+            return const EdgeInsets.symmetric(vertical: 4, horizontal: 8) * data.scaling;
           },
           textStyle: (context, states, value) {
             return value.copyWith(
@@ -93,8 +92,7 @@ class _DocsNavigationButtonState extends State<DocsNavigationButton> {
     return const EdgeInsets.symmetric(vertical: 4, horizontal: 8);
   }
 
-  TextStyle _textStyle(
-      BuildContext context, Set<WidgetState> states, TextStyle value) {
+  TextStyle _textStyle(BuildContext context, Set<WidgetState> states, TextStyle value) {
     return value.copyWith(
       fontWeight: widget.selected ? FontWeight.w500 : FontWeight.normal,
     );

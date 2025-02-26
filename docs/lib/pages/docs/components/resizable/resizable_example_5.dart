@@ -8,10 +8,8 @@ class ResizableExample5 extends StatefulWidget {
 }
 
 class _ResizableExample5State extends State<ResizableExample5> {
-  final ResizablePaneController controller =
-      AbsoluteResizablePaneController(120);
-  final ResizablePaneController controller2 =
-      AbsoluteResizablePaneController(120);
+  final ResizablePaneController controller = AbsoluteResizablePaneController(120);
+  final ResizablePaneController controller2 = AbsoluteResizablePaneController(120);
   @override
   Widget build(BuildContext context) {
     return OutlinedContainer(

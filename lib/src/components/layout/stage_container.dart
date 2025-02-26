@@ -12,8 +12,7 @@ abstract class StageBreakpoint {
     return StagedBreakpoint(breakpoints);
   }
 
-  static const StageBreakpoint defaultBreakpoints =
-      StagedBreakpoint.defaultBreakpoints();
+  static const StageBreakpoint defaultBreakpoints = StagedBreakpoint.defaultBreakpoints();
 
   double getMinWidth(double width);
   double getMaxWidth(double width);
@@ -28,8 +27,7 @@ class ConstantBreakpoint implements StageBreakpoint {
   @override
   final double maxSize;
 
-  const ConstantBreakpoint(this.breakpoint,
-      {this.minSize = 0, this.maxSize = double.infinity});
+  const ConstantBreakpoint(this.breakpoint, {this.minSize = 0, this.maxSize = double.infinity});
 
   @override
   double getMinWidth(double width) {
@@ -56,8 +54,7 @@ class StagedBreakpoint implements StageBreakpoint {
   final List<double> breakpoints;
 
   const StagedBreakpoint(this.breakpoints) : assert(breakpoints.length > 1);
-  const StagedBreakpoint.defaultBreakpoints()
-      : breakpoints = _defaultBreakpoints;
+  const StagedBreakpoint.defaultBreakpoints() : breakpoints = _defaultBreakpoints;
 
   @override
   double getMinWidth(double width) {

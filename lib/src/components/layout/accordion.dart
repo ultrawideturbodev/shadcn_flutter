@@ -163,8 +163,7 @@ class AccordionItem extends StatefulWidget {
   State<AccordionItem> createState() => _AccordionItemState();
 }
 
-class _AccordionItemState extends State<AccordionItem>
-    with SingleTickerProviderStateMixin {
+class _AccordionItemState extends State<AccordionItem> with SingleTickerProviderStateMixin {
   _AccordionState? accordion;
   final ValueNotifier<bool> _expanded = ValueNotifier(false);
 
@@ -352,9 +351,7 @@ class _AccordionTriggerState extends State<AccordionTrigger> {
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(
-              color: _focusing
-                  ? theme.colorScheme.ring
-                  : theme.colorScheme.ring.withOpacity(0),
+              color: _focusing ? theme.colorScheme.ring : theme.colorScheme.ring.withOpacity(0),
               width: 1,
             ),
             borderRadius: BorderRadius.circular(theme.radiusXs),
@@ -370,9 +367,7 @@ class _AccordionTriggerState extends State<AccordionTrigger> {
                     alignment: AlignmentDirectional.centerStart,
                     child: DefaultTextStyle.merge(
                       style: TextStyle(
-                        decoration: _hovering
-                            ? TextDecoration.underline
-                            : TextDecoration.none,
+                        decoration: _hovering ? TextDecoration.underline : TextDecoration.none,
                       ),
                       child: widget.child,
                     ),
@@ -380,21 +375,16 @@ class _AccordionTriggerState extends State<AccordionTrigger> {
                 ),
                 SizedBox(width: accTheme?.iconGap ?? 18 * scaling),
                 TweenAnimationBuilder(
-                    tween: _expanded
-                        ? Tween(begin: 1.0, end: 0)
-                        : Tween(begin: 0, end: 1.0),
+                    tween: _expanded ? Tween(begin: 1.0, end: 0) : Tween(begin: 0, end: 1.0),
                     duration: accTheme?.duration ?? kDefaultDuration,
                     builder: (context, value, child) {
                       return Transform.rotate(
                         angle: value * pi,
                         child: IconTheme(
                           data: IconThemeData(
-                            color: accTheme?.arrowIconColor ??
-                                theme.colorScheme.mutedForeground,
+                            color: accTheme?.arrowIconColor ?? theme.colorScheme.mutedForeground,
                           ),
-                          child: Icon(accTheme?.arrowIcon ??
-                                  Icons.keyboard_arrow_up)
-                              .iconMedium(),
+                          child: Icon(accTheme?.arrowIcon ?? Icons.keyboard_arrow_up).iconMedium(),
                         ),
                       );
                     }),

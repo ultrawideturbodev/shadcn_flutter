@@ -88,8 +88,7 @@ class _MostInnerWidgetState extends State<MostInnerWidget> {
     int parentCounter = Data.of(context);
     mostInnerRebuildCount++;
     return Card(
-      child: Text(
-          'MostInnerWidget Data: $parentCounter - Rebuild Count: $mostInnerRebuildCount'),
+      child: Text('MostInnerWidget Data: $parentCounter - Rebuild Count: $mostInnerRebuildCount'),
     );
   }
 }

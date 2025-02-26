@@ -171,10 +171,8 @@ class DocsPageState extends State<DocsPage> {
     ),
     ShadcnDocsSection('Control', [
       ShadcnDocsPage('Button', 'button'),
-      ShadcnDocsPage(
-          'Audio Control', 'audio_control', ShadcnFeatureTag.workInProgress),
-      ShadcnDocsPage(
-          'Video Control', 'video_control', ShadcnFeatureTag.workInProgress),
+      ShadcnDocsPage('Audio Control', 'audio_control', ShadcnFeatureTag.workInProgress),
+      ShadcnDocsPage('Video Control', 'video_control', ShadcnFeatureTag.workInProgress),
     ]),
     ShadcnDocsSection(
       'Disclosure',
@@ -226,8 +224,7 @@ class DocsPageState extends State<DocsPage> {
         ShadcnDocsPage('Color Picker', 'color_picker'),
         ShadcnDocsPage('Date Picker', 'date_picker'),
         // TODO: https://file-vault-delta.vercel.app/ also https://uploader.sadmn.com/
-        ShadcnDocsPage(
-            'File Picker', 'file_picker', ShadcnFeatureTag.workInProgress),
+        ShadcnDocsPage('File Picker', 'file_picker', ShadcnFeatureTag.workInProgress),
         ShadcnDocsPage('Form', 'form'),
         // TODO: Image Input (with cropper and rotate tool, upload from file or take photo from camera)
         // ShadcnDocsPage(
@@ -289,8 +286,7 @@ class DocsPageState extends State<DocsPage> {
         // aka Bottom Navigation Bar
         ShadcnDocsPage('Navigation Bar', 'navigation_bar'),
         ShadcnDocsPage('Navigation Rail', 'navigation_rail'),
-        ShadcnDocsPage('Expandable Sidebar', 'expandable_sidebar',
-            ShadcnFeatureTag.experimental),
+        ShadcnDocsPage('Expandable Sidebar', 'expandable_sidebar', ShadcnFeatureTag.experimental),
         // aka Drawer
         ShadcnDocsPage('Navigation Sidebar', 'navigation_sidebar'),
         ShadcnDocsPage('Dot Indicator', 'dot_indicator'),
@@ -322,8 +318,7 @@ class DocsPageState extends State<DocsPage> {
         // TODO https://www.radix-ui.com/themes/docs/components/kbd
         ShadcnDocsPage('Keyboard Display', 'keyboard_display'),
         // TODO: Same progress as image input
-        ShadcnDocsPage(
-            'Image Tools', 'image_tools', ShadcnFeatureTag.workInProgress),
+        ShadcnDocsPage('Image Tools', 'image_tools', ShadcnFeatureTag.workInProgress),
         // TODO: Mostly same as refresh indicator, but it does not provide indicator
         // the indicator itself is provided by scaffold
         ShadcnDocsPage('Refresh Trigger', 'refresh_trigger'),
@@ -401,9 +396,8 @@ class DocsPageState extends State<DocsPage> {
   void _onVisibilityChanged() {
     if (!mounted) return;
     setState(() {
-      currentlyVisible = widget.onThisPage.values
-          .where((element) => element.isVisible.value)
-          .toList();
+      currentlyVisible =
+          widget.onThisPage.values.where((element) => element.isVisible.value).toList();
     });
   }
 
@@ -418,8 +412,7 @@ class DocsPageState extends State<DocsPage> {
         for (final section in sections) {
           final List<Widget> resultItems = [];
           for (final page in section.pages) {
-            if (query == null ||
-                page.title.toLowerCase().contains(query.toLowerCase())) {
+            if (query == null || page.title.toLowerCase().contains(query.toLowerCase())) {
               resultItems.add(CommandItem(
                 title: Text(page.title),
                 trailing: Icon(section.icon),
@@ -445,10 +438,8 @@ class DocsPageState extends State<DocsPage> {
   @override
   Widget build(BuildContext context) {
     Map<String, OnThisPage> onThisPage = widget.onThisPage;
-    ShadcnDocsPage? page = sections
-        .expand((e) => e.pages)
-        .where((e) => e.name == widget.name)
-        .firstOrNull;
+    ShadcnDocsPage? page =
+        sections.expand((e) => e.pages).where((e) => e.name == widget.name).firstOrNull;
 
     final theme = Theme.of(context);
 
@@ -487,8 +478,7 @@ class DocsPageState extends State<DocsPage> {
                               GhostButton(
                                 density: ButtonDensity.icon,
                                 onPressed: () {
-                                  openInNewTab(
-                                      'https://github.com/sunarya-thito/shadcn_flutter');
+                                  openInNewTab('https://github.com/sunarya-thito/shadcn_flutter');
                                 },
                                 child: FaIcon(
                                   FontAwesomeIcons.github,
@@ -499,8 +489,7 @@ class DocsPageState extends State<DocsPage> {
                               GhostButton(
                                   density: ButtonDensity.icon,
                                   onPressed: () {
-                                    openInNewTab(
-                                        'https://pub.dev/packages/shadcn_flutter');
+                                    openInNewTab('https://pub.dev/packages/shadcn_flutter');
                                   },
                                   child: ColorFiltered(
                                     // turns into white
@@ -520,12 +509,9 @@ class DocsPageState extends State<DocsPage> {
                                   onPressed: () {
                                     showSearchBar();
                                   },
-                                  trailing: const Icon(Icons.search)
-                                      .iconSmall()
-                                      .iconMutedForeground(),
-                                  child: const Text('Search documentation...')
-                                      .muted()
-                                      .normal(),
+                                  trailing:
+                                      const Icon(Icons.search).iconSmall().iconMutedForeground(),
+                                  child: const Text('Search documentation...').muted().normal(),
                                 ),
                               ),
                             ),
@@ -564,13 +550,9 @@ class DocsPageState extends State<DocsPage> {
                       child: FocusTraversalGroup(
                         child: SingleChildScrollView(
                           key: const PageStorageKey('sidebar'),
-                          padding: EdgeInsets.only(
-                                  top: 32,
-                                  left: 24 + padding.left,
-                                  bottom: 32) *
+                          padding: EdgeInsets.only(top: 32, left: 24 + padding.left, bottom: 32) *
                               theme.scaling,
-                          child: _DocsSidebar(
-                              sections: sections, pageName: widget.name),
+                          child: _DocsSidebar(sections: sections, pageName: widget.name),
                         ),
                       ),
                     ),
@@ -595,8 +577,7 @@ class DocsPageState extends State<DocsPage> {
                                         theme.scaling,
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
                                     Breadcrumb(
                                       separator: Breadcrumb.arrowSeparator,
@@ -638,8 +619,7 @@ class DocsPageState extends State<DocsPage> {
                                         theme.scaling,
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
                                     Breadcrumb(
                                       separator: Breadcrumb.arrowSeparator,
@@ -711,8 +691,7 @@ class DocsPageState extends State<DocsPage> {
               onPressed: () {
                 showSearchBar();
               },
-              trailing:
-                  const Icon(Icons.search).iconSmall().iconMutedForeground(),
+              trailing: const Icon(Icons.search).iconSmall().iconMutedForeground(),
               child: const Text('Search documentation...').muted().normal(),
             ),
           ),
@@ -723,8 +702,7 @@ class DocsPageState extends State<DocsPage> {
           onPressed: () {
             openInNewTab('https://github.com/sunarya-thito/shadcn_flutter');
           },
-          child: FaIcon(FontAwesomeIcons.github,
-                  color: theme.colorScheme.secondaryForeground)
+          child: FaIcon(FontAwesomeIcons.github, color: theme.colorScheme.secondaryForeground)
               .iconLarge(),
         ),
         // pub.dev icon
@@ -783,9 +761,7 @@ class DocsPageState extends State<DocsPage> {
               Expanded(
                 child: FocusTraversalGroup(
                   child: SingleChildScrollView(
-                    padding:
-                        const EdgeInsets.only(left: 32, right: 32, bottom: 48) *
-                            scaling,
+                    padding: const EdgeInsets.only(left: 32, right: 32, bottom: 48) * scaling,
                     key: const PageStorageKey('sidebar'),
                     child: SidebarNav(children: [
                       for (var section in sections)
@@ -795,8 +771,7 @@ class DocsPageState extends State<DocsPage> {
                             for (var page in section.pages)
                               DocsNavigationButton(
                                 onPressed: () {
-                                  if (page.tag ==
-                                      ShadcnFeatureTag.workInProgress) {
+                                  if (page.tag == ShadcnFeatureTag.workInProgress) {
                                     showDialog(
                                       context: context,
                                       builder: (context) {
@@ -821,8 +796,7 @@ class DocsPageState extends State<DocsPage> {
                                 selected: page.name == widget.name,
                                 child: Basic(
                                   trailing: page.tag?.buildBadge(context),
-                                  trailingAlignment:
-                                      AlignmentDirectional.centerStart,
+                                  trailingAlignment: AlignmentDirectional.centerStart,
                                   content: Text(page.title),
                                 ),
                               ),
@@ -843,7 +817,6 @@ class DocsPageState extends State<DocsPage> {
 
 class _DocsSidebar extends StatefulWidget {
   const _DocsSidebar({
-    super.key,
     required this.sections,
     required this.pageName,
   });
@@ -881,7 +854,6 @@ class _DocsSecondarySidebar extends StatefulWidget {
   final EdgeInsets padding;
 
   const _DocsSecondarySidebar({
-    super.key,
     required this.onThisPage,
     required this.isVisible,
     required this.padding,
@@ -901,8 +873,7 @@ class _DocsSecondarySidebarState extends State<_DocsSecondarySidebar> {
       side.add(SidebarButton(
         onPressed: () {
           Scrollable.ensureVisible(widget.onThisPage[key]!.currentContext!,
-              duration: kDefaultDuration,
-              alignmentPolicy: ScrollPositionAlignmentPolicy.explicit);
+              duration: kDefaultDuration, alignmentPolicy: ScrollPositionAlignmentPolicy.explicit);
         },
         selected: widget.isVisible(widget.onThisPage[key]!),
         child: Text(key),
@@ -938,7 +909,6 @@ class _DocsSecondarySidebarState extends State<_DocsSecondarySidebar> {
 
 class _DocsSidebarSection extends StatefulWidget {
   const _DocsSidebarSection({
-    super.key,
     required this.section,
     required this.pageName,
   });
@@ -975,7 +945,6 @@ class _DocsSidebarSectionState extends State<_DocsSidebarSection> {
 
 class _DocsSidebarButton extends StatefulWidget {
   const _DocsSidebarButton({
-    super.key,
     required this.page,
     required this.pageName,
   });
@@ -1010,8 +979,7 @@ class _DocsSidebarButtonState extends State<_DocsSidebarButton> {
         builder: (context) {
           return AlertDialog(
             title: const Text('Work in Progress'),
-            content: const Text(
-                'This page is still under development. Please come back later.'),
+            content: const Text('This page is still under development. Please come back later.'),
             actions: [
               PrimaryButton(
                   onPressed: () {

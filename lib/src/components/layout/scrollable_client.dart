@@ -59,11 +59,8 @@ class ScrollableClient extends StatelessWidget {
               builder: (context, child) {
                 var horizontalPixels = horizontalOffset.pixels;
                 var verticalPixels = verticalOffset.pixels;
-                return builder(
-                    context,
-                    Offset(horizontalPixels, verticalPixels),
-                    (vicinity as _ScrollableClientChildVicinity).viewportSize,
-                    child);
+                return builder(context, Offset(horizontalPixels, verticalPixels),
+                    (vicinity as _ScrollableClientChildVicinity).viewportSize, child);
               },
               child: child,
             );
@@ -143,7 +140,7 @@ class ScrollableClient extends StatelessWidget {
 
 class ScrollableClientViewport extends TwoDimensionalViewport {
   final bool overscroll;
-  ScrollableClientViewport({
+  const ScrollableClientViewport({
     super.key,
     required super.verticalOffset,
     required super.verticalAxisDirection,
@@ -213,16 +210,11 @@ class RenderScrollableClientViewport extends RenderTwoDimensionalViewport {
       horizontalPixels = min(horizontalPixels, maxHorizontalPixels);
       verticalPixels = min(verticalPixels, maxVerticalPixels);
     }
-    parentDataOf(child).layoutOffset =
-        Offset(-horizontalPixels, -verticalPixels);
+    parentDataOf(child).layoutOffset = Offset(-horizontalPixels, -verticalPixels);
     horizontalOffset.applyContentDimensions(
-        0,
-        (child.size.width - viewportDimension.width)
-            .clamp(0.0, double.infinity));
+        0, (child.size.width - viewportDimension.width).clamp(0.0, double.infinity));
     verticalOffset.applyContentDimensions(
-        0,
-        (child.size.height - viewportDimension.height)
-            .clamp(0.0, double.infinity));
+        0, (child.size.height - viewportDimension.height).clamp(0.0, double.infinity));
     horizontalOffset.applyViewportDimension(viewportDimension.width);
     verticalOffset.applyViewportDimension(viewportDimension.height);
   }

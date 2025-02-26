@@ -13,10 +13,8 @@ class _InputOTPSpacing extends StatelessWidget {
 }
 
 abstract class InputOTPChild {
-  static InputOTPChild get separator =>
-      const WidgetInputOTPChild(OTPSeparator());
-  static InputOTPChild get space =>
-      const WidgetInputOTPChild(_InputOTPSpacing());
+  static InputOTPChild get separator => const WidgetInputOTPChild(OTPSeparator());
+  static InputOTPChild get space => const WidgetInputOTPChild(_InputOTPSpacing());
   static InputOTPChild get empty => const WidgetInputOTPChild(SizedBox());
   factory InputOTPChild.input({
     CodepointPredicate? predicate,
@@ -53,12 +51,10 @@ abstract class InputOTPChild {
         : TextInputType.text;
     return CharacterInputOTPChild(
       predicate: (codepoint) {
-        if (allowLowercaseAlphabet &&
-            CharacterInputOTPChild.isAlphabetLower(codepoint)) {
+        if (allowLowercaseAlphabet && CharacterInputOTPChild.isAlphabetLower(codepoint)) {
           return true;
         }
-        if (allowUppercaseAlphabet &&
-            CharacterInputOTPChild.isAlphabetUpper(codepoint)) {
+        if (allowUppercaseAlphabet && CharacterInputOTPChild.isAlphabetUpper(codepoint)) {
           return true;
         }
         if (allowDigit && CharacterInputOTPChild.isDigit(codepoint)) {
@@ -100,12 +96,9 @@ class CharacterInputOTPChild extends InputOTPChild {
       codepoint >= _startAlphabetLower && codepoint <= _endAlphabetLower;
   static bool isAlphabetUpper(int codepoint) =>
       codepoint >= _startAlphabetUpper && codepoint <= _endAlphabetUpper;
-  static int lowerToUpper(int codepoint) =>
-      isAlphabetLower(codepoint) ? codepoint - 32 : codepoint;
-  static int upperToLower(int codepoint) =>
-      isAlphabetUpper(codepoint) ? codepoint + 32 : codepoint;
-  static bool isDigit(int codepoint) =>
-      codepoint >= _startDigit && codepoint <= _endDigit;
+  static int lowerToUpper(int codepoint) => isAlphabetLower(codepoint) ? codepoint - 32 : codepoint;
+  static int upperToLower(int codepoint) => isAlphabetUpper(codepoint) ? codepoint + 32 : codepoint;
+  static bool isDigit(int codepoint) => codepoint >= _startDigit && codepoint <= _endDigit;
 
   final CodepointPredicate? predicate;
   final CodepointUnaryOperator? transform;
@@ -213,8 +206,7 @@ class _OTPCharacterInputState extends State<_OTPCharacterInput> {
     }
   }
 
-  BorderRadius getBorderRadiusByRelativeIndex(
-      ThemeData theme, int relativeIndex, int groupLength) {
+  BorderRadius getBorderRadiusByRelativeIndex(ThemeData theme, int relativeIndex, int groupLength) {
     if (relativeIndex == 0) {
       return BorderRadius.only(
         topLeft: Radius.circular(theme.radiusMd),
@@ -397,11 +389,7 @@ class OTPSeparator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return const Text('-')
-        .bold()
-        .withPadding(horizontal: theme.scaling * 4)
-        .base()
-        .foreground();
+    return const Text('-').bold().withPadding(horizontal: theme.scaling * 4).base().foreground();
   }
 }
 
@@ -483,8 +471,7 @@ class InputOTP extends StatefulWidget {
   State<InputOTP> createState() => _InputOTPState();
 }
 
-class _InputOTPState extends State<InputOTP>
-    with FormValueSupplier<OTPCodepointList, InputOTP> {
+class _InputOTPState extends State<InputOTP> with FormValueSupplier<OTPCodepointList, InputOTP> {
   final List<_InputOTPChild> _children = [];
 
   OTPCodepointList get value {
@@ -595,8 +582,7 @@ class _InputOTPState extends State<InputOTP>
             groupIndex: _children[i].groupIndex,
             relativeIndex: _children[i].relativeIndex,
             previousFocusNode: i == 0 ? null : _children[i - 1].focusNode,
-            nextFocusNode:
-                i == _children.length - 1 ? null : _children[i + 1].focusNode,
+            nextFocusNode: i == _children.length - 1 ? null : _children[i + 1].focusNode,
             value: _children[i].value,
             groupLength: _children[i].groupLength,
           ),

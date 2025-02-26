@@ -10,8 +10,7 @@ class ButtonExample16 extends StatelessWidget {
       child: const Basic(
         title: Text('Project #1'),
         subtitle: Text('Project description'),
-        content:
-            Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+        content: Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
       ),
     );
   }

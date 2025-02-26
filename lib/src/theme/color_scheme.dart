@@ -49,19 +49,7 @@ class ChartColorScheme {
 
 class ColorShades implements Color, ColorSwatch {
   static const int _step = 100;
-  static const List<int> shadeValues = [
-    50,
-    100,
-    200,
-    300,
-    400,
-    500,
-    600,
-    700,
-    800,
-    900,
-    950
-  ];
+  static const List<int> shadeValues = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
   final Map<int, Color> _colors;
 
   ColorShades._() : _colors = {};
@@ -70,8 +58,7 @@ class ColorShades implements Color, ColorSwatch {
   const ColorShades.raw(this._colors);
 
   factory ColorShades.sorted(List<Color> colors) {
-    assert(colors.length == shadeValues.length,
-        'ColorShades.sorted: Invalid number of colors');
+    assert(colors.length == shadeValues.length, 'ColorShades.sorted: Invalid number of colors');
     final slate = ColorShades._();
     for (int i = 0; i < shadeValues.length; i++) {
       slate._colors[shadeValues[i]] = colors[i];
@@ -86,8 +73,7 @@ class ColorShades implements Color, ColorSwatch {
       int saturationStepUp = 0,
       int lightnessStepDown = 8,
       int lightnessStepUp = 9}) {
-    assert(shadeValues.contains(base),
-        'ColorShades.fromAccent: Invalid base value');
+    assert(shadeValues.contains(base), 'ColorShades.fromAccent: Invalid base value');
     final hsl = HSLColor.fromColor(accent);
     return ColorShades.fromAccentHSL(hsl,
         base: base,
@@ -104,16 +90,13 @@ class ColorShades implements Color, ColorSwatch {
       int saturationStepUp = 0,
       int lightnessStepDown = 8,
       int lightnessStepUp = 9}) {
-    assert(shadeValues.contains(base),
-        'ColorShades.fromAccent: Invalid base value');
+    assert(shadeValues.contains(base), 'ColorShades.fromAccent: Invalid base value');
     final slate = ColorShades._();
     for (final key in shadeValues) {
       double delta = (key - base) / _step;
       double hueDelta = delta * (hueShift / 10);
-      double saturationDelta =
-          delta > 0 ? delta * saturationStepUp : delta * saturationStepDown;
-      double lightnessDelta =
-          delta > 0 ? delta * lightnessStepUp : delta * lightnessStepDown;
+      double saturationDelta = delta > 0 ? delta * saturationStepUp : delta * saturationStepDown;
+      double lightnessDelta = delta > 0 ? delta * lightnessStepUp : delta * lightnessStepDown;
       final h = (accent.hue + hueDelta) % 360;
       final s = (accent.saturation * 100 - saturationDelta).clamp(0, 100) / 100;
       final l = (accent.lightness * 100 - lightnessDelta).clamp(0, 100) / 100;
@@ -133,14 +116,11 @@ class ColorShades implements Color, ColorSwatch {
     int lightnessStepUp = 9,
     int lightnessStepDown = 8,
   }) {
-    assert(shadeValues.contains(base),
-        'ColorShades.fromAccent: Invalid base value');
+    assert(shadeValues.contains(base), 'ColorShades.fromAccent: Invalid base value');
     double delta = (targetBase - base) / _step;
     double hueDelta = delta * (hueShift / 10);
-    double saturationDelta =
-        delta > 0 ? delta * saturationStepUp : delta * saturationStepDown;
-    double lightnessDelta =
-        delta > 0 ? delta * lightnessStepUp : delta * lightnessStepDown;
+    double saturationDelta = delta > 0 ? delta * saturationStepUp : delta * saturationStepDown;
+    double lightnessDelta = delta > 0 ? delta * lightnessStepUp : delta * lightnessStepDown;
     final h = (hsv.hue + hueDelta) % 360;
     final s = (hsv.saturation * 100 - saturationDelta).clamp(0, 100) / 100;
     final l = (hsv.lightness * 100 - lightnessDelta).clamp(0, 100) / 100;
@@ -151,8 +131,7 @@ class ColorShades implements Color, ColorSwatch {
   factory ColorShades.fromMap(Map<int, Color> colors) {
     final slate = ColorShades._();
     for (final key in shadeValues) {
-      assert(colors.containsKey(key),
-          'ColorShades.fromMap: Missing value for $key');
+      assert(colors.containsKey(key), 'ColorShades.fromMap: Missing value for $key');
       slate._colors[key] = colors[key]!;
     }
     return slate;
@@ -283,11 +262,7 @@ class ColorShades implements Color, ColorSwatch {
 
   @override
   Color withValues(
-      {double? alpha,
-      double? red,
-      double? green,
-      double? blue,
-      ColorSpace? colorSpace}) {
+      {double? alpha, double? red, double? green, double? blue, ColorSpace? colorSpace}) {
     Map<int, Color> colors = {};
     for (final key in shadeValues) {
       colors[key] = _colors[key]!.withValues(
@@ -417,10 +392,9 @@ class ColorScheme implements ChartColorScheme {
         chart3 = map._col('chart3'),
         chart4 = map._col('chart4'),
         chart5 = map._col('chart5'),
-        brightness = Brightness.values
-                .where((element) => element.name == map['brightness'])
-                .firstOrNull ??
-            Brightness.light;
+        brightness =
+            Brightness.values.where((element) => element.name == map['brightness']).firstOrNull ??
+                Brightness.light;
 
   Map<String, String> toMap() {
     return {
@@ -551,8 +525,7 @@ class ColorScheme implements ChartColorScheme {
       accent: accent ?? this.accent,
       accentForeground: accentForeground ?? this.accentForeground,
       destructive: destructive ?? this.destructive,
-      destructiveForeground:
-          destructiveForeground ?? this.destructiveForeground,
+      destructiveForeground: destructiveForeground ?? this.destructiveForeground,
       border: border ?? this.border,
       input: input ?? this.input,
       ring: ring ?? this.ring,
@@ -575,21 +548,17 @@ class ColorScheme implements ChartColorScheme {
       card: Color.lerp(a.card, b.card, t)!,
       cardForeground: Color.lerp(a.cardForeground, b.cardForeground, t)!,
       popover: Color.lerp(a.popover, b.popover, t)!,
-      popoverForeground:
-          Color.lerp(a.popoverForeground, b.popoverForeground, t)!,
+      popoverForeground: Color.lerp(a.popoverForeground, b.popoverForeground, t)!,
       primary: Color.lerp(a.primary, b.primary, t)!,
-      primaryForeground:
-          Color.lerp(a.primaryForeground, b.primaryForeground, t)!,
+      primaryForeground: Color.lerp(a.primaryForeground, b.primaryForeground, t)!,
       secondary: Color.lerp(a.secondary, b.secondary, t)!,
-      secondaryForeground:
-          Color.lerp(a.secondaryForeground, b.secondaryForeground, t)!,
+      secondaryForeground: Color.lerp(a.secondaryForeground, b.secondaryForeground, t)!,
       muted: Color.lerp(a.muted, b.muted, t)!,
       mutedForeground: Color.lerp(a.mutedForeground, b.mutedForeground, t)!,
       accent: Color.lerp(a.accent, b.accent, t)!,
       accentForeground: Color.lerp(a.accentForeground, b.accentForeground, t)!,
       destructive: Color.lerp(a.destructive, b.destructive, t)!,
-      destructiveForeground:
-          Color.lerp(a.destructiveForeground, b.destructiveForeground, t)!,
+      destructiveForeground: Color.lerp(a.destructiveForeground, b.destructiveForeground, t)!,
       border: Color.lerp(a.border, b.border, t)!,
       input: Color.lerp(a.input, b.input, t)!,
       ring: Color.lerp(a.ring, b.ring, t)!,

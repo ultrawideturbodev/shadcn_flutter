@@ -8,8 +8,7 @@ class RefreshTriggerExample1 extends StatefulWidget {
 }
 
 class _RefreshTriggerExample1State extends State<RefreshTriggerExample1> {
-  final GlobalKey<RefreshTriggerState> _refreshTriggerKey =
-      GlobalKey<RefreshTriggerState>();
+  final GlobalKey<RefreshTriggerState> _refreshTriggerKey = GlobalKey<RefreshTriggerState>();
   @override
   Widget build(BuildContext context) {
     return RefreshTrigger(

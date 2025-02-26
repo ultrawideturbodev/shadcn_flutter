@@ -10,14 +10,12 @@ class NumberInputExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'number_input',
-      description:
-          'A number input field with buttons to increase or decrease the value.',
+      description: 'A number input field with buttons to increase or decrease the value.',
       displayName: 'Number Input',
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/number_input/number_input_example_1.dart',
+          path: 'lib/pages/docs/components/number_input/number_input_example_1.dart',
           child: NumberInputExample1(),
         ),
       ],

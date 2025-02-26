@@ -62,9 +62,7 @@ class _HoverCardState extends State<HoverCard> {
       onEnter: (_) {
         int count = ++_hoverCount;
         Future.delayed(widget.wait, () {
-          if (count == _hoverCount &&
-              !_controller.hasOpenPopover &&
-              context.mounted) {
+          if (count == _hoverCount && !_controller.hasOpenPopover && context.mounted) {
             _showPopover(context);
           }
         });
@@ -91,8 +89,7 @@ class _HoverCardState extends State<HoverCard> {
     OverlayHandler? handler = widget.handler;
     if (handler == null) {
       final overlayManager = OverlayManager.of(context);
-      handler =
-          OverlayManagerAsTooltipOverlayHandler(overlayManager: overlayManager);
+      handler = OverlayManagerAsTooltipOverlayHandler(overlayManager: overlayManager);
     }
     _controller.show(
       context: context,

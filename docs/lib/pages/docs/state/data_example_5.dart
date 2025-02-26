@@ -94,8 +94,7 @@ class _MostInnerWidgetState extends State<MostInnerWidget> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                  'MostInnerWidget Data: $parentCounter - Rebuild Count: $mostInnerRebuildCount'),
+              Text('MostInnerWidget Data: $parentCounter - Rebuild Count: $mostInnerRebuildCount'),
               const Gap(24),
               PrimaryButton(
                 onPressed: () {

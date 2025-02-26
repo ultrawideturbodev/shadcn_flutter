@@ -41,8 +41,7 @@ class Tabs extends StatelessWidget {
                       cursor: SystemMouseCursors.click,
                       child: AnimatedContainer(
                         duration: const Duration(
-                            milliseconds:
-                                50), // slightly faster than kDefaultDuration
+                            milliseconds: 50), // slightly faster than kDefaultDuration
                         alignment: Alignment.center,
                         padding: padding ??
                             const EdgeInsets.symmetric(
@@ -51,17 +50,13 @@ class Tabs extends StatelessWidget {
                                 ) *
                                 scaling,
                         decoration: BoxDecoration(
-                          color:
-                              i == index ? theme.colorScheme.background : null,
+                          color: i == index ? theme.colorScheme.background : null,
                           borderRadius: BorderRadius.circular(
                             theme.radiusMd,
                           ),
                         ),
-                        child: (i == index
-                                ? tabs[i].foreground()
-                                : tabs[i].muted())
-                            .small()
-                            .medium(),
+                        child:
+                            (i == index ? tabs[i].foreground() : tabs[i].muted()).small().medium(),
                       ),
                     ),
                   ),

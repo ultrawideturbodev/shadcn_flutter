@@ -18,8 +18,7 @@ class TimelineAnimationExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Timeline Animation Example',
-          path:
-              'lib/pages/docs/components/timeline_animation/timeline_animation_example_1.dart',
+          path: 'lib/pages/docs/components/timeline_animation/timeline_animation_example_1.dart',
           child: TimelineAnimationExample1(),
         ),
       ],

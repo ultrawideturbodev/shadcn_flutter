@@ -88,8 +88,7 @@ class _LeafWidgetState extends State<LeafWidget> {
     int secondCounter = Model.of(context, #secondCounter);
     rebuildCount++;
     return Card(
-      child:
-          Text('Second Counter: $secondCounter (Rebuild Count: $rebuildCount)'),
+      child: Text('Second Counter: $secondCounter (Rebuild Count: $rebuildCount)'),
     );
   }
 }

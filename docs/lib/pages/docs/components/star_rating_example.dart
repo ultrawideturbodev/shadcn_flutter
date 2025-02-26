@@ -16,8 +16,7 @@ class StarRatingExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/star_rating/star_rating_example_1.dart',
+          path: 'lib/pages/docs/components/star_rating/star_rating_example_1.dart',
           child: StarRatingExample1(),
         ),
       ],

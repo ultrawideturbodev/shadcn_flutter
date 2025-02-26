@@ -11,8 +11,7 @@ class SheetExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'sheet',
-      description:
-          'A sheet is a panel that slides in from the edge of a screen.',
+      description: 'A sheet is a panel that slides in from the edge of a screen.',
       displayName: 'Sheet',
       children: [
         WidgetUsageExample(

@@ -74,8 +74,7 @@ class _InnerChildWidgetState extends State<InnerChildWidget> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                  'Rebuild: $innerRebuildCount - Inner Data: $childCounterData'),
+              Text('Rebuild: $innerRebuildCount - Inner Data: $childCounterData'),
               const Gap(24),
               PrimaryButton(
                 onPressed: () {
@@ -118,8 +117,7 @@ class _MostInnerChildState extends State<MostInnerChildWidget> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                    'Rebuild: $mostInnerRebuildCount - Most Inner Data: $counter'),
+                Text('Rebuild: $mostInnerRebuildCount - Most Inner Data: $counter'),
                 const Gap(24),
                 PrimaryButton(
                   onPressed: () {

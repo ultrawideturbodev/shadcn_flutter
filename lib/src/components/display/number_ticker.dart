@@ -1,7 +1,6 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
-typedef NumberTickerBuilder = Widget Function(
-    BuildContext context, num number, Widget? child);
+typedef NumberTickerBuilder = Widget Function(BuildContext context, num number, Widget? child);
 typedef NumberTickerFormatted = String Function(num number);
 
 class NumberTicker extends StatelessWidget {

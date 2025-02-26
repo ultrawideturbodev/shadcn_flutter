@@ -17,14 +17,12 @@ class CircularProgressExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Circular Progress Example',
-          path:
-              'lib/pages/docs/components/circular_progress/circular_progress_example_1.dart',
+          path: 'lib/pages/docs/components/circular_progress/circular_progress_example_1.dart',
           child: CircularProgressExample1(),
         ),
         WidgetUsageExample(
           title: 'Circular Progress with Value Example',
-          path:
-              'lib/pages/docs/components/circular_progress/circular_progress_example_2.dart',
+          path: 'lib/pages/docs/components/circular_progress/circular_progress_example_2.dart',
           child: CircularProgressExample2(),
         ),
       ],

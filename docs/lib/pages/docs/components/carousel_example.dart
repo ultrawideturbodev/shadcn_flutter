@@ -14,8 +14,7 @@ class CarouselExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'carousel',
-      description:
-          'A carousel slider widget, support infinite scroll and custom child widget.',
+      description: 'A carousel slider widget, support infinite scroll and custom child widget.',
       displayName: 'Carousel',
       children: [
         WidgetUsageExample(
@@ -64,8 +63,7 @@ class NumberedContainer extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         color: fill
-            ? Colors.primaries[
-                (Colors.primaries.length - 1 - index) % Colors.primaries.length]
+            ? Colors.primaries[(Colors.primaries.length - 1 - index) % Colors.primaries.length]
             : null,
         borderRadius: theme.borderRadiusMd,
       ),

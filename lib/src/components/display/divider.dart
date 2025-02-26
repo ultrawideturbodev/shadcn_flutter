@@ -15,8 +15,7 @@ class DividerProperties {
     required this.endIndent,
   });
 
-  static DividerProperties lerp(
-      DividerProperties a, DividerProperties b, double t) {
+  static DividerProperties lerp(DividerProperties a, DividerProperties b, double t) {
     return DividerProperties(
       color: Color.lerp(a.color, b.color, t)!,
       thickness: lerpDouble(a.thickness, b.thickness, t)!,
@@ -84,8 +83,7 @@ class Divider extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               child!.muted().small().withPadding(
-                  padding: padding ??
-                      EdgeInsets.symmetric(horizontal: theme.scaling * 8)),
+                  padding: padding ?? EdgeInsets.symmetric(horizontal: theme.scaling * 8)),
               Expanded(
                 child: SizedBox(
                   height: height ?? 1,

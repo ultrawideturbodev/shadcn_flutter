@@ -37,8 +37,7 @@ class _ClickDetectorState extends State<ClickDetector> {
           ? null
           : () {
               var now = DateTime.now();
-              if (lastClick == null ||
-                  (now.difference(lastClick!) > widget.threshold)) {
+              if (lastClick == null || (now.difference(lastClick!) > widget.threshold)) {
                 count = 1;
               } else {
                 count++;

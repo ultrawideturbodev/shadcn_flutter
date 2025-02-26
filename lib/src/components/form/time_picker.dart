@@ -30,8 +30,7 @@ class TimePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ShadcnLocalizations localizations = ShadcnLocalizations.of(context);
-    bool use24HourFormat =
-        this.use24HourFormat ?? MediaQuery.of(context).alwaysUse24HourFormat;
+    bool use24HourFormat = this.use24HourFormat ?? MediaQuery.of(context).alwaysUse24HourFormat;
     return ObjectFormField(
       value: value,
       placeholder: placeholder ?? Text(localizations.placeholderTimePicker),
@@ -84,12 +83,10 @@ class _TimePickerDialogState extends State<TimePickerDialog> {
     return value.toString().padLeft(2, '0');
   }
 
-  Widget _buildInput(
-      BuildContext context, TextEditingController controller, String label) {
+  Widget _buildInput(BuildContext context, TextEditingController controller, String label) {
     final theme = Theme.of(context);
     return ConstrainedBox(
-      constraints: BoxConstraints(
-          minWidth: 72 * theme.scaling, minHeight: 72 * theme.scaling),
+      constraints: BoxConstraints(minWidth: 72 * theme.scaling, minHeight: 72 * theme.scaling),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -128,8 +125,7 @@ class _TimePickerDialogState extends State<TimePickerDialog> {
       minute = minute.clamp(0, 59);
       second = second.clamp(0, 59);
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        widget.onChanged
-            ?.call(TimeOfDay(hour: hour, minute: minute, second: second));
+        widget.onChanged?.call(TimeOfDay(hour: hour, minute: minute, second: second));
       });
     } else {
       if (_pm && hour < 12) {
@@ -142,8 +138,7 @@ class _TimePickerDialogState extends State<TimePickerDialog> {
       second = second.clamp(0, 59);
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         if (!mounted) return;
-        widget.onChanged
-            ?.call(TimeOfDay(hour: hour, minute: minute, second: second));
+        widget.onChanged?.call(TimeOfDay(hour: hour, minute: minute, second: second));
       });
     }
   }
@@ -265,8 +260,7 @@ class _TimePickerDialogState extends State<TimePickerDialog> {
 class _TimeFormatter extends TextInputFormatter {
   const _TimeFormatter();
   @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
     // make sure new value has leading zero
     var newText = newValue.text;
     int substringCount = 0;

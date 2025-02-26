@@ -9,12 +9,10 @@ abstract class CarouselSizeConstraint {
   const CarouselSizeConstraint();
 
   /// Creates a fixed carousel size constraint.
-  const factory CarouselSizeConstraint.fixed(double size) =
-      CarouselFixedConstraint;
+  const factory CarouselSizeConstraint.fixed(double size) = CarouselFixedConstraint;
 
   /// Creates a fractional carousel size constraint.
-  const factory CarouselSizeConstraint.fractional(double fraction) =
-      CarouselFractionalConstraint;
+  const factory CarouselSizeConstraint.fractional(double fraction) = CarouselFractionalConstraint;
 }
 
 /// A fixed carousel size constraint.
@@ -23,8 +21,7 @@ class CarouselFixedConstraint extends CarouselSizeConstraint {
   final double size;
 
   /// Creates a fixed carousel size constraint.
-  const CarouselFixedConstraint(this.size)
-      : assert(size > 0, 'size must be greater than 0');
+  const CarouselFixedConstraint(this.size) : assert(size > 0, 'size must be greater than 0');
 }
 
 /// A fractional carousel size constraint.
@@ -43,8 +40,7 @@ abstract class CarouselTransition {
   const CarouselTransition();
 
   /// Creates a sliding carousel layout.
-  const factory CarouselTransition.sliding({double gap}) =
-      SlidingCarouselTransition;
+  const factory CarouselTransition.sliding({double gap}) = SlidingCarouselTransition;
 
   /// Creates a fading carousel layout.
   const factory CarouselTransition.fading() = FadingCarouselTransition;
@@ -102,9 +98,8 @@ class SlidingCarouselTransition extends CarouselTransition {
   }) {
     int additionalPreviousItems = 1;
     int additionalNextItems = 1;
-    double originalSize = direction == Axis.horizontal
-        ? constraints.maxWidth
-        : constraints.maxHeight;
+    double originalSize =
+        direction == Axis.horizontal ? constraints.maxWidth : constraints.maxHeight;
     double size;
     if (sizeConstraint is CarouselFixedConstraint) {
       size = sizeConstraint.size;
@@ -189,9 +184,8 @@ class FadingCarouselTransition extends CarouselTransition {
     required bool wrap,
     required bool reverse,
   }) {
-    double originalSize = direction == Axis.horizontal
-        ? constraints.maxWidth
-        : constraints.maxHeight;
+    double originalSize =
+        direction == Axis.horizontal ? constraints.maxWidth : constraints.maxHeight;
     double size;
     if (sizeConstraint is CarouselFixedConstraint) {
       size = sizeConstraint.size;
@@ -281,17 +275,13 @@ class CarouselController extends Listenable {
   /// Animates to the next item.
   void animateNext(Duration duration, [Curve curve = Curves.easeInOut]) {
     _controller.push(
-        AnimationRequest(
-            (_controller.value + 1).roundToDouble(), duration, curve),
-        false);
+        AnimationRequest((_controller.value + 1).roundToDouble(), duration, curve), false);
   }
 
   /// Animates to the previous item.
   void animatePrevious(Duration duration, [Curve curve = Curves.easeInOut]) {
     _controller.push(
-        AnimationRequest(
-            (_controller.value - 1).roundToDouble(), duration, curve),
-        false);
+        AnimationRequest((_controller.value - 1).roundToDouble(), duration, curve), false);
   }
 
   /// Snaps the current value to the nearest integer.
@@ -301,8 +291,7 @@ class CarouselController extends Listenable {
 
   /// Animates the current value to the nearest integer.
   void animateSnap(Duration duration, [Curve curve = Curves.easeInOut]) {
-    _controller.push(
-        AnimationRequest(_controller.value.roundToDouble(), duration, curve));
+    _controller.push(AnimationRequest(_controller.value.roundToDouble(), duration, curve));
   }
 
   /// Jumps to the specified value.
@@ -311,8 +300,7 @@ class CarouselController extends Listenable {
   }
 
   /// Animates to the specified value.
-  void animateTo(double value, Duration duration,
-      [Curve curve = Curves.linear]) {
+  void animateTo(double value, Duration duration, [Curve curve = Curves.linear]) {
     _controller.push(AnimationRequest(value, duration, curve), false);
   }
 
@@ -453,15 +441,13 @@ class Carousel extends StatefulWidget {
     this.disableOverheadScrolling = true,
     this.disableDraggingVelocity = false,
     required this.transition,
-  }) : assert(wrap || itemCount != null,
-            'itemCount must be provided if wrap is false');
+  }) : assert(wrap || itemCount != null, 'itemCount must be provided if wrap is false');
 
   @override
   State<Carousel> createState() => _CarouselState();
 }
 
-class _CarouselState extends State<Carousel>
-    with SingleTickerProviderStateMixin {
+class _CarouselState extends State<Carousel> with SingleTickerProviderStateMixin {
   late CarouselController _controller;
   Duration? _startTime;
   late Ticker _ticker;
@@ -546,22 +532,15 @@ class _CarouselState extends State<Carousel>
       }
     }
     if (shouldAutoPlay) {
-      if (!widget.wrap &&
-          widget.itemCount != null &&
-          _controller.value >= widget.itemCount! - 1) {
+      if (!widget.wrap && widget.itemCount != null && _controller.value >= widget.itemCount! - 1) {
+        _controller.animateTo(0, widget.autoplaySpeed ?? widget.speed, widget.curve);
+      } else if (!widget.wrap && widget.itemCount != null && _controller.value <= 0) {
         _controller.animateTo(
-            0, widget.autoplaySpeed ?? widget.speed, widget.curve);
-      } else if (!widget.wrap &&
-          widget.itemCount != null &&
-          _controller.value <= 0) {
-        _controller.animateTo(widget.itemCount! - 1,
-            widget.autoplaySpeed ?? widget.speed, widget.curve);
+            widget.itemCount! - 1, widget.autoplaySpeed ?? widget.speed, widget.curve);
       } else if (widget.autoplayReverse) {
-        _controller.animatePrevious(
-            widget.autoplaySpeed ?? widget.speed, widget.curve);
+        _controller.animatePrevious(widget.autoplaySpeed ?? widget.speed, widget.curve);
       } else {
-        _controller.animateNext(
-            widget.autoplaySpeed ?? widget.speed, widget.curve);
+        _controller.animateNext(widget.autoplaySpeed ?? widget.speed, widget.curve);
       }
     }
     if (_dragVelocity.abs() > 0.01 && !dragging) {
@@ -573,11 +552,9 @@ class _CarouselState extends State<Carousel>
         _dragVelocity = 0;
         if (widget.disableOverheadScrolling) {
           if (_lastDragValue < targetValue) {
-            _controller.animateTo(
-                _lastDragValue.floorToDouble() + 1, widget.speed, widget.curve);
+            _controller.animateTo(_lastDragValue.floorToDouble() + 1, widget.speed, widget.curve);
           } else {
-            _controller.animateTo(
-                _lastDragValue.floorToDouble() - 1, widget.speed, widget.curve);
+            _controller.animateTo(_lastDragValue.floorToDouble() - 1, widget.speed, widget.curve);
           }
         } else {
           _controller.animateSnap(widget.speed, widget.curve);
@@ -647,11 +624,9 @@ class _CarouselState extends State<Carousel>
           var carouselWidget = buildCarousel(context, constraints);
           if (widget.draggable) {
             if (widget.direction == Axis.horizontal) {
-              carouselWidget =
-                  buildHorizontalDragger(context, carouselWidget, constraints);
+              carouselWidget = buildHorizontalDragger(context, carouselWidget, constraints);
             } else {
-              carouselWidget =
-                  buildVerticalDragger(context, carouselWidget, constraints);
+              carouselWidget = buildVerticalDragger(context, carouselWidget, constraints);
             }
           }
           return carouselWidget;
@@ -666,8 +641,8 @@ class _CarouselState extends State<Carousel>
     if (widget.sizeConstraint is CarouselFixedConstraint) {
       size = (widget.sizeConstraint as CarouselFixedConstraint).size;
     } else if (widget.sizeConstraint is CarouselFractionalConstraint) {
-      size = constraints.maxHeight *
-          (widget.sizeConstraint as CarouselFractionalConstraint).fraction;
+      size =
+          constraints.maxHeight * (widget.sizeConstraint as CarouselFractionalConstraint).fraction;
     } else {
       size = constraints.maxHeight;
     }
@@ -706,8 +681,8 @@ class _CarouselState extends State<Carousel>
     if (widget.sizeConstraint is CarouselFixedConstraint) {
       size = (widget.sizeConstraint as CarouselFixedConstraint).size;
     } else if (widget.sizeConstraint is CarouselFractionalConstraint) {
-      size = constraints.maxWidth *
-          (widget.sizeConstraint as CarouselFractionalConstraint).fraction;
+      size =
+          constraints.maxWidth * (widget.sizeConstraint as CarouselFractionalConstraint).fraction;
     } else {
       size = constraints.maxWidth;
     }

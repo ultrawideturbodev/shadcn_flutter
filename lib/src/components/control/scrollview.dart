@@ -9,8 +9,7 @@ class ScrollViewInterceptor extends StatefulWidget {
   final Widget child;
   final bool enabled;
 
-  const ScrollViewInterceptor(
-      {super.key, required this.child, this.enabled = true});
+  const ScrollViewInterceptor({super.key, required this.child, this.enabled = true});
 
   @override
   State<ScrollViewInterceptor> createState() => _ScrollViewInterceptorState();
@@ -58,10 +57,8 @@ class _ScrollViewInterceptorState extends State<ScrollViewInterceptor>
     _lastTime = elapsed;
     if (delta.inMilliseconds == 0) return;
     Offset positionDelta = _event!.position - _lastOffset!;
-    double incX =
-        pow(-positionDelta.dx * kScrollDragSpeed, 3) / delta.inMilliseconds;
-    double incY =
-        pow(-positionDelta.dy * kScrollDragSpeed, 3) / delta.inMilliseconds;
+    double incX = pow(-positionDelta.dx * kScrollDragSpeed, 3) / delta.inMilliseconds;
+    double incY = pow(-positionDelta.dy * kScrollDragSpeed, 3) / delta.inMilliseconds;
     incX = incX.clamp(-kMaxScrollSpeed, kMaxScrollSpeed);
     incY = incY.clamp(-kMaxScrollSpeed, kMaxScrollSpeed);
     var instance = GestureBinding.instance;

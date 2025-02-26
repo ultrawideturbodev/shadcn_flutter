@@ -41,8 +41,7 @@ class _CarouselExample3State extends State<CarouselExample3> {
               OutlineButton(
                   shape: ButtonShape.circle,
                   onPressed: () {
-                    controller
-                        .animatePrevious(const Duration(milliseconds: 500));
+                    controller.animatePrevious(const Duration(milliseconds: 500));
                   },
                   child: const Icon(Icons.arrow_back)),
               const Gap(8),

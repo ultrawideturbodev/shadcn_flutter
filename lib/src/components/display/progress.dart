@@ -102,16 +102,12 @@ class Progress extends StatelessWidget {
     final compTheme = ComponentTheme.maybeOf<ProgressTheme>(context);
     return LinearProgressIndicator(
       value: normalizedValue,
-      backgroundColor: styleValue(
-          defaultValue: backgroundColor,
-          themeValue: compTheme?.backgroundColor),
-      color: styleValue(
-          themeValue: compTheme?.color, widgetValue: color, defaultValue: null),
-      minHeight: styleValue(
-          defaultValue: 8.0 * theme.scaling, themeValue: compTheme?.minHeight),
-      borderRadius: styleValue(
-          defaultValue: theme.borderRadiusSm,
-          themeValue: compTheme?.borderRadius),
+      backgroundColor:
+          styleValue(defaultValue: backgroundColor, themeValue: compTheme?.backgroundColor),
+      color: styleValue(themeValue: compTheme?.color, widgetValue: color, defaultValue: null),
+      minHeight: styleValue(defaultValue: 8.0 * theme.scaling, themeValue: compTheme?.minHeight),
+      borderRadius:
+          styleValue(defaultValue: theme.borderRadiusSm, themeValue: compTheme?.borderRadius),
       disableAnimation: disableAnimation,
     );
   }

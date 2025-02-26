@@ -102,11 +102,8 @@ class _TreeExample1State extends State<TreeExample1> {
                       : null,
                   leading: node.leaf
                       ? const Icon(BootstrapIcons.fileImage)
-                      : Icon(node.expanded
-                          ? BootstrapIcons.folder2Open
-                          : BootstrapIcons.folder2),
-                  onExpand: TreeView.defaultItemExpandHandler(treeItems, node,
-                      (value) {
+                      : Icon(node.expanded ? BootstrapIcons.folder2Open : BootstrapIcons.folder2),
+                  onExpand: TreeView.defaultItemExpandHandler(treeItems, node, (value) {
                     setState(() {
                       treeItems = value;
                     });
@@ -162,9 +159,7 @@ class _TreeExample1State extends State<TreeExample1> {
         ),
         const Gap(8),
         Checkbox(
-          state: recursiveSelection
-              ? CheckboxState.checked
-              : CheckboxState.unchecked,
+          state: recursiveSelection ? CheckboxState.checked : CheckboxState.unchecked,
           onChanged: (value) {
             setState(() {
               recursiveSelection = value == CheckboxState.checked;

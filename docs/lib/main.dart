@@ -171,9 +171,7 @@ class MyAppState extends State<MyApp> {
       name: 'layout',
     ),
     GoRoute(
-        path: '/external',
-        builder: (context, state) => const MaterialExample(),
-        name: 'external'),
+        path: '/external', builder: (context, state) => const MaterialExample(), name: 'external'),
     GoRoute(
       path: '/web_preloader',
       name: 'web_preloader',

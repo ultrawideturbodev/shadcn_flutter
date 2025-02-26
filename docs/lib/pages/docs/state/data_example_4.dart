@@ -93,8 +93,7 @@ class _MostInnerWidgetState extends State<MostInnerWidget> {
     return Card(
       child: Column(
         children: [
-          Text(
-              'MostInnerWidget Data: $parentCounter - Rebuild Count: $mostInnerRebuildCount'),
+          Text('MostInnerWidget Data: $parentCounter - Rebuild Count: $mostInnerRebuildCount'),
           if (widget.child != null) ...[
             const Gap(12),
             widget.child!,

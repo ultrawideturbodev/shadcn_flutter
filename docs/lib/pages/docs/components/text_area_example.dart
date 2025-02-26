@@ -13,8 +13,7 @@ class TextAreaExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'text_area',
-      description:
-          'TextArea is a component that allows users to enter multiple lines of text.',
+      description: 'TextArea is a component that allows users to enter multiple lines of text.',
       displayName: 'TextArea',
       children: [
         WidgetUsageExample(

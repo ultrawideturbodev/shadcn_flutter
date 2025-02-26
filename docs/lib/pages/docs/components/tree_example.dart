@@ -10,8 +10,7 @@ class TreeExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'tree',
-      description:
-          'A tree is a way of displaying a hierarchical list of items.',
+      description: 'A tree is a way of displaying a hierarchical list of items.',
       displayName: 'Tree',
       children: [
         WidgetUsageExample(

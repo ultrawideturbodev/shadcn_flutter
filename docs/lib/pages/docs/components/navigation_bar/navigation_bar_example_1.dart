@@ -18,12 +18,9 @@ class _NavigationBarExample1State extends State<NavigationBarExample1> {
 
   NavigationItem buildButton(String label, IconData icon) {
     return NavigationItem(
-      style: customButtonStyle
-          ? const ButtonStyle.muted(density: ButtonDensity.icon)
-          : null,
-      selectedStyle: customButtonStyle
-          ? const ButtonStyle.fixed(density: ButtonDensity.icon)
-          : null,
+      style: customButtonStyle ? const ButtonStyle.muted(density: ButtonDensity.icon) : null,
+      selectedStyle:
+          customButtonStyle ? const ButtonStyle.fixed(density: ButtonDensity.icon) : null,
       label: Text(label),
       child: Icon(icon),
     );
@@ -70,8 +67,7 @@ class _NavigationBarExample1State extends State<NavigationBarExample1> {
               children: [
                 Select<NavigationBarAlignment>(
                   value: alignment,
-                  itemBuilder:
-                      (BuildContext context, NavigationBarAlignment item) {
+                  itemBuilder: (BuildContext context, NavigationBarAlignment item) {
                     return Text(item.name);
                   },
                   popupWidthConstraint: PopoverConstraint.anchorFixedSize,
@@ -92,8 +88,7 @@ class _NavigationBarExample1State extends State<NavigationBarExample1> {
                 ),
                 Select<NavigationLabelType>(
                   value: labelType,
-                  itemBuilder:
-                      (BuildContext context, NavigationLabelType item) {
+                  itemBuilder: (BuildContext context, NavigationLabelType item) {
                     return Text(item.name);
                   },
                   popupConstraints: const BoxConstraints(maxWidth: 200),
@@ -113,8 +108,7 @@ class _NavigationBarExample1State extends State<NavigationBarExample1> {
                   ],
                 ),
                 Checkbox(
-                  state:
-                      expands ? CheckboxState.checked : CheckboxState.unchecked,
+                  state: expands ? CheckboxState.checked : CheckboxState.unchecked,
                   onChanged: (value) {
                     setState(() {
                       expands = value == CheckboxState.checked;
@@ -123,9 +117,7 @@ class _NavigationBarExample1State extends State<NavigationBarExample1> {
                   trailing: const Text('Expands'),
                 ),
                 Checkbox(
-                  state: customButtonStyle
-                      ? CheckboxState.checked
-                      : CheckboxState.unchecked,
+                  state: customButtonStyle ? CheckboxState.checked : CheckboxState.unchecked,
                   onChanged: (value) {
                     setState(() {
                       customButtonStyle = value == CheckboxState.checked;
@@ -134,9 +126,7 @@ class _NavigationBarExample1State extends State<NavigationBarExample1> {
                   trailing: const Text('Custom Button Style'),
                 ),
                 Checkbox(
-                  state: expanded
-                      ? CheckboxState.checked
-                      : CheckboxState.unchecked,
+                  state: expanded ? CheckboxState.checked : CheckboxState.unchecked,
                   onChanged: (value) {
                     setState(() {
                       expanded = value == CheckboxState.checked;

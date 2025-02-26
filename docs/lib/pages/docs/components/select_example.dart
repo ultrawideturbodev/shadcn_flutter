@@ -11,8 +11,7 @@ class SelectExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'select',
-      description:
-          'A select component that allows you to select an item from a list of items.',
+      description: 'A select component that allows you to select an item from a list of items.',
       displayName: 'Select',
       children: [
         WidgetUsageExample(

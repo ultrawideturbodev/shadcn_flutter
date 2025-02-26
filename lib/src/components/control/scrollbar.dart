@@ -67,8 +67,7 @@ class _ShadcnScrollbar extends RawScrollbar {
           fadeDuration: _kScrollbarFadeDuration,
           timeToFade: _kScrollbarTimeToFade,
           pressDuration: Duration.zero,
-          notificationPredicate:
-              notificationPredicate ?? defaultScrollNotificationPredicate,
+          notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
         );
 
   @override

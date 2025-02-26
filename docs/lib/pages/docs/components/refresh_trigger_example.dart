@@ -18,8 +18,7 @@ class RefreshTriggerExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/refresh_trigger/refresh_trigger_example_1.dart',
+          path: 'lib/pages/docs/components/refresh_trigger/refresh_trigger_example_1.dart',
           child: ScrollConfiguration(
             behavior: ScrollConfiguration.of(context).copyWith(dragDevices: {
               PointerDeviceKind.mouse,

@@ -8,8 +8,7 @@ class AvatarExample1 extends StatelessWidget {
     return Avatar(
       backgroundColor: Colors.red,
       initials: Avatar.getInitials('sunarya-thito'),
-      provider: const NetworkImage(
-          'https://avatars.githubusercontent.com/u/64018564?v=4'),
+      provider: const NetworkImage('https://avatars.githubusercontent.com/u/64018564?v=4'),
     );
   }
 }

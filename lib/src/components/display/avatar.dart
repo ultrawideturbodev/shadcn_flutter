@@ -189,8 +189,7 @@ class AvatarBadge extends StatelessWidget implements AvatarWidget {
       height: size,
       decoration: BoxDecoration(
         color: color ?? Theme.of(context).colorScheme.primary,
-        borderRadius:
-            BorderRadius.circular(borderRadius ?? theme.radius * size),
+        borderRadius: BorderRadius.circular(borderRadius ?? theme.radius * size),
       ),
       child: child,
     );
@@ -339,8 +338,7 @@ class AvatarGroup extends StatelessWidget {
         rect = Rect.fromLTWH(currentX, currentY, size, size);
         currentWidth = size;
         currentHeight = size;
-        currentBorderRadius =
-            avatar.borderRadius ?? Theme.of(context).radius * size;
+        currentBorderRadius = avatar.borderRadius ?? Theme.of(context).radius * size;
       } else {
         double width = size;
         double height = size;
@@ -352,8 +350,7 @@ class AvatarGroup extends StatelessWidget {
         var offsetWidthDiff = widthDiff * resolved.x;
         var offsetHeightDiff = heightDiff * resolved.y;
         double x = (widthDiff / 2) + offsetWidth + currentX + offsetWidthDiff;
-        double y =
-            (heightDiff / 2) + offsetHeight + currentY + offsetHeightDiff;
+        double y = (heightDiff / 2) + offsetHeight + currentY + offsetHeightDiff;
 
         // NOTE: child positions are not affected by gap
 

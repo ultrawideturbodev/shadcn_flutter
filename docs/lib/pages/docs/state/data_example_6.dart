@@ -77,8 +77,7 @@ class _InnerWidgetState extends State<InnerWidget> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-              'Data: $counter - InnerWidget Rebuild Count: $innerRebuildCount'),
+          Text('Data: $counter - InnerWidget Rebuild Count: $innerRebuildCount'),
           const Gap(12),
           widget.child
         ],
@@ -101,8 +100,7 @@ class _MostInnerWidgetState extends State<MostInnerWidget> {
     final toggle = Data.of<bool>(context);
     mostInnerRebuildCount++;
     return Card(
-      child: Text(
-          'Data: $toggle - MostInnerWidget Rebuild Count: $mostInnerRebuildCount'),
+      child: Text('Data: $toggle - MostInnerWidget Rebuild Count: $mostInnerRebuildCount'),
     );
   }
 }

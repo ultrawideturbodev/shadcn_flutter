@@ -10,14 +10,12 @@ class OverflowMarqueeExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'overflow_marquee',
-      description:
-          'A widget that marquee its child when it overflows the available space.',
+      description: 'A widget that marquee its child when it overflows the available space.',
       displayName: 'Overflow Marquee',
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/overflow_marquee/overflow_marquee_example_1.dart',
+          path: 'lib/pages/docs/components/overflow_marquee/overflow_marquee_example_1.dart',
           child: OverflowMarqueeExample1(),
         ),
       ],

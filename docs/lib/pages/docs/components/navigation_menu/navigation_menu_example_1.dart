@@ -14,25 +14,21 @@ class NavigationMenuExample1 extends StatelessWidget {
             children: [
               NavigationMenuContent(
                 title: const Text('Introduction'),
-                content: const Text(
-                    'Component library for Flutter based on Shadcn/UI design.'),
+                content: const Text('Component library for Flutter based on Shadcn/UI design.'),
                 onPressed: () {},
               ),
               NavigationMenuContent(
                 title: const Text('Installation'),
-                content: const Text(
-                    'How to install this package in your Flutter project.'),
+                content: const Text('How to install this package in your Flutter project.'),
                 onPressed: () {},
               ),
               NavigationMenuContent(
                 title: const Text('Typography'),
-                content: const Text(
-                    'Styles and usage of typography in this package.'),
+                content: const Text('Styles and usage of typography in this package.'),
                 onPressed: () {},
               ),
               Clickable(
-                mouseCursor:
-                    const WidgetStatePropertyAll(SystemMouseCursors.click),
+                mouseCursor: const WidgetStatePropertyAll(SystemMouseCursors.click),
                 child: Card(
                   borderRadius: theme.borderRadiusMd,
                   child: Column(

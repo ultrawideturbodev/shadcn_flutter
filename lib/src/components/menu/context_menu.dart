@@ -20,13 +20,10 @@ class DesktopEditableTextContextMenu extends StatelessWidget {
     final scaling = theme.scaling;
     final localizations = ShadcnLocalizations.of(context);
     var undoHistoryController = this.undoHistoryController;
-    var contextMenuButtonItems =
-        List.of(editableTextState.contextMenuButtonItems);
+    var contextMenuButtonItems = List.of(editableTextState.contextMenuButtonItems);
 
     ContextMenuButtonItem? take(ContextMenuButtonType type) {
-      var item = contextMenuButtonItems
-          .where((element) => element.type == type)
-          .firstOrNull;
+      var item = contextMenuButtonItems.where((element) => element.type == type).firstOrNull;
       if (item != null) {
         contextMenuButtonItems.remove(item);
       }
@@ -126,8 +123,8 @@ class DesktopEditableTextContextMenu extends StatelessWidget {
           child: ContextMenuPopup(
             anchorSize: Size.zero,
             anchorContext: anchorContext,
-            position: editableTextState.contextMenuAnchors.primaryAnchor +
-                const Offset(8, -8) * scaling,
+            position:
+                editableTextState.contextMenuAnchors.primaryAnchor + const Offset(8, -8) * scaling,
             children: [
               cutButtonWidget,
               copyButtonWidget,
@@ -211,13 +208,10 @@ class MobileEditableTextContextMenu extends StatelessWidget {
     final scaling = theme.scaling;
     final localizations = ShadcnLocalizations.of(context);
     var undoHistoryController = this.undoHistoryController;
-    var contextMenuButtonItems =
-        List.of(editableTextState.contextMenuButtonItems);
+    var contextMenuButtonItems = List.of(editableTextState.contextMenuButtonItems);
 
     ContextMenuButtonItem? take(ContextMenuButtonType type) {
-      var item = contextMenuButtonItems
-          .where((element) => element.type == type)
-          .firstOrNull;
+      var item = contextMenuButtonItems.where((element) => element.type == type).firstOrNull;
       if (item != null) {
         contextMenuButtonItems.remove(item);
       }
@@ -378,8 +372,7 @@ class MobileEditableTextContextMenu extends StatelessWidget {
   }
 }
 
-Widget buildEditableTextContextMenu(
-    BuildContext innerContext, EditableTextState editableTextState,
+Widget buildEditableTextContextMenu(BuildContext innerContext, EditableTextState editableTextState,
     [UndoHistoryController? undoHistoryController]) {
   TargetPlatform platform = Theme.of(innerContext).platform;
 
@@ -458,13 +451,11 @@ class _ContextMenuState extends State<ContextMenu> {
       onSecondaryTapDown: !widget.enabled
           ? null
           : (details) {
-              _showContextMenu(
-                  context, details.globalPosition, _children, widget.direction);
+              _showContextMenu(context, details.globalPosition, _children, widget.direction);
             },
       onLongPressStart: enableLongPress && widget.enabled
           ? (details) {
-              _showContextMenu(
-                  context, details.globalPosition, _children, widget.direction);
+              _showContextMenu(context, details.globalPosition, _children, widget.direction);
             }
           : null,
       child: widget.child,
@@ -501,16 +492,14 @@ Future<void> _showContextMenu(
           return AnimatedBuilder(
               animation: children,
               builder: (context, child) {
-                bool isSheetOverlay =
-                    SheetOverlayHandler.isSheetOverlay(context);
+                bool isSheetOverlay = SheetOverlayHandler.isSheetOverlay(context);
                 return ConstrainedBox(
                   constraints: const BoxConstraints(
                     minWidth: 192,
                   ),
                   child: MenuGroup(
                     itemPadding: isSheetOverlay
-                        ? const EdgeInsets.symmetric(horizontal: 8) *
-                            theme.scaling
+                        ? const EdgeInsets.symmetric(horizontal: 8) * theme.scaling
                         : EdgeInsets.zero,
                     direction: direction,
                     regionGroupId: key,

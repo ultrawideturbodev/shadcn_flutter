@@ -10,14 +10,12 @@ class NavigationSidebarExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'navigation_sidebar',
-      description:
-          'A widget that displays a sidebar with navigation buttons and labels.',
+      description: 'A widget that displays a sidebar with navigation buttons and labels.',
       displayName: 'Navigation Sidebar',
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/navigation_sidebar/navigation_sidebar_example_1.dart',
+          path: 'lib/pages/docs/components/navigation_sidebar/navigation_sidebar_example_1.dart',
           child: NavigationSidebarExample1(),
         ),
       ],

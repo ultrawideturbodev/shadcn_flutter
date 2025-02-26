@@ -10,8 +10,7 @@ class MenubarExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'menubar',
-      description:
-          'A bar of buttons that provies quick access to common actions.',
+      description: 'A bar of buttons that provies quick access to common actions.',
       displayName: 'Menubar',
       children: [
         WidgetUsageExample(

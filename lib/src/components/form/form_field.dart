@@ -13,8 +13,7 @@ class ObjectFormField<T> extends StatefulWidget {
   final Widget? leading;
   final Widget? trailing;
   final PromptMode mode;
-  final Widget Function(BuildContext context, ObjectFormHandler<T> handler)
-      editorBuilder;
+  final Widget Function(BuildContext context, ObjectFormHandler<T> handler) editorBuilder;
   final AlignmentGeometry? popoverAlignment;
   final AlignmentGeometry? popoverAnchorAlignment;
   final EdgeInsetsGeometry? popoverPadding;
@@ -22,8 +21,7 @@ class ObjectFormField<T> extends StatefulWidget {
   final ButtonSize size;
   final ButtonDensity density;
   final ButtonShape shape;
-  final List<Widget> Function(
-      BuildContext context, ObjectFormHandler<T> handler)? dialogActions;
+  final List<Widget> Function(BuildContext context, ObjectFormHandler<T> handler)? dialogActions;
 
   const ObjectFormField({
     super.key,
@@ -175,11 +173,9 @@ class ObjectFormFieldState<T> extends State<ObjectFormField<T>>
 
 class _ObjectFormFieldDialog<T> extends StatefulWidget {
   final T? value;
-  final Widget Function(BuildContext context, ObjectFormHandler<T> handler)
-      editorBuilder;
+  final Widget Function(BuildContext context, ObjectFormHandler<T> handler) editorBuilder;
   final Widget? dialogTitle;
-  final List<Widget> Function(
-      BuildContext context, ObjectFormHandler<T> handler)? dialogActions;
+  final List<Widget> Function(BuildContext context, ObjectFormHandler<T> handler)? dialogActions;
   final ValueChanged<T?> prompt;
 
   const _ObjectFormFieldDialog({
@@ -192,8 +188,7 @@ class _ObjectFormFieldDialog<T> extends StatefulWidget {
   });
 
   @override
-  State<_ObjectFormFieldDialog<T>> createState() =>
-      _ObjectFormFieldDialogState<T>();
+  State<_ObjectFormFieldDialog<T>> createState() => _ObjectFormFieldDialogState<T>();
 }
 
 class _ObjectFormFieldDialogResult<T> {
@@ -254,8 +249,7 @@ class _ObjectFormFieldDialogState<T> extends State<_ObjectFormFieldDialog<T>>
           ),
         ),
         actions: [
-          if (widget.dialogActions != null)
-            ...widget.dialogActions!(context, this),
+          if (widget.dialogActions != null) ...widget.dialogActions!(context, this),
           SecondaryButton(
               child: Text(localizations.buttonCancel),
               onPressed: () {
@@ -274,8 +268,7 @@ class _ObjectFormFieldDialogState<T> extends State<_ObjectFormFieldDialog<T>>
 
 class _ObjectFormFieldPopup<T> extends StatefulWidget {
   final T? value;
-  final Widget Function(BuildContext context, ObjectFormHandler<T> handler)
-      editorBuilder;
+  final Widget Function(BuildContext context, ObjectFormHandler<T> handler) editorBuilder;
   final EdgeInsetsGeometry? popoverPadding;
   final ValueChanged<T?>? onChanged;
   final ValueChanged<T?> prompt;
@@ -290,8 +283,7 @@ class _ObjectFormFieldPopup<T> extends StatefulWidget {
   });
 
   @override
-  State<_ObjectFormFieldPopup<T>> createState() =>
-      _ObjectFormFieldPopupState<T>();
+  State<_ObjectFormFieldPopup<T>> createState() => _ObjectFormFieldPopupState<T>();
 }
 
 class _ObjectFormFieldPopupState<T> extends State<_ObjectFormFieldPopup<T>>
@@ -336,8 +328,7 @@ class _ObjectFormFieldPopupState<T> extends State<_ObjectFormFieldPopup<T>>
       data: this,
       child: SurfaceCard(
         padding: widget.popoverPadding ??
-            (const EdgeInsets.symmetric(vertical: 16, horizontal: 16) *
-                theme.scaling),
+            (const EdgeInsets.symmetric(vertical: 16, horizontal: 16) * theme.scaling),
         child: widget.editorBuilder(
           context,
           this,

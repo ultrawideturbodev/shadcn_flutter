@@ -81,8 +81,7 @@ class ImageProperties {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(cropRect, rotation, flipHorizontal, flipVertical);
+  int get hashCode => Object.hash(cropRect, rotation, flipHorizontal, flipVertical);
 
   @override
   String toString() =>

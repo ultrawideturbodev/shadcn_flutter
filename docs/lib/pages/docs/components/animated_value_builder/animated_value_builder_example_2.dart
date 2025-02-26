@@ -4,12 +4,10 @@ class AnimatedValueBuilderExample2 extends StatefulWidget {
   const AnimatedValueBuilderExample2({super.key});
 
   @override
-  State<AnimatedValueBuilderExample2> createState() =>
-      _AnimatedValueBuilderExample2State();
+  State<AnimatedValueBuilderExample2> createState() => _AnimatedValueBuilderExample2State();
 }
 
-class _AnimatedValueBuilderExample2State
-    extends State<AnimatedValueBuilderExample2> {
+class _AnimatedValueBuilderExample2State extends State<AnimatedValueBuilderExample2> {
   List<Color> colors = [
     Colors.red,
     Colors.green,

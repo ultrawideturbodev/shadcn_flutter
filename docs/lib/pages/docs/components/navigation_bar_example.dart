@@ -10,14 +10,12 @@ class NavigationBarExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'navigation_bar',
-      description:
-          'A widget that displays a bar with navigation buttons and labels.',
+      description: 'A widget that displays a bar with navigation buttons and labels.',
       displayName: 'Navigation Bar',
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/navigation_bar/navigation_bar_example_1.dart',
+          path: 'lib/pages/docs/components/navigation_bar/navigation_bar_example_1.dart',
           child: NavigationBarExample1(),
         ),
       ],

@@ -40,8 +40,7 @@ class _CupertinoExample1State extends State<CupertinoExample1> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
-                      'You can also use shadcn_flutter widgets inside Material widgets'),
+                  const Text('You can also use shadcn_flutter widgets inside Material widgets'),
                   const shadcnui.Gap(16),
                   shadcnui.PrimaryButton(
                     onPressed: () {
@@ -73,8 +72,7 @@ class _CupertinoExample1State extends State<CupertinoExample1> {
                         builder: (context) {
                           return shadcnui.AlertDialog(
                             title: const Text('Hello'),
-                            content:
-                                const Text('This is shadcn_flutter dialog'),
+                            content: const Text('This is shadcn_flutter dialog'),
                             actions: [
                               shadcnui.PrimaryButton(
                                 onPressed: () {

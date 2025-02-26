@@ -1,5 +1,4 @@
 import 'dart:ui' as ui;
-import 'dart:ui';
 
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
@@ -57,8 +56,7 @@ class LinearProgressIndicator extends StatelessWidget {
             start: 0,
             end: value!.clamp(0, 1),
             color: color ?? theme.colorScheme.primary,
-            backgroundColor:
-                backgroundColor ?? theme.colorScheme.primary.scaleAlpha(0.2),
+            backgroundColor: backgroundColor ?? theme.colorScheme.primary.scaleAlpha(0.2),
             showSparks: showSparks,
             sparksColor: color ?? theme.colorScheme.primary,
             sparksRadius: theme.scaling * 16,
@@ -103,8 +101,7 @@ class LinearProgressIndicator extends StatelessWidget {
                 start2: start2,
                 end2: end2,
                 color: color ?? theme.colorScheme.primary,
-                backgroundColor: backgroundColor ??
-                    theme.colorScheme.primary.scaleAlpha(0.2),
+                backgroundColor: backgroundColor ?? theme.colorScheme.primary.scaleAlpha(0.2),
                 showSparks: showSparks,
                 sparksColor: color ?? theme.colorScheme.primary,
                 sparksRadius: theme.scaling * 16,
@@ -198,8 +195,7 @@ double? _lerpDouble(double? a, double? b, double t) {
 }
 
 class _LinearProgressIndicatorPainter extends CustomPainter {
-  static final gradientTransform =
-      (Matrix4.identity()..scale(1.0, 0.5)).storage;
+  static final gradientTransform = (Matrix4.identity()..scale(1.0, 0.5)).storage;
 
   final double start;
   final double end;
@@ -258,8 +254,7 @@ class _LinearProgressIndicatorPainter extends CustomPainter {
     paint.color = backgroundColor;
 
     canvas.drawRRect(
-      RRect.fromLTRBR(
-          0, 0, size.width, size.height, Radius.circular(size.height / 2)),
+      RRect.fromLTRBR(0, 0, size.width, size.height, Radius.circular(size.height / 2)),
       paint,
     );
 

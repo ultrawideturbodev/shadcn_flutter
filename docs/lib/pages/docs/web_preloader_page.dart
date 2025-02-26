@@ -14,8 +14,7 @@ class WebPreloaderPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text('Web Preloader').h1(),
-            const Text('Customize how flutter load your web application')
-                .lead(),
+            const Text('Customize how flutter load your web application').lead(),
             const Gap(32),
             Alert(
               title: const Text('Note'),
@@ -35,9 +34,7 @@ class WebPreloaderPage extends StatelessWidget {
                 StepItem(
                   title: const Text('Creating a web directory'),
                   content: [
-                    const Text(
-                            'If you don\'t have a web directory, create one.')
-                        .p(),
+                    const Text('If you don\'t have a web directory, create one.').p(),
                     const CodeSnippet(
                       code: 'flutter create . --platforms=web',
                       mode: 'shell',
@@ -49,8 +46,7 @@ class WebPreloaderPage extends StatelessWidget {
                               openInNewTab(
                                   'https://docs.flutter.dev/platform-integration/web/initialization#upgrade-an-older-project');
                             },
-                            child:
-                                const Text('Click here for more information.'))
+                            child: const Text('Click here for more information.'))
                         .italic()
                         .muted()
                         .withPadding(top: 8),

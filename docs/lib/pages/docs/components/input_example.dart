@@ -12,8 +12,7 @@ class InputExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'input',
-      description:
-          'A text input is a form field that allows users to enter text.',
+      description: 'A text input is a form field that allows users to enter text.',
       displayName: 'Text Input',
       children: [
         WidgetUsageExample(

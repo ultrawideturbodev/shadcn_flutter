@@ -10,14 +10,12 @@ class HoverCardExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'hover_card',
-      description:
-          'For sighted users to preview content available behind a link',
+      description: 'For sighted users to preview content available behind a link',
       displayName: 'Hover Card',
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/hover_card/hover_card_example_1.dart',
+          path: 'lib/pages/docs/components/hover_card/hover_card_example_1.dart',
           child: HoverCardExample1(),
         ),
       ],

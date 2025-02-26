@@ -67,8 +67,7 @@ class _InnerWidgetState extends State<InnerWidget> {
           ModelBuilder<int>(
             #firstCounter,
             builder: (context, model, child) {
-              return Text(
-                  'First Counter: ${model.value} (Rebuild Count: $rebuildCount)');
+              return Text('First Counter: ${model.value} (Rebuild Count: $rebuildCount)');
             },
           ),
           const Gap(8),
@@ -98,8 +97,7 @@ class _LeafWidgetState extends State<LeafWidget> {
           return Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                  'Second Counter: ${model.value} (Rebuild Count: $rebuildCount)'),
+              Text('Second Counter: ${model.value} (Rebuild Count: $rebuildCount)'),
               const Gap(24),
               PrimaryButton(
                 onPressed: () {

@@ -14,8 +14,7 @@ class InputOTPExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'input_otp',
-      description:
-          'Input OTP is a component that allows users to enter OTP code.',
+      description: 'Input OTP is a component that allows users to enter OTP code.',
       displayName: 'Input OTP',
       children: [
         WidgetUsageExample(

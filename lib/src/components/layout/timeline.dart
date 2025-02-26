@@ -59,9 +59,7 @@ class Timeline extends StatelessWidget {
                   width: 12 * scaling,
                   height: 12 * scaling,
                   decoration: BoxDecoration(
-                    shape: theme.radius == 0
-                        ? BoxShape.rectangle
-                        : BoxShape.circle,
+                    shape: theme.radius == 0 ? BoxShape.rectangle : BoxShape.circle,
                     color: data.color ?? theme.colorScheme.primary,
                   ),
                 ),
@@ -81,14 +79,9 @@ class Timeline extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  data.title
-                      .semiBold()
-                      .secondaryForeground()
-                      .base()
-                      .withPadding(left: 4 * scaling),
+                  data.title.semiBold().secondaryForeground().base().withPadding(left: 4 * scaling),
                   if (data.content != null) Gap(8 * scaling),
-                  if (data.content != null)
-                    Expanded(child: data.content!.muted().small()),
+                  if (data.content != null) Expanded(child: data.content!.muted().small()),
                 ],
               ),
             )

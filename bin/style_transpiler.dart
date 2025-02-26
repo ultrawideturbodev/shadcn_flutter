@@ -71,8 +71,7 @@ main() {
   // result +=
   //     '    diagnosticList.add(ErrorHint(\'To use system theme mode, do this ShadcnApp(theme: ThemeData(colorScheme: ColorSchemes.\${label.toLowerCase()}(ThemeMode.light)), darkTheme: ThemeData(colorScheme: ColorSchemes.\${label.toLowerCase()}(ThemeMode.dark)), themeMode: ThemeMode.system,) instead of ShadcnApp(theme: ThemeData(colorScheme: ColorSchemes.\${label.toLowerCase()}(ThemeMode.system)),).\'));\n';
   // try to use \n in the string so the code example is more readable
-  result +=
-      '    diagnosticList.add(ErrorHint(\'To use system theme mode, do this:\\n\'\n';
+  result += '    diagnosticList.add(ErrorHint(\'To use system theme mode, do this:\\n\'\n';
   result += '      \'ShadcnApp(\\n\'\n';
   result +=
       '      \'  theme: ThemeData(colorScheme: ColorSchemes.\${label.toLowerCase()}(ThemeMode.light)),\\n\'\n';
@@ -83,10 +82,8 @@ main() {
   result += '      \')\\n\'\n';
   result += '      \'or:\\n\'\n';
   result += '      \'ShadcnApp(\\n\'\n';
-  result +=
-      '      \'  theme: ThemeData(colorScheme: ColorSchemes.light\$label()),\\n\'\n';
-  result +=
-      '      \'  darkTheme: ThemeData(colorScheme: ColorScheme.dark\$label()),\\n\'\n';
+  result += '      \'  theme: ThemeData(colorScheme: ColorSchemes.light\$label()),\\n\'\n';
+  result += '      \'  darkTheme: ThemeData(colorScheme: ColorScheme.dark\$label()),\\n\'\n';
   result += '      \')\\n\'\n';
   result += '      \'instead of:\\n\'\n';
   result += '      \'ShadcnApp(\\n\'\n';
@@ -205,12 +202,10 @@ String printTheme(String name, Map config) {
   result += '\n';
   result += '\tstatic ColorScheme ${name.toLowerCase()}(ThemeMode mode) {\n';
   result += '\t\tassert(() {\n';
-  result +=
-      '\t\t\t_assertNotThemeModeSystem(mode, \'$name\');\n'; // assert not system
+  result += '\t\t\t_assertNotThemeModeSystem(mode, \'$name\');\n'; // assert not system
   result += '\t\t\treturn true;\n';
   result += '\t\t}());\n';
-  result +=
-      '\t\treturn mode == ThemeMode.light ? light$name() : dark$name();\n';
+  result += '\t\treturn mode == ThemeMode.light ? light$name() : dark$name();\n';
   result += '\t}\n';
   return result;
 }

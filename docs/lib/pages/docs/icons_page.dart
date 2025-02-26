@@ -44,8 +44,7 @@ class _IconsPageState extends State<IconsPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title:
-              Text(capitalizeWords(_separateByCamelCase(entry.key)).join(' ')),
+          title: Text(capitalizeWords(_separateByCamelCase(entry.key)).join(' ')),
           leading: Icon(entry.value, size: 48),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -102,8 +101,7 @@ class _IconsPageState extends State<IconsPage> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           const Text('Icons').h1(),
-                          const Text('Use bundled icons in your application')
-                              .lead(),
+                          const Text('Use bundled icons in your application').lead(),
                           Row(
                             children: [
                               Expanded(
@@ -114,14 +112,10 @@ class _IconsPageState extends State<IconsPage> {
                                     children: [
                                       Column(
                                         mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text('${kRadixIcons.length}')
-                                              .textLarge(),
-                                          const Text('Radix Icons')
-                                              .muted()
-                                              .textSmall(),
+                                          Text('${kRadixIcons.length}').textLarge(),
+                                          const Text('Radix Icons').muted().textSmall(),
                                         ],
                                       ),
                                       Positioned(
@@ -130,9 +124,7 @@ class _IconsPageState extends State<IconsPage> {
                                         child: const Icon(
                                           RadixIcons.iconjarLogo,
                                           size: 96,
-                                        )
-                                            .iconMutedForeground()
-                                            .withOpacity(0.3),
+                                        ).iconMutedForeground().withOpacity(0.3),
                                       ),
                                     ],
                                   ),
@@ -146,14 +138,10 @@ class _IconsPageState extends State<IconsPage> {
                                     children: [
                                       Column(
                                         mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text('${kBootstrapIcons.length}')
-                                              .textLarge(),
-                                          const Text('Bootstrap Icons')
-                                              .muted()
-                                              .textSmall(),
+                                          Text('${kBootstrapIcons.length}').textLarge(),
+                                          const Text('Bootstrap Icons').muted().textSmall(),
                                         ],
                                       ),
                                       Positioned(
@@ -162,9 +150,7 @@ class _IconsPageState extends State<IconsPage> {
                                         child: const Icon(
                                           BootstrapIcons.bootstrap,
                                           size: 96,
-                                        )
-                                            .iconMutedForeground()
-                                            .withOpacity(0.3),
+                                        ).iconMutedForeground().withOpacity(0.3),
                                       ),
                                     ],
                                   ),
@@ -223,9 +209,8 @@ class _IconsPageState extends State<IconsPage> {
               filteredBootstrapIcons.sort((a, b) => a.key.compareTo(b.key));
               filteredRadixIcons.sort((a, b) => a.key.compareTo(b.key));
               return ListView.separated(
-                itemCount: filteredRadixIcons.length +
-                    filteredBootstrapIcons.length +
-                    additionalLength,
+                itemCount:
+                    filteredRadixIcons.length + filteredBootstrapIcons.length + additionalLength,
                 padding: const EdgeInsets.only(bottom: 32),
                 separatorBuilder: (context, index) {
                   return const Gap(8);
@@ -234,9 +219,7 @@ class _IconsPageState extends State<IconsPage> {
                   if (filteredRadixIcons.isNotEmpty) {
                     if (index == 0) {
                       // the header
-                      return const Text('Radix Icons')
-                          .h2()
-                          .withPadding(bottom: 16);
+                      return const Text('Radix Icons').h2().withPadding(bottom: 16);
                     }
                     if (index <= filteredRadixIcons.length) {
                       var e = filteredRadixIcons[index - 1];
@@ -260,9 +243,7 @@ class _IconsPageState extends State<IconsPage> {
                   if (filteredBootstrapIcons.isNotEmpty) {
                     if (index == 0) {
                       // the header
-                      return const Text('Bootstrap Icons')
-                          .h2()
-                          .withPadding(bottom: 16);
+                      return const Text('Bootstrap Icons').h2().withPadding(bottom: 16);
                     }
                     if (index <= filteredBootstrapIcons.length) {
                       var e = filteredBootstrapIcons[index - 1];

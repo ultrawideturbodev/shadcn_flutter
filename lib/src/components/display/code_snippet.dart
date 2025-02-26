@@ -37,8 +37,7 @@ class _CodeSnippetState extends State<CodeSnippet> {
     //
   };
   static final Map<String, Future<void>> _initializedLanguages = {};
-  static final Map<Brightness, Future<HighlighterTheme>> _initializedThemes =
-      {};
+  static final Map<Brightness, Future<HighlighterTheme>> _initializedThemes = {};
   static Future<String?> _initializeLanguage(String mode) {
     // check for alias
     if (_languageAlias.containsKey(mode)) {
@@ -151,15 +150,13 @@ class _CodeSnippetState extends State<CodeSnippet> {
                 GhostButton(
                   density: ButtonDensity.icon,
                   onPressed: () {
-                    Clipboard.setData(ClipboardData(text: widget.code))
-                        .then((value) {
+                    Clipboard.setData(ClipboardData(text: widget.code)).then((value) {
                       if (context.mounted) {
                         showShadToast(
                           context: context,
                           showDuration: const Duration(seconds: 2),
                           builder: (context, overlay) {
-                            final localizations =
-                                ShadcnLocalizations.of(context);
+                            final localizations = ShadcnLocalizations.of(context);
                             return Alert(
                               leading: const Icon(
                                 Icons.check,

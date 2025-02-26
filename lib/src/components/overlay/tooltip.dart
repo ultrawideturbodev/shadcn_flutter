@@ -100,8 +100,8 @@ class _TooltipState extends State<Tooltip> {
             overlayBarrier: const OverlayBarrier(
               barrierColor: Colors.transparent,
             ),
-            handler: OverlayManagerAsTooltipOverlayHandler(
-                overlayManager: OverlayManager.of(context)),
+            handler:
+                OverlayManagerAsTooltipOverlayHandler(overlayManager: OverlayManager.of(context)),
           );
         } else {
           _controller.close();
@@ -159,8 +159,7 @@ class _InstantTooltipState extends State<InstantTooltip> {
           overlayBarrier: const OverlayBarrier(
             barrierColor: Colors.transparent,
           ),
-          handler: OverlayManagerAsTooltipOverlayHandler(
-              overlayManager: overlayManager),
+          handler: OverlayManagerAsTooltipOverlayHandler(overlayManager: overlayManager),
         );
       },
       onExit: (event) {
@@ -291,13 +290,10 @@ class FixedTooltipOverlayHandler extends OverlayHandler {
                   return AnimatedValueBuilder.animation(
                       value: isClosed.value ? 0.0 : 1.0,
                       initialValue: 0.0,
-                      curve: isClosed.value
-                          ? const Interval(0, 2 / 3)
-                          : Curves.linear,
+                      curve: isClosed.value ? const Interval(0, 2 / 3) : Curves.linear,
                       duration: isClosed.value
                           ? (showDuration ?? kDefaultDuration)
-                          : (dismissDuration ??
-                              const Duration(milliseconds: 100)),
+                          : (dismissDuration ?? const Duration(milliseconds: 100)),
                       onEnd: (value) {
                         if (value == 0.0 && isClosed.value) {
                           popoverEntry.remove();

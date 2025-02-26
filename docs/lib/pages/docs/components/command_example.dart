@@ -11,8 +11,7 @@ class CommandExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'command',
-      description:
-          'A command is a component that allows you to search for items.',
+      description: 'A command is a component that allows you to search for items.',
       displayName: 'Command',
       children: [
         WidgetUsageExample(

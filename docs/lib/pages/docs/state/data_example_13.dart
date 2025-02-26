@@ -60,8 +60,7 @@ class _InnerWidgetState extends State<InnerWidget> {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                  'First Counter: $firstCounter (Rebuild Count: $rebuildCount)'),
+              Text('First Counter: $firstCounter (Rebuild Count: $rebuildCount)'),
               const Gap(24),
               PrimaryButton(
                 onPressed: () {
@@ -93,15 +92,13 @@ class _LeafWidgetState extends State<LeafWidget> {
     // directly get the ModelProperty instance
     // careful to not use [of] method when trying to get ModelProperty instance
     // as it will try to find Model<ModelProperty<T>> instance instead of Model<T>
-    ModelProperty<int> secondCounter =
-        Model.ofProperty(context, #secondCounter);
+    ModelProperty<int> secondCounter = Model.ofProperty(context, #secondCounter);
     rebuildCount++;
     return Card(
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-              'Second Counter: ${secondCounter.value} (Rebuild Count: $rebuildCount)'),
+          Text('Second Counter: ${secondCounter.value} (Rebuild Count: $rebuildCount)'),
           const Gap(24),
           PrimaryButton(
             onPressed: () {

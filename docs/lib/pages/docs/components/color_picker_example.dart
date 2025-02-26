@@ -13,25 +13,21 @@ class ColorPickerExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'color_picker',
-      description:
-          'A color picker is a widget that allows the user to pick a color.',
+      description: 'A color picker is a widget that allows the user to pick a color.',
       displayName: 'Color Picker',
       children: [
         WidgetUsageExample(
           title: 'Color Input Example',
-          path:
-              'lib/pages/docs/components/color_picker/color_picker_example_1.dart',
+          path: 'lib/pages/docs/components/color_picker/color_picker_example_1.dart',
           child: ColorPickerExample1(),
         ),
         WidgetUsageExample(
-          path:
-              'lib/pages/docs/components/color_picker/color_picker_example_2.dart',
+          path: 'lib/pages/docs/components/color_picker/color_picker_example_2.dart',
           title: 'Screen Color Picker Example',
           child: ColorPickerExample2(),
         ),
         WidgetUsageExample(
-          path:
-              'lib/pages/docs/components/color_picker/color_picker_example_3.dart',
+          path: 'lib/pages/docs/components/color_picker/color_picker_example_3.dart',
           title: 'Color Picker Trigger Example',
           child: ColorPickerExample3(),
         ),

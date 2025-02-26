@@ -16,8 +16,7 @@ class CodeSnippetExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Code Snippet Example',
-          path:
-              'lib/pages/docs/components/code_snippet/code_snippet_example_1.dart',
+          path: 'lib/pages/docs/components/code_snippet/code_snippet_example_1.dart',
           child: CodeSnippetExample1(),
         ),
       ],

@@ -136,8 +136,7 @@ class SortableDropFallback<T> extends StatefulWidget {
   });
 
   @override
-  State<SortableDropFallback<T>> createState() =>
-      _SortableDropFallbackState<T>();
+  State<SortableDropFallback<T>> createState() => _SortableDropFallbackState<T>();
 }
 
 class _SortableDropFallbackState<T> extends State<SortableDropFallback<T>> {
@@ -203,37 +202,26 @@ class _DropTransform {
   });
 }
 
-class _SortableState<T> extends State<Sortable<T>>
-    with AutomaticKeepAliveClientMixin {
-  final ValueNotifier<_SortableDraggingSession<T>?> topCandidate =
-      ValueNotifier(null);
-  final ValueNotifier<_SortableDraggingSession<T>?> leftCandidate =
-      ValueNotifier(null);
-  final ValueNotifier<_SortableDraggingSession<T>?> rightCandidate =
-      ValueNotifier(null);
-  final ValueNotifier<_SortableDraggingSession<T>?> bottomCandidate =
-      ValueNotifier(null);
+class _SortableState<T> extends State<Sortable<T>> with AutomaticKeepAliveClientMixin {
+  final ValueNotifier<_SortableDraggingSession<T>?> topCandidate = ValueNotifier(null);
+  final ValueNotifier<_SortableDraggingSession<T>?> leftCandidate = ValueNotifier(null);
+  final ValueNotifier<_SortableDraggingSession<T>?> rightCandidate = ValueNotifier(null);
+  final ValueNotifier<_SortableDraggingSession<T>?> bottomCandidate = ValueNotifier(null);
 
   final ValueNotifier<_DroppingTarget<T>?> _currentTarget = ValueNotifier(null);
-  final ValueNotifier<_SortableDropFallbackState<T>?> _currentFallback =
-      ValueNotifier(null);
+  final ValueNotifier<_SortableDropFallbackState<T>?> _currentFallback = ValueNotifier(null);
   final ValueNotifier<bool> _hasClaimedDrop = ValueNotifier(false);
   final ValueNotifier<bool> _hasDraggedOff = ValueNotifier(false);
 
-  (_SortableState<T>, Offset)? _findState(
-      _SortableLayerState target, Offset globalPosition) {
+  (_SortableState<T>, Offset)? _findState(_SortableLayerState target, Offset globalPosition) {
     BoxHitTestResult result = BoxHitTestResult();
     RenderBox renderBox = target.context.findRenderObject() as RenderBox;
     renderBox.hitTest(result, position: globalPosition);
     for (final HitTestEntry entry in result.path) {
       if (entry.target is RenderMetaData) {
         RenderMetaData metaData = entry.target as RenderMetaData;
-        if (metaData.metaData is _SortableState<T> &&
-            metaData.metaData != this) {
-          return (
-            metaData.metaData as _SortableState<T>,
-            (entry as BoxHitTestEntry).localPosition
-          );
+        if (metaData.metaData is _SortableState<T> && metaData.metaData != this) {
+          return (metaData.metaData as _SortableState<T>, (entry as BoxHitTestEntry).localPosition);
         }
       }
     }
@@ -248,8 +236,7 @@ class _SortableState<T> extends State<Sortable<T>>
     for (final HitTestEntry entry in result.path) {
       if (entry.target is RenderMetaData) {
         RenderMetaData metaData = entry.target as RenderMetaData;
-        if (metaData.metaData is _SortableDropFallbackState<T> &&
-            metaData.metaData != this) {
+        if (metaData.metaData is _SortableDropFallbackState<T> && metaData.metaData != this) {
           return metaData.metaData as _SortableDropFallbackState<T>;
         }
       }
@@ -317,8 +304,7 @@ class _SortableState<T> extends State<Sortable<T>>
     _scrollableLayer?._startDrag(this, details.globalPosition);
   }
 
-  ValueNotifier<_SortableDraggingSession<T>?> _getByLocation(
-      _SortableDropLocation location) {
+  ValueNotifier<_SortableDraggingSession<T>?> _getByLocation(_SortableDropLocation location) {
     switch (location) {
       case _SortableDropLocation.top:
         return topCandidate;
@@ -335,8 +321,7 @@ class _SortableState<T> extends State<Sortable<T>>
     Offset minOffset = _session!.minOffset;
     Offset maxOffset = _session!.maxOffset;
     if (_session != null) {
-      RenderBox sessionRenderBox =
-          _session!.layer.context.findRenderObject() as RenderBox;
+      RenderBox sessionRenderBox = _session!.layer.context.findRenderObject() as RenderBox;
       Size size = sessionRenderBox.size;
       if (_session!.lock) {
         double minX = -minOffset.dx;
@@ -358,10 +343,8 @@ class _SortableState<T> extends State<Sortable<T>>
       }
       Offset globalPosition = _session!.offset.value +
           minOffset +
-          Offset((maxOffset.dx - minOffset.dx) / 2,
-              (maxOffset.dy - minOffset.dy) / 2);
-      (_SortableState<T>, Offset)? target =
-          _findState(_session!.layer, globalPosition);
+          Offset((maxOffset.dx - minOffset.dx) / 2, (maxOffset.dy - minOffset.dy) / 2);
+      (_SortableState<T>, Offset)? target = _findState(_session!.layer, globalPosition);
       if (target == null) {
         _SortableDropFallbackState<T>? fallback =
             _findFallbackState(_session!.layer, globalPosition);
@@ -391,8 +374,8 @@ class _SortableState<T> extends State<Sortable<T>>
               target.$1._getByLocation(location);
 
           candidate.value = _session;
-          _currentTarget.value = _DroppingTarget(
-              candidate: candidate, source: target.$1, location: location);
+          _currentTarget.value =
+              _DroppingTarget(candidate: candidate, source: target.$1, location: location);
         }
       }
     }
@@ -453,8 +436,7 @@ class _SortableState<T> extends State<Sortable<T>>
         var target = _currentFallback.value;
         if (target != null) {
           var sortData = _session!.data;
-          if (target.widget.canAccept == null ||
-              target.widget.canAccept!(sortData)) {
+          if (target.widget.canAccept == null || target.widget.canAccept!(sortData)) {
             target.widget.onAccept?.call(sortData);
           }
         }
@@ -661,8 +643,7 @@ class _SortableState<T> extends State<Sortable<T>>
                                   listenable: _hasClaimedDrop,
                                   builder: (context, child) {
                                     return IgnorePointer(
-                                      ignoring:
-                                          hasCandidate || _hasClaimedDrop.value,
+                                      ignoring: hasCandidate || _hasClaimedDrop.value,
                                       child: Visibility(
                                         maintainSize: true,
                                         maintainAnimation: true,
@@ -745,11 +726,7 @@ class SortableDragHandle extends StatefulWidget {
   final MouseCursor? cursor;
 
   const SortableDragHandle(
-      {super.key,
-      required this.child,
-      this.enabled = true,
-      this.behavior,
-      this.cursor});
+      {super.key, required this.child, this.enabled = true, this.behavior, this.cursor});
 
   @override
   State<SortableDragHandle> createState() => _SortableDragHandleState();
@@ -776,9 +753,7 @@ class _SortableDragHandleState extends State<SortableDragHandle>
   Widget build(BuildContext context) {
     super.build(context);
     return MouseRegion(
-      cursor: widget.enabled
-          ? (widget.cursor ?? SystemMouseCursors.grab)
-          : MouseCursor.defer,
+      cursor: widget.enabled ? (widget.cursor ?? SystemMouseCursors.grab) : MouseCursor.defer,
       hitTestBehavior: widget.behavior,
       child: GestureDetector(
         behavior: widget.behavior,
@@ -788,8 +763,7 @@ class _SortableDragHandleState extends State<SortableDragHandle>
                 _state!._onDragStart(details);
               }
             : null,
-        onPanUpdate:
-            widget.enabled && _state != null ? _state!._onDragUpdate : null,
+        onPanUpdate: widget.enabled && _state != null ? _state!._onDragUpdate : null,
         onPanEnd: widget.enabled && _state != null
             ? (details) {
                 _state!._onDragEnd(details);
@@ -857,16 +831,12 @@ class _PendingDropTransform {
   });
 }
 
-class _SortableLayerState extends State<SortableLayer>
-    with SingleTickerProviderStateMixin {
-  final MutableNotifier<List<_SortableDraggingSession>> _sessions =
-      MutableNotifier([]);
-  final MutableNotifier<List<_DropTransform>> _activeDrops =
-      MutableNotifier([]);
+class _SortableLayerState extends State<SortableLayer> with SingleTickerProviderStateMixin {
+  final MutableNotifier<List<_SortableDraggingSession>> _sessions = MutableNotifier([]);
+  final MutableNotifier<List<_DropTransform>> _activeDrops = MutableNotifier([]);
 
   // _PendingDropTransform? _pendingDrop;
-  final ValueNotifier<_PendingDropTransform?> _pendingDrop =
-      ValueNotifier(null);
+  final ValueNotifier<_PendingDropTransform?> _pendingDrop = ValueNotifier(null);
 
   late Ticker _ticker;
 
@@ -880,10 +850,8 @@ class _SortableLayerState extends State<SortableLayer>
     return _pendingDrop.value != null && data == _pendingDrop.value!.data;
   }
 
-  _DropTransform? _claimDrop(_SortableState item, SortableData data,
-      [bool force = false]) {
-    if (_pendingDrop.value != null &&
-        (force || data == _pendingDrop.value!.data)) {
+  _DropTransform? _claimDrop(_SortableState item, SortableData data, [bool force = false]) {
+    if (_pendingDrop.value != null && (force || data == _pendingDrop.value!.data)) {
       RenderBox layerRenderBox = context.findRenderObject() as RenderBox;
       RenderBox itemRenderBox = item.context.findRenderObject() as RenderBox;
       var dropTransform = _DropTransform(
@@ -958,8 +926,7 @@ class _SortableLayerState extends State<SortableLayer>
         value.remove(session);
       });
       if (widget.dropDuration != Duration.zero) {
-        RenderBox? ghostRenderBox =
-            session.key.currentContext?.findRenderObject() as RenderBox?;
+        RenderBox? ghostRenderBox = session.key.currentContext?.findRenderObject() as RenderBox?;
         if (ghostRenderBox != null) {
           RenderBox layerRenderBox = context.findRenderObject() as RenderBox;
           _pendingDrop.value = _PendingDropTransform(
@@ -981,8 +948,7 @@ class _SortableLayerState extends State<SortableLayer>
       data: this,
       child: Stack(
         fit: StackFit.passthrough,
-        clipBehavior:
-            widget.clipBehavior ?? (widget.lock ? Clip.hardEdge : Clip.none),
+        clipBehavior: widget.clipBehavior ?? (widget.lock ? Clip.hardEdge : Clip.none),
         children: [
           widget.child,
           ListenableBuilder(
@@ -992,9 +958,8 @@ class _SortableLayerState extends State<SortableLayer>
                 child: MouseRegion(
                   opaque: false,
                   hitTestBehavior: HitTestBehavior.translucent,
-                  cursor: _sessions.value.isNotEmpty
-                      ? SystemMouseCursors.grabbing
-                      : MouseCursor.defer,
+                  cursor:
+                      _sessions.value.isNotEmpty ? SystemMouseCursors.grabbing : MouseCursor.defer,
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
@@ -1088,8 +1053,7 @@ class ScrollableSortableLayer extends StatefulWidget {
   });
 
   @override
-  State<ScrollableSortableLayer> createState() =>
-      _ScrollableSortableLayerState();
+  State<ScrollableSortableLayer> createState() => _ScrollableSortableLayerState();
 }
 
 class _ScrollableSortableLayerState extends State<ScrollableSortableLayer>

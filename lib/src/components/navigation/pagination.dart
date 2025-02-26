@@ -37,8 +37,7 @@ class Pagination extends StatelessWidget {
       if (start < 1) {
         yield* List.generate(maxPages, (index) => index + 1);
       } else if (end > totalPages) {
-        yield* List.generate(
-            maxPages, (index) => totalPages - maxPages + index + 1);
+        yield* List.generate(maxPages, (index) => totalPages - maxPages + index + 1);
       } else {
         yield* List.generate(maxPages, (index) => start + index);
       }
@@ -104,8 +103,7 @@ class Pagination extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (!hidePreviousOnFirstPage || hasPrevious)
-            _buildPreviousLabel(localizations),
+          if (!hidePreviousOnFirstPage || hasPrevious) _buildPreviousLabel(localizations),
           if (hasMorePreviousPages) ...[
             if (showSkipToFirstPage && firstShownPage - 1 > 1)
               GhostButton(

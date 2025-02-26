@@ -98,8 +98,7 @@ class CodeSnippetFutureBuilder extends StatefulWidget {
   });
 
   @override
-  State<CodeSnippetFutureBuilder> createState() =>
-      _CodeSnippetFutureBuilderState();
+  State<CodeSnippetFutureBuilder> createState() => _CodeSnippetFutureBuilderState();
 }
 
 class _CodeSnippetFutureBuilderState extends State<CodeSnippetFutureBuilder> {
@@ -109,8 +108,7 @@ class _CodeSnippetFutureBuilderState extends State<CodeSnippetFutureBuilder> {
     //https://raw.githubusercontent.com/sunarya-thito/shadcn_flutter/master/docs/lib/pages/docs/layout_page/layout_page_example_1.dart
     String url =
         'https://raw.githubusercontent.com/sunarya-thito/shadcn_flutter/master/docs/${widget.path}';
-    futureCode =
-        http.get(Uri.parse(url)).then((response) => response.body).then((code) {
+    futureCode = http.get(Uri.parse(url)).then((response) => response.body).then((code) {
       try {
         return widget.summarize ? _formatCode(code) : code;
       } catch (e, stackTrace) {
@@ -145,8 +143,7 @@ class _CodeSnippetFutureBuilderState extends State<CodeSnippetFutureBuilder> {
           print(snapshot.error);
           print(snapshot.stackTrace);
           return CodeSnippet(
-            code:
-                'Error loading code\n${snapshot.error}\n${snapshot.stackTrace}',
+            code: 'Error loading code\n${snapshot.error}\n${snapshot.stackTrace}',
             mode: widget.mode,
             actions: [
               GhostButton(
@@ -228,8 +225,8 @@ class _CodeSnippetFutureBuilderState extends State<CodeSnippetFutureBuilder> {
 String _formatCode(String code) {
   // check if code uses stateful widget
   if (code.contains('StatefulWidget')) {
-    RegExp exp = RegExp(r'extends[\s]*State<.+?>[\s]*{[\s]*\n(.*)[\s]*}',
-        multiLine: true, dotAll: true);
+    RegExp exp =
+        RegExp(r'extends[\s]*State<.+?>[\s]*{[\s]*\n(.*)[\s]*}', multiLine: true, dotAll: true);
     var firstMatch = exp.firstMatch(code);
     if (firstMatch == null) {
       return code;

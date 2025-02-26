@@ -18,9 +18,7 @@ class Radio extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-            color: focusing
-                ? theme.colorScheme.ring
-                : theme.colorScheme.ring.withOpacity(0)),
+            color: focusing ? theme.colorScheme.ring : theme.colorScheme.ring.withOpacity(0)),
       ),
       child: AnimatedContainer(
         duration: kDefaultDuration,
@@ -103,8 +101,7 @@ class _RadioItemState<T> extends State<RadioItem<T>> {
     final theme = Theme.of(context);
     final groupData = Data.maybeOf<RadioGroupData<T>>(context);
     final group = Data.maybeOf<_RadioGroupState<T>>(context);
-    assert(groupData != null,
-        'RadioItem<$T> must be a descendant of RadioGroup<$T>');
+    assert(groupData != null, 'RadioItem<$T> must be a descendant of RadioGroup<$T>');
     return GestureDetector(
       onTap: widget.enabled
           ? () {
@@ -113,9 +110,7 @@ class _RadioItemState<T> extends State<RadioItem<T>> {
           : null,
       child: FocusableActionDetector(
         focusNode: _focusNode,
-        mouseCursor: widget.enabled
-            ? SystemMouseCursors.click
-            : SystemMouseCursors.basic,
+        mouseCursor: widget.enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
         onShowFocusHighlight: (value) {
           if (value && widget.enabled) {
             group?._setSelected(widget.value);
@@ -134,14 +129,11 @@ class _RadioItemState<T> extends State<RadioItem<T>> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   if (widget.leading != null) widget.leading!,
-                  if (widget.leading != null)
-                    SizedBox(width: 8 * theme.scaling),
+                  if (widget.leading != null) SizedBox(width: 8 * theme.scaling),
                   Radio(
                       value: groupData?.selectedItem == widget.value,
-                      focusing:
-                          _focusing && groupData?.selectedItem == widget.value),
-                  if (widget.trailing != null)
-                    SizedBox(width: 8 * theme.scaling),
+                      focusing: _focusing && groupData?.selectedItem == widget.value),
+                  if (widget.trailing != null) SizedBox(width: 8 * theme.scaling),
                   if (widget.trailing != null) widget.trailing!,
                 ],
               ),
@@ -196,8 +188,7 @@ class _RadioCardState<T> extends State<RadioCard<T>> {
     final theme = Theme.of(context);
     final groupData = Data.maybeOf<RadioGroupData<T>>(context);
     final group = Data.maybeOf<_RadioGroupState<T>>(context);
-    assert(groupData != null,
-        'RadioCard<$T> must be a descendant of RadioGroup<$T>');
+    assert(groupData != null, 'RadioCard<$T> must be a descendant of RadioGroup<$T>');
     return GestureDetector(
       onTap: widget.enabled
           ? () {
@@ -206,9 +197,7 @@ class _RadioCardState<T> extends State<RadioCard<T>> {
           : null,
       child: FocusableActionDetector(
         focusNode: _focusNode,
-        mouseCursor: widget.enabled
-            ? SystemMouseCursors.click
-            : SystemMouseCursors.basic,
+        mouseCursor: widget.enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
         onShowFocusHighlight: (value) {
           if (value && widget.enabled) {
             group?._setSelected(widget.value);
@@ -232,16 +221,13 @@ class _RadioCardState<T> extends State<RadioCard<T>> {
               borderColor: groupData?.selectedItem == widget.value
                   ? theme.colorScheme.primary
                   : theme.colorScheme.muted,
-              borderWidth: groupData?.selectedItem == widget.value
-                  ? 2 * theme.scaling
-                  : 1 * theme.scaling,
+              borderWidth:
+                  groupData?.selectedItem == widget.value ? 2 * theme.scaling : 1 * theme.scaling,
               borderRadius: theme.borderRadiusMd,
               padding: EdgeInsets.zero,
               clipBehavior: Clip.antiAlias,
               duration: kDefaultDuration,
-              fillColor: _hovering
-                  ? theme.colorScheme.muted
-                  : theme.colorScheme.background,
+              fillColor: _hovering ? theme.colorScheme.muted : theme.colorScheme.background,
               child: Container(
                 padding: EdgeInsets.all(16 * theme.scaling),
                 child: AnimatedPadding(
@@ -291,8 +277,7 @@ class RadioGroupData<T> {
   int get hashCode => selectedItem.hashCode;
 }
 
-class _RadioGroupState<T> extends State<RadioGroup<T>>
-    with FormValueSupplier<T, RadioGroup<T>> {
+class _RadioGroupState<T> extends State<RadioGroup<T>> with FormValueSupplier<T, RadioGroup<T>> {
   void _setSelected(T value) {
     if (widget.value != value) {
       widget.onChanged?.call(value);

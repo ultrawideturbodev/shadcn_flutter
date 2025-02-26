@@ -9,8 +9,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.sans,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.sans, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.sans, child: this);
   }
 
   Widget mono() {
@@ -19,8 +18,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.mono,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.mono, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.mono, child: this);
   }
 
   Widget xSmall() {
@@ -29,8 +27,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.xSmall,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.xSmall, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.xSmall, child: this);
   }
 
   Widget small() {
@@ -39,8 +36,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.small,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.small, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.small, child: this);
   }
 
   Widget base() {
@@ -49,8 +45,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.base,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.base, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.base, child: this);
   }
 
   Widget large() {
@@ -59,8 +54,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.large,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.large, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.large, child: this);
   }
 
   Widget xLarge() {
@@ -69,8 +63,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.xLarge,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.xLarge, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.xLarge, child: this);
   }
 
   Widget x2Large() {
@@ -79,8 +72,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.x2Large,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.x2Large, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.x2Large, child: this);
   }
 
   Widget x3Large() {
@@ -89,8 +81,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.x3Large,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.x3Large, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.x3Large, child: this);
   }
 
   Widget x4Large() {
@@ -99,8 +90,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.x4Large,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.x4Large, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.x4Large, child: this);
   }
 
   Widget x5Large() {
@@ -109,8 +99,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.x5Large,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.x5Large, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.x5Large, child: this);
   }
 
   Widget x6Large() {
@@ -119,8 +108,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.x6Large,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.x6Large, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.x6Large, child: this);
   }
 
   Widget x7Large() {
@@ -129,8 +117,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.x7Large,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.x7Large, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.x7Large, child: this);
   }
 
   Widget x8Large() {
@@ -139,8 +126,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.x8Large,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.x8Large, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.x8Large, child: this);
   }
 
   Widget x9Large() {
@@ -149,8 +135,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.x9Large,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.x9Large, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.x9Large, child: this);
   }
 
   Widget thin() {
@@ -159,8 +144,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.thin,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.thin, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.thin, child: this);
   }
 
   Widget extraLight() {
@@ -169,8 +153,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.extraLight,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.extraLight, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.extraLight, child: this);
   }
 
   Widget light() {
@@ -179,8 +162,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.light,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.light, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.light, child: this);
   }
 
   Widget normal() {
@@ -189,8 +171,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.normal,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.normal, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.normal, child: this);
   }
 
   Widget medium() {
@@ -199,8 +180,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.medium,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.medium, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.medium, child: this);
   }
 
   Widget semiBold() {
@@ -209,8 +189,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.semiBold,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.semiBold, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.semiBold, child: this);
   }
 
   Widget bold() {
@@ -219,8 +198,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.bold,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.bold, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.bold, child: this);
   }
 
   Widget extraBold() {
@@ -229,8 +207,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.extraBold,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.extraBold, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.extraBold, child: this);
   }
 
   Widget black() {
@@ -239,8 +216,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.black,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.black, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.black, child: this);
   }
 
   Widget italic() {
@@ -249,8 +225,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.italic,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.italic, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.italic, child: this);
   }
 
   Widget underline() {
@@ -330,8 +305,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.h1,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.h1, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.h1, child: this);
   }
 
   Widget h2() {
@@ -342,8 +316,7 @@ extension TextExtension on Widget {
           (context, theme) => theme.typography.h2,
         );
       } else {
-        child = WrappedText(
-            style: (context, theme) => theme.typography.h2, child: this);
+        child = WrappedText(style: (context, theme) => theme.typography.h2, child: this);
       }
       return Container(
         margin: const EdgeInsets.only(top: 40),
@@ -367,8 +340,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.h3,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.h3, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.h3, child: this);
   }
 
   Widget h4() {
@@ -377,8 +349,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.h4,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.h4, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.h4, child: this);
   }
 
   Widget p({bool firstChild = false}) {
@@ -388,8 +359,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.p,
       );
     } else {
-      child = WrappedText(
-          style: (context, theme) => theme.typography.p, child: this);
+      child = WrappedText(style: (context, theme) => theme.typography.p, child: this);
     }
     if (firstChild) {
       return child;
@@ -408,9 +378,7 @@ extension TextExtension on Widget {
           (context, theme) => theme.typography.blockQuote,
         );
       } else {
-        child = WrappedText(
-            style: (context, theme) => theme.typography.blockQuote,
-            child: this);
+        child = WrappedText(style: (context, theme) => theme.typography.blockQuote, child: this);
       }
       return Container(
         decoration: BoxDecoration(
@@ -445,8 +413,7 @@ extension TextExtension on Widget {
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: Data.inherit(
-                    data: UnorderedListData(depth: depth + 1), child: this),
+                child: Data.inherit(data: UnorderedListData(depth: depth + 1), child: this),
               ),
             ],
           ),
@@ -467,9 +434,7 @@ extension TextExtension on Widget {
           (context, theme) => theme.typography.inlineCode,
         );
       } else {
-        child = WrappedText(
-            style: (context, theme) => theme.typography.inlineCode,
-            child: this);
+        child = WrappedText(style: (context, theme) => theme.typography.inlineCode, child: this);
       }
       return Container(
         padding: EdgeInsets.symmetric(
@@ -493,9 +458,7 @@ extension TextExtension on Widget {
           )
           .muted();
     }
-    return WrappedText(
-            style: (context, theme) => theme.typography.lead, child: this)
-        .muted();
+    return WrappedText(style: (context, theme) => theme.typography.lead, child: this).muted();
   }
 
   Widget textLarge() {
@@ -504,8 +467,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.textLarge,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.textLarge, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.textLarge, child: this);
   }
 
   Widget textSmall() {
@@ -514,8 +476,7 @@ extension TextExtension on Widget {
         (context, theme) => theme.typography.textSmall,
       );
     }
-    return WrappedText(
-        style: (context, theme) => theme.typography.textSmall, child: this);
+    return WrappedText(style: (context, theme) => theme.typography.textSmall, child: this);
   }
 
   Widget textMuted() {
@@ -526,9 +487,7 @@ extension TextExtension on Widget {
           )
           .muted();
     }
-    return WrappedText(
-            style: (context, theme) => theme.typography.textMuted, child: this)
-        .muted();
+    return WrappedText(style: (context, theme) => theme.typography.textMuted, child: this).muted();
   }
 
   Widget singleLine() {
@@ -755,21 +714,17 @@ class _TextThenWidget extends StatelessWidget {
       effectiveTextStyle = defaultTextStyle.style.merge(text.style);
     }
     if (MediaQuery.boldTextOf(context)) {
-      effectiveTextStyle = effectiveTextStyle!
-          .merge(const TextStyle(fontWeight: FontWeight.bold));
+      effectiveTextStyle = effectiveTextStyle!.merge(const TextStyle(fontWeight: FontWeight.bold));
     }
     final SelectionRegistrar? registrar = SelectionContainer.maybeOf(context);
     Widget result = RichText(
-      textAlign:
-          text.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
+      textAlign: text.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
       textDirection: text
           .textDirection, // RichText uses Directionality.of to obtain a default if this is null.
-      locale: text
-          .locale, // RichText uses Localizations.localeOf to obtain a default if this is null
+      locale:
+          text.locale, // RichText uses Localizations.localeOf to obtain a default if this is null
       softWrap: text.softWrap ?? defaultTextStyle.softWrap,
-      overflow: text.overflow ??
-          effectiveTextStyle?.overflow ??
-          defaultTextStyle.overflow,
+      overflow: text.overflow ?? effectiveTextStyle?.overflow ?? defaultTextStyle.overflow,
       textScaler: text.textScaler ?? TextScaler.noScaling,
       maxLines: text.maxLines ?? defaultTextStyle.maxLines,
       strutStyle: text.strutStyle,
@@ -791,8 +746,7 @@ class _TextThenWidget extends StatelessWidget {
     );
     if (registrar != null) {
       result = MouseRegion(
-        cursor: DefaultSelectionStyle.of(context).mouseCursor ??
-            SystemMouseCursors.text,
+        cursor: DefaultSelectionStyle.of(context).mouseCursor ?? SystemMouseCursors.text,
         child: result,
       );
     }
@@ -942,8 +896,7 @@ class UnorderedListData {
   const UnorderedListData({this.depth = 0});
 }
 
-typedef WrappedTextDataBuilder<T> = T Function(
-    BuildContext context, ThemeData theme);
+typedef WrappedTextDataBuilder<T> = T Function(BuildContext context, ThemeData theme);
 
 class WrappedText extends StatelessWidget {
   final Widget child;
@@ -1001,8 +954,7 @@ class WrappedText extends StatelessWidget {
 
   WrappedText copyWithStyle(WrappedTextDataBuilder<TextStyle> style) {
     return WrappedText(
-      style: (context, theme) =>
-          style(context, theme).merge(this.style?.call(context, theme)),
+      style: (context, theme) => style(context, theme).merge(this.style?.call(context, theme)),
       textAlign: textAlign,
       softWrap: softWrap,
       overflow: overflow,

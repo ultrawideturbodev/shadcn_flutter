@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 class IconBox extends StatelessWidget {
   const IconBox({
     required this.child,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget child;
 

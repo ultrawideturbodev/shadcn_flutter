@@ -6,8 +6,7 @@ import 'package:shadcn_flutter/shadcn_flutter.dart';
 const kDebugStickerVisible = true;
 const kDebugContainerVisible = true;
 
-void debugPostSticker(
-    BuildContext context, Rect rect, Color color, String text) {
+void debugPostSticker(BuildContext context, Rect rect, Color color, String text) {
   if (!kDebugStickerVisible) {
     return;
   }

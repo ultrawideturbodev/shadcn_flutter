@@ -6,8 +6,7 @@ import 'package:archive/archive.dart';
 class WoffConverter {
   static const int WOFF_SIGNATURE = 0x774F4646; // 'wOFF'
 
-  Future<void> convertStreams(
-      RandomAccessFile infile, RandomAccessFile outfile) async {
+  Future<void> convertStreams(RandomAccessFile infile, RandomAccessFile outfile) async {
     Map<String, int> WOFFHeader = {
       'signature': _readUint32(infile),
       'flavor': _readUint32(infile),
@@ -53,8 +52,7 @@ class WoffConverter {
 
     for (var TableDirectoryEntry in TableDirectoryEntries) {
       await outfile.writeFrom(_packUint32(TableDirectoryEntry['tag']!));
-      await outfile
-          .writeFrom(_packUint32(TableDirectoryEntry['origChecksum']!));
+      await outfile.writeFrom(_packUint32(TableDirectoryEntry['origChecksum']!));
       await outfile.writeFrom(_packUint32(offset));
       await outfile.writeFrom(_packUint32(TableDirectoryEntry['origLength']!));
       TableDirectoryEntry['outOffset'] = offset;
@@ -66,22 +64,18 @@ class WoffConverter {
 
     for (var TableDirectoryEntry in TableDirectoryEntries) {
       await infile.setPosition(TableDirectoryEntry['offset']!);
-      Uint8List compressedData =
-          await infile.read(TableDirectoryEntry['compLength']!);
+      Uint8List compressedData = await infile.read(TableDirectoryEntry['compLength']!);
       Uint8List uncompressedData;
-      if (TableDirectoryEntry['compLength'] !=
-          TableDirectoryEntry['origLength']) {
+      if (TableDirectoryEntry['compLength'] != TableDirectoryEntry['origLength']) {
         // uncompressedData = zlib.decode(compressedData);
         var decoder = const ZLibDecoder();
-        uncompressedData =
-            Uint8List.fromList(decoder.decodeBytes(compressedData));
+        uncompressedData = Uint8List.fromList(decoder.decodeBytes(compressedData));
       } else {
         uncompressedData = compressedData;
       }
       await outfile.setPosition(TableDirectoryEntry['outOffset']!);
       await outfile.writeFrom(uncompressedData);
-      offset = TableDirectoryEntry['outOffset']! +
-          TableDirectoryEntry['origLength']!;
+      offset = TableDirectoryEntry['outOffset']! + TableDirectoryEntry['origLength']!;
       int padding = 0;
       if (offset % 4 != 0) {
         padding = 4 - (offset % 4);

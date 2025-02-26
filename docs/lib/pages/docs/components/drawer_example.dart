@@ -11,8 +11,7 @@ class DrawerExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'drawer',
-      description:
-          'A drawer is a panel that slides in from the edge of a screen.',
+      description: 'A drawer is a panel that slides in from the edge of a screen.',
       displayName: 'Drawer',
       children: [
         WidgetUsageExample(

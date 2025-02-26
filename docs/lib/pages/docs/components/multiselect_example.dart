@@ -16,8 +16,7 @@ class MultiSelectExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/multiselect/multiselect_example_1.dart',
+          path: 'lib/pages/docs/components/multiselect/multiselect_example_1.dart',
           child: MultiSelectExample1(),
         ),
       ],

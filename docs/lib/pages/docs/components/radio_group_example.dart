@@ -16,8 +16,7 @@ class RadioGroupExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/radio_group/radio_group_example_1.dart',
+          path: 'lib/pages/docs/components/radio_group/radio_group_example_1.dart',
           child: RadioGroupExample1(),
         ),
       ],

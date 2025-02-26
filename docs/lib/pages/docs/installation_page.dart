@@ -27,8 +27,7 @@ class _InstallationPageState extends State<InstallationPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Text('Installation').h1(),
-          const Text('Install and configure shadcn_flutter in your project.')
-              .lead(),
+          const Text('Install and configure shadcn_flutter in your project.').lead(),
           const Text('Install using CLI').h2().anchored(_cliKey),
           const Gap(32),
           // 1. Activate "shadcn_flutter_cli" package
@@ -48,9 +47,7 @@ class _InstallationPageState extends State<InstallationPage> {
               StepItem(
                 title: const Text('Run the setup command'),
                 content: [
-                  const Text(
-                          'Run the setup command to add shadcn_flutter to your project.')
-                      .p(),
+                  const Text('Run the setup command to add shadcn_flutter to your project.').p(),
                   const CodeSnippet(
                     code: 'flutter pub global run shadcn_flutter_cli:setup',
                     mode: 'shell',
@@ -66,9 +63,7 @@ class _InstallationPageState extends State<InstallationPage> {
               StepItem(
                 title: const Text('Creating a new Flutter project'),
                 content: [
-                  const Text(
-                          'Create a new Flutter project using the following command:')
-                      .p(),
+                  const Text('Create a new Flutter project using the following command:').p(),
                   const CodeSnippet(
                     code: 'flutter create my_app\ncd my_app',
                     mode: 'shell',
@@ -78,9 +73,7 @@ class _InstallationPageState extends State<InstallationPage> {
               StepItem(
                 title: const Text('Adding the dependency'),
                 content: [
-                  const Text(
-                          'Next, add the shadcn_flutter dependency to your project.')
-                      .p(),
+                  const Text('Next, add the shadcn_flutter dependency to your project.').p(),
                   const CodeSnippet(
                     code: 'flutter pub add shadcn_flutter',
                     mode: 'shell',
@@ -90,12 +83,9 @@ class _InstallationPageState extends State<InstallationPage> {
               StepItem(
                 title: const Text('Importing the package'),
                 content: [
-                  const Text(
-                          'Now, you can import the package in your Dart code.')
-                      .p(),
+                  const Text('Now, you can import the package in your Dart code.').p(),
                   const CodeSnippet(
-                    code:
-                        'import \'package:shadcn_flutter/shadcn_flutter.dart\';',
+                    code: 'import \'package:shadcn_flutter/shadcn_flutter.dart\';',
                     mode: 'dart',
                   ).p(),
                 ],
@@ -103,8 +93,7 @@ class _InstallationPageState extends State<InstallationPage> {
               StepItem(
                 title: const Text('Adding the ShadcnApp widget'),
                 content: [
-                  const Text('Add the ShadcnApp widget to your main function.')
-                      .p(),
+                  const Text('Add the ShadcnApp widget to your main function.').p(),
                   const CodeSnippet(
                     code: '''
 void main() {
@@ -195,8 +184,7 @@ void main() {
           ),
           const Text('Experimental Version').h2().anchored(_experimentalKey),
           const Text('Experimental versions are available on GitHub.').p(),
-          const Text(
-                  'To use an experimental version, use git instead of version number in your '
+          const Text('To use an experimental version, use git instead of version number in your '
                   'pubspec.yaml file:')
               .p(),
           const CodeSnippet(
@@ -212,8 +200,7 @@ void main() {
           const Text('See ')
               .thenButton(
                   onPressed: () {
-                    launchUrlString(
-                        'https://dart.dev/tools/pub/dependencies#git-packages');
+                    launchUrlString('https://dart.dev/tools/pub/dependencies#git-packages');
                   },
                   child: const Text('this page'))
               .thenText(' for more information.')

@@ -14,22 +14,20 @@ class MaterialExample extends StatelessWidget {
     return ComponentPage(
       name: 'external',
       component: false,
-      description:
-          'You can use Material/Cupertino Widgets with shadcn_flutter.',
+      description: 'You can use Material/Cupertino Widgets with shadcn_flutter.',
       displayName: 'Material/Cupertino Widgets',
       children: [
         const Gap(24),
         Alert(
           leading: const Icon(Icons.info_outline),
           title: const Text('Note'),
-          content: const Text(
-                  'By default, Material/Cupertino Theme will follow shadcn_flutter theme. ')
-              .thenButton(
-                  onPressed: () {
-                    context.goNamed('theme');
-                  },
-                  child: const Text(
-                      'Try changing the shadcn_flutter theme right here!')),
+          content:
+              const Text('By default, Material/Cupertino Theme will follow shadcn_flutter theme. ')
+                  .thenButton(
+                      onPressed: () {
+                        context.goNamed('theme');
+                      },
+                      child: const Text('Try changing the shadcn_flutter theme right here!')),
         ),
         WidgetUsageExample(
           title: 'Material Example',

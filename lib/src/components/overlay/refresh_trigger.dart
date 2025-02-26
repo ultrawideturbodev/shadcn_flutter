@@ -4,14 +4,12 @@ import 'dart:math';
 import 'package:flutter/rendering.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
-typedef RefreshIndicatorBuilder = Widget Function(
-    BuildContext context, RefreshTriggerStage stage);
+typedef RefreshIndicatorBuilder = Widget Function(BuildContext context, RefreshTriggerStage stage);
 
 typedef FutureVoidCallback = Future<void> Function();
 
 class RefreshTrigger extends StatefulWidget {
-  static Widget defaultIndicatorBuilder(
-      BuildContext context, RefreshTriggerStage stage) {
+  static Widget defaultIndicatorBuilder(BuildContext context, RefreshTriggerStage stage) {
     return DefaultRefreshIndicator(stage: stage);
   }
 
@@ -48,8 +46,7 @@ class DefaultRefreshIndicator extends StatefulWidget {
   const DefaultRefreshIndicator({super.key, required this.stage});
 
   @override
-  State<DefaultRefreshIndicator> createState() =>
-      _DefaultRefreshIndicatorState();
+  State<DefaultRefreshIndicator> createState() => _DefaultRefreshIndicatorState();
 }
 
 class _DefaultRefreshIndicatorState extends State<DefaultRefreshIndicator> {
@@ -158,8 +155,7 @@ class _DefaultRefreshIndicatorState extends State<DefaultRefreshIndicator> {
       child: SurfaceCard(
         padding: widget.stage.stage == TriggerStage.pulling
             ? const EdgeInsets.all(4) * theme.scaling
-            : const EdgeInsets.symmetric(horizontal: 12, vertical: 4) *
-                theme.scaling,
+            : const EdgeInsets.symmetric(horizontal: 12, vertical: 4) * theme.scaling,
         borderRadius: theme.borderRadiusXl,
         child: CrossFadedTransition(
           child: KeyedSubtree(
@@ -183,8 +179,7 @@ class _RefreshTriggerTween extends Animatable<double> {
   }
 }
 
-class RefreshTriggerState extends State<RefreshTrigger>
-    with SingleTickerProviderStateMixin {
+class RefreshTriggerState extends State<RefreshTrigger> with SingleTickerProviderStateMixin {
   double _currentExtent = 0;
   bool _scrolling = false;
   ScrollDirection _userScrollDirection = ScrollDirection.idle;
@@ -272,8 +267,7 @@ class RefreshTriggerState extends State<RefreshTrigger>
               });
             }
           }
-        } else if (_stage == TriggerStage.idle &&
-            (widget.reverse ? delta > 0 : delta < 0)) {
+        } else if (_stage == TriggerStage.idle && (widget.reverse ? delta > 0 : delta < 0)) {
           setState(() {
             _currentExtent = 0;
             _scrolling = true;
@@ -345,8 +339,7 @@ class RefreshTriggerState extends State<RefreshTrigger>
     return NotificationListener<ScrollNotification>(
       onNotification: _handleScrollNotification,
       child: AnimatedValueBuilder.animation(
-        value: _stage == TriggerStage.refreshing ||
-                _stage == TriggerStage.completed
+        value: _stage == TriggerStage.refreshing || _stage == TriggerStage.completed
             ? widget.minExtent
             : _currentExtent,
         duration: _scrolling ? Duration.zero : kDefaultDuration,
@@ -376,10 +369,8 @@ class RefreshTriggerState extends State<RefreshTrigger>
                             translation: _offset,
                             child: Transform.translate(
                               offset: widget.direction == Axis.vertical
-                                  ? Offset(
-                                      0, _calculateSafeExtent(animation.value))
-                                  : Offset(
-                                      _calculateSafeExtent(animation.value), 0),
+                                  ? Offset(0, _calculateSafeExtent(animation.value))
+                                  : Offset(_calculateSafeExtent(animation.value), 0),
                               child: child,
                             ),
                           ),

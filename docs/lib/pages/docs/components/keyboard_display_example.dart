@@ -16,8 +16,7 @@ class KeyboardDisplayExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Example 1',
-          path:
-              'lib/pages/docs/components/keyboard_display/keyboard_display_example_1.dart',
+          path: 'lib/pages/docs/components/keyboard_display/keyboard_display_example_1.dart',
           child: KeyboardDisplayExample1(),
         ),
       ],

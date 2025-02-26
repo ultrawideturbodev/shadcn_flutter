@@ -73,10 +73,7 @@ class _FormExample3State extends State<FormExample3> {
                   key: _passwordKey,
                   label: const Text('Password'),
                   validator: const LengthValidator(min: 8),
-                  showErrors: const {
-                    FormValidationMode.submitted,
-                    FormValidationMode.changed
-                  },
+                  showErrors: const {FormValidationMode.submitted, FormValidationMode.changed},
                   child: const TextField(
                     obscureText: true,
                   ),
@@ -84,12 +81,8 @@ class _FormExample3State extends State<FormExample3> {
                 FormField<String>(
                   key: _confirmPasswordKey,
                   label: const Text('Confirm Password'),
-                  showErrors: const {
-                    FormValidationMode.submitted,
-                    FormValidationMode.changed
-                  },
-                  validator: CompareWith.equal(_passwordKey,
-                      message: 'Passwords do not match'),
+                  showErrors: const {FormValidationMode.submitted, FormValidationMode.changed},
+                  validator: CompareWith.equal(_passwordKey, message: 'Passwords do not match'),
                   child: const TextField(
                     obscureText: true,
                   ),

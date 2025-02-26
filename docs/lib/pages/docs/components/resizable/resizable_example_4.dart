@@ -9,16 +9,11 @@ class ResizableExample4 extends StatefulWidget {
 }
 
 class _ResizableExample4State extends State<ResizableExample4> {
-  final AbsoluteResizablePaneController controller1 =
-      AbsoluteResizablePaneController(80);
-  final AbsoluteResizablePaneController controller2 =
-      AbsoluteResizablePaneController(80);
-  final AbsoluteResizablePaneController controller3 =
-      AbsoluteResizablePaneController(120);
-  final AbsoluteResizablePaneController controller4 =
-      AbsoluteResizablePaneController(80);
-  final AbsoluteResizablePaneController controller5 =
-      AbsoluteResizablePaneController(80);
+  final AbsoluteResizablePaneController controller1 = AbsoluteResizablePaneController(80);
+  final AbsoluteResizablePaneController controller2 = AbsoluteResizablePaneController(80);
+  final AbsoluteResizablePaneController controller3 = AbsoluteResizablePaneController(120);
+  final AbsoluteResizablePaneController controller4 = AbsoluteResizablePaneController(80);
+  final AbsoluteResizablePaneController controller5 = AbsoluteResizablePaneController(80);
   @override
   Widget build(BuildContext context) {
     return Column(

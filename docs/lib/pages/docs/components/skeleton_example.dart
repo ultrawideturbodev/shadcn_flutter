@@ -12,8 +12,7 @@ class SkeletonExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return ComponentPage(
       name: 'skeleton',
-      description:
-          'Skeleton is a placeholder for content that hasn\'t loaded yet.',
+      description: 'Skeleton is a placeholder for content that hasn\'t loaded yet.',
       displayName: 'Skeleton',
       children: [
         const Text('This component uses widget from ')

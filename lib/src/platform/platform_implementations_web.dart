@@ -30,8 +30,7 @@ extension type _ShadcnAppThemeChangedEvent._(JSObject _) implements JSObject {
 
 @JS("ShadcnAppTheme")
 extension type _ShadcnAppTheme._(JSObject _) implements JSObject {
-  external _ShadcnAppTheme(
-      String background, String foreground, String primary);
+  external _ShadcnAppTheme(String background, String foreground, String primary);
 }
 
 class ShadcnFlutterPlatformImplementations {

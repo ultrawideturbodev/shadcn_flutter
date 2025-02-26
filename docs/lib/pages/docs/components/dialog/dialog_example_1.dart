@@ -17,8 +17,7 @@ class DialogExample1 extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                      'Make changes to your profile here. Click save when you\'re done'),
+                  const Text('Make changes to your profile here. Click save when you\'re done'),
                   const Gap(16),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 400),

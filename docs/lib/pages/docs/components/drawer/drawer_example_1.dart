@@ -29,8 +29,7 @@ class _DrawerExample1State extends State<DrawerExample1> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                  'Drawer ${count + 1} at ${positions[count % positions.length].name}'),
+              Text('Drawer ${count + 1} at ${positions[count % positions.length].name}'),
               const Gap(16),
               PrimaryButton(
                 onPressed: () {

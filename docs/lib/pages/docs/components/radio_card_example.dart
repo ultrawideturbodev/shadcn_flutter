@@ -15,8 +15,7 @@ class RadioCardExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/radio_card/radio_card_example_1.dart',
+          path: 'lib/pages/docs/components/radio_card/radio_card_example_1.dart',
           child: RadioCardExample1(),
         ),
       ],

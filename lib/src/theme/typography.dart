@@ -69,10 +69,10 @@ class Typography {
     this.h3 = const TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
     this.h4 = const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
     this.p = const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-    this.blockQuote = const TextStyle(
-        fontSize: 16, fontWeight: FontWeight.w400, fontStyle: FontStyle.italic),
-    this.inlineCode = const TextStyle(
-        fontFamily: 'GeistMono', fontSize: 14, fontWeight: FontWeight.w600),
+    this.blockQuote =
+        const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, fontStyle: FontStyle.italic),
+    this.inlineCode =
+        const TextStyle(fontFamily: 'GeistMono', fontSize: 14, fontWeight: FontWeight.w600),
     this.lead = const TextStyle(fontSize: 20),
     this.textLarge = const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
     this.textSmall = const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
@@ -198,27 +198,15 @@ class Typography {
 
   Typography scale(double factor) {
     return Typography(
-      sans: sans.fontSize == null
-          ? sans
-          : sans.copyWith(fontSize: sans.fontSize! * factor),
-      mono: mono.fontSize == null
-          ? mono
-          : mono.copyWith(fontSize: mono.fontSize! * factor),
-      xSmall: xSmall.fontSize == null
-          ? xSmall
-          : xSmall.copyWith(fontSize: xSmall.fontSize! * factor),
-      small: small.fontSize == null
-          ? small
-          : small.copyWith(fontSize: small.fontSize! * factor),
-      base: base.fontSize == null
-          ? base
-          : base.copyWith(fontSize: base.fontSize! * factor),
-      large: large.fontSize == null
-          ? large
-          : large.copyWith(fontSize: large.fontSize! * factor),
-      xLarge: xLarge.fontSize == null
-          ? xLarge
-          : xLarge.copyWith(fontSize: xLarge.fontSize! * factor),
+      sans: sans.fontSize == null ? sans : sans.copyWith(fontSize: sans.fontSize! * factor),
+      mono: mono.fontSize == null ? mono : mono.copyWith(fontSize: mono.fontSize! * factor),
+      xSmall:
+          xSmall.fontSize == null ? xSmall : xSmall.copyWith(fontSize: xSmall.fontSize! * factor),
+      small: small.fontSize == null ? small : small.copyWith(fontSize: small.fontSize! * factor),
+      base: base.fontSize == null ? base : base.copyWith(fontSize: base.fontSize! * factor),
+      large: large.fontSize == null ? large : large.copyWith(fontSize: large.fontSize! * factor),
+      xLarge:
+          xLarge.fontSize == null ? xLarge : xLarge.copyWith(fontSize: xLarge.fontSize! * factor),
       x2Large: x2Large.fontSize == null
           ? x2Large
           : x2Large.copyWith(fontSize: x2Large.fontSize! * factor),
@@ -243,48 +231,29 @@ class Typography {
       x9Large: x9Large.fontSize == null
           ? x9Large
           : x9Large.copyWith(fontSize: x9Large.fontSize! * factor),
-      thin: thin.fontSize == null
-          ? thin
-          : thin.copyWith(fontSize: thin.fontSize! * factor),
-      light: light.fontSize == null
-          ? light
-          : light.copyWith(fontSize: light.fontSize! * factor),
+      thin: thin.fontSize == null ? thin : thin.copyWith(fontSize: thin.fontSize! * factor),
+      light: light.fontSize == null ? light : light.copyWith(fontSize: light.fontSize! * factor),
       extraLight: extraLight.fontSize == null
           ? extraLight
           : extraLight.copyWith(fontSize: extraLight.fontSize! * factor),
-      normal: normal.fontSize == null
-          ? normal
-          : normal.copyWith(fontSize: normal.fontSize! * factor),
-      medium: medium.fontSize == null
-          ? medium
-          : medium.copyWith(fontSize: medium.fontSize! * factor),
+      normal:
+          normal.fontSize == null ? normal : normal.copyWith(fontSize: normal.fontSize! * factor),
+      medium:
+          medium.fontSize == null ? medium : medium.copyWith(fontSize: medium.fontSize! * factor),
       semiBold: semiBold.fontSize == null
           ? semiBold
           : semiBold.copyWith(fontSize: semiBold.fontSize! * factor),
-      bold: bold.fontSize == null
-          ? bold
-          : bold.copyWith(fontSize: bold.fontSize! * factor),
+      bold: bold.fontSize == null ? bold : bold.copyWith(fontSize: bold.fontSize! * factor),
       extraBold: extraBold.fontSize == null
           ? extraBold
           : extraBold.copyWith(fontSize: extraBold.fontSize! * factor),
-      black: black.fontSize == null
-          ? black
-          : black.copyWith(fontSize: black.fontSize! * factor),
-      italic: italic.fontSize == null
-          ? italic
-          : italic.copyWith(fontSize: italic.fontSize! * factor),
-      h1: h1.fontSize == null
-          ? h1
-          : h1.copyWith(fontSize: h1.fontSize! * factor),
-      h2: h2.fontSize == null
-          ? h2
-          : h2.copyWith(fontSize: h2.fontSize! * factor),
-      h3: h3.fontSize == null
-          ? h3
-          : h3.copyWith(fontSize: h3.fontSize! * factor),
-      h4: h4.fontSize == null
-          ? h4
-          : h4.copyWith(fontSize: h4.fontSize! * factor),
+      black: black.fontSize == null ? black : black.copyWith(fontSize: black.fontSize! * factor),
+      italic:
+          italic.fontSize == null ? italic : italic.copyWith(fontSize: italic.fontSize! * factor),
+      h1: h1.fontSize == null ? h1 : h1.copyWith(fontSize: h1.fontSize! * factor),
+      h2: h2.fontSize == null ? h2 : h2.copyWith(fontSize: h2.fontSize! * factor),
+      h3: h3.fontSize == null ? h3 : h3.copyWith(fontSize: h3.fontSize! * factor),
+      h4: h4.fontSize == null ? h4 : h4.copyWith(fontSize: h4.fontSize! * factor),
       p: p.fontSize == null ? p : p.copyWith(fontSize: p.fontSize! * factor),
       blockQuote: blockQuote.fontSize == null
           ? blockQuote
@@ -292,9 +261,7 @@ class Typography {
       inlineCode: inlineCode.fontSize == null
           ? inlineCode
           : inlineCode.copyWith(fontSize: inlineCode.fontSize! * factor),
-      lead: lead.fontSize == null
-          ? lead
-          : lead.copyWith(fontSize: lead.fontSize! * factor),
+      lead: lead.fontSize == null ? lead : lead.copyWith(fontSize: lead.fontSize! * factor),
       textLarge: textLarge.fontSize == null
           ? textLarge
           : textLarge.copyWith(fontSize: textLarge.fontSize! * factor),

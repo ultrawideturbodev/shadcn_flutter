@@ -1,8 +1,7 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 
 Future<void> closeOverlay<T>(BuildContext context, [T? value]) {
-  return Data.maybeFind<OverlayHandlerStateMixin>(context)
-          ?.closeWithResult(value) ??
+  return Data.maybeFind<OverlayHandlerStateMixin>(context)?.closeWithResult(value) ??
       Future.value();
 }
 
@@ -185,8 +184,7 @@ class OverlayManagerLayer extends StatefulWidget {
   State<OverlayManagerLayer> createState() => _OverlayManagerLayerState();
 }
 
-class _OverlayManagerLayerState extends State<OverlayManagerLayer>
-    implements OverlayManager {
+class _OverlayManagerLayerState extends State<OverlayManagerLayer> implements OverlayManager {
   @override
   Widget build(BuildContext context) {
     return Data<OverlayManager>.inherit(

@@ -13,8 +13,7 @@ class DividerExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'divider',
-      description:
-          'A divider is a thin line that groups content in lists and layouts.',
+      description: 'A divider is a thin line that groups content in lists and layouts.',
       displayName: 'Divider',
       children: [
         WidgetUsageExample(

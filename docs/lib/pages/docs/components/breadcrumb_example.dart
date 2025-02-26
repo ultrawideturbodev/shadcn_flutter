@@ -17,8 +17,7 @@ class BreadcrumbExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Breadcrumb Example',
-          path:
-              'lib/pages/docs/components/breadcrumb/breadcrumb_example_1.dart',
+          path: 'lib/pages/docs/components/breadcrumb/breadcrumb_example_1.dart',
           child: BreadcrumbExample1(),
         ),
       ],

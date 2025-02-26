@@ -39,8 +39,7 @@ main() {
     String line = lines[i].trim();
     if (line.startsWith('.') && line.endsWith(':before {')) {
       String iconName = line.substring(1, line.indexOf(':'));
-      if (iconName.startsWith("icon-") &&
-          !kUnsafeName.contains(iconName.substring(5))) {
+      if (iconName.startsWith("icon-") && !kUnsafeName.contains(iconName.substring(5))) {
         iconName = iconName.substring(5);
       }
       iconName = generateIconName(iconName);

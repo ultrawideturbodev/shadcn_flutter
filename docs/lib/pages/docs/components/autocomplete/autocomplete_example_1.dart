@@ -37,8 +37,7 @@ class _AutoCompleteExample1State extends State<AutoCompleteExample1> {
     }
     setState(() {
       _currentSuggestions = suggestions
-          .where(
-              (element) => element.toLowerCase().contains(value.toLowerCase()))
+          .where((element) => element.toLowerCase().contains(value.toLowerCase()))
           .toList();
     });
   }

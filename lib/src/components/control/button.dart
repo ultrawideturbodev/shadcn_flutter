@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/gestures.dart';
-
 import '../../../shadcn_flutter.dart';
 
 class Toggle extends StatefulWidget {
@@ -1521,20 +1519,20 @@ EdgeInsets _buttonMenuPadding(BuildContext context, Set<WidgetState> states) {
   final scaling = theme.scaling;
   final menuGroupData = Data.maybeOf<MenuGroupData>(context);
   if (menuGroupData != null && menuGroupData.direction == Axis.horizontal) {
-    return EdgeInsets.symmetric(horizontal: 18, vertical: 6) * scaling;
+    return const EdgeInsets.symmetric(horizontal: 18, vertical: 6) * scaling;
   }
-  return EdgeInsets.only(left: 8, top: 6, right: 6, bottom: 6) * scaling;
+  return const EdgeInsets.only(left: 8, top: 6, right: 6, bottom: 6) * scaling;
 }
 
 EdgeInsets _buttonMenubarPadding(BuildContext context, Set<WidgetState> states) {
   final theme = Theme.of(context);
   final scaling = theme.scaling;
-  return EdgeInsets.symmetric(horizontal: 12, vertical: 4) * scaling;
+  return const EdgeInsets.symmetric(horizontal: 12, vertical: 4) * scaling;
 }
 
 EdgeInsets _buttonCardPadding(BuildContext context, Set<WidgetState> states) {
   final theme = Theme.of(context);
-  return EdgeInsets.all(16) * theme.scaling;
+  return const EdgeInsets.all(16) * theme.scaling;
 }
 
 // CARD

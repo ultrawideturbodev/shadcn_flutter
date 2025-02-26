@@ -192,8 +192,7 @@ class _TextAreaState extends State<TextArea> {
                     if (widget.expandableHeight && _height.isFinite) {
                       setState(() {
                         _height += details.delta.dy;
-                        _height =
-                            _height.clamp(widget.minHeight, widget.maxHeight);
+                        _height = _height.clamp(widget.minHeight, widget.maxHeight);
                         widget.onHeightChanged?.call(_height);
                       });
                     }
@@ -208,8 +207,7 @@ class _TextAreaState extends State<TextArea> {
                   child: Padding(
                     padding: EdgeInsets.all(4.0 * scaling),
                     child: CustomPaint(
-                      painter: _TextAreaDragHandlePainter(
-                          theme.colorScheme.foreground),
+                      painter: _TextAreaDragHandlePainter(theme.colorScheme.foreground),
                     ),
                   ),
                 ),

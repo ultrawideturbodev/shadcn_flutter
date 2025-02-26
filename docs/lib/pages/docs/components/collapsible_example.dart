@@ -16,8 +16,7 @@ class CollapsibleExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Collapsible Example',
-          path:
-              'lib/pages/docs/components/collapsible/collapsible_example_1.dart',
+          path: 'lib/pages/docs/components/collapsible/collapsible_example_1.dart',
           child: CollapsibleExample1(),
         ),
       ],

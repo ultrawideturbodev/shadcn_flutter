@@ -16,8 +16,7 @@ class ContextMenuExample extends StatelessWidget {
       children: [
         WidgetUsageExample(
           title: 'Example',
-          path:
-              'lib/pages/docs/components/context_menu/context_menu_example_1.dart',
+          path: 'lib/pages/docs/components/context_menu/context_menu_example_1.dart',
           child: ContextMenuExample1(),
         ),
       ],

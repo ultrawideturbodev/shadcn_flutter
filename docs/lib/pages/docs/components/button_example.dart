@@ -26,8 +26,7 @@ class ButtonExample extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ComponentPage(
       name: 'button',
-      description:
-          'Buttons allow users to take actions, and make choices, with a single tap.',
+      description: 'Buttons allow users to take actions, and make choices, with a single tap.',
       displayName: 'Button',
       children: [
         WidgetUsageExample(

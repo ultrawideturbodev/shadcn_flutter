@@ -30,8 +30,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Text('Introduction').h1(),
-          const Text(
-                  'Beautifully designed components from Shadcn/UI is now available for Flutter.')
+          const Text('Beautifully designed components from Shadcn/UI is now available for Flutter.')
               .lead(),
           const Text(
             'Welcome to shadcn_flutter, a versatile and comprehensive set '
@@ -64,8 +63,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
               const Text('Pre-made themes from Shadcn/UI.').li(),
               const Text('Supports mobile, web, and desktop platforms.').li(),
               const Text('Supports middle drag scrolling.').li(),
-              const Text('Various widget extensions for typography purposes.')
-                  .li(),
+              const Text('Various widget extensions for typography purposes.').li(),
               const Text('Supports WebAssembly for better performance.').li(),
             ],
           ).p(),
@@ -81,10 +79,8 @@ class _IntroductionPageState extends State<IntroductionPage> {
           Accordion(
             items: [
               const AccordionItem(
-                trigger: AccordionTrigger(
-                    child: Text('Does this support GoRouter?')),
-                content: Text(
-                    'Yes, it does. You can use GoRouter with shadcn_flutter. '),
+                trigger: AccordionTrigger(child: Text('Does this support GoRouter?')),
+                content: Text('Yes, it does. You can use GoRouter with shadcn_flutter. '),
               ),
               const AccordionItem(
                 trigger: AccordionTrigger(
@@ -95,8 +91,7 @@ class _IntroductionPageState extends State<IntroductionPage> {
               ),
               AccordionItem(
                 trigger: const AccordionTrigger(
-                  child:
-                      Text('Can I use this with Material/Cupertino Widgets?'),
+                  child: Text('Can I use this with Material/Cupertino Widgets?'),
                 ),
                 content: const Text('Sure you can! ').thenButton(
                     onPressed: () {
@@ -106,16 +101,15 @@ class _IntroductionPageState extends State<IntroductionPage> {
               ),
               AccordionItem(
                 trigger: const AccordionTrigger(
-                  child: Text(
-                      'Can I configure which style i would like to use? (Default/New York)'),
+                  child:
+                      Text('Can I configure which style i would like to use? (Default/New York)'),
                 ),
                 content: const Text(
                         'Unfortunately you can\'t. This package only supports New York style. '
                         'But if you wish to have default style of Shadcn/UI, i would recommend ')
                     .thenButton(
                         onPressed: () {
-                          launchUrlString(
-                              'https://github.com/nank1ro/flutter-shadcn-ui');
+                          launchUrlString('https://github.com/nank1ro/flutter-shadcn-ui');
                         },
                         child: const Text('this package'))
                     .thenText(' by ')
@@ -136,20 +130,16 @@ class _IntroductionPageState extends State<IntroductionPage> {
               const Text('Github: ')
                   .thenButton(
                       onPressed: () {
-                        launchUrlString(
-                            'https://github.com/sunarya-thito/shadcn_flutter');
+                        launchUrlString('https://github.com/sunarya-thito/shadcn_flutter');
                       },
-                      child: const Text(
-                          'https://github.com/sunarya-thito/shadcn_flutter'))
+                      child: const Text('https://github.com/sunarya-thito/shadcn_flutter'))
                   .li(),
               const Text('pub.dev: ')
                   .thenButton(
                       onPressed: () {
-                        launchUrlString(
-                            'https://pub.dev/packages/shadcn_flutter');
+                        launchUrlString('https://pub.dev/packages/shadcn_flutter');
                       },
-                      child:
-                          const Text('https://pub.dev/packages/shadcn_flutter'))
+                      child: const Text('https://pub.dev/packages/shadcn_flutter'))
                   .li(),
               const Text('Discord: ')
                   .thenButton(

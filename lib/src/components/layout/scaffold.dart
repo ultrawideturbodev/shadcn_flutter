@@ -59,8 +59,7 @@ class ScaffoldState extends State<Scaffold> {
             verticalDirection: VerticalDirection.up,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              if (widget.loadingProgress != null ||
-                  widget.loadingProgressIndeterminate)
+              if (widget.loadingProgress != null || widget.loadingProgressIndeterminate)
                 SizedBox(
                   // to make it float
                   height: 0,
@@ -73,9 +72,8 @@ class ScaffoldState extends State<Scaffold> {
                         right: 0,
                         child: LinearProgressIndicator(
                           backgroundColor: Colors.transparent,
-                          value: widget.loadingProgressIndeterminate
-                              ? null
-                              : widget.loadingProgress,
+                          value:
+                              widget.loadingProgressIndeterminate ? null : widget.loadingProgress,
                           showSparks: false,
                         ),
                       ),
@@ -107,9 +105,7 @@ class ScaffoldState extends State<Scaffold> {
                     right: 0,
                     child: LinearProgressIndicator(
                       backgroundColor: Colors.transparent,
-                      value: widget.loadingProgressIndeterminate
-                          ? null
-                          : widget.loadingProgress,
+                      value: widget.loadingProgressIndeterminate ? null : widget.loadingProgress,
                       showSparks: true,
                     ),
                   ),
@@ -175,8 +171,7 @@ class AppBar extends StatefulWidget {
   final Widget? title;
   final Widget? header; // small widget placed on top of title
   final Widget? subtitle; // small widget placed below title
-  final bool
-      trailingExpanded; // expand the trailing instead of the main content
+  final bool trailingExpanded; // expand the trailing instead of the main content
   final AlignmentGeometry alignment;
   final Color? backgroundColor;
   final double? leadingGap;
@@ -239,9 +234,7 @@ class _AppBarState extends State<AppBar> {
                   ) *
                   scaling),
           child: SafeArea(
-            top: widget.useSafeArea &&
-                barData?.isHeader == true &&
-                barData?.childIndex == 0,
+            top: widget.useSafeArea && barData?.isHeader == true && barData?.childIndex == 0,
             right: widget.useSafeArea,
             left: widget.useSafeArea,
             bottom: widget.useSafeArea &&
@@ -259,9 +252,7 @@ class _AppBarState extends State<AppBar> {
                         children: widget.leading,
                       ).gap(widget.leadingGap ?? (4 * scaling)),
                     Flexible(
-                      fit: widget.trailingExpanded
-                          ? FlexFit.loose
-                          : FlexFit.tight,
+                      fit: widget.trailingExpanded ? FlexFit.loose : FlexFit.tight,
                       child: widget.child ??
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -327,8 +318,7 @@ class _ScaffoldFlex extends MultiChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, _ScaffoldRenderFlex renderObject) {
+  void updateRenderObject(BuildContext context, _ScaffoldRenderFlex renderObject) {
     bool needsLayout = false;
     if (renderObject._floatingHeader != floatingHeader) {
       renderObject._floatingHeader = floatingHeader;
@@ -380,12 +370,9 @@ class _ScaffoldRenderFlex extends RenderBox
     RenderBox header = firstChild!;
     RenderBox content = (header.parentData as _ScaffoldParentData).nextSibling!;
     RenderBox footer = (content.parentData as _ScaffoldParentData).nextSibling!;
-    context.paintChild(
-        content, (content.parentData as BoxParentData).offset + offset);
-    context.paintChild(
-        header, (header.parentData as BoxParentData).offset + offset);
-    context.paintChild(
-        footer, (footer.parentData as BoxParentData).offset + offset);
+    context.paintChild(content, (content.parentData as BoxParentData).offset + offset);
+    context.paintChild(header, (header.parentData as BoxParentData).offset + offset);
+    context.paintChild(footer, (footer.parentData as BoxParentData).offset + offset);
   }
 
   bool _hitTestBox(BoxHitTestResult result, RenderBox child, Offset position) {

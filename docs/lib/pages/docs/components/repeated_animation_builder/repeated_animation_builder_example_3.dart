@@ -4,12 +4,10 @@ class RepeatedAnimationBuilderExample3 extends StatefulWidget {
   const RepeatedAnimationBuilderExample3({super.key});
 
   @override
-  State<RepeatedAnimationBuilderExample3> createState() =>
-      _RepeatedAnimationBuilderExample3State();
+  State<RepeatedAnimationBuilderExample3> createState() => _RepeatedAnimationBuilderExample3State();
 }
 
-class _RepeatedAnimationBuilderExample3State
-    extends State<RepeatedAnimationBuilderExample3> {
+class _RepeatedAnimationBuilderExample3State extends State<RepeatedAnimationBuilderExample3> {
   bool play = true;
   @override
   Widget build(BuildContext context) {

@@ -54,8 +54,7 @@ class ChipInput<T> extends StatefulWidget {
   State<ChipInput<T>> createState() => ChipInputState();
 }
 
-class ChipInputState<T> extends State<ChipInput<T>>
-    with FormValueSupplier<List<T>, ChipInput<T>> {
+class ChipInputState<T> extends State<ChipInput<T>> with FormValueSupplier<List<T>, ChipInput<T>> {
   late FocusNode _focusNode;
   late TextEditingController _controller;
   late ValueNotifier<List<T>> _suggestions;
@@ -93,8 +92,7 @@ class ChipInputState<T> extends State<ChipInput<T>>
   void _onSuggestionsChanged() {
     if (_suggestions.value.isEmpty || !_focusNode.hasFocus) {
       _popoverController.close();
-    } else if (!_popoverController.hasOpenPopover &&
-        _suggestions.value.isNotEmpty) {
+    } else if (!_popoverController.hasOpenPopover && _suggestions.value.isNotEmpty) {
       final theme = Theme.of(context);
       _popoverController.show(
         context: context,
@@ -179,25 +177,17 @@ class ChipInputState<T> extends State<ChipInput<T>>
                         child: Row(
                           children: [
                             if (widget.suggestionLeadingBuilder != null) ...[
-                              widget.suggestionLeadingBuilder!(
-                                  context, _suggestions.value[i]),
-                              SizedBox(
-                                  width:
-                                      theme.scaling * 10), // Add spacing here
+                              widget.suggestionLeadingBuilder!(context, _suggestions.value[i]),
+                              SizedBox(width: theme.scaling * 10), // Add spacing here
                             ],
                             Expanded(
-                              child: widget.suggestionBuilder
-                                      ?.call(context, _suggestions.value[i]) ??
-                                  Text(_suggestions.value[i].toString())
-                                      .normal()
-                                      .small(),
+                              child:
+                                  widget.suggestionBuilder?.call(context, _suggestions.value[i]) ??
+                                      Text(_suggestions.value[i].toString()).normal().small(),
                             ),
                             if (widget.suggestionTrailingBuilder != null) ...[
-                              SizedBox(
-                                  width:
-                                      theme.scaling * 10), // Add spacing here
-                              widget.suggestionTrailingBuilder!
-                                      (context, _suggestions.value[i])
+                              SizedBox(width: theme.scaling * 10), // Add spacing here
+                              widget.suggestionTrailingBuilder!(context, _suggestions.value[i])
                                   .normal()
                                   .small(),
                             ],
@@ -223,8 +213,7 @@ class ChipInputState<T> extends State<ChipInput<T>>
   final GlobalKey _textFieldKey = GlobalKey();
 
   void _handleSubmitted(String text) {
-    if (_selectedSuggestions.value >= 0 &&
-        _selectedSuggestions.value < _suggestions.value.length) {
+    if (_selectedSuggestions.value >= 0 && _selectedSuggestions.value < _suggestions.value.length) {
       // A suggestion is selected, use it
       widget.onSuggestionChoosen?.call(_selectedSuggestions.value);
     } else if (text.isNotEmpty) {
@@ -247,10 +236,8 @@ class ChipInputState<T> extends State<ChipInput<T>>
         mouseCursor: SystemMouseCursors.text,
         shortcuts: {
           LogicalKeySet(LogicalKeyboardKey.tab): const SelectSuggestionIntent(),
-          LogicalKeySet(LogicalKeyboardKey.arrowDown):
-              const NextSuggestionIntent(),
-          LogicalKeySet(LogicalKeyboardKey.arrowUp):
-              const PreviousSuggestionIntent(),
+          LogicalKeySet(LogicalKeyboardKey.arrowDown): const NextSuggestionIntent(),
+          LogicalKeySet(LogicalKeyboardKey.arrowUp): const PreviousSuggestionIntent(),
         },
         actions: {
           SelectSuggestionIntent: CallbackAction(
@@ -302,8 +289,7 @@ class ChipInputState<T> extends State<ChipInput<T>>
                       runSpacing: theme.scaling * 4,
                       spacing: theme.scaling * 4,
                       children: [
-                        for (int i = 0; i < widget.chips.length; i++)
-                          _chipBuilder(i),
+                        for (int i = 0; i < widget.chips.length; i++) _chipBuilder(i),
                       ],
                     ).withPadding(
                       left: theme.scaling * 6,
@@ -330,17 +316,14 @@ class ChipInputState<T> extends State<ChipInput<T>>
                       spacing: theme.scaling * 4,
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        for (int i = 0; i < widget.chips.length; i++)
-                          _chipBuilder(i),
+                        for (int i = 0; i < widget.chips.length; i++) _chipBuilder(i),
                         if (_controller.text.isNotEmpty) const Gap(4),
                         if (_controller.text.isNotEmpty)
                           Text(
                             _controller.text,
                           ).base(),
                       ],
-                    ).withPadding(
-                        horizontal: theme.scaling * 6,
-                        vertical: theme.scaling * 4),
+                    ).withPadding(horizontal: theme.scaling * 6, vertical: theme.scaling * 4),
                   ],
                 );
               }
@@ -349,9 +332,8 @@ class ChipInputState<T> extends State<ChipInput<T>>
               child: OutlinedContainer(
                 backgroundColor: Colors.transparent,
                 borderRadius: theme.borderRadiusMd,
-                borderColor: _focusNode.hasFocus
-                    ? theme.colorScheme.ring
-                    : theme.colorScheme.border,
+                borderColor:
+                    _focusNode.hasFocus ? theme.colorScheme.ring : theme.colorScheme.border,
                 child: Row(
                   children: [
                     Expanded(child: child!),

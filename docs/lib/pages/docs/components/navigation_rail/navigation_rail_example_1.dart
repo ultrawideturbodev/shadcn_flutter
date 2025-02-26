@@ -18,12 +18,9 @@ class _NavigationRailExample1State extends State<NavigationRailExample1> {
 
   NavigationItem buildButton(String label, IconData icon) {
     return NavigationItem(
-      style: customButtonStyle
-          ? const ButtonStyle.muted(density: ButtonDensity.icon)
-          : null,
-      selectedStyle: customButtonStyle
-          ? const ButtonStyle.fixed(density: ButtonDensity.icon)
-          : null,
+      style: customButtonStyle ? const ButtonStyle.muted(density: ButtonDensity.icon) : null,
+      selectedStyle:
+          customButtonStyle ? const ButtonStyle.fixed(density: ButtonDensity.icon) : null,
       label: Text(label),
       child: Icon(icon),
     );
@@ -76,8 +73,7 @@ class _NavigationRailExample1State extends State<NavigationRailExample1> {
                   children: [
                     Select<NavigationRailAlignment>(
                       value: alignment,
-                      itemBuilder:
-                          (BuildContext context, NavigationRailAlignment item) {
+                      itemBuilder: (BuildContext context, NavigationRailAlignment item) {
                         return Text(item.name);
                       },
                       popupWidthConstraint: PopoverConstraint.anchorFixedSize,
@@ -98,12 +94,10 @@ class _NavigationRailExample1State extends State<NavigationRailExample1> {
                     ),
                     Select<NavigationLabelType>(
                       value: labelType,
-                      itemBuilder:
-                          (BuildContext context, NavigationLabelType item) {
+                      itemBuilder: (BuildContext context, NavigationLabelType item) {
                         return Text(item.name);
                       },
-                      popupConstraints:
-                          BoxConstraints.tight(const Size(200, 200)),
+                      popupConstraints: BoxConstraints.tight(const Size(200, 200)),
                       onChanged: (value) {
                         if (value != null) {
                           setState(() {
@@ -121,8 +115,7 @@ class _NavigationRailExample1State extends State<NavigationRailExample1> {
                     ),
                     Select<NavigationLabelPosition>(
                       value: labelPosition,
-                      itemBuilder:
-                          (BuildContext context, NavigationLabelPosition item) {
+                      itemBuilder: (BuildContext context, NavigationLabelPosition item) {
                         return Text(item.name);
                       },
                       onChanged: (value) {
@@ -141,9 +134,7 @@ class _NavigationRailExample1State extends State<NavigationRailExample1> {
                       ],
                     ),
                     Checkbox(
-                      state: customButtonStyle
-                          ? CheckboxState.checked
-                          : CheckboxState.unchecked,
+                      state: customButtonStyle ? CheckboxState.checked : CheckboxState.unchecked,
                       onChanged: (value) {
                         setState(() {
                           customButtonStyle = value == CheckboxState.checked;
@@ -152,9 +143,7 @@ class _NavigationRailExample1State extends State<NavigationRailExample1> {
                       trailing: const Text('Custom Button Style'),
                     ),
                     Checkbox(
-                      state: expanded
-                          ? CheckboxState.checked
-                          : CheckboxState.unchecked,
+                      state: expanded ? CheckboxState.checked : CheckboxState.unchecked,
                       onChanged: (value) {
                         setState(() {
                           expanded = value == CheckboxState.checked;

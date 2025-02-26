@@ -23,8 +23,7 @@ class DataExample9State extends State<DataExample9> {
             ValueListenableBuilder(
               valueListenable: counter,
               builder: (context, value, child) {
-                return Text(
-                    'Current Value: $value - Rebuild Count: $rebuildCount');
+                return Text('Current Value: $value - Rebuild Count: $rebuildCount');
               },
             ),
             const Gap(24),
@@ -91,8 +90,7 @@ class _MostInnerWidgetState extends State<MostInnerWidget> {
     return Card(
       child: DataBuilder<int>(
         builder: (context, data, _) {
-          return Text(
-              'MostInnerWidget Data: $data - Rebuild Count: $mostInnerRebuildCount');
+          return Text('MostInnerWidget Data: $data - Rebuild Count: $mostInnerRebuildCount');
         },
       ),
     );
