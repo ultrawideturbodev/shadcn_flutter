@@ -139,6 +139,7 @@ class _NavigationBarState extends State<NavigationBar> with NavigationContainerM
     return AppBar(
       padding: EdgeInsets.zero,
       surfaceBlur: widget.surfaceBlur,
+      useSafeArea: false,
       surfaceOpacity: widget.surfaceOpacity,
       child: Data.inherit(
         data: NavigationControlData(
@@ -245,6 +246,7 @@ class NavigationRail extends StatefulWidget {
   final bool expanded;
   final bool keepMainAxisSize;
   final bool keepCrossAxisSize;
+  final List<BoxShadow> shadows;
 
   const NavigationRail({
     super.key,
@@ -265,6 +267,7 @@ class NavigationRail extends StatefulWidget {
     this.keepMainAxisSize = false,
     this.keepCrossAxisSize = false,
     required this.children,
+    this.shadows = const [],
   });
 
   @override
@@ -317,21 +320,31 @@ class _NavigationRailState extends State<NavigationRail> with NavigationContaine
         keepCrossAxisSize: widget.keepCrossAxisSize,
         keepMainAxisSize: widget.keepMainAxisSize,
       ),
-      child: SurfaceBlur(
-        surfaceBlur: widget.surfaceBlur,
-        child: Container(
+      child: Container(
+        clipBehavior: Clip.none,
+        decoration: BoxDecoration(
+          boxShadow: widget.shadows,
+          borderRadius: theme.appBarBorderRadius == null
+              ? null
+              : BorderRadius.circular(theme.appBarBorderRadius!),
+          border: theme.appBarBorderWidth == null || theme.appBarBorderWidth! <= 0
+              ? null
+              : Border.all(
+            color: theme.colorScheme.border,
+            width: theme.appBarBorderWidth!,
+          ),
           color: widget.backgroundColor ??
-              (theme.colorScheme.background.scaleAlpha(widget.surfaceOpacity ?? 1)),
-          alignment: _alignment,
-          child: SingleChildScrollView(
-            scrollDirection: widget.direction,
-            padding: resolvedPadding,
-            child: _wrapIntrinsic(
-              Flex(
-                direction: widget.direction,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: wrapChildren(context, widget.children),
-              ),
+              theme.colorScheme.background,
+        ),
+        alignment: _alignment,
+        child: SingleChildScrollView(
+          scrollDirection: widget.direction,
+          padding: resolvedPadding,
+          child: _wrapIntrinsic(
+            Flex(
+              direction: widget.direction,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: wrapChildren(context, widget.children),
             ),
           ),
         ),
@@ -750,6 +763,7 @@ class _NavigationItemState extends _AbstractNavigationButtonState<NavigationItem
         labelType == NavigationLabelType.selected);
     return NavigationPadding(
       child: SelectedButton(
+        disableHoverEffect: true,
         value: isSelected,
         enabled: widget.enabled,
         onChanged: parentIndex != null || widget.index != null
