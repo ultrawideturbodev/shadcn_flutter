@@ -13,8 +13,12 @@ class ThemeData {
   final double? surfaceOpacity;
   final double? surfaceBlur;
   final double? borderWidth;
+  final double? appBarBorderRadius;
+  final double? appBarBorderWidth;
 
   ThemeData({
+    this.appBarBorderRadius,
+    this.appBarBorderWidth,
     required this.colorScheme,
     required this.radius,
     this.scaling = 1,

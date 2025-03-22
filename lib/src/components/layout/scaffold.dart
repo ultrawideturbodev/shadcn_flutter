@@ -117,25 +117,22 @@ class ScaffoldState extends State<Scaffold> {
     );
   }
 
-  Widget buildFooter(BuildContext context, EdgeInsets viewInsets) {
-    return Offstage(
-      offstage: viewInsets.bottom > 0,
-      child: Container(
-        color: widget.footerBackgroundColor,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (var i = 0; i < widget.footers.length; i++)
-              Data.inherit(
-                data: ScaffoldBarData(
-                  isHeader: false,
-                  childIndex: i,
-                  childrenCount: widget.footers.length,
-                ),
-                child: widget.footers[i],
+  Widget buildFooter(BuildContext context) {
+    return Container(
+      color: widget.footerBackgroundColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          for (var i = 0; i < widget.footers.length; i++)
+            Data.inherit(
+              data: ScaffoldBarData(
+                isHeader: false,
+                childIndex: i,
+                childrenCount: widget.footers.length,
               ),
-          ],
-        ),
+              child: widget.footers[i],
+            ),
+        ],
       ),
     );
   }
@@ -143,7 +140,6 @@ class ScaffoldState extends State<Scaffold> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final viewInsets = MediaQuery.viewInsetsOf(context);
     return DrawerOverlay(
       child: Container(
         color: widget.backgroundColor ?? theme.colorScheme.background,
@@ -152,11 +148,8 @@ class ScaffoldState extends State<Scaffold> {
           floatingFooter: widget.floatingFooter,
           children: [
             buildHeader(context),
-            Container(
-              padding: viewInsets,
-              child: ToastLayer(child: widget.child),
-            ),
-            buildFooter(context, viewInsets),
+            ToastLayer(child: widget.child),
+            buildFooter(context),
           ],
         ),
       ),
@@ -181,6 +174,12 @@ class AppBar extends StatefulWidget {
   final bool useSafeArea;
   final double? surfaceBlur;
   final double? surfaceOpacity;
+  final List<BoxShadow> shadows;
+  final EdgeInsets margin;
+  final double? borderWidth;
+  final double? borderRadius;
+  final double spacing;
+  final Color? borderColor;
 
   const AppBar({
     super.key,
@@ -200,6 +199,12 @@ class AppBar extends StatefulWidget {
     this.surfaceBlur,
     this.surfaceOpacity,
     this.useSafeArea = true,
+    this.shadows = const [],
+    this.borderWidth,
+    this.margin = EdgeInsets.zero,
+    this.borderRadius,
+    this.spacing = 16,
+    this.borderColor,
   }) : assert(
           child == null || title == null,
           'Cannot provide both child and title',
@@ -217,83 +222,81 @@ class _AppBarState extends State<AppBar> {
     final barData = Data.maybeOf<ScaffoldBarData>(context);
     var surfaceBlur = widget.surfaceBlur ?? theme.surfaceBlur;
     var surfaceOpacity = widget.surfaceOpacity ?? theme.surfaceOpacity;
-    return ClipRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: surfaceBlur ?? 0,
-          sigmaY: surfaceBlur ?? 0,
+    return Container(
+      clipBehavior: Clip.none,
+      margin: widget.margin,
+      decoration: BoxDecoration(
+        boxShadow: widget.shadows,
+        borderRadius: (widget.borderRadius == null && theme.appBarBorderRadius == null
+            ? null
+            : BorderRadius.circular(widget.borderRadius ?? theme.appBarBorderRadius!)),
+        border: widget.borderWidth == null && (theme.appBarBorderWidth == null || theme.appBarBorderWidth! <= 0)
+            ? null
+            : Border.all(
+          color: widget.borderColor ?? theme.colorScheme.border,
+          width: widget.borderWidth ?? theme.appBarBorderWidth!,
         ),
-        child: Container(
-          color: widget.backgroundColor ??
-              theme.colorScheme.background.scaleAlpha(surfaceOpacity ?? 1),
-          alignment: widget.alignment,
-          padding: widget.padding ??
-              (const EdgeInsets.symmetric(
-                    horizontal: 18,
-                    vertical: 12,
-                  ) *
-                  scaling),
-          child: SafeArea(
-            top: widget.useSafeArea && barData?.isHeader == true && barData?.childIndex == 0,
-            right: widget.useSafeArea,
-            left: widget.useSafeArea,
-            bottom: widget.useSafeArea &&
-                barData?.isHeader == false &&
-                barData?.childIndex == (barData?.childrenCount ?? 0) - 1,
-            child: SizedBox(
-              height: widget.height,
-              child: IntrinsicHeight(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    if (widget.leading.isNotEmpty)
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: widget.leading,
-                      ).gap(widget.leadingGap ?? (4 * scaling)),
-                    Flexible(
-                      fit: widget.trailingExpanded ? FlexFit.loose : FlexFit.tight,
-                      child: widget.child ??
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              if (widget.header != null)
-                                KeyedSubtree(
-                                  key: const ValueKey('header'),
-                                  child: widget.header!.muted().small(),
-                                ),
-                              if (widget.title != null)
-                                KeyedSubtree(
-                                  key: const ValueKey('title'),
-                                  child: widget.title!.large().medium(),
-                                ),
-                              if (widget.subtitle != null)
-                                KeyedSubtree(
-                                  key: const ValueKey('subtitle'),
-                                  child: widget.subtitle!.muted().small(),
-                                ),
-                            ],
+        color: widget.backgroundColor ??
+            theme.colorScheme.background.scaleAlpha(surfaceOpacity ?? 1),
+      ),
+      alignment: widget.alignment,
+      padding: widget.padding ??
+          (const EdgeInsets.symmetric(
+            horizontal: 18,
+            vertical: 12,
+          ) *
+              scaling),
+      child: SizedBox(
+        height: widget.height,
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (widget.leading.isNotEmpty)
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: widget.leading,
+                ),
+              Flexible(
+                fit: widget.trailingExpanded ? FlexFit.loose : FlexFit.tight,
+                child: widget.child ??
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (widget.header != null)
+                          KeyedSubtree(
+                            key: const ValueKey('header'),
+                            child: widget.header!.muted().small(),
                           ),
+                        if (widget.title != null)
+                          KeyedSubtree(
+                            key: const ValueKey('title'),
+                            child: widget.title!.large().medium(),
+                          ),
+                        if (widget.subtitle != null)
+                          KeyedSubtree(
+                            key: const ValueKey('subtitle'),
+                            child: widget.subtitle!.muted().small(),
+                          ),
+                      ],
                     ),
-                    if (widget.trailing.isNotEmpty)
-                      if (!widget.trailingExpanded)
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: widget.trailing,
-                        ).gap(widget.trailingGap ?? (4 * scaling))
-                      else
-                        Expanded(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: widget.trailing,
-                          ).gap(widget.trailingGap ?? (4 * scaling)),
-                        ),
-                  ],
-                ).gap(18 * scaling),
               ),
-            ),
-          ),
+              if (widget.trailing.isNotEmpty)
+                if (!widget.trailingExpanded)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: widget.trailing,
+                  )
+                else
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: widget.trailing,
+                    ),
+                  ),
+            ],
+          ).gap(widget.spacing),
         ),
       ),
     );

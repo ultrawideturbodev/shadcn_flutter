@@ -247,6 +247,7 @@ class NavigationRail extends StatefulWidget {
   final bool keepMainAxisSize;
   final bool keepCrossAxisSize;
   final List<BoxShadow> shadows;
+  final Color? borderColor;
 
   const NavigationRail({
     super.key,
@@ -267,6 +268,7 @@ class NavigationRail extends StatefulWidget {
     this.keepMainAxisSize = false,
     this.keepCrossAxisSize = false,
     required this.children,
+    this.borderColor,
     this.shadows = const [],
   });
 
@@ -330,7 +332,7 @@ class _NavigationRailState extends State<NavigationRail> with NavigationContaine
           border: theme.appBarBorderWidth == null || theme.appBarBorderWidth! <= 0
               ? null
               : Border.all(
-            color: theme.colorScheme.border,
+            color: widget.borderColor ?? theme.colorScheme.border,
             width: theme.appBarBorderWidth!,
           ),
           color: widget.backgroundColor ??
@@ -763,7 +765,6 @@ class _NavigationItemState extends _AbstractNavigationButtonState<NavigationItem
         labelType == NavigationLabelType.selected);
     return NavigationPadding(
       child: SelectedButton(
-        disableHoverEffect: true,
         value: isSelected,
         enabled: widget.enabled,
         onChanged: parentIndex != null || widget.index != null

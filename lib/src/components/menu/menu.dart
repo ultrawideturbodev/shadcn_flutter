@@ -402,6 +402,7 @@ class _MenuButtonState extends State<MenuButton> {
               animation: menuData!.popoverController,
               builder: (context, child) {
                 return Button(
+                  forceHeight: false,
                   disableFocusOutline: true,
                   alignment: menuGroupData.direction == Axis.vertical
                       ? AlignmentDirectional.centerStart
@@ -417,7 +418,7 @@ class _MenuButtonState extends State<MenuButton> {
                         color: menuData.popoverController.hasOpenPopover
                             ? theme.colorScheme.accent
                             : null,
-                        borderRadius: BorderRadius.circular(theme.radiusMd),
+                        borderRadius: BorderRadius.circular(6),
                       );
                     },
                   ),

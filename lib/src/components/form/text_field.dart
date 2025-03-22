@@ -49,9 +49,14 @@ class TextField extends StatefulWidget {
   final bool autofocus;
   final WidgetStatesController? statesController;
   final double? borderWidth;
+  final material.InputDecoration Function(material.InputDecoration cValue)? inputDecoration;
+  final Color? cursorColor;
+  final EdgeInsets? scrollPadding;
 
   const TextField({
     super.key,
+    this.cursorColor,
+    this.inputDecoration,
     this.controller,
     this.maxLength,
     this.maxLengthEnforcement,
@@ -84,7 +89,7 @@ class TextField extends StatefulWidget {
     this.onTapOutside,
     this.inputFormatters,
     this.style,
-    this.contextMenuBuilder = defaultContextMenuBuilder,
+    this.contextMenuBuilder = null,
     this.useNativeContextMenu = false,
     this.isCollapsed,
     this.textInputAction,
@@ -95,6 +100,7 @@ class TextField extends StatefulWidget {
     this.trailingAlignment,
     this.statesController,
     this.borderWidth,
+    this.scrollPadding,
   });
 
   static Widget defaultContextMenuBuilder(
@@ -211,7 +217,7 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
                   color: widget.filled ? theme.colorScheme.muted : null,
                   border: widget.border
                       ? Border.all(
-                          width: widget.borderWidth ?? theme.borderWidth ?? 1.5,
+                          width: widget.borderWidth ?? 1.5,
                           color: _statesController.value.contains(WidgetState.focused) &&
                                   widget.enabled
                               ? theme.colorScheme.ring
@@ -261,6 +267,7 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
                     obscureText: widget.obscureText,
                     autofocus: widget.autofocus,
                     obscuringCharacter: widget.obscuringCharacter,
+                    scrollPadding: widget.scrollPadding ?? const EdgeInsets.all(20.0),
                     enabled: widget.enabled,
                     readOnly: widget.readOnly,
                     maxLength: widget.maxLength,
@@ -282,7 +289,27 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
                     style: defaultTextStyle,
                     expands: widget.expands,
                     textAlignVertical: widget.textAlignVertical,
-                    decoration: material.InputDecoration(
+                    decoration: widget.inputDecoration?.call(material.InputDecoration(
+                      isCollapsed: widget.isCollapsed,
+                      // prefixIcon: widget.leading,
+                      // suffixIcon: widget.trailing,
+                      isDense: true,
+                      border: material.InputBorder.none,
+                      hintText: widget.hintText,
+                      hintStyle: defaultTextStyle.copyWith(
+                        color: theme.colorScheme.input,
+                      ),
+                      hoverColor: Colors.transparent,
+                      focusedBorder: material.InputBorder.none,
+                      enabledBorder: material.InputBorder.none,
+                      disabledBorder: material.InputBorder.none,
+                      errorBorder: material.InputBorder.none,
+                      focusedErrorBorder: material.InputBorder.none,
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 8,
+                      ),
+                    )) ?? material.InputDecoration(
                       isCollapsed: widget.isCollapsed,
                       // prefixIcon: widget.leading,
                       // suffixIcon: widget.trailing,
@@ -303,7 +330,7 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
                         horizontal: 8,
                       ),
                     ),
-                    cursorColor: theme.colorScheme.primary,
+                    cursorColor: widget.cursorColor ?? theme.colorScheme.primary,
                     cursorWidth: 1.5,
                     cursorHeight: 16,
                     cursorRadius: const Radius.circular(2),

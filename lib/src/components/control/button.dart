@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:shadcn_flutter/src/extensions/color_extension.dart';
+
 import '../../../shadcn_flutter.dart';
 
 class Toggle extends StatefulWidget {
@@ -237,9 +239,11 @@ class Button extends StatefulWidget {
   final WidgetStatesController? statesController;
   final AlignmentGeometry? marginAlignment;
   final bool disableFocusOutline;
+  final bool forceHeight;
 
   const Button({
     super.key,
+    this.forceHeight = true,
     this.statesController,
     this.leading,
     this.trailing,
@@ -275,6 +279,7 @@ class Button extends StatefulWidget {
 
   const Button.primary({
     super.key,
+    this.forceHeight = true,
     this.statesController,
     this.leading,
     this.trailing,
@@ -310,6 +315,7 @@ class Button extends StatefulWidget {
 
   const Button.secondary({
     super.key,
+    this.forceHeight = true,
     this.statesController,
     this.leading,
     this.trailing,
@@ -345,6 +351,7 @@ class Button extends StatefulWidget {
 
   const Button.outline({
     super.key,
+    this.forceHeight = true,
     this.statesController,
     this.leading,
     this.trailing,
@@ -380,6 +387,7 @@ class Button extends StatefulWidget {
 
   const Button.ghost({
     super.key,
+    this.forceHeight = true,
     this.statesController,
     this.leading,
     this.trailing,
@@ -415,6 +423,7 @@ class Button extends StatefulWidget {
 
   const Button.link({
     super.key,
+    this.forceHeight = true,
     this.statesController,
     this.leading,
     this.trailing,
@@ -450,6 +459,7 @@ class Button extends StatefulWidget {
 
   const Button.text({
     super.key,
+    this.forceHeight = true,
     this.statesController,
     this.leading,
     this.trailing,
@@ -488,6 +498,7 @@ class Button extends StatefulWidget {
     this.statesController,
     this.leading,
     this.trailing,
+    this.forceHeight = true,
     required this.child,
     this.onPressed,
     this.focusNode,
@@ -521,6 +532,7 @@ class Button extends StatefulWidget {
   const Button.fixed({
     super.key,
     this.statesController,
+    this.forceHeight = true,
     this.leading,
     this.trailing,
     required this.child,
@@ -555,6 +567,7 @@ class Button extends StatefulWidget {
 
   const Button.card({
     super.key,
+    this.forceHeight = true,
     this.statesController,
     this.leading,
     this.trailing,
@@ -671,8 +684,36 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
     final theme = Theme.of(context);
     final scaling = theme.scaling;
     bool enableFeedback = widget.enableFeedback ?? _shouldEnableFeedback;
-    final buttonSize =
-        widget.style is ButtonStyle ? (widget.style as ButtonStyle).buttonSize : ButtonSize.normal;
+    final style = widget.style;
+    final styleIsButtonStyle = style is ButtonStyle;
+    final buttonSize = styleIsButtonStyle ? style.buttonSize : ButtonSize.normal;
+    final clickableChild = widget.leading == null && widget.trailing == null
+        ? Align(
+            heightFactor: 1,
+            widthFactor: 1,
+            alignment: widget.alignment ?? Alignment.center,
+            child: widget.child,
+          )
+        : IntrinsicWidth(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (widget.leading != null) widget.leading!,
+                if (widget.leading != null) Gap(8 * scaling),
+                Expanded(
+                  child: Align(
+                    widthFactor: 1,
+                    heightFactor: 1,
+                    alignment: widget.alignment ?? AlignmentDirectional.centerStart,
+                    child: widget.child,
+                  ),
+                ),
+                if (widget.trailing != null) Gap(8 * scaling),
+                if (widget.trailing != null) widget.trailing!,
+              ],
+            ),
+          );
     final clickable = Clickable(
       disableFocusOutline: widget.disableFocusOutline,
       statesController: widget.statesController,
@@ -706,38 +747,14 @@ class ButtonState<T extends Button> extends State<T> with SingleTickerProviderSt
       textStyle: WidgetStateProperty.resolveWith(_resolveTextStyle),
       iconTheme: WidgetStateProperty.resolveWith(_resolveIconTheme),
       onPressed: widget.onPressed,
-      child: ConstrainedBox(
-        constraints: BoxConstraints.tightFor(
-          height: buttonSize.maxHeight,
-        ),
-        child: widget.leading == null && widget.trailing == null
-            ? Align(
-                heightFactor: 1,
-                widthFactor: 1,
-                alignment: widget.alignment ?? Alignment.center,
-                child: widget.child,
-              )
-            : IntrinsicWidth(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    if (widget.leading != null) widget.leading!,
-                    if (widget.leading != null) Gap(8 * scaling),
-                    Expanded(
-                      child: Align(
-                        widthFactor: 1,
-                        heightFactor: 1,
-                        alignment: widget.alignment ?? AlignmentDirectional.centerStart,
-                        child: widget.child,
-                      ),
-                    ),
-                    if (widget.trailing != null) Gap(8 * scaling),
-                    if (widget.trailing != null) widget.trailing!,
-                  ],
-                ),
+      child: widget.forceHeight
+          ? ConstrainedBox(
+              constraints: BoxConstraints.tightFor(
+                height: buttonSize.maxHeight,
               ),
-      ),
+              child: clickableChild,
+            )
+          : clickableChild,
     );
     return clickable;
   }
@@ -820,6 +837,7 @@ class ButtonStyle implements AbstractButtonStyle {
   final ButtonDensity density;
   final ButtonShape shape;
   final ButtonStateProperty<double?>? _borderWidth;
+  final Color? color;
 
   const ButtonStyle({
     required this.variance,
@@ -827,12 +845,14 @@ class ButtonStyle implements AbstractButtonStyle {
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
+    this.color,
   }) : _borderWidth = borderWidth;
 
   const ButtonStyle.primary({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
+    this.color,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.primary,
         _borderWidth = borderWidth;
@@ -842,6 +862,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
+    this.color,
   })  : variance = ButtonVariance.secondary,
         _borderWidth = borderWidth;
 
@@ -850,6 +871,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
+    this.color,
   })  : variance = ButtonVariance.outline,
         _borderWidth = borderWidth;
 
@@ -858,6 +880,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
+    this.color,
   })  : variance = ButtonVariance.ghost,
         _borderWidth = borderWidth;
 
@@ -866,6 +889,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
+    this.color,
   })  : variance = ButtonVariance.link,
         _borderWidth = borderWidth;
 
@@ -874,12 +898,14 @@ class ButtonStyle implements AbstractButtonStyle {
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
+    this.color,
   })  : variance = ButtonVariance.text,
         _borderWidth = borderWidth;
 
   const ButtonStyle.destructive({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
+    this.color,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.destructive,
@@ -889,6 +915,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
+    this.color,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.fixed,
         _borderWidth = borderWidth;
@@ -896,6 +923,7 @@ class ButtonStyle implements AbstractButtonStyle {
   const ButtonStyle.menu({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
+    this.color,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.menu,
@@ -904,6 +932,7 @@ class ButtonStyle implements AbstractButtonStyle {
   const ButtonStyle.menubar({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
+    this.color,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.menubar,
@@ -912,6 +941,7 @@ class ButtonStyle implements AbstractButtonStyle {
   const ButtonStyle.muted({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.normal,
+    this.color,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.muted,
@@ -920,6 +950,7 @@ class ButtonStyle implements AbstractButtonStyle {
   const ButtonStyle.primaryIcon({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
+    this.color,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.primary,
@@ -928,6 +959,7 @@ class ButtonStyle implements AbstractButtonStyle {
   const ButtonStyle.secondaryIcon({
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
+    this.color,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.secondary,
@@ -937,6 +969,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
+    this.color,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.outline,
         _borderWidth = borderWidth;
@@ -945,6 +978,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
+    this.color,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.ghost,
         _borderWidth = borderWidth;
@@ -953,6 +987,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
+    this.color,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.link,
         _borderWidth = borderWidth;
@@ -962,6 +997,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
+    this.color,
   })  : variance = ButtonVariance.text,
         _borderWidth = borderWidth;
 
@@ -970,6 +1006,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
+    this.color,
   })  : variance = ButtonVariance.destructive,
         _borderWidth = borderWidth;
 
@@ -977,6 +1014,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.buttonSize = ButtonSize.normal,
     this.density = ButtonDensity.icon,
     this.shape = ButtonShape.rectangle,
+    this.color,
     ButtonStateProperty<double?>? borderWidth,
   })  : variance = ButtonVariance.fixed,
         _borderWidth = borderWidth;
@@ -986,6 +1024,7 @@ class ButtonStyle implements AbstractButtonStyle {
     this.density = ButtonDensity.normal,
     this.shape = ButtonShape.rectangle,
     ButtonStateProperty<double?>? borderWidth,
+    this.color,
   })  : variance = ButtonVariance.card,
         _borderWidth = borderWidth;
 
@@ -1032,6 +1071,7 @@ class ButtonStyle implements AbstractButtonStyle {
       if (width != null && decoration.border != null && decoration.border is Border) {
         final border = decoration.border as Border;
         return decoration.copyWith(
+          color: color,
           border: Border(
             top: border.top.copyWith(width: width),
             right: border.right.copyWith(width: width),
@@ -1213,7 +1253,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonMenuTextStyle,
     iconTheme: _buttonMenuIconTheme,
     margin: _buttonZeroMargin,
-    size: ButtonSize.normal,
+    size: ButtonSize.xSmall,
     borderWidth: null,
   );
 
@@ -1224,7 +1264,7 @@ class ButtonVariance implements AbstractButtonStyle {
     textStyle: _buttonMenuTextStyle,
     iconTheme: _buttonMenuIconTheme,
     margin: _buttonZeroMargin,
-    size: ButtonSize.normal,
+    size: ButtonSize.xSmall,
     borderWidth: null,
   );
 
@@ -1558,17 +1598,17 @@ Decoration _buttonCardDecoration(BuildContext context, Set<WidgetState> states) 
       borderRadius: BorderRadius.circular(themeData.radiusXl),
       border: Border.all(
         color: themeData.colorScheme.border,
-        width: 1,
+        width: themeData.appBarBorderWidth ?? 1,
       ),
     );
   }
   if (states.contains(WidgetState.hovered) || states.contains(WidgetState.selected)) {
     return BoxDecoration(
-      color: themeData.colorScheme.border,
+      color: themeData.colorScheme.card.shadHovered,
       borderRadius: BorderRadius.circular(themeData.radiusXl),
       border: Border.all(
         color: themeData.colorScheme.border,
-        width: 1,
+        width: themeData.appBarBorderWidth ?? 1,
       ),
     );
   }
@@ -1577,7 +1617,7 @@ Decoration _buttonCardDecoration(BuildContext context, Set<WidgetState> states) 
     borderRadius: BorderRadius.circular(themeData.radiusXl),
     border: Border.all(
       color: themeData.colorScheme.border,
-      width: 1,
+      width: themeData.appBarBorderWidth ?? 1,
     ),
   );
 }
@@ -1592,7 +1632,7 @@ Decoration _buttonMenuDecoration(BuildContext context, Set<WidgetState> states) 
       states.contains(WidgetState.hovered) ||
       states.contains(WidgetState.selected)) {
     return BoxDecoration(
-      color: themeData.colorScheme.accent,
+      color: themeData.colorScheme.card.shadHovered,
       borderRadius: BorderRadius.circular(themeData.radiusSm),
     );
   }
@@ -1622,7 +1662,7 @@ Decoration _buttonPrimaryDecoration(BuildContext context, Set<WidgetState> state
   }
   if (states.contains(WidgetState.hovered)) {
     return BoxDecoration(
-      color: themeData.colorScheme.primary.scaleAlpha(0.8),
+      color: themeData.colorScheme.primary.shadHovered,
       borderRadius: BorderRadius.circular(themeData.radiusMd),
     );
   }
@@ -1657,7 +1697,7 @@ Decoration _buttonSecondaryDecoration(BuildContext context, Set<WidgetState> sta
   }
   if (states.contains(WidgetState.hovered)) {
     return BoxDecoration(
-      color: themeData.colorScheme.secondary.scaleAlpha(0.8),
+      color: themeData.colorScheme.secondary.shadHovered,
       borderRadius: BorderRadius.circular(themeData.radiusMd),
     );
   }
@@ -1692,26 +1732,26 @@ Decoration _buttonOutlineDecoration(BuildContext context, Set<WidgetState> state
       color: themeData.colorScheme.muted.withOpacity(0),
       border: Border.all(
         color: themeData.colorScheme.muted,
-        width: 1,
+        width: themeData.appBarBorderWidth ?? 1,
       ),
       borderRadius: BorderRadius.circular(themeData.radiusMd),
     );
   }
   if (states.contains(WidgetState.hovered)) {
     return BoxDecoration(
-      color: themeData.colorScheme.muted.scaleAlpha(0.8),
+      color: themeData.colorScheme.card.shadHovered,
       border: Border.all(
-        color: themeData.colorScheme.muted.scaleAlpha(0.8),
-        width: 1,
+        color: themeData.colorScheme.border.shadHovered,
+        width: themeData.appBarBorderWidth ?? 1,
       ),
       borderRadius: BorderRadius.circular(themeData.radiusMd),
     );
   }
   return BoxDecoration(
-    color: themeData.colorScheme.muted.withOpacity(0),
+    color: themeData.colorScheme.background,
     border: Border.all(
-      color: themeData.colorScheme.muted,
-      width: 1,
+      color: themeData.colorScheme.border,
+      width: themeData.appBarBorderWidth ?? 1,
     ),
     borderRadius: BorderRadius.circular(themeData.radiusMd),
   );
@@ -1739,18 +1779,18 @@ Decoration _buttonGhostDecoration(BuildContext context, Set<WidgetState> states)
   var themeData = Theme.of(context);
   if (states.contains(WidgetState.disabled)) {
     return BoxDecoration(
-      color: themeData.colorScheme.muted.withOpacity(0),
+      color: null,
       borderRadius: BorderRadius.circular(themeData.radiusMd),
     );
   }
   if (states.contains(WidgetState.hovered)) {
     return BoxDecoration(
-      color: themeData.colorScheme.muted.scaleAlpha(0.8),
+      color: themeData.colorScheme.card.shadHovered,
       borderRadius: BorderRadius.circular(themeData.radiusMd),
     );
   }
   return BoxDecoration(
-    color: themeData.colorScheme.muted.withOpacity(0),
+    color: null,
     borderRadius: BorderRadius.circular(themeData.radiusMd),
   );
 }
@@ -2102,6 +2142,7 @@ class OutlineButton extends StatelessWidget {
   final ValueChanged<bool>? onHover;
   final ValueChanged<bool>? onFocus;
   final double? borderWidth;
+  final Color? color;
 
   final bool? enableFeedback;
   final GestureTapDownCallback? onTapDown;
@@ -2119,11 +2160,13 @@ class OutlineButton extends StatelessWidget {
   final GestureLongPressEndCallback? onLongPressEnd;
   final GestureLongPressUpCallback? onSecondaryLongPress;
   final GestureLongPressUpCallback? onTertiaryLongPress;
+  final Color? outlineColor;
 
   const OutlineButton({
     super.key,
     required this.child,
     this.onPressed,
+    this.color,
     this.enabled,
     this.leading,
     this.trailing,
@@ -2152,6 +2195,7 @@ class OutlineButton extends StatelessWidget {
     this.onSecondaryLongPress,
     this.onTertiaryLongPress,
     this.borderWidth,
+    this.outlineColor,
   });
 
   @override
@@ -2163,10 +2207,23 @@ class OutlineButton extends StatelessWidget {
       trailing: trailing,
       alignment: alignment,
       style: ButtonStyle.outline(
+        color: color,
         buttonSize: size,
         density: density,
         shape: shape,
         borderWidth: borderWidth != null ? (context, states) => borderWidth : null,
+      ).copyWith(
+        decoration: (context, states, decoration) {
+          if (decoration is BoxDecoration) {
+            if (outlineColor == null) return decoration;
+            return decoration.copyWith(
+              border: Border.all(
+                color: outlineColor!,
+              ),
+            );
+          }
+          return decoration;
+        },
       ),
       focusNode: focusNode,
       disableTransition: disableTransition,

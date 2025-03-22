@@ -31,6 +31,7 @@ class MenuPopup extends StatelessWidget {
     return SurfaceCard(
       borderRadius: theme.borderRadiusMd,
       filled: true,
+      borderWidth: 1,
       fillColor: theme.colorScheme.popover,
       borderColor: theme.colorScheme.border,
       surfaceBlur: surfaceBlur ?? theme.surfaceBlur,
@@ -51,6 +52,6 @@ class MenuPopup extends StatelessWidget {
           !isSheetOverlay && !isDialogOverlay,
         ),
       ),
-    ).normal();
+    );
   }
 }

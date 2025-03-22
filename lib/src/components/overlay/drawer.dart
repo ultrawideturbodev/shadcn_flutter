@@ -118,6 +118,8 @@ class DrawerWrapper extends StatefulWidget {
     required this.stackIndex,
   });
 
+
+
   @override
   State<DrawerWrapper> createState() => _DrawerWrapperState();
 }
@@ -495,8 +497,8 @@ class _DrawerWrapperState extends State<DrawerWrapper> with SingleTickerProvider
     }
     return BoxDecoration(
       borderRadius: borderRadius,
-      color: backgroundColor,
-      border: border,
+      color: null,
+      border: null,
     );
   }
 
@@ -676,19 +678,9 @@ class _SheetWrapperState extends _DrawerWrapperState {
 
   @override
   BoxDecoration getDecoration(ThemeData theme) {
-    var backgroundColor = theme.colorScheme.background;
-    var surfaceOpacity = widget.surfaceOpacity ?? theme.surfaceOpacity;
-    if (surfaceOpacity != null) {
-      if (widget.stackIndex == 0) {
-        // the top sheet should have a higher opacity to prevent
-        // visual bleeding from the main content
-        surfaceOpacity = surfaceOpacity * 1.25;
-      }
-      backgroundColor = backgroundColor.scaleAlpha(surfaceOpacity);
-    }
     return BoxDecoration(
-      color: backgroundColor,
-      border: getBorder(theme),
+      color: null,
+      border: null,
     );
   }
 }
