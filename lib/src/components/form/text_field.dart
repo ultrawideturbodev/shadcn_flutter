@@ -52,6 +52,7 @@ class TextField extends StatefulWidget {
   final material.InputDecoration Function(material.InputDecoration cValue)? inputDecoration;
   final Color? cursorColor;
   final EdgeInsets? scrollPadding;
+  final Color? backgroundColor;
 
   const TextField({
     super.key,
@@ -101,6 +102,7 @@ class TextField extends StatefulWidget {
     this.statesController,
     this.borderWidth,
     this.scrollPadding,
+    this.backgroundColor,
   });
 
   static Widget defaultContextMenuBuilder(
@@ -214,7 +216,7 @@ class _TextFieldState extends State<TextField> with FormValueSupplier<String, Te
                 decoration: BoxDecoration(
                   borderRadius: optionallyResolveBorderRadius(context, widget.borderRadius) ??
                       BorderRadius.circular(theme.radiusMd),
-                  color: widget.filled ? theme.colorScheme.muted : null,
+                  color: widget.filled ? widget.backgroundColor ?? theme.colorScheme.muted : null,
                   border: widget.border
                       ? Border.all(
                           width: widget.borderWidth ?? 1.5,

@@ -48,11 +48,13 @@ class AutoComplete extends StatefulWidget {
   final Clip clipBehavior;
   final bool autofocus;
   final bool filled;
+  final Color? backgroundColor;
 
   const AutoComplete({
     super.key,
     required this.suggestions,
     required this.onChanged,
+    this.backgroundColor,
     this.initialValue,
     this.controller,
     this.border = true,
@@ -324,6 +326,7 @@ class _AutoCompleteState extends State<AutoComplete> {
           isCollapsed: widget.isCollapsed,
           padding: widget.padding,
           filled: widget.filled,
+          backgroundColor: widget.backgroundColor,
           expands: widget.expands,
         ),
       ),

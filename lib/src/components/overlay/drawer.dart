@@ -580,6 +580,7 @@ class SheetWrapper extends DrawerWrapper {
     super.barrierColor,
     super.gapBeforeDragger,
     super.gapAfterDragger,
+    super.showDragHandle = false,
   });
 
   @override
@@ -678,9 +679,17 @@ class _SheetWrapperState extends _DrawerWrapperState {
 
   @override
   BoxDecoration getDecoration(ThemeData theme) {
+    var backgroundColor = theme.colorScheme.background;
+    var surfaceOpacity = widget.surfaceOpacity ?? theme.surfaceOpacity;
+    if (surfaceOpacity != null) {
+     if (widget.stackIndex == 0) {
+         surfaceOpacity = surfaceOpacity * 1.25;
+       }
+       backgroundColor = backgroundColor.scaleAlpha(surfaceOpacity);
+     }
     return BoxDecoration(
-      color: null,
-      border: null,
+       color: backgroundColor,
+       border: getBorder(theme),
     );
   }
 }

@@ -851,6 +851,8 @@ class MultiSelect<T> extends StatefulWidget {
   final bool disableHoverEffect;
   final bool autoClosePopover;
   final SelectSearch? onSearch;
+  final Future<void> Function(BuildContext context, List<T> value, ValueChanged<List<T>>? onChanged,
+      List<AbstractSelectItem<T>> children)? customBuilder;
 
   const MultiSelect({
     super.key,
@@ -876,6 +878,7 @@ class MultiSelect<T> extends StatefulWidget {
     this.surfaceOpacity,
     this.autoClosePopover = false,
     this.onSearch,
+    this.customBuilder,
     required this.itemBuilder,
     required this.children,
   });
@@ -963,6 +966,14 @@ class MultiSelectState<T> extends State<MultiSelect<T>>
           onPressed: widget.onChanged == null
               ? null
               : () {
+                  if (widget.customBuilder != null) {
+                    widget.customBuilder!(context, widget.value, widget.onChanged, widget.children)
+                        .then((_) {
+                      _focusNode.requestFocus();
+                    });
+                    return;
+                  }
+
                   _popoverController
                       .show(
                     context: context,
