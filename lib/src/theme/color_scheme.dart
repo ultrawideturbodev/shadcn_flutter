@@ -275,6 +275,9 @@ class ColorShades implements Color, ColorSwatch {
     }
     return ColorShades._direct(colors);
   }
+
+  @override
+  int toARGB32() => _primary.toARGB32();
 }
 
 String hexFromColor(Color color) {
