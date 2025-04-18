@@ -5,6 +5,7 @@ class TextArea extends StatefulWidget {
   final TextEditingController? controller;
   final bool filled;
   final Widget? placeholder;
+  final String? hintText;
   final bool border;
   final Widget? leading;
   final Widget? trailing;
@@ -58,6 +59,7 @@ class TextArea extends StatefulWidget {
     this.controller,
     this.filled = false,
     this.placeholder,
+    this.hintText,
     this.border = true,
     this.leading,
     this.trailing,
@@ -153,6 +155,7 @@ class _TextAreaState extends State<TextArea> {
                 border: widget.border,
                 filled: widget.filled,
                 placeholder: widget.placeholder,
+                hintText: widget.hintText,
                 leading: widget.leading,
                 trailing: widget.trailing,
                 padding: widget.padding,
@@ -192,8 +195,7 @@ class _TextAreaState extends State<TextArea> {
                     if (widget.expandableHeight && _height.isFinite) {
                       setState(() {
                         _height += details.delta.dy;
-                        _height =
-                            _height.clamp(widget.minHeight, widget.maxHeight);
+                        _height = _height.clamp(widget.minHeight, widget.maxHeight);
                         widget.onHeightChanged?.call(_height);
                       });
                     }
@@ -208,8 +210,7 @@ class _TextAreaState extends State<TextArea> {
                   child: Padding(
                     padding: EdgeInsets.all(4.0 * scaling),
                     child: CustomPaint(
-                      painter: _TextAreaDragHandlePainter(
-                          theme.colorScheme.foreground),
+                      painter: _TextAreaDragHandlePainter(theme.colorScheme.foreground),
                     ),
                   ),
                 ),

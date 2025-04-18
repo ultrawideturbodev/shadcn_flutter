@@ -9,6 +9,7 @@ class TextField extends StatefulWidget {
   final TextEditingController? controller;
   final bool filled;
   final Widget? placeholder;
+  final String? hintText;
   final AlignmentGeometry? placeholderAlignment;
   final AlignmentGeometry? leadingAlignment;
   final AlignmentGeometry? trailingAlignment;
@@ -91,6 +92,7 @@ class TextField extends StatefulWidget {
     this.leadingAlignment,
     this.trailingAlignment,
     this.statesController,
+    this.hintText,
   });
 
   static Widget defaultContextMenuBuilder(
